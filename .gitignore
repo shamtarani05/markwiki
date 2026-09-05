@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# locally-uploaded media (dev-only file storage — see src/lib/db/getSystemAuthor.ts-style
+# TODO in app/api/admin/media/route.ts: production needs real object storage, not local disk)
+/public/uploads/*
+!/public/uploads/.gitkeep

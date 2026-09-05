@@ -1,26 +1,586 @@
 @import "tailwindcss";
 
+/* ============================================
+   THEME VARIABLES - Midnight Library (Dark) & Classic Editorial (Light)
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Dark Theme (Default) - Midnight Library */
+  --background: #121212;
+  --background-secondary: #1a1a1a;
+  --background-tertiary: #242424;
+  --foreground: #E0E0E0;
+  --foreground-muted: #9CA3AF;
+  --accent: #D4AF37;
+  --accent-hover: #E5C358;
+  --accent-muted: rgba(212, 175, 55, 0.1);
+  --border: #2d2d2d;
+  --border-light: #3d3d3d;
+  --card: #1a1a1a;
+  --card-hover: #242424;
+  --success: #22C55E;
+  --error: #EF4444;
+  --warning: #F59E0B;
+  --info: #3B82F6;
+
+  /* Text color guaranteed to read on top of --accent (flips per theme) */
+  --accent-contrast: #000000;
+
+  /* Category/type badge tokens. The dark-theme values below are tuned for
+     dark backgrounds (~7-9:1 contrast); the light theme override further
+     down swaps in darker shades so badge text still clears WCAG AA 4.5:1
+     on a white background. */
+  --tag-red: #F87171;
+  --tag-red-bg: rgba(248, 113, 113, 0.2);
+  --tag-blue: #60A5FA;
+  --tag-blue-bg: rgba(96, 165, 250, 0.2);
+  --tag-green: #4ADE80;
+  --tag-green-bg: rgba(74, 222, 128, 0.2);
+  --tag-purple: #C084FC;
+  --tag-purple-bg: rgba(192, 132, 252, 0.2);
+  --tag-yellow: #FACC15;
+  --tag-yellow-bg: rgba(250, 204, 21, 0.2);
+  --tag-gray: #9CA3AF;
+  --tag-gray-bg: rgba(156, 163, 175, 0.2);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.6);
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  --font-serif: Georgia, 'Times New Roman', serif;
+
+  /* Spacing */
+  --header-height: 72px;
+  --container-max: 1400px;
+  --section-padding: 100px;
 }
+
+/* Light Theme - Classic Editorial (accent swapped from crimson to teal —
+   reads calmer next to white, doesn't compete with the red/error status
+   color, and isn't shared with any of the category badge colors) */
+[data-theme="light"] {
+  --background: #FFFFFF;
+  --background-secondary: #F2F3F5;
+  --background-tertiary: #E7E9EC;
+  --foreground: #2C3E50;
+  --foreground-muted: #64748B;
+  --accent: #0F766E;
+  --accent-hover: #115E56;
+  --accent-muted: rgba(15, 118, 110, 0.1);
+  --border: #DADDE2;
+  --border-light: #E7E9EC;
+  --card: #FFFFFF;
+  --card-hover: #F9FAFB;
+
+  /* Overrides accent-contrast: white reads far better than black on this
+     accent (see WCAG note below) */
+  --accent-contrast: #FFFFFF;
+
+  /* Darker than the dark-theme info/status colors so each still hits 4.5:1+ on white */
+  --info: #1D4ED8;
+  --success: #15803D;
+  --error: #B91C1C;
+  --warning: #B45309;
+
+  /* WCAG-safe (4.9:1-7:1 on white) darker versions of the badge colors above */
+  --tag-red: #B91C1C;
+  --tag-red-bg: rgba(185, 28, 28, 0.1);
+  --tag-blue: #1D4ED8;
+  --tag-blue-bg: rgba(29, 78, 216, 0.1);
+  --tag-green: #15803D;
+  --tag-green-bg: rgba(21, 128, 61, 0.1);
+  --tag-purple: #7E22CE;
+  --tag-purple-bg: rgba(126, 34, 206, 0.1);
+  --tag-yellow: #A16207;
+  --tag-yellow-bg: rgba(161, 98, 7, 0.1);
+  --tag-gray: #4B5563;
+  --tag-gray-bg: rgba(75, 85, 99, 0.1);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   TAILWIND THEME INTEGRATION
+   ============================================ */
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-muted: var(--accent-muted);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================
+   BASE STYLES
+   ============================================
+
+   Everything below is deliberately wrapped in @layer base/components rather
+   than left bare. Tailwind v4 emits its own utility classes into
+   @layer utilities, and unlayered CSS always wins over layered CSS
+   regardless of selector specificity — so a bare `.card { overflow: hidden }`
+   permanently defeats `overflow-y-auto` on the same element, a bare
+   `h3 { font-size: ... }` permanently defeats `text-sm` on an <h3>, and so
+   on, everywhere in the app. Layering these correctly (base < components <
+   utilities, Tailwind's own convention) is what lets a plain Tailwind
+   utility class override any of these defaults like it's supposed to. */
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--foreground);
+  }
+
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.25rem; }
+  h3 { font-size: 1.875rem; }
+  h4 { font-size: 1.5rem; }
+  h5 { font-size: 1.25rem; }
+  h6 { font-size: 1rem; }
+
+  p {
+    color: var(--foreground-muted);
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--accent-hover);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================
+   SCROLLBAR STYLES
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground-muted);
+}
+
+@layer components {
+  /* ============================================
+     BUTTON STYLES
+     ============================================ */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 0.95rem;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--foreground);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    background: var(--background-tertiary);
+    border-color: var(--accent);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--foreground);
+  }
+
+  .btn-ghost:hover {
+    background: var(--accent-muted);
+    color: var(--accent);
+  }
+
+  /* ============================================
+     CARD STYLES
+     ============================================ */
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-light);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  /* ============================================
+     CONTAINER
+     ============================================ */
+
+  .container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      padding: 0 2rem;
+    }
+  }
+
+  /* ============================================
+     SECTION STYLES
+     ============================================ */
+
+  .section {
+    padding: var(--section-padding) 0;
+  }
+
+  @media (max-width: 768px) {
+    .section {
+      padding: 60px 0;
+    }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--foreground);
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: 2.25rem;
+    }
+  }
+
+  .section-subtitle {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  /* ============================================
+     PROSE (rich text block / wiki section content)
+     ============================================ */
+
+  .prose-wiki {
+    color: var(--foreground);
+    line-height: 1.75;
+  }
+
+  .prose-wiki > * + * {
+    margin-top: 1rem;
+  }
+
+  .prose-wiki a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose-wiki ul,
+  .prose-wiki ol {
+    padding-left: 1.5rem;
+  }
+
+  .prose-wiki ul {
+    list-style: disc;
+  }
+
+  .prose-wiki ol {
+    list-style: decimal;
+  }
+
+  .prose-wiki blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+    font-style: italic;
+    color: var(--foreground-muted);
+  }
+
+  .prose-wiki h4,
+  .prose-wiki h5 {
+    font-weight: 700;
+    color: var(--foreground);
+    margin-top: 1.5rem;
+  }
+
+  .prose-wiki .wiki-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .prose-wiki .wiki-table th,
+  .prose-wiki .wiki-table td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  .prose-wiki .wiki-table th {
+    background: var(--background-secondary);
+  }
+
+  .prose-wiki .references-list {
+    font-size: 0.875rem;
+    color: var(--foreground-muted);
+    padding-left: 1.25rem;
+  }
+
+  /* ============================================
+     TEXT EDITOR (TipTap continuous document surface)
+     ============================================ */
+
+  .tiptap-editor {
+    padding: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+  }
+
+  .tiptap-editor p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    color: var(--foreground-muted);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+
+  .tiptap-editor img {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .tiptap-video-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin: 0.5rem 0;
+  }
+
+  .tiptap-video-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* ============================================
+     CATEGORY / TYPE BADGES
+     ============================================ */
+
+  .badge-red { background: var(--tag-red-bg); color: var(--tag-red); }
+  .badge-blue { background: var(--tag-blue-bg); color: var(--tag-blue); }
+  .badge-green { background: var(--tag-green-bg); color: var(--tag-green); }
+  .badge-purple { background: var(--tag-purple-bg); color: var(--tag-purple); }
+  .badge-yellow { background: var(--tag-yellow-bg); color: var(--tag-yellow); }
+  .badge-gray { background: var(--tag-gray-bg); color: var(--tag-gray); }
+
+  /* ============================================
+     AD PLACEMENT ZONES
+     ============================================ */
+
+  .ad-zone {
+    background: var(--background-tertiary);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--foreground-muted);
+    font-size: 0.875rem;
+    min-height: 90px;
+  }
+
+  .ad-zone-sidebar {
+    min-height: 250px;
+  }
+
+  .ad-zone-banner {
+    min-height: 90px;
+    width: 100%;
+  }
+
+  /* ============================================
+     ANIMATIONS
+     ============================================ */
+
+  .animate-fadeIn {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .animate-slideUp {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  /* ============================================
+     BOOK COVER STYLES
+     ============================================ */
+
+  .book-cover {
+    aspect-ratio: 2/3;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+  }
+
+  .book-cover:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ============================================
+     GRADIENT OVERLAYS
+     ============================================ */
+
+  .gradient-overlay {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      var(--background) 100%
+    );
+  }
+
+  .gradient-accent {
+    background: linear-gradient(
+      135deg,
+      var(--accent) 0%,
+      var(--accent-hover) 100%
+    );
+  }
+}
+
+/* Light surfaces separate less visibly by color alone than dark ones do,
+   so alternating "banded" sections (bg-background-secondary) get a hairline
+   border as a backup cue in the light theme. Additive (not overriding a
+   utility), so it's fine unlayered. */
+[data-theme="light"] .bg-background-secondary {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
