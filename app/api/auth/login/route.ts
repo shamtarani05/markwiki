@@ -5,8 +5,14 @@ import { verifyPassword } from '@/src/lib/auth/password';
 import { signSession, SESSION_COOKIE, SESSION_MAX_AGE_SECONDS } from '@/src/lib/auth/session';
 
 export async function POST(req: NextRequest) {
+  let body;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
+  }
+
   await connectDB();
-  const body = await req.json();
   const email: string = (body.email ?? '').trim().toLowerCase();
   const password: string = body.password ?? '';
 

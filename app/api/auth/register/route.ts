@@ -7,8 +7,14 @@ import { signSession, SESSION_COOKIE, SESSION_MAX_AGE_SECONDS } from '@/src/lib/
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: NextRequest) {
+  let body;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
+  }
+
   await connectDB();
-  const body = await req.json();
   const email: string = (body.email ?? '').trim().toLowerCase();
   const password: string = body.password ?? '';
   const name: string = (body.name ?? '').trim();
@@ -27,12 +33,21 @@ export async function POST(req: NextRequest) {
   }
 
   // role is always 'reader' on self-registration — never trust client input here.
-  const user = await User.create({
-    email,
-    password: await hashPassword(password),
-    name,
-    role: 'reader',
-  });
+  let user;
+  try {
+    user = await User.create({
+      email,
+      password: await hashPassword(password),
+      name,
+      role: 'reader',
+    });
+  } catch (err: unknown) {
+    const error = err as { code?: number };
+    if (error.code === 11000) {
+      return NextResponse.json({ error: 'An account with that email already exists' }, { status: 409 });
+    }
+    throw err;
+  }
 
   const token = await signSession({ sub: user._id.toString(), role: user.role });
   const res = NextResponse.json(

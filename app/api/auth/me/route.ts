@@ -8,8 +8,8 @@ export async function GET() {
   if (!session) return NextResponse.json({ user: null });
 
   await connectDB();
-  const user = await User.findById(session.sub).select('name email role avatar preferences');
-  if (!user) return NextResponse.json({ user: null });
+  const user = await User.findById(session.sub).select('name email role avatar preferences isActive');
+  if (!user || !user.isActive) return NextResponse.json({ user: null });
 
   return NextResponse.json({
     user: { id: user._id, name: user.name, email: user.email, role: user.role, avatar: user.avatar, preferences: user.preferences },
