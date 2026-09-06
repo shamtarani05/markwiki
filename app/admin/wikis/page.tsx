@@ -25,27 +25,33 @@ export default async function WikisListPage() {
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {wikis.map((w) => (
-            <Link
+            <div
               key={w._id.toString()}
-              href={`/admin/pages?wikiId=${w._id}`}
               className="card overflow-hidden hover:border-accent transition-colors"
             >
-              <div className="aspect-[16/9] bg-background-tertiary">
-                {w.coverImage && <img src={w.coverImage} alt={w.name} className="w-full h-full object-cover" />}
-              </div>
-              <div className="p-4">
-                <h3 className="text-sm font-semibold text-foreground truncate">{w.name}</h3>
-                <p className="text-xs text-foreground-muted mt-1">
-                  {(w.category as unknown as { name?: string } | null)?.name ?? 'Uncategorized'}
-                </p>
-                <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
-                  <span className="flex items-center gap-1 text-xs text-foreground-muted">
-                    <FileText size={12} /> {w.pageCount} page{w.pageCount === 1 ? '' : 's'}
-                  </span>
+              <Link href={`/admin/pages?wikiId=${w._id}`}>
+                <div className="aspect-[16/9] bg-background-tertiary">
+                  {w.coverImage && <img src={w.coverImage} alt={w.name} className="w-full h-full object-cover" />}
+                </div>
+                <div className="p-4 pb-0">
+                  <h3 className="text-sm font-semibold text-foreground truncate">{w.name}</h3>
+                  <p className="text-xs text-foreground-muted mt-1">
+                    {(w.category as unknown as { name?: string } | null)?.name ?? 'Uncategorized'}
+                  </p>
+                </div>
+              </Link>
+              <div className="flex items-center justify-between p-4 mt-3 pt-3 border-t border-border">
+                <span className="flex items-center gap-1 text-xs text-foreground-muted">
+                  <FileText size={12} /> {w.pageCount} page{w.pageCount === 1 ? '' : 's'}
+                </span>
+                <div className="flex items-center gap-3">
+                  <Link href={`/admin/preview/wiki/${w._id}`} className="text-xs text-accent hover:underline">
+                    Preview
+                  </Link>
                   <span className="text-xs text-foreground-muted">{new Date(w.updatedAt).toLocaleDateString()}</span>
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       )}

@@ -123,6 +123,9 @@ export default function EditWikiPage({ params }: { params: Promise<{ id: string 
                   View live ↗
                 </a>
               )}
+              <Link href={`/admin/preview/page/${id}`} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground-muted hover:text-accent">
+                Preview
+              </Link>
               <Link href={`/admin/wiki/${id}/history`} className="text-sm text-foreground-muted hover:text-accent">
                 View history
               </Link>
