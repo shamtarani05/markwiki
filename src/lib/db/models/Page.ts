@@ -59,7 +59,7 @@ const PageSchema = new Schema<IPage>(
     },
     pageType: {
       type: String,
-      enum: ['overview', 'character', 'location', 'episode', 'blank'],
+      enum: ['overview', 'character', 'location', 'episode', 'cover', 'blank'],
       default: 'blank',
     },
     title: {
