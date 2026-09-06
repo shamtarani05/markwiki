@@ -14,6 +14,9 @@ export interface IWiki extends Document {
   category: mongoose.Types.ObjectId;
   pageCount: number;
   isFeatured: boolean;
+  status: 'draft' | 'pending' | 'approved';
+  coverPage?: mongoose.Types.ObjectId;
+  reviewNote?: string;
   createdBy: mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
@@ -53,6 +56,19 @@ const WikiSchema = new Schema<IWiki>(
       type: Boolean,
       default: false,
     },
+    status: {
+      type: String,
+      enum: ['draft', 'pending', 'approved'],
+      default: 'draft',
+    },
+    coverPage: {
+      type: Schema.Types.ObjectId,
+      ref: 'Page',
+    },
+    reviewNote: {
+      type: String,
+      maxlength: 2000,
+    },
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: 'User',
@@ -66,6 +82,7 @@ const WikiSchema = new Schema<IWiki>(
 
 WikiSchema.index({ slug: 1 });
 WikiSchema.index({ category: 1 });
+WikiSchema.index({ status: 1 });
 
 const Wiki: Model<IWiki> = mongoose.models.Wiki || mongoose.model<IWiki>('Wiki', WikiSchema);
 

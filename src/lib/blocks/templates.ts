@@ -10,7 +10,7 @@ import { Block, createBlock } from './types';
 // Character page and a Video Game wiki's Character page start from the
 // same archetype) — not one template per homepage category.
 
-export type PageArchetype = 'overview' | 'character' | 'location' | 'episode' | 'blank';
+export type PageArchetype = 'overview' | 'character' | 'location' | 'episode' | 'cover' | 'blank';
 
 export interface PageTemplate {
   key: PageArchetype;

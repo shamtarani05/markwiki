@@ -2,7 +2,7 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 import type { Block, BlockType } from '@/src/lib/blocks/types';
 import type { PageArchetype } from '@/src/lib/blocks/templates';
 
-export type PageStatus = 'draft' | 'published' | 'archived';
+export type PageStatus = 'draft' | 'pending' | 'published' | 'archived';
 
 export interface IPage extends Document {
   _id: mongoose.Types.ObjectId;
@@ -29,6 +29,7 @@ export interface IPage extends Document {
   author: mongoose.Types.ObjectId;
   lastEditedBy: mongoose.Types.ObjectId;
   status: PageStatus;
+  reviewNote?: string;
   isLocked: boolean;
   lockedBy?: mongoose.Types.ObjectId;
   lockedAt?: Date;
@@ -117,8 +118,12 @@ const PageSchema = new Schema<IPage>(
     },
     status: {
       type: String,
-      enum: ['draft', 'published', 'archived'],
+      enum: ['draft', 'pending', 'published', 'archived'],
       default: 'draft',
+    },
+    reviewNote: {
+      type: String,
+      maxlength: 2000,
     },
     isLocked: {
       type: Boolean,

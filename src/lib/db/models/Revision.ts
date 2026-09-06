@@ -12,6 +12,7 @@ export interface IRevision extends Document {
   editSummary?: string;
   version: number;
   isMinorEdit: boolean;
+  status: 'pending' | 'applied' | 'rejected';
   diff?: {
     additions: number;
     deletions: number;
@@ -56,6 +57,11 @@ const RevisionSchema = new Schema<IRevision>(
       type: Boolean,
       default: false,
     },
+    status: {
+      type: String,
+      enum: ['pending', 'applied', 'rejected'],
+      default: 'applied',
+    },
     diff: {
       additions: Number,
       deletions: Number,
@@ -70,6 +76,7 @@ RevisionSchema.index({ contentType: 1, contentId: 1 });
 RevisionSchema.index({ contentId: 1, version: -1 });
 RevisionSchema.index({ editedBy: 1 });
 RevisionSchema.index({ createdAt: -1 });
+RevisionSchema.index({ status: 1 });
 
 const Revision: Model<IRevision> =
   mongoose.models.Revision || mongoose.model<IRevision>('Revision', RevisionSchema);
