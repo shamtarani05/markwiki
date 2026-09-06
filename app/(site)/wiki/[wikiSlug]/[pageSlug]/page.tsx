@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import connectDB from '@/src/lib/db/connection';
-import { Page, Wiki } from '@/src/lib/db/models';
+import { Page, ReadingProgress, Wiki } from '@/src/lib/db/models';
 import { BlockListRenderer } from '@/src/components/blocks/BlockRenderer';
 import type { Block } from '@/src/lib/blocks/types';
 import { getSessionUser } from '@/src/lib/auth/getSessionUser';
@@ -65,6 +65,13 @@ export default async function WikiReadPage({ params }: Props) {
 
   // Fire-and-forget — don't make the reader wait on a write.
   void Page.updateOne({ _id: page._id }, { $inc: { viewCount: 1 } }).exec();
+  if (session) {
+    void ReadingProgress.updateOne(
+      { user: session.sub, contentType: 'page', contentId: page._id },
+      { $set: { lastReadAt: new Date() }, $setOnInsert: { startedAt: new Date() } },
+      { upsert: true }
+    ).exec();
+  }
 
   const jsonLd = {
     '@context': 'https://schema.org',

@@ -1,12 +1,31 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useTheme } from '@/src/context/ThemeContext';
+
+interface Me {
+  name: string;
+  email: string;
+}
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [me, setMe] = useState<Me | null>(null);
+
+  useEffect(() => {
+    fetch('/api/auth/me').then((r) => r.json()).then(({ user }) => setMe(user));
+  }, []);
+
+  const handleLogout = async () => {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    setMe(null);
+    router.push('/');
+    router.refresh();
+  };
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -72,12 +91,25 @@ export default function Header() {
 
             {/* Sign In / Sign Up */}
             <div className="hidden sm:flex items-center gap-2">
-              <Link href="/login" className="btn btn-ghost text-sm">
-                Sign In
-              </Link>
-              <Link href="/register" className="btn btn-primary text-sm">
-                Sign Up
-              </Link>
+              {me ? (
+                <>
+                  <Link href="/account" className="btn btn-ghost text-sm">
+                    Account
+                  </Link>
+                  <button type="button" onClick={handleLogout} className="btn btn-primary text-sm">
+                    Log out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" className="btn btn-ghost text-sm">
+                    Sign In
+                  </Link>
+                  <Link href="/register" className="btn btn-primary text-sm">
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -113,20 +145,44 @@ export default function Header() {
                 </Link>
               ))}
               <hr className="border-border my-2" />
-              <Link
-                href="/login"
-                className="px-4 py-2 text-foreground-muted hover:text-accent hover:bg-background-tertiary rounded-lg transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Sign In
-              </Link>
-              <Link
-                href="/register"
-                className="px-4 py-2 bg-accent text-accent-contrast font-medium rounded-lg text-center"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Sign Up
-              </Link>
+              {me ? (
+                <>
+                  <Link
+                    href="/account"
+                    className="px-4 py-2 text-foreground-muted hover:text-accent hover:bg-background-tertiary rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Account
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      handleLogout();
+                    }}
+                    className="px-4 py-2 bg-accent text-accent-contrast font-medium rounded-lg text-center"
+                  >
+                    Log out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="px-4 py-2 text-foreground-muted hover:text-accent hover:bg-background-tertiary rounded-lg transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="px-4 py-2 bg-accent text-accent-contrast font-medium rounded-lg text-center"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </nav>
           </div>
         )}
