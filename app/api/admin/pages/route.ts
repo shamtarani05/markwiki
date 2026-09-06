@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/src/lib/db/connection';
 import { Page, Wiki } from '@/src/lib/db/models';
 import { getSessionUser } from '@/src/lib/auth/getSessionUser';
+import { isTrustedRole } from '@/src/lib/auth/roles';
 import { slugify } from '@/src/lib/slugify';
 import type { Block } from '@/src/lib/blocks/types';
 import type { PageArchetype } from '@/src/lib/blocks/templates';
@@ -51,6 +52,8 @@ export async function POST(req: NextRequest) {
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   const authorId = session.sub;
 
+  const status = isTrustedRole(session.role) ? 'draft' : 'pending';
+
   const page = await Page.create({
     wiki: wikiId,
     pageType,
@@ -61,7 +64,7 @@ export async function POST(req: NextRequest) {
     coverImage,
     author: authorId,
     lastEditedBy: authorId,
-    status: 'draft',
+    status,
   });
 
   await Wiki.updateOne({ _id: wikiId }, { $inc: { pageCount: 1 } });
