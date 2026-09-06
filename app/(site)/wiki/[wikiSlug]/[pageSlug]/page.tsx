@@ -5,6 +5,7 @@ import connectDB from '@/src/lib/db/connection';
 import { Page, Wiki } from '@/src/lib/db/models';
 import { BlockListRenderer } from '@/src/components/blocks/BlockRenderer';
 import type { Block } from '@/src/lib/blocks/types';
+import { getSessionUser } from '@/src/lib/auth/getSessionUser';
 
 interface Props {
   params: Promise<{ wikiSlug: string; pageSlug: string }>;
@@ -60,6 +61,7 @@ export default async function WikiReadPage({ params }: Props) {
   const result = await loadPage(wikiSlug, pageSlug);
   if (!result) notFound();
   const { page, wiki } = result;
+  const session = await getSessionUser();
 
   // Fire-and-forget — don't make the reader wait on a write.
   void Page.updateOne({ _id: page._id }, { $inc: { viewCount: 1 } }).exec();
@@ -87,7 +89,14 @@ export default async function WikiReadPage({ params }: Props) {
           <Link href={`/wiki/${wikiSlug}`} className="text-accent hover:underline font-medium">
             {wiki.name} Wiki
           </Link>
-          <span className="text-foreground-muted">{(page.viewCount + 1).toLocaleString()} views</span>
+          <div className="flex items-center gap-4">
+            <span className="text-foreground-muted">{(page.viewCount + 1).toLocaleString()} views</span>
+            {session && (
+              <Link href={`/wiki/${wikiSlug}/${pageSlug}/edit`} className="text-accent hover:underline font-medium">
+                Edit
+              </Link>
+            )}
+          </div>
         </div>
       </div>
 
