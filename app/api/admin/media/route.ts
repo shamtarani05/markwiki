@@ -4,7 +4,7 @@ import path from 'path';
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/src/lib/db/connection';
 import { Media } from '@/src/lib/db/models';
-import { getSystemAuthorId } from '@/src/lib/db/getSystemAuthor';
+import { getSessionUser } from '@/src/lib/auth/getSessionUser';
 
 // TODO(production storage): writes to public/uploads on local disk, which
 // works in dev but NOT on Vercel (serverless functions have no writable
@@ -16,6 +16,9 @@ const MAX_SIZE = 8 * 1024 * 1024; // 8MB
 const ALLOWED_TYPES = new Set(['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml']);
 
 export async function POST(req: NextRequest) {
+  const session = await getSessionUser();
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
   await connectDB();
 
   const formData = await req.formData();
@@ -39,7 +42,7 @@ export async function POST(req: NextRequest) {
   await writeFile(path.join(UPLOAD_DIR, filename), buffer);
 
   const url = `/uploads/${filename}`;
-  const uploadedBy = await getSystemAuthorId();
+  const uploadedBy = session.sub;
 
   const media = await Media.create({
     filename,

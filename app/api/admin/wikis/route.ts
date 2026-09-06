@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/src/lib/db/connection';
 import { Wiki } from '@/src/lib/db/models';
-import { getSystemAuthorId } from '@/src/lib/db/getSystemAuthor';
+import { getSessionUser } from '@/src/lib/auth/getSessionUser';
 import { slugify } from '@/src/lib/slugify';
-
-// TODO(auth): see app/api/admin/pages/route.ts — same placeholder-author note.
 
 export async function GET() {
   await connectDB();
@@ -36,7 +34,9 @@ export async function POST(req: NextRequest) {
     slug = `${baseSlug}-${suffix}`;
   }
 
-  const createdBy = await getSystemAuthorId();
+  const session = await getSessionUser();
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const createdBy = session.sub;
 
   const wiki = await Wiki.create({
     name,

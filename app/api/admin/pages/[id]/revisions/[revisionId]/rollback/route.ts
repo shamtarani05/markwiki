@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/src/lib/db/connection';
 import { Page, Revision } from '@/src/lib/db/models';
-import { getSystemAuthorId } from '@/src/lib/db/getSystemAuthor';
+import { getSessionUser } from '@/src/lib/auth/getSessionUser';
 import { snapshotPageRevision } from '@/src/lib/db/pageRevisions';
 import type { Block } from '@/src/lib/blocks/types';
 
@@ -17,7 +17,9 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
   if (!page) return NextResponse.json({ error: 'Page not found' }, { status: 404 });
   if (!revision) return NextResponse.json({ error: 'Revision not found' }, { status: 404 });
 
-  const authorId = await getSystemAuthorId();
+  const session = await getSessionUser();
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const authorId = session.sub;
 
   // Snapshot the current state too, so rolling back is itself a reversible
   // step rather than losing whatever was there before the rollback.

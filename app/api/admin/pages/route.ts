@@ -1,14 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/src/lib/db/connection';
 import { Page, Wiki } from '@/src/lib/db/models';
-import { getSystemAuthorId } from '@/src/lib/db/getSystemAuthor';
+import { getSessionUser } from '@/src/lib/auth/getSessionUser';
 import { slugify } from '@/src/lib/slugify';
 import type { Block } from '@/src/lib/blocks/types';
 import type { PageArchetype } from '@/src/lib/blocks/templates';
-
-// TODO(auth): once NextAuth is wired (PROGRESS.md — "Auth: TBD"), require an
-// authenticated admin/editor session here and use it for author/lastEditedBy
-// instead of the placeholder system user.
 
 export async function GET(req: NextRequest) {
   await connectDB();
@@ -51,7 +47,9 @@ export async function POST(req: NextRequest) {
     slug = `${baseSlug}-${suffix}`;
   }
 
-  const authorId = await getSystemAuthorId();
+  const session = await getSessionUser();
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const authorId = session.sub;
 
   const page = await Page.create({
     wiki: wikiId,
