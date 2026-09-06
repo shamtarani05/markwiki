@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 import connectDB from '@/src/lib/db/connection';
 import { Page, Revision, Wiki } from '@/src/lib/db/models';
 import { getTrendingPages } from '@/src/lib/db/trending';
+import WikiHubCoverBlocks from '@/src/components/wiki/WikiHubCoverBlocks';
+import type { Block } from '@/src/lib/blocks/types';
 
 interface Props {
   params: Promise<{ wikiSlug: string }>;
@@ -18,7 +20,7 @@ interface Props {
 // this wiki, not authored separately.
 async function loadWiki(wikiSlug: string) {
   await connectDB();
-  const wiki = await Wiki.findOne({ slug: wikiSlug }).populate('category', 'name').lean();
+  const wiki = await Wiki.findOne({ slug: wikiSlug, status: 'approved' }).populate('category', 'name').lean();
   if (!wiki) return null;
   return wiki;
 }
@@ -77,6 +79,10 @@ export default async function WikiHomePage({ params, searchParams }: Props) {
     );
   }
 
+  const coverPage = wiki.coverPage
+    ? await Page.findById(wiki.coverPage).lean()
+    : null;
+
   const [totalViews, trendingPages, categoryAgg] = await Promise.all([
     Page.aggregate([{ $match: publishedFilter }, { $group: { _id: null, total: { $sum: '$viewCount' } } }]),
     getTrendingPages(publishedFilter, 4),
@@ -88,14 +94,30 @@ export default async function WikiHomePage({ params, searchParams }: Props) {
       { $limit: 8 },
     ]),
   ]);
-
   const pageIds = (await Page.find(publishedFilter).select('_id').lean()).map((p) => p._id);
-  const recentActivity = await Revision.find({ contentType: 'page', contentId: { $in: pageIds } })
+  const recentRevisions = await Revision.find({ contentType: 'page', contentId: { $in: pageIds } })
     .populate('editedBy', 'name')
     .populate({ path: 'contentId', select: 'title slug', model: 'Page' })
     .sort({ createdAt: -1 })
     .limit(5)
     .lean();
+
+  const recentActivityItems = recentRevisions.map((rev) => {
+    const content = rev.contentId as unknown as { title?: string; slug?: string } | null;
+    return {
+      _id: rev._id.toString(),
+      title: content?.title ?? rev.title,
+      editSummary: rev.editSummary,
+      editorName: (rev.editedBy as unknown as { name?: string })?.name ?? 'Unknown',
+      createdAt: rev.createdAt.toISOString(),
+      pageSlug: content?.slug,
+    };
+  });
+
+  const trendingPagesData = trendingPages.map((p) => ({
+    _id: p._id.toString(), slug: p.slug, pageType: p.pageType,
+    title: p.title, viewCount: p.viewCount, searchCount: p.searchCount,
+  }));
 
   return (
     <div className="min-h-screen bg-background pb-16">
@@ -110,110 +132,51 @@ export default async function WikiHomePage({ params, searchParams }: Props) {
         </div>
       </div>
 
-      <div className="border-b border-border bg-background-secondary">
-        <div className="container py-4">
-          <div className="flex items-center gap-8 flex-wrap">
-            <div>
-              <span className="text-2xl font-bold text-accent">{wiki.pageCount.toLocaleString()}</span>
-              <span className="text-foreground-muted text-sm ml-2">pages</span>
-            </div>
-            <div>
-              <span className="text-2xl font-bold text-accent">{(totalViews[0]?.total ?? 0).toLocaleString()}</span>
-              <span className="text-foreground-muted text-sm ml-2">views</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="container py-8">
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-8">
-            <form action={`/wiki/${wikiSlug}`} method="get">
-              <input
-                type="search"
-                name="q"
-                placeholder={`Search ${wiki.name} Wiki...`}
-                className="w-full px-5 py-4 rounded-xl bg-card border border-border text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
-              />
-            </form>
+        <form action={`/wiki/${wikiSlug}`} method="get" className="mb-8">
+          <input
+            type="search"
+            name="q"
+            placeholder={`Search ${wiki.name} Wiki...`}
+            className="w-full px-5 py-4 rounded-xl bg-card border border-border text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+          />
+        </form>
 
-            {trendingPages.length > 0 && (
-              <section>
-                <h2 className="text-xl font-bold text-foreground mb-4">🔥 Trending Pages</h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {trendingPages.map((page) => (
-                    <Link key={page._id.toString()} href={`/wiki/${wikiSlug}/${page.slug}`} className="card p-4 hover:border-accent group">
-                      <span className="text-xs text-accent font-medium capitalize">{page.pageType}</span>
-                      <h3 className="font-semibold text-foreground group-hover:text-accent transition-colors mt-1">{page.title}</h3>
-                      <p className="text-sm text-foreground-muted mt-1">
-                        {page.viewCount.toLocaleString()} views
-                        {page.searchCount > 0 && ` · ${page.searchCount.toLocaleString()} searches`}
-                      </p>
-                    </Link>
-                  ))}
+        {coverPage ? (
+          <WikiHubCoverBlocks
+            blocks={coverPage.blocks as Block[]}
+            wikiSlug={wikiSlug}
+            pageCount={wiki.pageCount}
+            totalViews={totalViews[0]?.total ?? 0}
+            trendingPages={trendingPagesData}
+            recentActivityItems={recentActivityItems}
+          />
+        ) : (
+          <p className="text-foreground-muted">
+            No pages published yet. <Link href="/admin/wiki/new" className="text-accent hover:underline">Add the first one →</Link>
+          </p>
+        )}
+
+        {categoryAgg.length > 0 && (
+          <div className="card p-4 mt-8 max-w-sm">
+            <h3 className="font-bold text-foreground mb-3">Categories</h3>
+            <div className="space-y-2">
+              {categoryAgg.map((cat: { _id: string; count: number }) => (
+                <div key={cat._id} className="flex items-center justify-between text-sm">
+                  <span className="text-foreground-muted">{cat._id}</span>
+                  <span className="text-xs text-foreground-muted bg-background-secondary px-2 py-0.5 rounded">{cat.count}</span>
                 </div>
-              </section>
-            )}
-
-            {recentActivity.length > 0 && (
-              <section>
-                <h2 className="text-xl font-bold text-foreground mb-4">Recent Activity</h2>
-                <div className="card divide-y divide-border">
-                  {recentActivity.map((rev) => {
-                    const content = rev.contentId as unknown as { title?: string; slug?: string } | null;
-                    return (
-                      <div key={rev._id.toString()} className="p-4 flex items-start justify-between">
-                        <div>
-                          {content?.slug ? (
-                            <Link href={`/wiki/${wikiSlug}/${content.slug}`} className="font-medium text-foreground hover:text-accent transition-colors">
-                              {content.title}
-                            </Link>
-                          ) : (
-                            <span className="font-medium text-foreground">{rev.title}</span>
-                          )}
-                          {rev.editSummary && <p className="text-sm text-foreground-muted mt-1">{rev.editSummary}</p>}
-                        </div>
-                        <div className="text-right shrink-0 ml-4">
-                          <p className="text-sm text-accent">{(rev.editedBy as unknown as { name?: string })?.name ?? 'Unknown'}</p>
-                          <p className="text-xs text-foreground-muted">{new Date(rev.createdAt).toLocaleDateString()}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            )}
-
-            {trendingPages.length === 0 && (
-              <p className="text-foreground-muted">
-                No pages published yet. <Link href="/admin/wiki/new" className="text-accent hover:underline">Add the first one →</Link>
-              </p>
-            )}
+              ))}
+            </div>
           </div>
+        )}
 
-          <aside className="space-y-6">
-            <form action={`/wiki/${wikiSlug}/random`} className="card p-4">
-              <h3 className="font-bold text-foreground mb-3">Quick Links</h3>
-              <button type="submit" className="block text-foreground-muted hover:text-accent transition-colors text-sm">
-                Random page →
-              </button>
-            </form>
-
-            {categoryAgg.length > 0 && (
-              <div className="card p-4">
-                <h3 className="font-bold text-foreground mb-3">Categories</h3>
-                <div className="space-y-2">
-                  {categoryAgg.map((cat: { _id: string; count: number }) => (
-                    <div key={cat._id} className="flex items-center justify-between text-sm">
-                      <span className="text-foreground-muted">{cat._id}</span>
-                      <span className="text-xs text-foreground-muted bg-background-secondary px-2 py-0.5 rounded">{cat.count}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </aside>
-        </div>
+        <form action={`/wiki/${wikiSlug}/random`} className="card p-4 mt-6 max-w-sm">
+          <h3 className="font-bold text-foreground mb-3">Quick Links</h3>
+          <button type="submit" className="block text-foreground-muted hover:text-accent transition-colors text-sm">
+            Random page →
+          </button>
+        </form>
       </div>
     </div>
   );
