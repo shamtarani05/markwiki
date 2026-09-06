@@ -45,7 +45,7 @@ const NAV_GROUPS: { label: string; items: (NavItem | { label: string; icon: Luci
   {
     label: 'Community',
     items: [
-      { label: 'Submissions', icon: Inbox },
+      { label: 'Review Queue', href: '/admin/review', icon: Inbox },
       { label: 'Users', icon: Users },
     ],
   },
