@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import type { Block } from '@/src/lib/blocks/types';
+import { BLOCK_LABELS } from '@/src/lib/blocks/types';
 import { sanitizeHtml } from '@/src/lib/blocks/sanitize';
 import { toEmbedUrl } from '@/src/lib/blocks/embedUrl';
 import AdBanner from '@/src/components/home/AdBanner';
@@ -13,7 +14,17 @@ import AdBanner from '@/src/components/home/AdBanner';
 // first section, regardless of where its block happens to sit in the list.
 const SIDEBAR_TYPES = new Set(['infobox']);
 
-export function BlockListRenderer({ blocks }: { blocks: Block[] }) {
+export function BlockListRenderer({
+  blocks,
+  renderOverride,
+}: {
+  blocks: Block[];
+  // Lets a server-rendering caller (the wiki hub route) substitute live,
+  // pre-computed content for specific blocks (wikiStats/trendingPages/
+  // recentActivity) instead of the static editor-preview placeholder.
+  // Returning null/undefined falls through to the generic BlockRenderer.
+  renderOverride?: (block: Block) => React.ReactNode | null | undefined;
+}) {
   const headings = blocks.filter((b) => b.type === 'heading');
   const sidebarBlocks = blocks.filter((b) => SIDEBAR_TYPES.has(b.type));
   const toc = blocks.find((b) => b.type === 'tableOfContents');
@@ -24,19 +35,21 @@ export function BlockListRenderer({ blocks }: { blocks: Block[] }) {
       <div className="prose-wiki flex-1 min-w-0">
         {toc && (
           <div className="mb-6">
-            <BlockRenderer block={toc} headings={headings} />
+            {renderOverride?.(toc) ?? <BlockRenderer block={toc} headings={headings} />}
           </div>
         )}
         {mainBlocks.map((block) => (
           <div key={block.id} className="mb-6 last:mb-0">
-            <BlockRenderer block={block} headings={headings} />
+            {renderOverride?.(block) ?? <BlockRenderer block={block} headings={headings} />}
           </div>
         ))}
       </div>
       {sidebarBlocks.length > 0 && (
         <div className="w-full lg:w-80 shrink-0 space-y-4 mb-6 lg:mb-0 lg:sticky lg:top-24">
           {sidebarBlocks.map((block) => (
-            <BlockRenderer key={block.id} block={block} headings={headings} />
+            <div key={block.id}>
+              {renderOverride?.(block) ?? <BlockRenderer block={block} headings={headings} />}
+            </div>
           ))}
         </div>
       )}
@@ -236,6 +249,15 @@ export function BlockRenderer({
 
     case 'adSlot':
       return <AdBanner zone={block.props.zone} />;
+
+    case 'wikiStats':
+    case 'trendingPages':
+    case 'recentActivity':
+      return (
+        <div className="ad-zone">
+          <span>{BLOCK_LABELS[block.type]} — live on the published wiki cover page</span>
+        </div>
+      );
 
     default:
       return null;

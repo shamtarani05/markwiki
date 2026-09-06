@@ -18,7 +18,10 @@ export type BlockType =
   | 'ctaButton'
   | 'newsletter'
   | 'comments'
-  | 'adSlot';
+  | 'adSlot'
+  | 'wikiStats'
+  | 'trendingPages'
+  | 'recentActivity';
 
 export interface HeadingProps {
   text: string;
@@ -105,6 +108,16 @@ export interface AdSlotProps {
   zone: string;
 }
 
+export interface WikiStatsProps {}
+
+export interface TrendingPagesProps {
+  limit: number;
+}
+
+export interface RecentActivityProps {
+  limit: number;
+}
+
 export interface BlockPropsMap {
   heading: HeadingProps;
   richText: RichTextProps;
@@ -120,6 +133,9 @@ export interface BlockPropsMap {
   newsletter: NewsletterProps;
   comments: CommentsProps;
   adSlot: AdSlotProps;
+  wikiStats: WikiStatsProps;
+  trendingPages: TrendingPagesProps;
+  recentActivity: RecentActivityProps;
 }
 
 // Discriminated union built from BlockPropsMap: `block.type` narrows
@@ -143,6 +159,9 @@ export const BLOCK_LABELS: Record<BlockType, string> = {
   newsletter: 'Newsletter Signup',
   comments: 'Comments',
   adSlot: 'Ad Slot',
+  wikiStats: 'Wiki Stats',
+  trendingPages: 'Trending Pages',
+  recentActivity: 'Recent Activity',
 };
 
 export const BLOCK_DESCRIPTIONS: Record<BlockType, string> = {
@@ -160,6 +179,9 @@ export const BLOCK_DESCRIPTIONS: Record<BlockType, string> = {
   newsletter: 'Newsletter signup form',
   comments: 'Reader comments thread',
   adSlot: 'Ad placement (references an AdPlacement zone)',
+  wikiStats: 'Live page/view counters for this wiki (renders on the wiki cover page only)',
+  trendingPages: "This wiki's most-viewed/most-searched pages, computed live",
+  recentActivity: "This wiki's latest edits, computed live",
 };
 
 let blockIdCounter = 0;
@@ -202,4 +224,7 @@ export const DEFAULT_BLOCK_PROPS: { [K in BlockType]: BlockPropsMap[K] } = {
   newsletter: { title: 'Subscribe for updates' },
   comments: {},
   adSlot: { zone: 'article-top' },
+  wikiStats: {},
+  trendingPages: { limit: 4 },
+  recentActivity: { limit: 5 },
 };
