@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/src/lib/db/connection';
-import { Wiki } from '@/src/lib/db/models';
+import { Page, Wiki } from '@/src/lib/db/models';
 import { getSessionUser } from '@/src/lib/auth/getSessionUser';
 import { slugify } from '@/src/lib/slugify';
+import { buildCoverPageBlocks } from '@/src/lib/blocks/coverTemplate';
 
 export async function GET() {
   await connectDB();
@@ -12,6 +13,8 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   await connectDB();
+  const session = await getSessionUser();
+  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const body = await req.json();
   const name: string = body.name?.trim();
@@ -19,12 +22,8 @@ export async function POST(req: NextRequest) {
   const description: string | undefined = body.description;
   const coverImage: string | undefined = body.coverImage;
 
-  if (!name) {
-    return NextResponse.json({ error: 'Name is required' }, { status: 400 });
-  }
-  if (!categoryId) {
-    return NextResponse.json({ error: 'Category is required' }, { status: 400 });
-  }
+  if (!name) return NextResponse.json({ error: 'Name is required' }, { status: 400 });
+  if (!categoryId) return NextResponse.json({ error: 'Category is required' }, { status: 400 });
 
   const baseSlug = slugify(name);
   let slug = baseSlug;
@@ -34,18 +33,30 @@ export async function POST(req: NextRequest) {
     slug = `${baseSlug}-${suffix}`;
   }
 
-  const session = await getSessionUser();
-  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  const createdBy = session.sub;
-
   const wiki = await Wiki.create({
     name,
     slug,
     description,
     coverImage,
     category: categoryId,
-    createdBy,
+    createdBy: session.sub,
+    status: 'draft',
   });
+
+  const coverPage = await Page.create({
+    wiki: wiki._id,
+    pageType: 'cover',
+    title: name,
+    slug: '_cover',
+    blocks: buildCoverPageBlocks(name, description),
+    coverImage,
+    author: session.sub,
+    lastEditedBy: session.sub,
+    status: 'draft',
+  });
+
+  wiki.coverPage = coverPage._id;
+  await wiki.save();
 
   return NextResponse.json({ wiki }, { status: 201 });
 }
