@@ -28,6 +28,7 @@ const NAV_GROUPS: { label: string; items: (NavItem | { label: string; icon: Luci
     items: [
       { label: 'Wikis', href: '/admin/wikis', icon: BookOpen },
       { label: 'Pages', href: '/admin/pages', icon: FileText },
+      { label: 'Site Pages', href: '/admin/pages/site', icon: FileText },
       { label: 'Books', icon: Book },
       { label: 'Blog Posts', icon: PenLine },
       { label: 'Short Stories', icon: ScrollText },
