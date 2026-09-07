@@ -10,6 +10,9 @@ import type { PageStatus } from '@/src/lib/db/models/Page';
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   await connectDB();
+  const session = await getSessionUser();
+  if (!session || !isTrustedRole(session.role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+
   const { id } = await params;
   const page = await Page.findOne({ _id: id, pageType: 'site' });
   if (!page) return NextResponse.json({ error: 'Not found' }, { status: 404 });
