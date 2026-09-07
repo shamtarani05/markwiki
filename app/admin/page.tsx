@@ -16,47 +16,58 @@ export default async function AdminDashboard() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="admin-page-head">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
-          <p className="text-sm text-foreground-muted mt-0.5">An overview of your wiki content.</p>
+          <h1 className="admin-title">Dashboard</h1>
+          <p className="admin-subtitle">An overview of your wiki content.</p>
         </div>
-        <Link href="/admin/wiki/new" className="btn btn-primary text-sm py-2 flex items-center gap-1.5">
-          <Plus size={16} /> New Page
+        <Link href="/admin/wiki/new" className="btn btn-primary text-[13px] py-2 px-4 no-underline">
+          <Plus size={15} /> New page
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <StatCard label="Wikis" value={wikiCount} icon={BookOpen} accent="blue" />
-        <StatCard label="Pages" value={pageCount} icon={FileText} accent="purple" />
-        <StatCard label="Drafts" value={draftCount} icon={FileEdit} accent="yellow" />
-        <StatCard label="Published" value={publishedCount} icon={CheckCircle2} accent="green" />
+      {/* One divided strip rather than four floating cards: these four numbers
+          are one reading, and the hairlines between them say so. */}
+      <div className="admin-stat-strip grid-cols-2 md:grid-cols-4 mb-8">
+        <Stat label="Wikis" value={wikiCount} icon={BookOpen} tone="blue" />
+        <Stat label="Pages" value={pageCount} icon={FileText} tone="purple" />
+        {/* Drafts is the only count that implies unfinished work, so it's the
+            only one that carries the accent. */}
+        <Stat label="Drafts" value={draftCount} icon={FileEdit} tone="yellow" flagged={draftCount > 0} />
+        <Stat label="Published" value={publishedCount} icon={CheckCircle2} tone="green" />
       </div>
 
-      <div className="card overflow-hidden">
-        <div className="px-4 py-3 border-b border-border">
-          <h2 className="text-sm font-semibold text-foreground">Recently edited</h2>
+      <div className="admin-panel overflow-hidden">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+          <h2 className="admin-section-title">Recently edited</h2>
+          <Link href="/admin/pages" className="text-[13px] text-accent hover:underline">
+            All pages
+          </Link>
         </div>
         {recentPages.length === 0 ? (
-          <div className="p-8 text-center">
-            <p className="text-sm text-foreground-muted mb-3">No pages yet.</p>
-            <Link href="/admin/wiki/new" className="text-sm text-accent hover:underline">Create your first page →</Link>
+          <div className="admin-empty border-0">
+            <FileText size={22} className="mx-auto text-foreground-muted mb-3" aria-hidden="true" />
+            <p className="text-[13px] text-foreground mb-1">No pages yet</p>
+            <p className="admin-meta mb-4">Pages you create or edit will show up here.</p>
+            <Link href="/admin/wiki/new" className="btn btn-primary text-[13px] py-2 px-4 no-underline">
+              <Plus size={15} /> Create your first page
+            </Link>
           </div>
         ) : (
           <div className="divide-y divide-border">
             {recentPages.map((p) => (
-              <Link
-                key={p._id.toString()}
-                href={`/admin/wiki/${p._id}/edit`}
-                className="flex items-center justify-between px-4 py-3 hover:bg-background-tertiary transition-colors"
-              >
+              <Link key={p._id.toString()} href={`/admin/wiki/${p._id}/edit`} className="admin-row no-underline">
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-foreground truncate">{p.title}</p>
-                  <p className="text-xs text-foreground-muted mt-0.5">
-                    {(p.wiki as unknown as { name?: string } | null)?.name ?? 'Unknown wiki'} · {p.pageType}
+                  <p className="text-[13px] font-medium text-foreground truncate">{p.title}</p>
+                  <p className="admin-meta mt-0.5 truncate">
+                    {(p.wiki as unknown as { name?: string } | null)?.name ?? 'Unknown wiki'}
+                    <span aria-hidden="true" className="inline-block w-px h-3 align-middle bg-border mx-2" />
+                    {PAGE_TYPE_LABEL[p.pageType] ?? p.pageType}
                   </p>
                 </div>
-                <span className="text-xs text-foreground-muted shrink-0 ml-4">{new Date(p.updatedAt).toLocaleDateString()}</span>
+                <span className="admin-meta admin-num shrink-0">
+                  {new Date(p.updatedAt).toLocaleDateString()}
+                </span>
               </Link>
             ))}
           </div>
@@ -66,23 +77,34 @@ export default async function AdminDashboard() {
   );
 }
 
-const ACCENT_CLASSES: Record<string, string> = {
+// Archetype names as an admin reads them, not as the enum stores them.
+// Kept local rather than exported — a Next.js `page.tsx` may only export the
+// route's own reserved members.
+const PAGE_TYPE_LABEL: Record<string, string> = {
+  overview: 'Overview',
+  character: 'Character',
+  location: 'Location',
+  episode: 'Episode',
+  blank: 'Blank',
+};
+
+const TONE_CLASSES: Record<string, string> = {
   blue: 'badge-blue',
   purple: 'badge-purple',
   yellow: 'badge-yellow',
   green: 'badge-green',
 };
 
-function StatCard({
-  label, value, icon: Icon, accent,
-}: { label: string; value: number; icon: LucideIcon; accent: string }) {
+function Stat({
+  label, value, icon: Icon, tone, flagged = false,
+}: { label: string; value: number; icon: LucideIcon; tone: string; flagged?: boolean }) {
   return (
-    <div className="card p-4">
-      <div className={`w-9 h-9 rounded-lg flex items-center justify-center mb-3 ${ACCENT_CLASSES[accent]}`}>
-        <Icon size={18} />
-      </div>
-      <p className="text-2xl font-bold text-foreground leading-none">{value}</p>
-      <p className="text-xs text-foreground-muted mt-1.5">{label}</p>
+    <div className={`admin-stat ${flagged ? 'admin-stat-flag' : ''}`}>
+      <span className={`w-7 h-7 rounded-md flex items-center justify-center mb-2.5 ${TONE_CLASSES[tone]}`}>
+        <Icon size={15} aria-hidden="true" />
+      </span>
+      <p className="admin-stat-value">{value}</p>
+      <p className="admin-stat-label">{label}</p>
     </div>
   );
 }

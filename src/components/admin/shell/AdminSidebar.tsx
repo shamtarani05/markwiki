@@ -78,13 +78,13 @@ export default function AdminSidebar() {
 
   return (
     <aside
-      className={`shrink-0 border-r border-border bg-background-secondary h-screen flex-col hidden md:flex transition-[width] duration-150 ${
-        collapsed ? 'w-16' : 'w-56'
+      className={`admin-sidebar shrink-0 h-screen flex-col hidden md:flex transition-[width] duration-150 ${
+        collapsed ? 'w-16' : 'w-60'
       }`}
     >
-      <div className={`flex items-center h-14 shrink-0 border-b border-border ${collapsed ? 'justify-center px-0' : 'justify-between px-3'}`}>
+      <div className={`flex items-center h-14 shrink-0 border-b border-border ${collapsed ? 'justify-center px-0' : 'justify-between pl-4 pr-2'}`}>
         {!collapsed && (
-          <Link href="/admin" className="flex items-center gap-2 min-w-0">
+          <Link href="/admin" className="flex items-center gap-2.5 min-w-0 no-underline">
             <div className="w-7 h-7 rounded-md bg-accent flex items-center justify-center shrink-0">
               <span className="text-accent-contrast font-bold text-xs">M</span>
             </div>
@@ -102,29 +102,38 @@ export default function AdminSidebar() {
         </button>
       </div>
 
-      <nav className="flex-1 overflow-y-auto overflow-x-hidden p-3 space-y-4">
-        {NAV_GROUPS.map((group) => (
-          <div key={group.label}>
+      <nav className="flex-1 overflow-y-auto overflow-x-hidden py-3">
+        {NAV_GROUPS.map((group, groupIndex) => (
+          <div
+            key={group.label}
+            // A hairline between groups instead of whitespace alone: the
+            // grouping is real information (what kind of thing this manages),
+            // so it gets a structural device rather than a gap.
+            className={groupIndex > 0 ? 'mt-3 pt-3 border-t border-border' : ''}
+          >
             {!collapsed && (
-              <p className="px-2 text-[11px] font-semibold text-foreground-muted/70 uppercase tracking-wider mb-1">
+              <p className="px-4 text-[11px] font-medium text-foreground-muted mb-1.5">
                 {group.label}
               </p>
             )}
-            <div className="space-y-0.5">
+            <div className="space-y-px px-2">
               {group.items.map((item) => {
                 const Icon = item.icon;
                 if (!('href' in item)) {
+                  // Deliberately not a link: these areas aren't built yet.
                   return (
                     <div
                       key={item.label}
-                      title={collapsed ? `${item.label} (soon)` : undefined}
-                      className={`flex items-center justify-between px-2 py-1.5 rounded-md text-sm text-foreground-muted/40 cursor-not-allowed ${collapsed ? 'justify-center' : ''}`}
+                      title={collapsed ? `${item.label} — not available yet` : undefined}
+                      className={`flex items-center gap-2.5 pl-2.5 pr-2 py-1.5 rounded-md text-[13px] text-foreground-muted/45 cursor-not-allowed ${
+                        collapsed ? 'justify-center' : 'justify-between'
+                      }`}
                     >
-                      <span className="flex items-center gap-2">
-                        <Icon size={16} className="shrink-0 opacity-60" />
-                        {!collapsed && item.label}
+                      <span className="flex items-center gap-2.5 min-w-0">
+                        <Icon size={16} className="shrink-0" />
+                        {!collapsed && <span className="truncate">{item.label}</span>}
                       </span>
-                      {!collapsed && <span className="text-[9px] uppercase tracking-wide text-foreground-muted/40">soon</span>}
+                      {!collapsed && <span className="text-[11px] shrink-0">Soon</span>}
                     </div>
                   );
                 }
@@ -134,17 +143,22 @@ export default function AdminSidebar() {
                     key={item.href}
                     href={item.href}
                     title={collapsed ? item.label : undefined}
-                    className={`relative flex items-center gap-2 px-2 py-1.5 rounded-md text-sm transition-colors ${
+                    aria-current={active ? 'page' : undefined}
+                    className={`relative flex items-center gap-2.5 pl-2.5 pr-2 py-1.5 rounded-md text-[13px] no-underline transition-colors ${
                       collapsed ? 'justify-center' : ''
                     } ${
                       active
-                        ? 'bg-accent-muted text-accent font-medium'
+                        ? 'bg-accent-muted text-accent font-semibold'
                         : 'text-foreground-muted hover:bg-background-tertiary hover:text-foreground'
                     }`}
                   >
-                    {active && <span className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-full bg-accent" />}
+                    {/* Full-height rail, not a 2px stub — the active row reads
+                        as attached to the edge of the rail it sits in. */}
+                    {active && (
+                      <span className="absolute -left-2 top-0 bottom-0 w-[3px] rounded-r-full bg-accent" />
+                    )}
                     <Icon size={16} className="shrink-0" />
-                    {!collapsed && item.label}
+                    {!collapsed && <span className="truncate">{item.label}</span>}
                   </Link>
                 );
               })}
