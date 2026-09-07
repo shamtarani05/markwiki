@@ -107,7 +107,7 @@ export default function TrendingPagesSection({ pages }: { pages: WikiPage[] }) {
         ) : (
           <div className="grid md:grid-cols-2 gap-6">
             {pages.map((page) => (
-              <PageCard key={page.id} page={page} />
+              <PageCard key={`${page.wikiSlug}/${page.id}`} page={page} />
             ))}
           </div>
         )}
