@@ -10,10 +10,12 @@ export interface IPage extends Document {
   // pages of different archetypes, e.g. one Overview plus many Character/
   // Location/Episode pages. Slugs are only unique within a wiki, matching
   // the public /wiki/[wikiSlug]/[pageSlug] URL shape.
-  wiki: mongoose.Types.ObjectId;
+  // For site pages (pageType: 'site'), wiki is optional; otherwise required.
+  wiki?: mongoose.Types.ObjectId;
   pageType: PageArchetype;
   title: string;
   slug: string;
+  siteSlug?: string;
   // Ordered block layout — the source of truth for page content, built by the
   // drag-and-drop admin canvas. `templateKey` just records which starter
   // template (if any) the page began from; it has no effect once saved.
@@ -55,11 +57,13 @@ const PageSchema = new Schema<IPage>(
     wiki: {
       type: Schema.Types.ObjectId,
       ref: 'Wiki',
-      required: true,
+      required: function (this: IPage) {
+        return this.pageType !== 'site';
+      },
     },
     pageType: {
       type: String,
-      enum: ['overview', 'character', 'location', 'episode', 'cover', 'blank'],
+      enum: ['overview', 'character', 'location', 'episode', 'cover', 'site', 'blank'],
       default: 'blank',
     },
     title: {
@@ -70,6 +74,11 @@ const PageSchema = new Schema<IPage>(
     slug: {
       type: String,
       required: true,
+      lowercase: true,
+      trim: true,
+    },
+    siteSlug: {
+      type: String,
       lowercase: true,
       trim: true,
     },
@@ -193,7 +202,8 @@ PageSchema.pre('save', function () {
   }
 });
 
-PageSchema.index({ wiki: 1, slug: 1 }, { unique: true });
+PageSchema.index({ wiki: 1, slug: 1 }, { unique: true, partialFilterExpression: { wiki: { $exists: true } } });
+PageSchema.index({ siteSlug: 1 }, { unique: true, sparse: true });
 PageSchema.index({ category: 1 });
 PageSchema.index({ status: 1 });
 PageSchema.index({ tags: 1 });
