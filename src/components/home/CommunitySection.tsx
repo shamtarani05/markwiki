@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-interface Update {
+export interface Update {
   id: string;
   title: string;
   type: 'news' | 'wiki-update' | 'community' | 'announcement';
@@ -15,44 +15,6 @@ interface Update {
   wiki?: string;
 }
 
-const updates: Update[] = [
-  {
-    id: '1',
-    title: 'Solo Leveling Season 2 Confirmed: Everything We Know',
-    type: 'news',
-    author: 'WikiAdmin',
-    excerpt: 'A-1 Pictures has officially announced the second season of Solo Leveling anime. Here is what we know about the release date, story arcs, and new characters.',
-    date: '2024-01-15',
-    readTime: 5,
-    featured: true,
-    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&h=500&fit=crop&q=80',
-    wiki: 'Solo Leveling',
-  },
-  {
-    id: '2',
-    title: 'New Elden Ring DLC Wiki Section Now Live',
-    type: 'wiki-update',
-    author: 'EldenLord42',
-    excerpt: 'We have added comprehensive coverage of Shadow of the Erdtree DLC including all new bosses, weapons, and locations.',
-    date: '2024-01-12',
-    readTime: 3,
-    featured: false,
-    image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=300&fit=crop&q=80',
-    wiki: 'Elden Ring',
-  },
-  {
-    id: '3',
-    title: 'Contribute to Marc\'s Wiki: New Editor Guidelines',
-    type: 'announcement',
-    author: 'Admin',
-    excerpt: 'Learn how to contribute quality content to our wikis. Updated formatting guidelines and community standards are now available.',
-    date: '2024-01-10',
-    readTime: 4,
-    featured: false,
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop&q=80',
-  },
-];
-
 const typeColors: Record<string, { bg: string; text: string; label: string }> = {
   'news': { bg: 'bg-[var(--tag-blue-bg)]', text: 'text-[var(--tag-blue)]', label: 'News' },
   'wiki-update': { bg: 'bg-[var(--tag-green-bg)]', text: 'text-[var(--tag-green)]', label: 'Wiki Update' },
@@ -60,7 +22,7 @@ const typeColors: Record<string, { bg: string; text: string; label: string }> = 
   'announcement': { bg: 'bg-[var(--tag-yellow-bg)]', text: 'text-[var(--tag-yellow)]', label: 'Announcement' },
 };
 
-export default function CommunitySection() {
+export default function CommunitySection({ updates }: { updates: Update[] }) {
   const featuredPost = updates.find(p => p.featured);
   const otherPosts = updates.filter(p => !p.featured);
 
@@ -81,6 +43,9 @@ export default function CommunitySection() {
           </Link>
         </div>
 
+        {updates.length === 0 ? (
+          <p className="text-foreground-muted text-center py-8">No community updates yet — check back soon.</p>
+        ) : (
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Featured Post */}
           {featuredPost && (
@@ -156,6 +121,7 @@ export default function CommunitySection() {
             ))}
           </div>
         </div>
+        )}
 
         {/* Mobile View All */}
         <div className="text-center mt-8 sm:hidden">

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import type { JSX } from 'react';
 
-interface Activity {
+export interface Activity {
   id: string;
   type: 'edit' | 'create' | 'comment';
   user: string;
@@ -15,74 +15,11 @@ interface Activity {
   summary?: string;
 }
 
-const recentActivity: Activity[] = [
-  {
-    id: '1',
-    type: 'edit',
-    user: 'ShadowHunter99',
-    userAvatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&q=80',
-    page: 'Sung Jin-Woo/Abilities',
-    wiki: 'Solo Leveling',
-    wikiSlug: 'solo-leveling',
-    timestamp: '2 min ago',
-    summary: 'Added information about Shadow Monarch powers',
-  },
-  {
-    id: '2',
-    type: 'create',
-    user: 'CursedEnergy',
-    userAvatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop&q=80',
-    page: 'Reverse Cursed Technique',
-    wiki: 'Jujutsu Kaisen',
-    wikiSlug: 'jujutsu-kaisen',
-    timestamp: '15 min ago',
-    summary: 'Created new page for RCT mechanics',
-  },
-  {
-    id: '3',
-    type: 'edit',
-    user: 'TarnishedOne',
-    userAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80',
-    page: 'Malenia, Blade of Miquella',
-    wiki: 'Elden Ring',
-    wikiSlug: 'elden-ring',
-    timestamp: '32 min ago',
-    summary: 'Updated boss strategies and attack patterns',
-  },
-  {
-    id: '4',
-    type: 'comment',
-    user: 'MysterySeeker',
-    userAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&q=80',
-    page: 'Pathway System',
-    wiki: 'Lord of the Mysteries',
-    wikiSlug: 'lord-of-the-mysteries',
-    timestamp: '1 hour ago',
-    summary: 'Discussion about Sequence 0 powers',
-  },
-  {
-    id: '5',
-    type: 'edit',
-    user: 'AnimeExpert',
-    userAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80',
-    page: 'Gear Fifth',
-    wiki: 'One Piece',
-    wikiSlug: 'one-piece',
-    timestamp: '2 hours ago',
-    summary: 'Added manga chapter references',
-  },
-  {
-    id: '6',
-    type: 'create',
-    user: 'GenshinPro',
-    userAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&q=80',
-    page: 'Natlan Region Guide',
-    wiki: 'Genshin Impact',
-    wikiSlug: 'genshin-impact',
-    timestamp: '3 hours ago',
-    summary: 'New region overview and exploration tips',
-  },
-];
+export interface Contributor {
+  name: string;
+  edits: number;
+  avatar: string;
+}
 
 const activityIcons: Record<string, { icon: JSX.Element; color: string }> = {
   'edit': {
@@ -111,7 +48,13 @@ const activityIcons: Record<string, { icon: JSX.Element; color: string }> = {
   },
 };
 
-export default function RecentActivitySection() {
+export default function RecentActivitySection({
+  activity: activityItems,
+  contributors,
+}: {
+  activity: Activity[];
+  contributors: Contributor[];
+}) {
   return (
     <section className="py-16 md:py-24">
       <div className="container">
@@ -132,7 +75,9 @@ export default function RecentActivitySection() {
             </div>
 
             <div className="card divide-y divide-border">
-              {recentActivity.map((activity) => (
+              {activityItems.length === 0 ? (
+                <p className="text-foreground-muted text-center py-8">No recent activity yet — check back soon.</p>
+              ) : activityItems.map((activity) => (
                 <div key={activity.id} className="p-4 hover:bg-background-secondary/50 transition-colors">
                   <div className="flex items-start gap-3">
                     {/* User Avatar */}
@@ -209,13 +154,9 @@ export default function RecentActivitySection() {
                 Top Contributors
               </h3>
               <div className="space-y-3">
-                {[
-                  { name: 'ShadowHunter99', edits: 1234, avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&q=80' },
-                  { name: 'CursedEnergy', edits: 987, avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop&q=80' },
-                  { name: 'TarnishedOne', edits: 876, avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&q=80' },
-                  { name: 'MysterySeeker', edits: 654, avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&q=80' },
-                  { name: 'AnimeExpert', edits: 543, avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&q=80' },
-                ].map((contributor, index) => (
+                {contributors.length === 0 ? (
+                  <p className="text-foreground-muted text-sm">No contributors yet.</p>
+                ) : contributors.map((contributor, index) => (
                   <div key={contributor.name} className="flex items-center gap-3">
                     <span className="text-foreground-muted font-medium w-4">{index + 1}</span>
                     <img

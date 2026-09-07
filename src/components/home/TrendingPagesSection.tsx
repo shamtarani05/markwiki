@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-interface WikiPage {
+export interface WikiPage {
   id: string;
   title: string;
   wiki: string;
@@ -14,57 +14,6 @@ interface WikiPage {
   image: string;
   lastUpdated: string;
 }
-
-const trendingPages: WikiPage[] = [
-  {
-    id: '1',
-    title: 'Sung Jin-Woo',
-    wiki: 'Solo Leveling',
-    wikiSlug: 'solo-leveling',
-    excerpt: 'Sung Jin-Woo is the main protagonist of Solo Leveling. Originally the weakest Hunter in all of Korea, he became a "Player" after surviving...',
-    views: 45230,
-    edits: 156,
-    category: 'Character',
-    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&h=300&fit=crop&q=80',
-    lastUpdated: '2 hours ago',
-  },
-  {
-    id: '2',
-    title: 'Domain Expansion',
-    wiki: 'Jujutsu Kaisen',
-    wikiSlug: 'jujutsu-kaisen',
-    excerpt: 'Domain Expansion is a technique where the user creates a pocket dimension using cursed energy. It is considered the pinnacle of jujutsu...',
-    views: 38456,
-    edits: 89,
-    category: 'Ability',
-    image: 'https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=400&h=300&fit=crop&q=80',
-    lastUpdated: '5 hours ago',
-  },
-  {
-    id: '3',
-    title: 'Klein Moretti',
-    wiki: 'Lord of the Mysteries',
-    wikiSlug: 'lord-of-the-mysteries',
-    excerpt: 'Klein Moretti, born Zhou Mingrui, is the main protagonist. A transmigrator from Earth who finds himself in a Victorian-era world filled with...',
-    views: 28934,
-    edits: 234,
-    category: 'Character',
-    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=300&fit=crop&q=80',
-    lastUpdated: '1 day ago',
-  },
-  {
-    id: '4',
-    title: 'Elden Beast',
-    wiki: 'Elden Ring',
-    wikiSlug: 'elden-ring',
-    excerpt: 'The Elden Beast is the true final boss of Elden Ring. It is the physical form of the Elden Ring itself, sent to the Lands Between by the Greater Will...',
-    views: 67890,
-    edits: 312,
-    category: 'Boss',
-    image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=300&fit=crop&q=80',
-    lastUpdated: '3 hours ago',
-  },
-];
 
 const categoryColors: Record<string, string> = {
   'Character': 'badge-blue',
@@ -134,7 +83,7 @@ function PageCard({ page }: { page: WikiPage }) {
   );
 }
 
-export default function TrendingPagesSection() {
+export default function TrendingPagesSection({ pages }: { pages: WikiPage[] }) {
   return (
     <section className="py-16 md:py-24 bg-background-secondary">
       <div className="container">
@@ -153,11 +102,15 @@ export default function TrendingPagesSection() {
         </div>
 
         {/* Pages Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
-          {trendingPages.map((page) => (
-            <PageCard key={page.id} page={page} />
-          ))}
-        </div>
+        {pages.length === 0 ? (
+          <p className="text-foreground-muted text-center py-8">No trending pages yet — check back soon.</p>
+        ) : (
+          <div className="grid md:grid-cols-2 gap-6">
+            {pages.map((page) => (
+              <PageCard key={page.id} page={page} />
+            ))}
+          </div>
+        )}
 
         {/* Mobile View All */}
         <div className="text-center mt-8 sm:hidden">
