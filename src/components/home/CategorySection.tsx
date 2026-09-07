@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-interface Category {
+export interface Category {
   id: string;
   name: string;
   slug: string;
@@ -13,90 +13,7 @@ interface Category {
   color: string;
 }
 
-const categories: Category[] = [
-  {
-    id: '1',
-    name: 'Anime',
-    slug: 'anime',
-    icon: '🎬',
-    count: 2450,
-    description: 'Japanese animation series & films',
-    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&h=300&fit=crop&q=80',
-    color: 'from-red-500/20 to-pink-500/20',
-  },
-  {
-    id: '2',
-    name: 'Web Novels',
-    slug: 'web-novels',
-    icon: '📖',
-    count: 1890,
-    description: 'Light novels & web fiction',
-    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop&q=80',
-    color: 'from-blue-500/20 to-cyan-500/20',
-  },
-  {
-    id: '3',
-    name: 'Webtoons',
-    slug: 'webtoons',
-    icon: '🎨',
-    count: 1654,
-    description: 'Manhwa, Manhua & WebComics',
-    image: 'https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=400&h=300&fit=crop&q=80',
-    color: 'from-purple-500/20 to-violet-500/20',
-  },
-  {
-    id: '4',
-    name: 'Video Games',
-    slug: 'games',
-    icon: '🎮',
-    count: 3200,
-    description: 'RPGs, Action, Adventure & more',
-    image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=300&fit=crop&q=80',
-    color: 'from-green-500/20 to-emerald-500/20',
-  },
-  {
-    id: '5',
-    name: 'Trading Cards',
-    slug: 'tcg',
-    icon: '🃏',
-    count: 920,
-    description: 'MTG, Pokemon, Yu-Gi-Oh & more',
-    image: 'https://images.unsplash.com/photo-1606503153255-59d8b8b82176?w=400&h=300&fit=crop&q=80',
-    color: 'from-yellow-500/20 to-orange-500/20',
-  },
-  {
-    id: '6',
-    name: 'Movies & TV',
-    slug: 'movies-tv',
-    icon: '🎥',
-    count: 1430,
-    description: 'Films, series & documentaries',
-    image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=300&fit=crop&q=80',
-    color: 'from-indigo-500/20 to-blue-500/20',
-  },
-  {
-    id: '7',
-    name: 'Books & Literature',
-    slug: 'books',
-    icon: '📚',
-    count: 980,
-    description: 'Fantasy, Sci-Fi & Fiction series',
-    image: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=300&fit=crop&q=80',
-    color: 'from-amber-500/20 to-yellow-500/20',
-  },
-  {
-    id: '8',
-    name: 'Tabletop & RPG',
-    slug: 'tabletop',
-    icon: '🎲',
-    count: 560,
-    description: 'D&D, Warhammer & board games',
-    image: 'https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=400&h=300&fit=crop&q=80',
-    color: 'from-rose-500/20 to-red-500/20',
-  },
-];
-
-export default function CategorySection() {
+export default function CategorySection({ categories }: { categories: Category[] }) {
   return (
     <section className="py-16 md:py-24 bg-background-secondary">
       <div className="container">

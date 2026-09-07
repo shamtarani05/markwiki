@@ -1,12 +1,8 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { ContinueReadingSection, type ReadingItem } from '@/src/components/home';
 
-interface ReadingItem {
-  pageTitle: string; pageSlug: string; coverImage?: string; wikiName: string; wikiSlug: string; lastReadAt: string;
-}
 interface Contributions {
   wikis: { _id: string; name: string; slug: string; status: string; coverImage?: string; reviewNote?: string }[];
   pages: { _id: string; title: string; slug: string; status: string; coverImage?: string; reviewNote?: string; wiki: { slug: string } }[];
@@ -34,28 +30,14 @@ export default function AccountDashboard() {
     <div className="container py-10 space-y-12">
       <h1 className="text-3xl font-bold text-foreground">Your Dashboard</h1>
 
-      <section>
-        <h2 className="text-xl font-bold text-foreground mb-4">Continue Reading</h2>
-        {reading.length === 0 ? (
+      {reading.length === 0 ? (
+        <section>
+          <h2 className="text-xl font-bold text-foreground mb-4">Continue Reading</h2>
           <p className="text-foreground-muted">Pages you read will show up here.</p>
-        ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {reading.map((item) => (
-              <Link key={`${item.wikiSlug}-${item.pageSlug}`} href={`/wiki/${item.wikiSlug}/${item.pageSlug}`} className="card overflow-hidden group">
-                <div className="aspect-video bg-background-tertiary overflow-hidden relative">
-                  {item.coverImage && (
-                    <Image src={item.coverImage} alt={item.pageTitle} fill className="object-cover group-hover:scale-105 transition-transform" />
-                  )}
-                </div>
-                <div className="p-3">
-                  <p className="text-xs text-accent">{item.wikiName}</p>
-                  <h3 className="font-semibold text-foreground text-sm">{item.pageTitle}</h3>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
-      </section>
+        </section>
+      ) : (
+        <ContinueReadingSection items={reading} />
+      )}
 
       <section>
         <h2 className="text-xl font-bold text-foreground mb-4">My Contributions</h2>

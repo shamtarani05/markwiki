@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 
-interface Wiki {
+export interface Wiki {
   id: string;
   slug: string;
   title: string;
@@ -14,97 +14,6 @@ interface Wiki {
   contributors: number;
   trending: boolean;
 }
-
-const featuredWikis: Wiki[] = [
-  {
-    id: '1',
-    slug: 'solo-leveling',
-    title: 'Solo Leveling',
-    franchise: 'Manhwa / Anime',
-    cover: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&h=600&fit=crop&q=80',
-    category: 'Webtoon',
-    pages: 1247,
-    contributors: 342,
-    trending: true,
-  },
-  {
-    id: '2',
-    slug: 'jujutsu-kaisen',
-    title: 'Jujutsu Kaisen',
-    franchise: 'Manga / Anime',
-    cover: 'https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=400&h=600&fit=crop&q=80',
-    category: 'Anime',
-    pages: 2156,
-    contributors: 567,
-    trending: true,
-  },
-  {
-    id: '3',
-    slug: 'elden-ring',
-    title: 'Elden Ring',
-    franchise: 'FromSoftware',
-    cover: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=600&fit=crop&q=80',
-    category: 'Game',
-    pages: 3421,
-    contributors: 892,
-    trending: false,
-  },
-  {
-    id: '4',
-    slug: 'lord-of-the-mysteries',
-    title: 'Lord of the Mysteries',
-    franchise: 'Web Novel',
-    cover: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=400&h=600&fit=crop&q=80',
-    category: 'Web Novel',
-    pages: 1876,
-    contributors: 234,
-    trending: true,
-  },
-  {
-    id: '5',
-    slug: 'one-piece',
-    title: 'One Piece',
-    franchise: 'Manga / Anime',
-    cover: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&h=600&fit=crop&q=80',
-    category: 'Anime',
-    pages: 8934,
-    contributors: 2341,
-    trending: false,
-  },
-  {
-    id: '6',
-    slug: 'genshin-impact',
-    title: 'Genshin Impact',
-    franchise: 'miHoYo',
-    cover: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=600&fit=crop&q=80',
-    category: 'Game',
-    pages: 4521,
-    contributors: 1234,
-    trending: true,
-  },
-  {
-    id: '7',
-    slug: 'demon-slayer',
-    title: 'Demon Slayer',
-    franchise: 'Manga / Anime',
-    cover: 'https://images.unsplash.com/photo-1578632292335-df3abbb0d586?w=400&h=600&fit=crop&q=80',
-    category: 'Anime',
-    pages: 1567,
-    contributors: 456,
-    trending: false,
-  },
-  {
-    id: '8',
-    slug: 'the-beginning-after-the-end',
-    title: 'The Beginning After The End',
-    franchise: 'Webtoon',
-    cover: 'https://images.unsplash.com/photo-1535666669445-e8c15cd2e7d9?w=400&h=600&fit=crop&q=80',
-    category: 'Webtoon',
-    pages: 987,
-    contributors: 189,
-    trending: true,
-  },
-];
 
 const categoryColors: Record<string, string> = {
   'Anime': 'badge-red',
@@ -173,10 +82,10 @@ function WikiCard({ wiki }: { wiki: Wiki }) {
   );
 }
 
-export default function FeaturedWikisSection() {
+export default function FeaturedWikisSection({ wikis }: { wikis: Wiki[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = Math.ceil(featuredWikis.length / 4);
+  const totalSlides = Math.ceil(wikis.length / 4);
 
   const scrollToSlide = (index: number) => {
     if (scrollRef.current) {
@@ -238,38 +147,44 @@ export default function FeaturedWikisSection() {
         </div>
 
         {/* Wikis Slider */}
-        <div
-          ref={scrollRef}
-          onScroll={handleScroll}
-          className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6"
-        >
-          {/* Each slide contains 4 wikis */}
-          {Array.from({ length: totalSlides }).map((_, slideIndex) => (
+        {wikis.length === 0 ? (
+          <p className="text-foreground-muted text-center py-8">No featured wikis yet — check back soon.</p>
+        ) : (
+          <>
             <div
-              key={slideIndex}
-              className="flex-shrink-0 w-full snap-start grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+              ref={scrollRef}
+              onScroll={handleScroll}
+              className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6"
             >
-              {featuredWikis.slice(slideIndex * 4, slideIndex * 4 + 4).map((wiki) => (
-                <WikiCard key={wiki.id} wiki={wiki} />
+              {/* Each slide contains 4 wikis */}
+              {Array.from({ length: totalSlides }).map((_, slideIndex) => (
+                <div
+                  key={slideIndex}
+                  className="flex-shrink-0 w-full snap-start grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
+                >
+                  {wikis.slice(slideIndex * 4, slideIndex * 4 + 4).map((wiki) => (
+                    <WikiCard key={wiki.id} wiki={wiki} />
+                  ))}
+                </div>
               ))}
             </div>
-          ))}
-        </div>
 
-        {/* Dots Indicator */}
-        <div className="flex justify-center gap-2 mt-6">
-          {Array.from({ length: totalSlides }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollToSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                currentSlide === index
-                  ? 'bg-accent w-6'
-                  : 'bg-border hover:bg-foreground-muted'
-              }`}
-            />
-          ))}
-        </div>
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-6">
+              {Array.from({ length: totalSlides }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => scrollToSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    currentSlide === index
+                      ? 'bg-accent w-6'
+                      : 'bg-border hover:bg-foreground-muted'
+                  }`}
+                />
+              ))}
+            </div>
+          </>
+        )}
 
         {/* Mobile View All */}
         <div className="text-center mt-8 sm:hidden">

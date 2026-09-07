@@ -1,6 +1,7 @@
 export { default as HeroSection } from './HeroSection';
 export { default as CategorySection } from './CategorySection';
 export { default as FeaturedWikisSection } from './FeaturedWikisSection';
+export { default as ContinueReadingSection, type ReadingItem } from './ContinueReadingSection';
 export { default as TrendingPagesSection } from './TrendingPagesSection';
 export { default as CommunitySection } from './CommunitySection';
 export { default as RecentActivitySection } from './RecentActivitySection';
