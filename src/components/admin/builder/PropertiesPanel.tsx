@@ -1,7 +1,9 @@
 'use client';
 
-import type { Block, CardGridItem, GalleryProps, InfoboxField } from '@/src/lib/blocks/types';
+import { useState } from 'react';
+import type { Block, CardGridItem, GalleryProps, InfoboxField, VideoEmbedProps } from '@/src/lib/blocks/types';
 import RichTextEditor from './RichTextEditor';
+import VideoPicker from './VideoPicker';
 
 type OnChange<T extends Block> = (props: T['props']) => void;
 
@@ -55,12 +57,7 @@ function renderFields(block: Block, onChange: (props: Block['props']) => void) {
       return <GalleryFields props={block.props} onChange={onChange as OnChange<Extract<Block, { type: 'gallery' }>>} />;
 
     case 'videoEmbed':
-      return (
-        <>
-          <TextField label="Video URL" value={block.props.url} onChange={(url) => onChange({ ...block.props, url })} />
-          <TextField label="Caption" value={block.props.caption ?? ''} onChange={(caption) => onChange({ ...block.props, caption })} />
-        </>
-      );
+      return <VideoEmbedFields props={block.props} onChange={onChange as OnChange<Extract<Block, { type: 'videoEmbed' }>>} />;
 
     case 'quote':
       return (
@@ -158,6 +155,32 @@ function renderFields(block: Block, onChange: (props: Block['props']) => void) {
     default:
       return null;
   }
+}
+
+function VideoEmbedFields({ props, onChange }: { props: VideoEmbedProps; onChange: OnChange<Extract<Block, { type: 'videoEmbed' }>> }) {
+  const [pickerOpen, setPickerOpen] = useState(false);
+  return (
+    <>
+      <TextField label="Video URL" value={props.url} onChange={(url) => onChange({ ...props, url })} />
+      <button
+        type="button"
+        onClick={() => setPickerOpen(true)}
+        className="text-xs text-accent hover:underline"
+      >
+        Upload a video file instead
+      </button>
+      <TextField label="Caption" value={props.caption ?? ''} onChange={(caption) => onChange({ ...props, caption })} />
+      {pickerOpen && (
+        <VideoPicker
+          onClose={() => setPickerOpen(false)}
+          onInsert={(url) => {
+            onChange({ ...props, url });
+            setPickerOpen(false);
+          }}
+        />
+      )}
+    </>
+  );
 }
 
 function GalleryFields({ props, onChange }: { props: GalleryProps; onChange: OnChange<Extract<Block, { type: 'gallery' }>> }) {

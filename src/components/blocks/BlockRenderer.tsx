@@ -5,7 +5,7 @@ import { useState } from 'react';
 import type { Block } from '@/src/lib/blocks/types';
 import { BLOCK_LABELS } from '@/src/lib/blocks/types';
 import { sanitizeHtml } from '@/src/lib/blocks/sanitize';
-import { toEmbedUrl } from '@/src/lib/blocks/embedUrl';
+import { toEmbedUrl, isDirectVideoUrl } from '@/src/lib/blocks/embedUrl';
 import AdBanner from '@/src/components/home/AdBanner';
 
 // Only the infobox goes in the right sidebar (like a real wiki article).
@@ -128,12 +128,16 @@ export function BlockRenderer({
       return block.props.url ? (
         <figure>
           <div className="aspect-video rounded-lg overflow-hidden border border-border">
-            <iframe
-              src={toEmbedUrl(block.props.url)}
-              className="w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+            {isDirectVideoUrl(block.props.url) ? (
+              <video src={block.props.url} controls className="w-full h-full" />
+            ) : (
+              <iframe
+                src={toEmbedUrl(block.props.url)}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            )}
           </div>
           {block.props.caption && (
             <figcaption className="text-xs text-foreground-muted text-center mt-2">

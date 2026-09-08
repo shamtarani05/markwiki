@@ -14,6 +14,7 @@ import { toEmbedUrl } from '@/src/lib/blocks/embedUrl';
 import { VideoEmbed } from '@/src/lib/tiptap/VideoEmbed';
 import TemplatePicker from './TemplatePicker';
 import ImagePicker from './ImagePicker';
+import VideoPicker from './VideoPicker';
 import { BlockListRenderer } from '@/src/components/blocks/BlockRenderer';
 
 const FONT_SIZES = [
@@ -56,6 +57,7 @@ export default function TextEditor({
 
   const [doc, setDoc] = useState<TextDocument>(() => blocksToDocument(initialBlocks));
   const [imagePickerOpen, setImagePickerOpen] = useState(false);
+  const [videoPickerOpen, setVideoPickerOpen] = useState(false);
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -175,15 +177,7 @@ export default function TextEditor({
         <ToolbarIconButton label="Quote" onClick={() => editor?.chain().focus().toggleBlockquote().run()} active={editor?.isActive('blockquote')}>&ldquo;&rdquo;</ToolbarIconButton>
         <Divider />
         <ToolbarIconButton label="Insert image" onClick={() => setImagePickerOpen(true)}>🖼</ToolbarIconButton>
-        <ToolbarIconButton
-          label="Insert video"
-          onClick={() => {
-            const url = window.prompt('Video URL (YouTube link or direct embed URL)');
-            if (url) editor?.chain().focus().setVideoEmbed({ src: toEmbedUrl(url) }).run();
-          }}
-        >
-          ▶
-        </ToolbarIconButton>
+        <ToolbarIconButton label="Insert video" onClick={() => setVideoPickerOpen(true)}>▶</ToolbarIconButton>
         <Divider />
         <button type="button" onClick={toggleInfobox} className="px-2 py-1 text-xs rounded-md text-foreground-muted hover:text-foreground hover:bg-background-tertiary">
           Infobox
@@ -357,6 +351,16 @@ export default function TextEditor({
           onInsert={(url) => {
             setCoverImage(url);
             setCoverPickerOpen(false);
+          }}
+        />
+      )}
+
+      {videoPickerOpen && (
+        <VideoPicker
+          onClose={() => setVideoPickerOpen(false)}
+          onInsert={(url) => {
+            editor?.chain().focus().setVideoEmbed({ src: toEmbedUrl(url) }).run();
+            setVideoPickerOpen(false);
           }}
         />
       )}
