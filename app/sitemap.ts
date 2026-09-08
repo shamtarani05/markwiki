@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   await connectDB();
 
   const [wikis, pages] = await Promise.all([
-    Wiki.find().select('slug updatedAt').lean(),
+    Wiki.find({ status: 'approved' }).select('slug updatedAt').lean(),
     Page.find({ status: 'published' }).select('slug updatedAt wiki').populate('wiki', 'slug').lean(),
   ]);
 

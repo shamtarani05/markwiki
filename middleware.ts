@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { SESSION_COOKIE, verifySession } from '@/src/lib/auth/session';
+import { isTrustedRole } from '@/src/lib/auth/roles';
 
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get(SESSION_COOKIE)?.value;
@@ -10,7 +11,7 @@ export async function middleware(req: NextRequest) {
     loginUrl.searchParams.set('next', req.nextUrl.pathname);
     return NextResponse.redirect(loginUrl);
   }
-  if (session.role !== 'admin' && session.role !== 'editor') {
+  if (!isTrustedRole(session.role)) {
     return NextResponse.redirect(new URL('/', req.url));
   }
   return NextResponse.next();

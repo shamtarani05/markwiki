@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/src/lib/db/connection';
 import { Page, Revision } from '@/src/lib/db/models';
 import { getSessionUser } from '@/src/lib/auth/getSessionUser';
+import { isTrustedRole } from '@/src/lib/auth/roles';
 import { snapshotPageRevision } from '@/src/lib/db/pageRevisions';
 import type { Block } from '@/src/lib/blocks/types';
 
@@ -17,8 +18,13 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
   if (!page) return NextResponse.json({ error: 'Page not found' }, { status: 404 });
   if (!revision) return NextResponse.json({ error: 'Revision not found' }, { status: 404 });
 
+  // Rollback overwrites a page (including a live published one) with an old
+  // version — that is a trusted-only action, equivalent to approving an edit.
+  // There is no "propose a rollback" flow for non-trusted users.
   const session = await getSessionUser();
-  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!session || !isTrustedRole(session.role)) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
   const authorId = session.sub;
 
   // Snapshot the current state too, so rolling back is itself a reversible

@@ -19,7 +19,10 @@ interface Props {
 // content present in the initial response.
 async function loadPage(wikiSlug: string, pageSlug: string) {
   await connectDB();
-  const wiki = await Wiki.findOne({ slug: wikiSlug }).lean();
+  // The wiki itself must be approved too — otherwise a page inside a
+  // draft/pending wiki stays publicly readable even though the wiki's own
+  // hub page 404s.
+  const wiki = await Wiki.findOne({ slug: wikiSlug, status: 'approved' }).lean();
   if (!wiki) return null;
   const page = await Page.findOne({ wiki: wiki._id, slug: pageSlug, status: 'published' }).lean();
   if (!page) return null;

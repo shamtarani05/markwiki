@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   if (!wikiSlug || !pageSlug) {
     return NextResponse.json({ error: 'wikiSlug and pageSlug are required' }, { status: 400 });
   }
-  const wiki = await Wiki.findOne({ slug: wikiSlug }).select('_id');
+  const wiki = await Wiki.findOne({ slug: wikiSlug, status: 'approved' }).select('_id');
   if (!wiki) return NextResponse.json({ page: null }, { status: 404 });
   const page = await Page.findOne({ wiki: wiki._id, slug: pageSlug, status: 'published' })
     .select('title blocks templateKey coverImage');

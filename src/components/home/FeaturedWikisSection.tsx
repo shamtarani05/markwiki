@@ -15,11 +15,18 @@ export interface Wiki {
   trending: boolean;
 }
 
+// Keys are real Category.name values (see the seed list in
+// app/api/admin/categories/route.ts) — anything unmapped falls back to
+// badge-gray at the call site.
 const categoryColors: Record<string, string> = {
   'Anime': 'badge-red',
-  'Webtoon': 'badge-purple',
-  'Game': 'badge-green',
-  'Web Novel': 'badge-blue',
+  'Webtoons': 'badge-purple',
+  'Web Novels': 'badge-blue',
+  'Video Games': 'badge-green',
+  'Trading Cards': 'badge-yellow',
+  'Movies & TV': 'badge-red',
+  'Books & Literature': 'badge-blue',
+  'Tabletop & RPG': 'badge-purple',
 };
 
 function WikiCard({ wiki }: { wiki: Wiki }) {

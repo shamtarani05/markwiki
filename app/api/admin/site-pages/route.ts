@@ -8,6 +8,11 @@ import type { Block } from '@/src/lib/blocks/types';
 
 const SEED_PAGES = [{ title: 'About', siteSlug: 'about' }];
 
+// Top-level static route segments that resolve before the dynamic
+// /[siteSlug] catch-all ever sees them — a site page given one of these
+// slugs would be permanently unreachable at its own URL.
+const RESERVED_SLUGS = new Set(['admin', 'api', 'login', 'register', 'account', 'wiki']);
+
 export async function GET() {
   await connectDB();
   const session = await getSessionUser();
@@ -40,7 +45,7 @@ export async function POST(req: NextRequest) {
   const baseSlug = slugify(title);
   let siteSlug = baseSlug;
   let suffix = 1;
-  while (await Page.exists({ siteSlug })) {
+  while (RESERVED_SLUGS.has(siteSlug) || (await Page.exists({ siteSlug }))) {
     suffix += 1;
     siteSlug = `${baseSlug}-${suffix}`;
   }

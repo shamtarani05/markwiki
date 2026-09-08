@@ -15,12 +15,17 @@ export interface WikiPage {
   lastUpdated: string;
 }
 
+// Keys are capitalized Page.pageType values (the PageArchetype union in
+// src/lib/blocks/templates.ts) — anything unmapped falls back to badge-gray
+// at the call site.
 const categoryColors: Record<string, string> = {
+  'Overview': 'badge-purple',
   'Character': 'badge-blue',
-  'Ability': 'badge-purple',
-  'Boss': 'badge-red',
   'Location': 'badge-green',
-  'Item': 'badge-yellow',
+  'Episode': 'badge-red',
+  'Cover': 'badge-yellow',
+  'Site': 'badge-gray',
+  'Blank': 'badge-gray',
 };
 
 function PageCard({ page }: { page: WikiPage }) {

@@ -9,6 +9,9 @@ import type { PageArchetype } from '@/src/lib/blocks/templates';
 
 export async function GET(req: NextRequest) {
   await connectDB();
+  const session = await getSessionUser();
+  if (!session || !isTrustedRole(session.role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+
   const wikiId = req.nextUrl.searchParams.get('wikiId');
   const filter = wikiId ? { wiki: wikiId } : {};
   const pages = await Page.find(filter)

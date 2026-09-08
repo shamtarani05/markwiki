@@ -473,6 +473,7 @@ Client asked to brainstorm further reader/admin features; decided
 auth/contribution/public-data/site-pages build, so that build finishes
 end-to-end instead of scope growing indefinitely:
 
+- [ ] **Deploy prerequisite (not optional):** before this branch's `Wiki.status` filters go live in production, run `db.wikis.updateMany({ status: { $exists: false } }, { $set: { status: 'approved' } })` against the production database — Mongoose defaults only apply at document creation, so wikis created before the field existed have no `status` and would be silently hidden forever by the new `status: 'approved'` filters (homepage, wiki hub, public page routes, sitemap). Already run against the local dev DB (4 wikis backfilled); there is no formal migration system in this repo, so this is a manual step.
 - [ ] Watchlist — follow a wiki/page, surfaced in the user dashboard when it changes
 - [ ] Talk/discussion pages per wiki page
 - [ ] Public user profile page (contributions, join date)

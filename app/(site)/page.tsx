@@ -63,7 +63,7 @@ async function getHomeData() {
       .populate('editedBy', 'name avatar')
       .populate({
         path: 'contentId',
-        select: 'title slug wiki excerpt coverImage',
+        select: 'title slug wiki excerpt coverImage status',
         model: 'Page',
         populate: { path: 'wiki', select: 'name slug' },
       })
@@ -124,8 +124,13 @@ export default async function HomePage() {
   const continueReading = session ? await getContinueReading(session.sub) : [];
 
   // Only revisions whose target page still exists (populate resolves to
-  // null for a deleted page) are usable for either activity feed below.
-  const validRevisions = recentRevisions.filter((r) => r.contentId);
+  // null for a deleted page) *and* is published are usable for either
+  // activity feed below — without the status check these public feeds leak
+  // the titles and edit summaries of draft/pending pages, including
+  // contributor submissions still sitting in the review queue.
+  const validRevisions = recentRevisions.filter(
+    (r) => r.contentId && (r.contentId as unknown as { status?: string }).status === 'published'
+  );
 
   const recentActivity = validRevisions.map((rev) => {
     const page = rev.contentId as unknown as {
