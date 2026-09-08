@@ -95,7 +95,7 @@ export default async function WikiHomePage({ params, searchParams }: Props) {
     ]),
   ]);
   const pageIds = (await Page.find(publishedFilter).select('_id').lean()).map((p) => p._id);
-  const recentRevisions = await Revision.find({ contentType: 'page', contentId: { $in: pageIds } })
+  const recentRevisions = await Revision.find({ contentType: 'page', contentId: { $in: pageIds }, status: 'applied' })
     .populate('editedBy', 'name')
     .populate({ path: 'contentId', select: 'title slug', model: 'Page' })
     .sort({ createdAt: -1 })
