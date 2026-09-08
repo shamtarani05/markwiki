@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/src/lib/db/connection';
 import { Media } from '@/src/lib/db/models';
 import { getSessionUser } from '@/src/lib/auth/getSessionUser';
-import { imagekit } from '@/src/lib/imagekit';
+import { getImagekit } from '@/src/lib/imagekit';
 
 const MAX_IMAGE_SIZE = 8 * 1024 * 1024; // 8MB
 const MAX_VIDEO_SIZE = 100 * 1024 * 1024; // 100MB
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
   const ext = file.name.includes('.') ? file.name.slice(file.name.lastIndexOf('.')) : `.${file.type.split('/')[1]}`;
   const filename = `${randomUUID()}${ext}`;
 
-  const uploaded = await imagekit.files.upload({
+  const uploaded = await getImagekit().files.upload({
     file,
     fileName: filename,
     folder: '/wiki-platform',
