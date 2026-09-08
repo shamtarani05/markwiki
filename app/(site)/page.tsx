@@ -59,7 +59,14 @@ async function getHomeData() {
     ]),
     // Feeds both RecentActivitySection (edit feed) and CommunitySection
     // (wiki-update items) — real Revision docs, no separate query needed.
-    Revision.find({ contentType: 'page' })
+    // status: 'applied' — a non-trusted edit to a published page creates a
+    // *pending* revision whose target page is still published, so the
+    // contentId.status check below would let its attacker-controlled
+    // editSummary onto the homepage before any admin reviewed it.
+    // snapshotPageRevision (every trusted edit/rollback/approval path)
+    // relies on the schema default 'applied', so legitimate activity is
+    // unaffected; an approved contribution flips to 'applied' and appears.
+    Revision.find({ contentType: 'page', status: 'applied' })
       .populate('editedBy', 'name avatar')
       .populate({
         path: 'contentId',

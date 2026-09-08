@@ -2,11 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/src/lib/db/connection';
 import { Page, Wiki } from '@/src/lib/db/models';
 import { getSessionUser } from '@/src/lib/auth/getSessionUser';
+import { isTrustedRole } from '@/src/lib/auth/roles';
 import { slugify } from '@/src/lib/slugify';
 import { buildCoverPageBlocks } from '@/src/lib/blocks/coverTemplate';
 
 export async function GET() {
   await connectDB();
+  // Returns every wiki including draft/pending ones (with reviewNote and
+  // createdBy) — trusted-only, same gate as the admin page routes.
+  const session = await getSessionUser();
+  if (!session || !isTrustedRole(session.role)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+
   const wikis = await Wiki.find().populate('category', 'name slug').sort({ name: 1 });
   return NextResponse.json({ wikis });
 }
