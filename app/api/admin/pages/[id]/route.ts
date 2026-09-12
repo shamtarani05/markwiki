@@ -38,6 +38,14 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
   const trusted = isTrustedRole(session.role);
 
+  // A real content edit (as opposed to a status-only toggle like publish/
+  // unpublish, which carries neither field) must explain itself — standard
+  // wiki convention, and the only record future readers get of *why*
+  // something changed.
+  if ((title !== undefined || blocks !== undefined) && !editSummary) {
+    return NextResponse.json({ error: 'An edit summary is required — briefly describe what you changed' }, { status: 400 });
+  }
+
   if (!trusted && (existing.status === 'published' || existing.status === 'archived')) {
     // Non-trusted edit to a live (or archived) page: propose a pending
     // revision instead of mutating the page directly.

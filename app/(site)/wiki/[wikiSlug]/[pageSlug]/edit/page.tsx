@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import PageBuilder from '@/src/components/admin/builder/PageBuilder';
+import TextEditor from '@/src/components/admin/builder/TextEditor';
 import type { PageBuilderSaveData } from '@/src/lib/blocks/types';
 
 interface PageDoc {
@@ -62,7 +62,12 @@ export default function PublicEditPage() {
   return (
     <div className="container py-8">
       {notice && <div className="mb-4 px-4 py-2 rounded-lg bg-accent-muted text-accent text-sm">{notice}</div>}
-      <PageBuilder
+      {/* Public contributors get the flowing, Wikipedia-style document
+          editor — not the admin drag-and-drop block canvas. Paragraphs,
+          headings-as-sections, images: the mental model a general
+          audience already knows, not a block palette. Both editors read/
+          write the same Page.blocks shape, so this is purely a UI choice. */}
+      <TextEditor
         initialTitle={page.title}
         initialBlocks={page.blocks}
         initialTemplateKey={page.templateKey}

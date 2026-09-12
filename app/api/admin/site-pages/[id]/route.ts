@@ -34,6 +34,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const existing = await Page.findOne({ _id: id, pageType: 'site' });
   if (!existing) return NextResponse.json({ error: 'Not found' }, { status: 404 });
 
+  if ((title !== undefined || blocks !== undefined) && !editSummary) {
+    return NextResponse.json({ error: 'An edit summary is required — briefly describe what you changed' }, { status: 400 });
+  }
+
   await snapshotPageRevision(existing, session.sub, editSummary);
   if (title) existing.title = title;
   if (blocks) existing.blocks = blocks;

@@ -195,7 +195,13 @@ export default function TextEditor({
           <button type="button" onClick={() => setMode('preview')} className={`px-2.5 py-1 text-xs ${mode === 'preview' ? 'bg-accent text-accent-contrast' : 'text-foreground-muted hover:bg-background-tertiary'}`}>Preview</button>
         </div>
         <div className="flex-1" />
-        <button type="button" disabled={saving} onClick={handleSave} className="btn btn-primary text-sm py-1.5 disabled:opacity-60">
+        <button
+          type="button"
+          disabled={saving || (showEditSummary && !editSummary.trim())}
+          title={showEditSummary && !editSummary.trim() ? 'Enter an edit summary describing what you changed before saving' : undefined}
+          onClick={handleSave}
+          className="btn btn-primary text-sm py-1.5 disabled:opacity-60"
+        >
           {saving ? 'Saving…' : 'Save'}
         </button>
       </div>
@@ -230,9 +236,10 @@ export default function TextEditor({
       {showEditSummary && (
         <input
           type="text"
+          required
           value={editSummary}
           onChange={(e) => setEditSummary(e.target.value)}
-          placeholder="Edit summary — briefly describe what you changed (optional but recommended)"
+          placeholder="Edit summary (required) — briefly describe what you changed"
           maxLength={500}
           className="w-full mt-3 mb-1 px-3 py-2 text-sm bg-background-secondary border border-border rounded-lg text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-accent transition-colors"
         />

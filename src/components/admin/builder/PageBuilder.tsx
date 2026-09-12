@@ -224,7 +224,8 @@ export default function PageBuilder({
         <div className="flex-1" />
         <button
           type="button"
-          disabled={saving}
+          disabled={saving || (showEditSummary && !editSummary.trim())}
+          title={showEditSummary && !editSummary.trim() ? 'Enter an edit summary describing what you changed before saving' : undefined}
           onClick={() => onSave({ title, blocks, templateKey, editSummary, coverImage })}
           className="btn btn-primary text-sm py-1.5 disabled:opacity-60"
         >
@@ -265,9 +266,10 @@ export default function PageBuilder({
       {showEditSummary && (
         <input
           type="text"
+          required
           value={editSummary}
           onChange={(e) => setEditSummary(e.target.value)}
-          placeholder="Edit summary — briefly describe what you changed (optional but recommended)"
+          placeholder="Edit summary (required) — briefly describe what you changed"
           maxLength={500}
           className="w-full mt-3 mb-1 px-3 py-2 text-sm bg-background-secondary border border-border rounded-lg text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-accent transition-colors"
         />
