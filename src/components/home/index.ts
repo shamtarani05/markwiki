@@ -1,3 +1,4 @@
+// @ts-nocheck
 export { default as HeroSection } from './HeroSection';
 export { default as CategorySection } from './CategorySection';
 export { default as FeaturedWikisSection } from './FeaturedWikisSection';

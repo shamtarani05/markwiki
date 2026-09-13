@@ -36,7 +36,7 @@ export default function AccountDashboard() {
           <p className="text-foreground-muted">Pages you read will show up here.</p>
         </section>
       ) : (
-        <ContinueReadingSection items={reading} />
+        <ContinueReadingSection settings={{}} items={reading} />
       )}
 
       <section>

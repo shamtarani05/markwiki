@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import {
   LayoutDashboard, BookOpen, FileText, Book, PenLine, ScrollText,
   Tag, Megaphone, Compass, Palette, Inbox, Users, Settings,
-  PanelLeftClose, PanelLeftOpen, type LucideIcon,
+  PanelLeftClose, PanelLeftOpen, LayoutTemplate, type LucideIcon,
 } from 'lucide-react';
 
 interface NavItem {
@@ -37,9 +37,10 @@ const NAV_GROUPS: { label: string; items: (NavItem | { label: string; icon: Luci
   {
     label: 'Site',
     items: [
+      { label: 'Homepage', href: '/admin/homepage', icon: LayoutTemplate },
+      { label: 'Navigation', href: '/admin/navigation', icon: Compass },
       { label: 'Categories', icon: Tag },
       { label: 'Ad Placements', icon: Megaphone },
-      { label: 'Navigation', icon: Compass },
       { label: 'Theme', icon: Palette },
     ],
   },

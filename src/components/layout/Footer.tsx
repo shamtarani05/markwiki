@@ -1,100 +1,65 @@
 import Link from 'next/link';
+import type { NavItem } from '@/src/lib/db/getNavigationConfig';
 
-export default function Footer() {
-  const footerLinks = {
-    explore: [
-      { href: '/wikis', label: 'All Wikis' },
-      { href: '/anime', label: 'Anime' },
-      { href: '/games', label: 'Video Games' },
-      { href: '/web-novels', label: 'Web Novels' },
-      { href: '/webtoons', label: 'Webtoons' },
-    ],
-    community: [
-      { href: '/create-wiki', label: 'Start a Wiki' },
-      { href: '/contribute', label: 'How to Contribute' },
-      { href: '/contributors', label: 'Top Contributors' },
-      { href: '/forums', label: 'Forums' },
-    ],
-    company: [
-      { href: '/about', label: 'About Us' },
-      { href: '/contact', label: 'Contact' },
-      { href: '/privacy', label: 'Privacy Policy' },
-      { href: '/terms', label: 'Terms of Service' },
-    ],
-  };
+export default function Footer({ navLinks = [] }: { navLinks?: NavItem[] }) {
+  // Organize links into columns. If the admin hasn't set up columns,
+  // we just render them all in one column or split them heuristically.
+  const explore = navLinks.slice(0, Math.ceil(navLinks.length / 3));
+  const community = navLinks.slice(Math.ceil(navLinks.length / 3), Math.ceil(navLinks.length * 2 / 3));
+  const company = navLinks.slice(Math.ceil(navLinks.length * 2 / 3));
 
   return (
-    <footer className="bg-background-secondary border-t border-border">
-      {/* Main Footer */}
-      <div className="container py-10 ">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 pb-6">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
-                <span className="text-accent-contrast font-bold text-xl">M</span>
+    <footer className="w-full bg-surface-container-lowest border-t border-white/[0.09] mt-space-2xl pt-space-2xl pb-space-xl">
+      <div className="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-xl pb-space-2xl border-b border-white/[0.06]">
+          <div className="lg:col-span-2 space-y-space-md pr-space-lg">
+            <div className="flex items-center gap-space-sm">
+              <div className="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+                <span className="text-on-primary-container font-bold text-lg">M</span>
               </div>
-              <span className="text-xl font-bold text-foreground">Marc<span className="text-accent">Wiki</span></span>
-            </Link>
-            <p className="text-foreground-muted mb-6 max-w-sm">
-              The ultimate fan-powered wiki platform for anime, games, web novels, and webtoons.
-              Discover lore, contribute knowledge, and connect with passionate communities.
+              <span className="font-headline-md text-headline-md tracking-tight text-on-surface">MarcWiki</span>
+            </div>
+            <p className="text-body-editorial font-body-editorial text-on-surface-variant max-w-sm">
+              Built by fans, for fans. The Living Archive for the worlds you love.
             </p>
-            {/* Social Links */}
-            <div className="flex items-center gap-4 mb-4">
-              <a href="#" className="p-2 rounded-lg bg-background-tertiary hover:bg-accent hover:text-accent-contrast transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                </svg>
-              </a>
-              <a href="#" className="p-2 rounded-lg bg-background-tertiary hover:bg-accent hover:text-accent-contrast transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-              </a>
-              <a href="#" className="p-2 rounded-lg bg-background-tertiary hover:bg-accent hover:text-accent-contrast transition-colors">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-                </svg>
-              </a>
+            <div className="flex items-center gap-space-xs text-tertiary-fixed-dim font-label-mono text-label-mono">
+              <span className="w-2 h-2 rounded-full bg-tertiary inline-block animate-ping"></span>
+              <span>ARCHIVE NETWORK LIVE • 142,891 CANONS ACTIVE</span>
             </div>
           </div>
-
-          {/* Explore */}
-          <div>
-            <h4 className="font-semibold text-foreground mb-4">Explore</h4>
-            <ul className="space-y-3">
-              {footerLinks.explore.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-foreground-muted hover:text-accent transition-colors">
+          
+          <div className="space-y-space-md">
+            <h4 className="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Explore</h4>
+            <ul className="space-y-space-xs text-body-sm font-body-sm text-on-surface-variant">
+              {explore.map((link) => (
+                <li key={link.url} className="hover:text-primary transition-colors cursor-pointer">
+                  <Link href={link.url} target={link.isExternal ? '_blank' : undefined} rel={link.isExternal ? 'noopener noreferrer' : undefined}>
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Community */}
-          <div>
-            <h4 className="font-semibold text-foreground mb-4">Community</h4>
-            <ul className="space-y-3">
-              {footerLinks.community.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-foreground-muted hover:text-accent transition-colors">
+          
+          <div className="space-y-space-md">
+            <h4 className="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Community</h4>
+            <ul className="space-y-space-xs text-body-sm font-body-sm text-on-surface-variant">
+              {community.map((link) => (
+                <li key={link.url} className="hover:text-primary transition-colors cursor-pointer">
+                  <Link href={link.url} target={link.isExternal ? '_blank' : undefined} rel={link.isExternal ? 'noopener noreferrer' : undefined}>
                     {link.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="font-semibold text-foreground mb-4">Company</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-foreground-muted hover:text-accent transition-colors">
+          
+          <div className="space-y-space-md">
+            <h4 className="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Platform & Legal</h4>
+            <ul className="space-y-space-xs text-body-sm font-body-sm text-on-surface-variant">
+              {company.map((link) => (
+                <li key={link.url} className="hover:text-primary transition-colors cursor-pointer">
+                  <Link href={link.url} target={link.isExternal ? '_blank' : undefined} rel={link.isExternal ? 'noopener noreferrer' : undefined}>
                     {link.label}
                   </Link>
                 </li>
@@ -102,17 +67,15 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="border-t border-border">
-        <div className="container py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-foreground-muted text-sm">
-            © {new Date().getFullYear()} MarcWiki. All rights reserved.
-          </p>
-          <p className="text-foreground-muted text-sm">
-            Built by fans, for fans
-          </p>
+        
+        <div className="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-mono text-label-mono">
+          <div>© {new Date().getFullYear()} MarcWiki Foundation. Preserving collective human imagination.</div>
+          <div className="flex items-center gap-space-lg">
+            <span className="hover:text-primary transition-colors cursor-pointer">DISCORD</span>
+            <span className="hover:text-primary transition-colors cursor-pointer">GITHUB</span>
+            <span className="hover:text-primary transition-colors cursor-pointer">FEED (RSS)</span>
+            <span className="hover:text-primary transition-colors cursor-pointer">SECURITY</span>
+          </div>
         </div>
       </div>
     </footer>

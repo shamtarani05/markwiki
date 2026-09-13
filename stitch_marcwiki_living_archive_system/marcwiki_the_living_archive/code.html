@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"inverse-primary":"#6d3bd7","on-tertiary-fixed-variant":"#005234","secondary":"#cebdff","tertiary-fixed":"#71fcb8","secondary-container":"#4f319c","on-tertiary-fixed":"#002112","outline":"#958ea0","on-secondary-fixed":"#21005e","surface-container-high":"#2a292e","error":"#ffb4ab","primary-fixed":"#e9ddff","primary":"#d0bcff","on-surface-variant":"#cbc3d7","surface-container-low":"#1b1b1f","on-primary-container":"#340080","on-primary-fixed":"#23005c","on-surface":"#e4e1e7","on-secondary":"#381385","primary-container":"#a078ff","on-secondary-fixed-variant":"#4f319c","on-background":"#e4e1e7","on-primary-fixed-variant":"#5516be","surface-dim":"#131317","surface-container-lowest":"#0e0e12","tertiary-fixed-dim":"#51de9d","surface-tint":"#d0bcff","on-primary":"#3c0091","primary-fixed-dim":"#d0bcff","surface-variant":"#353439","on-tertiary-container":"#00311d","tertiary-container":"#00a56d","on-error-container":"#ffdad6","secondary-fixed-dim":"#cebdff","on-tertiary":"#003822","surface":"#131317","surface-container":"#1f1f23","outline-variant":"#494454","surface-bright":"#39393d","inverse-surface":"#e4e1e7","secondary-fixed":"#e8ddff","inverse-on-surface":"#303034","background":"#131317","surface-container-highest":"#353439","error-container":"#93000a","tertiary":"#51de9d","on-secondary-container":"#bea8ff","on-error":"#690005"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"gutter-lg":"2.5rem","space-2xl":"4rem","margin-sm":"1.25rem","gutter-sm":"1rem","gutter":"1.5rem","space-lg":"1.5rem","margin":"2rem","space-sm":"0.5rem","margin-lg":"4rem","space-xs":"0.25rem","space-xl":"2.5rem","space-md":"1rem"},"fontFamily":{"display-lg-mobile":["Newsreader"],"label-mono":["Geist"],"label-caps":["Geist"],"headline-lg-mobile":["Newsreader"],"display-xl":["Newsreader"],"headline-sm":["Geist"],"body-default":["Geist"],"headline-md":["Geist"],"headline-lg":["Newsreader"],"body-sm":["Geist"],"display-xl-mobile":["Newsreader"],"display-lg":["Newsreader"],"body-editorial":["Geist"]},"fontSize":{"display-lg-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"400"}],"label-mono":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"500"}],"label-caps":["11px",{"lineHeight":"16px","letterSpacing":"0.12em","fontWeight":"600"}],"headline-lg-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.015em","fontWeight":"500"}],"display-xl":["72px",{"lineHeight":"80px","letterSpacing":"-0.03em","fontWeight":"400"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-default":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"500"}],"body-sm":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"display-xl-mobile":["44px",{"lineHeight":"52px","letterSpacing":"-0.02em","fontWeight":"400"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.025em","fontWeight":"400"}],"body-editorial":["18px",{"lineHeight":"30px","letterSpacing":"-0.005em","fontWeight":"400"}]}}}};</script></head><body class="bg-surface-container-lowest font-body-default text-body-default text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 inset-x-0 z-50 bg-surface-container-lowest/85 backdrop-blur-xl border-b border-white/[0.09] shadow-[0_4px_24px_-4px_rgba(0,0,0,0.7)]"><div class="h-[72px] w-full max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm group" data-path="explore" href="#"><img alt="MarcWiki Monogram Logo" class="h-8 w-auto object-contain transition-transform group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1UpssWQ8HLzh02Sjz7FwUvPeoUjnljc6BM_eUa9cPupI26cDlr40tbOfFqpAAUqfPGVJQ7TL3J7zWN_msogafzkelu8-nxbzS0SvdWf2_7R_LjxfWQdAfc_VELUy2178w3cLrBacbSByJnpZ-3IBGrhldg7wPRJaaP67o93uPAKcW4odpZahPHfe_BKy4ZZCLsDsGXN9_z1WZxhAqtSkgkvmrS6tQke-T9Ofx8Ll9CHYhKcpvfJv8Oc0Obh"/><span class="font-headline-md text-headline-md tracking-tight text-on-surface group-hover:text-primary transition-colors">MarcWiki</span></a><span class="hidden sm:inline-flex items-center px-space-xs py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary font-label-caps text-label-caps uppercase tracking-widest">Living Archive</span></div><nav class="hidden xl:flex items-center gap-space-xs p-1 rounded-xl bg-surface-container-low/60 border border-white/[0.04]" data-active-classes="text-primary font-semibold bg-surface-container-high/60"><a aria-current="page" class="px-space-md py-space-xs rounded-lg transition-all text-primary font-semibold bg-surface-container-high/60" data-path="explore" href="#">Explore</a><a class="px-space-md py-space-xs rounded-lg text-body-sm font-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="wikis" href="#">Wikis</a><a class="px-space-md py-space-xs rounded-lg text-body-sm font-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="stories" href="#">Stories</a><a class="px-space-md py-space-xs rounded-lg text-body-sm font-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="blog" href="#">Blog</a><a class="px-space-md py-space-xs rounded-lg text-body-sm font-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="community" href="#">Community</a></nav><div class="flex items-center gap-space-sm md:gap-space-md"><div class="hidden md:flex items-center gap-space-sm bg-surface-container-low/90 hover:bg-surface-container-high/80 border border-white/[0.09] hover:border-primary/40 rounded-xl px-space-md py-space-xs text-on-surface-variant cursor-pointer transition-all w-64 lg:w-72 shadow-inner"><span class="material-symbols-outlined text-outline text-lg">search</span><span class="flex-1 text-body-sm font-body-sm text-outline truncate">Search characters, worlds...</span><kbd class="px-1.5 py-0.5 rounded bg-surface-container-highest border border-outline-variant font-label-mono text-label-mono text-on-surface-variant">⌘K</kbd></div><a class="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-xl bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-all font-label-caps text-label-caps uppercase tracking-wider shadow-[0_0_20px_rgba(160,120,255,0.35)] border-t border-white/25 active:scale-95" data-path="create-page" href="#"><span class="material-symbols-outlined text-base">add</span><span>Create</span></a><div class="relative flex items-center pl-space-xs"><a class="relative block group" data-path="user-profile" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-white/10 group-hover:ring-primary transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARJErOkKFlQl7Mef4kA92TOv9zfiG8EPWiOwAQR0cx5elr-jINIaoyePvZwfxbnA2DvqudoR6_pMV4hA0dBrkR87hr1n8amvZ4_WjmGbD5FCic6PanoNtWBXP9Nv7YSB2id_GZgxuE1rsIxQ7iO-vzhwHVEhvugPs125EyM6p3iSoLLqWY1fHGSr2BtrGpx-mHIsLnuQbKu5Hi3EN2vs5bcgI4Ij_fyQEz8X58FGYz1g6TRIRcw1G27Q"/><span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-tertiary ring-2 ring-surface-container-lowest animate-pulse"></span></a></div></div></div></header><main class="w-full pt-[72px] min-h-screen bg-surface-container-lowest"><div class="flex flex-col w-full relative selection:bg-primary-container selection:text-on-primary-container">
+<!-- ================= 1. CINEMATIC HERO ================= -->
+<section class="relative w-full overflow-hidden bg-surface-container-lowest -mt-[72px] pt-[132px] pb-space-2xl min-h-[798px] flex flex-col justify-between">
+<!-- Cosmic Violet Nebula Glow Background -->
+<div class="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen overflow-hidden">
+<div class="absolute -top-[20%] left-1/2 -translate-x-1/2 w-[1000px] h-[650px] bg-gradient-to-b from-primary/30 via-secondary-container/20 to-transparent blur-[140px] rounded-full"></div>
+<div class="absolute top-1/3 -left-[10%] w-[500px] h-[500px] bg-secondary-container/15 blur-[120px] rounded-full"></div>
+<div class="absolute top-1/4 -right-[10%] w-[600px] h-[600px] bg-primary/10 blur-[130px] rounded-full"></div>
+</div>
+<!-- Editorial Ambient Grid Overlay -->
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(160,120,255,0.12),transparent)] pointer-events-none"></div>
+<div class="relative z-10 max-w-[1440px] w-full mx-auto px-margin-sm md:px-margin lg:px-margin-lg flex flex-col items-center text-center">
+<!-- Living Badge -->
+<div class="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-surface-container-high/90 shadow-md mb-space-lg backdrop-blur-md">
+<span class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_#51de9d] animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-[0.2em]">The Living Archive</span>
+<span class="text-outline-variant text-label-caps">•</span>
+<span class="font-label-mono text-label-mono text-primary">v4.8 CANON FEED</span>
+</div>
+<!-- Main Headline -->
+<h1 class="font-display-xl text-display-xl-mobile md:text-display-xl text-on-surface max-w-5xl tracking-tight leading-[1.05] text-balance">
+        Explore the worlds <span class="italic font-normal text-primary">you love.</span>
+</h1>
+<!-- Supporting Editorial Narrative -->
+<p class="mt-space-md font-body-editorial text-body-editorial text-on-surface-variant max-w-2xl text-balance">
+        The next-generation fan knowledge and serialized fiction platform. Deep lore, verified timelines, and living stories curated by enthusiasts worldwide.
+      </p>
+<!-- Search Component Box -->
+<div class="w-full max-w-3xl mt-space-xl relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/30 via-secondary-container/40 to-primary/20 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition duration-500"></div>
+<div class="relative flex items-center bg-surface-container-high/90 backdrop-blur-xl rounded-full px-space-lg py-space-sm shadow-xl transition-all">
+<span class="material-symbols-outlined text-primary text-2xl mr-space-sm select-none">travel_explore</span>
+<input class="w-full bg-transparent text-headline-sm font-headline-sm text-on-surface placeholder:text-outline focus:outline-none tracking-tight" placeholder="Search wikis, characters, artifacts, chronologies..." type="text"/>
+<div class="flex items-center gap-space-xs ml-space-sm shrink-0">
+<kbd class="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-highest text-label-mono font-label-mono text-on-surface-variant shadow-sm">
+<span class="text-xs">⌘</span>K
+            </kbd>
+<button class="flex items-center justify-center w-10 h-10 rounded-full bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-all shadow-md active:scale-95">
+<span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Search Chips -->
+<div class="flex flex-wrap items-center justify-center gap-space-xs mt-space-md max-w-2xl">
+<span class="font-label-caps text-label-caps uppercase text-outline mr-space-xs tracking-wider">Indexed Now:</span>
+<button class="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Solo Leveling
+        </button>
+<button class="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Arcane / Runeterra
+        </button>
+<button class="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Elden Ring
+        </button>
+<button class="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Chainsaw Man
+        </button>
+<button class="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Cyberpunk 2077
+        </button>
+<button class="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Omniscient Reader
+        </button>
+</div>
+</div>
+<!-- Live Archive Stats Ribbon -->
+<div class="relative z-10 max-w-[1440px] w-full mx-auto px-margin-sm md:px-margin lg:px-margin-lg mt-space-2xl">
+<div class="w-full bg-surface-container/80 backdrop-blur-md rounded-xl p-space-md flex flex-wrap items-center justify-around gap-space-md text-center shadow-md">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-primary/30 flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">482,190</span>
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Canon Articles</span>
+</div>
+<div class="hidden sm:block w-px h-6 bg-surface-variant"></div>
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-lg">visibility</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">3.4M</span>
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Daily Readers</span>
+</div>
+<div class="hidden sm:block w-px h-6 bg-surface-variant"></div>
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-lg">auto_stories</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">14,200</span>
+<span class="font-label-caps text-label-caps uppercase text-outline tracking-wider">Active Lore-Masters</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= 2. CONTINUE READING TRAY (Logged-in Context) ================= -->
+<section class="w-full bg-surface-container-lowest py-space-xl">
+<div class="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-xl">history_toggle_off</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Pick up where you left off</h2>
+</div>
+<a class="font-label-caps text-label-caps uppercase tracking-wider text-primary hover:text-on-surface transition-colors flex items-center gap-1" href="#">
+          Reading Queue <span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Progress Card 1 -->
+<div class="group relative flex flex-col sm:flex-row items-center gap-space-md p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all shadow-md">
+<div class="relative w-full sm:w-24 h-32 shrink-0 rounded-lg overflow-hidden bg-surface-variant shadow-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Dark moody illustrated cover of Solo Leveling Ragnarok featuring a shadow monarch with glowing violet daggers and neon blue eyes in cinematic manhwa style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKD81IlxqKT5BUWrEztiFjkdIKZ4F77xoK9QNnahcxwu6Hnk_CA5tCbz2ZIzkF9sJgVKRpIViw0QfIqWKvwsHGZj5OT1iRHlgb22i0XC0qXi1HLV2IakSWTllj62xObvVcWBsqSM3uNpO6IXWUJzGDdn3XYXP9i4BQaD-5k8GmzjqVbp1-IxN0P8jf9JjOBo-fsLYr3cgq08aHhHKLnih5e6C36jk3AfkIXSh_97tdRKou-Vo8PVd7-w"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-label-mono text-label-mono text-primary-fixed">CH 42</span>
+</div>
+<div class="flex-1 flex flex-col justify-between w-full h-full py-1">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-secondary">Web Novel Serial</span>
+<span class="font-label-mono text-label-mono text-tertiary">84% Read</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-0.5 group-hover:text-primary transition-colors">
+                Solo Leveling: Ragnarok
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">
+                The Monarch's Descent onto the Frozen Plateau of North America.
+              </p>
+</div>
+<div class="mt-space-sm">
+<div class="w-full h-1.5 rounded-full bg-surface-variant overflow-hidden mb-space-sm">
+<div class="h-full bg-gradient-to-r from-primary to-tertiary rounded-full" style="width: 84%;"></div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-outline">Last read 2h ago</span>
+<button class="px-space-md py-1 rounded-full bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider shadow-sm hover:bg-primary-container transition-all flex items-center gap-1">
+<span>Resume</span>
+<span class="material-symbols-outlined text-xs">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Progress Card 2 -->
+<div class="group relative flex flex-col sm:flex-row items-center gap-space-md p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all shadow-md">
+<div class="relative w-full sm:w-24 h-32 shrink-0 rounded-lg overflow-hidden bg-surface-variant shadow-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Steampunk cyberpunk Zaun cityscape neon green chem-tech fog and brass piping with a hooded female silhouette from Arcane" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKDOsY3GvSDf0JY1r2tW8UJ6GfajxCvBnkN3bOvyYsYuCgcClYRGVQWEeQXylMptZIWCxBoMD_2HmSN9VtqM2jD2jvQjIiF0_e6DvV_XPNpmpFOOLBozi6OkG0z-E5y61EVq4ZxBNLB3QvURRDLy-MQzalb6BHKGEryRGSQKMg3d_bU_5yH_isOXDXD9_tC8I-PwtoYXlOQIVB8s_sqQRDGcGtRXRu6qWh2JuJbnOCrJrKS9ilRUwRYg"/>
+<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-surface-container-lowest/90 font-label-mono text-label-mono text-secondary-fixed">CH 12</span>
+</div>
+<div class="flex-1 flex flex-col justify-between w-full h-full py-1">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-tertiary">Community Lore Series</span>
+<span class="font-label-mono text-label-mono text-secondary">62% Read</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-0.5 group-hover:text-primary transition-colors">
+                The Shadow of Zaun
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">
+                Deep chem-baron alliances and the reconstruction of Silco's factory line.
+              </p>
+</div>
+<div class="mt-space-sm">
+<div class="w-full h-1.5 rounded-full bg-surface-variant overflow-hidden mb-space-sm">
+<div class="h-full bg-gradient-to-r from-secondary to-primary-container rounded-full" style="width: 62%;"></div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-outline">Last read yesterday</span>
+<button class="px-space-md py-1 rounded-full bg-surface-container-high text-on-surface hover:bg-primary hover:text-on-primary font-label-caps text-label-caps uppercase tracking-wider shadow-sm transition-all flex items-center gap-1">
+<span>Resume</span>
+<span class="material-symbols-outlined text-xs">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= 3. CATEGORY EXPLORER (Magazine Asymmetric Bento) ================= -->
+<section class="w-full bg-surface-container-lowest py-space-2xl">
+<div class="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
+<!-- Section Editorial Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-space-md">
+<div>
+<span class="font-label-mono text-label-mono text-primary uppercase tracking-[0.25em] block mb-1">01 / ARCHIVE DOMAINS</span>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">
+            Traverse curated knowledge nodes.
+          </h2>
+</div>
+<p class="font-body-default text-body-default text-on-surface-variant max-w-md">
+          Every universe partitioned by discipline, verified by cross-referencing core canon materials and authorized scripts.
+        </p>
+</div>
+<!-- Bento Grid (Asymmetrical) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md auto-rows-[220px]">
+<!-- Large Card 1: Anime & Manga (Cols: 7, Rows: 2) -->
+<div class="md:col-span-7 md:row-span-2 relative rounded-xl overflow-hidden group p-space-lg flex flex-col justify-between shadow-xl bg-surface-container">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105 opacity-60" data-alt="Epic widescreen cinematic anime artwork with dark celestial sky, neon magenta energy slashing across the frame, highly stylized line work and glowing sparks" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOFjOrveUyAhWGIGA144WoIOOzK4OgAYWGZY8XqCpZJ7tVDDuByrgxQtAMRk_aTtrlmKXD9qzDNtDGjQ7Xcz5Gla_Q335nWppBXpQ-6qCVaZyd75oCA_WYCUTGCqiXAp_ellcdIrJ9Wa8OwrdreDDRQDsRwu-_7F0VLetrcPNwAzoNBTWombX73AFqlU9as_IlaB_lVHOotMBuwEpkp8xgjJAFX53pYRtvZEOVtN0f0ndVtI3Wcr5w0w')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container/60 to-transparent"></div>
+<div class="relative z-10 flex items-center justify-between">
+<span class="px-3 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-primary font-label-mono text-label-mono">
+              // DOMAIN.01
+            </span>
+<span class="font-label-mono text-label-mono text-on-surface-variant bg-surface-container-lowest/60 px-2 py-0.5 rounded">
+              184,290 WIKIS
+            </span>
+</div>
+<div class="relative z-10 mt-auto">
+<span class="font-label-caps text-label-caps uppercase text-secondary tracking-widest block mb-1">CULT CLASSICS &amp; RELEASES</span>
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface group-hover:text-primary transition-colors">
+              Anime &amp; Manga
+            </h3>
+<p class="font-body-default text-body-default text-on-surface-variant max-w-xl mt-space-xs line-clamp-2">
+              From the deep curses of Shibuya to the ancient Grand Line. Unravel complete character profiles, sakuga keyframe credits, and translated creator interviews.
+            </p>
+<div class="flex items-center gap-space-md mt-space-md">
+<span class="inline-flex items-center text-primary font-label-caps text-label-caps uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                Explore Domain <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Medium Card 2: Webtoons & Web Novels (Cols: 5, Rows: 1) -->
+<div class="md:col-span-5 md:row-span-1 relative rounded-xl overflow-hidden group p-space-md flex flex-col justify-between shadow-lg bg-surface-container">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105 opacity-40" data-alt="Vertical scrolling manhwa art panel illustration showing a floating blue screen holographic user interface with glowing runes and dark silhouette" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuATPOfSdJRf3n9SOykXwFY44ZfqGCpZ5vIyB88vP23G1O03A1xC26avrz_xb7iqP4Szmn4ooN1SFCwqA9GKdIA0tCVihkMWug6pZPgcuE2G37W8uvmmFzacGo73Rt8vUqxQbRX7U-TuCZGqQ1YZllor0g1I8oCw5LnGrTwiec0cv5xfP_bazYZ2HhzRzzS1vRW6TrchOuOhluWmQMLiKaK1xKTYTXS7zikzzAr23pTpZk6L9yihQYYyUQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest/90 via-surface-container-lowest/60 to-transparent"></div>
+<div class="relative z-10 flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-tertiary">// DOMAIN.02</span>
+<span class="font-label-mono text-label-mono text-outline">98,120 WIKIS</span>
+</div>
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+              Webtoons &amp; Serialized Novels
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1">
+              Cultivation realms, regression systems, and dungeon apocalypse mythologies.
+            </p>
+</div>
+</div>
+<!-- Medium Card 3: Video Games (Cols: 5, Rows: 1) -->
+<div class="md:col-span-5 md:row-span-1 relative rounded-xl overflow-hidden group p-space-md flex flex-col justify-between shadow-lg bg-surface-container">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105 opacity-40" data-alt="Dark fantasy gothic stone temple illuminated by golden Erdtree ethereal branches with an armored knight kneeling on wet stones in atmospheric Elden Ring lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDc6EwacsT6u1R5FfBfgRKvXPuWMwfp6c0gT6K__8o2-SnPYHjY0ijdaL_-kPKIjna_T44H9BBf3e1bLgwxeRaesN7bVCDrKL7wkUUwqgGxgcjLfh8AgrvvFpAXFXVloyyDmdSLjCljBgx2iMPO_p4VfHSHX84KegvYUYtRQHrHs4eqwTDsWb_FUOTZy5JjLDwPRre81ve1VMLEC3idBOVJZBJxir1r5Sc2qZEzCtqQbDyGLTxwW5O94Q')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest/90 via-surface-container-lowest/60 to-transparent"></div>
+<div class="relative z-10 flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-secondary">// DOMAIN.03</span>
+<span class="font-label-mono text-label-mono text-outline">112,040 WIKIS</span>
+</div>
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+              Video Game Universes
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1">
+              Item description lore, interactive boss timings, and fragmented environmental storytelling.
+            </p>
+</div>
+</div>
+<!-- Compact Card 4: Movies & TV (Cols: 4, Rows: 1) -->
+<div class="md:col-span-4 md:row-span-1 relative rounded-xl overflow-hidden group p-space-md flex flex-col justify-between bg-surface-container-low shadow-md">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-primary text-xl">movie</span>
+<span class="font-label-mono text-label-mono text-outline">43,800</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps uppercase text-outline">Cinematic Universes</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors mt-0.5">Movies &amp; TV</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">Sci-fi franchises, space operas, &amp; serialized screenplays.</p>
+</div>
+</div>
+<!-- Compact Card 5: Tabletop & RPG (Cols: 4, Rows: 1) -->
+<div class="md:col-span-4 md:row-span-1 relative rounded-xl overflow-hidden group p-space-md flex flex-col justify-between bg-surface-container-low shadow-md">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-tertiary text-xl">casino</span>
+<span class="font-label-mono text-label-mono text-outline">28,450</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps uppercase text-outline">Campaign Lore</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors mt-0.5">Tabletop &amp; TTRPG</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">D&amp;D world settings, homebrew pantheons &amp; statblocks.</p>
+</div>
+</div>
+<!-- Compact Card 6: Trading Cards & Collectibles (Cols: 4, Rows: 1) -->
+<div class="md:col-span-4 md:row-span-1 relative rounded-xl overflow-hidden group p-space-md flex flex-col justify-between bg-surface-container-low shadow-md">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-secondary text-xl">style</span>
+<span class="font-label-mono text-label-mono text-outline">15,490</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps uppercase text-outline">Card Archetypes</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors mt-0.5">Trading Cards &amp; CCG</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">Flavor text, card genealogy, and competitive meta logs.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= 3. FEATURED WIKIS (Spotlight Franchises) ================= -->
+<section class="w-full bg-surface-container-lowest py-space-2xl">
+<div class="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
+<!-- Section Editorial Header -->
+<div class="flex items-center justify-between mb-space-xl">
+<div>
+<span class="font-label-mono text-label-mono text-secondary uppercase tracking-[0.25em] block mb-1">02 / SPOTLIGHT FRANCHISES</span>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">
+            Curated Vaults of the Month
+          </h2>
+</div>
+<div class="hidden md:flex items-center gap-space-xs">
+<button class="w-10 h-10 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg">west</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-lg">east</span>
+</button>
+</div>
+</div>
+<!-- Asymmetric Grid Showcase -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-stretch">
+<!-- Primary Featured Wiki (48% width -> lg:col-span-6 or 7) -->
+<div class="lg:col-span-7 rounded-xl bg-surface-container-low overflow-hidden shadow-2xl flex flex-col justify-between group">
+<div class="relative w-full h-80 sm:h-96 overflow-hidden bg-surface-variant">
+<img class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" data-alt="Sung Jinwoo surrounded by glowing shadow soldiers, purple aura radiating from dual daggers, intense eyes, highly detailed high fantasy manhwa concept art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD88zIfwW8ZcBdM57XrBdpxRskhzit97AO8zIvlvD-iMoQBu9V2poDNGm1IBza6LxuZI6R82QVQYjNc7vG4Y-1A-9X6E3s0HhDtEyLrS1xN2hTNXeqfcVls4lFHFiF-vGStpvKKIze5aY0_8fBPUlkIDOK8wCuhlvR4NwHGB_1dUF-7mSGCfyrMs3SystMaDVvdQEJh0HJ9JmDpqVm0dSfYqbCqgy-0_cZHlDAPCGP9SpOuviUmEk4YmQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-surface-container-low/40 to-transparent"></div>
+<div class="absolute top-space-md left-space-md flex gap-space-xs">
+<span class="px-space-sm py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur text-primary font-label-caps text-label-caps uppercase tracking-wider">
+                Featured Canon #01
+              </span>
+<span class="px-space-sm py-1 rounded-full bg-tertiary-container/90 text-on-tertiary-container font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">verified</span> Verified 100%
+              </span>
+</div>
+<div class="absolute bottom-space-md left-space-md right-space-md flex items-end justify-between">
+<div>
+<span class="font-label-mono text-label-mono text-secondary">ARCHIVE VAULT // 77-SL</span>
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface leading-none mt-1">
+                  Solo Leveling
+                </h3>
+<p class="font-headline-sm text-headline-sm text-primary italic">Shadow Monarch Compendium</p>
+</div>
+</div>
+</div>
+<div class="p-space-lg flex flex-col justify-between flex-1">
+<p class="font-body-editorial text-body-editorial text-on-surface-variant">
+              The definitive registry for Sung Jinwoo's army, monarch lineages, world gates, and complete rank distributions. Over 4,800 canon-inspected entries reviewed by the Global Hunters Guild.
+            </p>
+<div class="grid grid-cols-3 gap-space-sm my-space-lg py-space-sm bg-surface-container rounded-lg text-center">
+<div>
+<span class="block font-headline-sm text-headline-sm text-on-surface">4,812</span>
+<span class="font-label-caps text-label-caps uppercase text-outline">Canon Pages</span>
+</div>
+<div>
+<span class="block font-headline-sm text-headline-sm text-on-surface">1.4M</span>
+<span class="font-label-caps text-label-caps uppercase text-outline">Monthly Views</span>
+</div>
+<div>
+<span class="block font-headline-sm text-headline-sm text-tertiary">99.8%</span>
+<span class="font-label-caps text-label-caps uppercase text-outline">Accuracy Index</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-space-md pt-space-xs">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 rounded bg-surface-variant font-label-mono text-label-mono text-on-surface-variant">Rulers</span>
+<span class="px-2.5 py-1 rounded bg-surface-variant font-label-mono text-label-mono text-on-surface-variant">Monarchs</span>
+<span class="px-2.5 py-1 rounded bg-surface-variant font-label-mono text-label-mono text-on-surface-variant">S-Rank Guilds</span>
+</div>
+<button class="px-space-lg py-space-xs rounded-xl bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-md flex items-center gap-space-xs">
+<span>Enter Vault</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Secondary Wikis Stack (52% width -> lg:col-span-5) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Secondary Card 1: Arcane -->
+<div class="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex gap-space-md items-center shadow-md">
+<div class="w-28 h-28 shrink-0 rounded-lg overflow-hidden bg-surface-variant relative shadow-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Jinx looking over the bridge in Zaun with vivid electric cyan hair, neon pink graffiti splashes, hextech blue ambient smoke, cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA69sAV9iIFCk-MfdsfhMYsz8WRkKiw4pMTjCt3qw-wSNP3BAATiOlhfiDW1wBMjD4HeIRxxLYr4gCY7y9UXAV3K-BM3oefB1YT8CLMU4J_rAHApwMMeVaKkdvkixzgcHLuvbq8aGmQNMOM4I7yYlqyIvWbbr2opuJvNcYM_nGC-aGRIkaIyrgC1wayE6Uy9DDaBdv3R2W5-hGJA40c1MQ40uCGNAsIShWuirkD1IV6CsfgOm7PlWyLNw"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="font-label-mono text-label-mono text-secondary">2,940 ARTICLES</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label-caps text-label-caps uppercase text-tertiary">Hextech Lore</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors truncate">
+                Arcane: Piltover &amp; Zaun
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">
+                Anatomy of Shimmer, Hexgates trade corridors, and council political minutes.
+              </p>
+<div class="flex items-center gap-space-xs mt-space-sm text-primary font-label-caps text-label-caps uppercase tracking-wider">
+<span>Inspect Archive</span>
+<span class="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Secondary Card 2: Elden Ring -->
+<div class="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex gap-space-md items-center shadow-md">
+<div class="w-28 h-28 shrink-0 rounded-lg overflow-hidden bg-surface-variant relative shadow-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Golden ethereal shattered runes floating in dark void, Erdtree roots winding through marble ruin architecture, souls-like dark fantasy concept" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3g4q4WLsmEiRpFfJkTmTh8o_IvSSGfhlqpIa8zvPKH1dZ1NGqYNQvBS8GUQ0msQ_gBCaKk7x3vBSFZQGAnd-2QT8t82hv1hsnH8xv0mbQWWZqANK8qKkt3kj2-zZ1_YNFryLqv4QHIVTJvooSkAzc0EH9uOdj-SPAUkry8o87sWlGebRH_Zw2M-it_fc79BkVkcD38oW_UYO_H3a31buo8kkqXd9ZVTU6WNB_Svt3ZpjWykt8rJGIsA"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="font-label-mono text-label-mono text-secondary">6,120 ARTICLES</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label-caps text-label-caps uppercase text-secondary-fixed-dim">Golden Order</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors truncate">
+                Elden Ring: Lands Between Codex
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">
+                Demigod lineages, Shadow Realm mappings, and untranslated item runes.
+              </p>
+<div class="flex items-center gap-space-xs mt-space-sm text-primary font-label-caps text-label-caps uppercase tracking-wider">
+<span>Inspect Archive</span>
+<span class="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Secondary Card 3: Omniscient Reader -->
+<div class="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex gap-space-md items-center shadow-md">
+<div class="w-28 h-28 shrink-0 rounded-lg overflow-hidden bg-surface-variant relative shadow-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Kim Dokja in black trench coat looking out over Seoul subway tunnel filled with floating constellation messages and blue starry constellations" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEq2X2BJNrPzJQVNSibpnneiglJhwqwTZTu1wvtnW2B-ID8HjJSkV-IWfoZaJgE65XJhodiwTN0aWpu1tYjjxQP7wRAUBi_Q6oDNviIZ5fc3QSdlVQC-VT80oiu-wIk-N5hqWmjDXjo0YBsJ3xqrr0nrZ_C4hT1BBmJ4CH9u-6atE9F1kTDr5aIoyDlqvsBAPnPqAgQC1yGcMvIrH-QK7rowiqf7ibETLhJ32oVck6NqtQlfuMzhVtug"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="font-label-mono text-label-mono text-secondary">1,840 ARTICLES</span>
+<span class="text-outline-variant">•</span>
+<span class="font-label-caps text-label-caps uppercase text-tertiary">Scenario Log</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors truncate">
+                Omniscient Reader's Viewpoint
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">
+                Constellation sponsor contracts, dokkaebi scenario stipulations, and Fable logs.
+              </p>
+<div class="flex items-center gap-space-xs mt-space-sm text-primary font-label-caps text-label-caps uppercase tracking-wider">
+<span>Inspect Archive</span>
+<span class="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= 4. TRENDING NOW (Pulse of the Archive) ================= -->
+<section class="w-full bg-surface-container-lowest py-space-2xl">
+<div class="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-space-md">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+<span class="font-label-mono text-label-mono text-error uppercase tracking-[0.25em]">03 / PULSE OF THE ARCHIVE</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">
+            Trending Lore Topics Today
+          </h2>
+</div>
+<div class="flex items-center gap-space-xs bg-surface-container-high/60 p-1 rounded-xl">
+<button class="px-space-md py-1 rounded-lg bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase tracking-wider shadow-sm">
+            Past 24h
+          </button>
+<button class="px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+            7 Days
+          </button>
+<button class="px-space-md py-1 rounded-lg text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+            All-Time
+          </button>
+</div>
+</div>
+<!-- Ranked List (Editorial High Contrast) -->
+<div class="flex flex-col gap-space-sm">
+<!-- Row 01 -->
+<div class="group flex flex-col sm:flex-row sm:items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all gap-space-md cursor-pointer shadow-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<span class="font-display-lg text-display-lg italic text-outline/40 group-hover:text-primary transition-colors font-serif w-12 shrink-0">
+              01
+            </span>
+<div class="w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="Sung Jinwoo commanding the dragon Kamish in violet spectral shadows, detailed manga art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqZlcMBLa92exOWyDMD5kmwy-Zwcv5P7VLz-UhU8IojCY1uFTDG0YdygUyiq_9BF4JNxJKV648dbto8SJQnyxnatYJVI-7GW8L5YNaQRNFs_nEPBh6N8TuQmJ4AsqEQ0bXNZOpOTkKRMKzk0hg2oMXDT47aXE7KXxOxStkkBHG4c4A--1zv2BNqnDfQDo7GR5XsKc4MOfeTyAH4eWypmrSFE-0W9HajAbJUP8BjTlf5EAmtZZWGRjavw"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-mono text-label-mono">Solo Leveling</span>
+<span class="font-label-mono text-label-mono text-tertiary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">trending_up</span> +340% Spike
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors truncate mt-0.5">
+                The Origin of the Shadow Monarch: Ashborn's Fall
+              </h3>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-lg shrink-0">
+<!-- Inline SVG Sparkline -->
+<div class="flex flex-col items-end">
+<svg class="w-24 h-7 text-tertiary" fill="none" viewbox="0 0 100 30">
+<path d="M0 24 L20 20 L40 22 L60 12 L80 16 L100 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+<span class="font-label-mono text-label-mono text-outline">142.8k reads / 24h</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+<!-- Row 02 -->
+<div class="group flex flex-col sm:flex-row sm:items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all gap-space-md cursor-pointer shadow-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<span class="font-display-lg text-display-lg italic text-outline/40 group-hover:text-primary transition-colors font-serif w-12 shrink-0">
+              02
+            </span>
+<div class="w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="Miquella the Kind sitting beside St Trina sleeping in a bed of deep purple velvet flowers, Elden Ring Shadow of the Erdtree illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLaH1JzG2RT53uMp9BWUML21CZp8hZiUliYUpFtDJ72ESLRmPKJFf9WsXsk2VHAEOAoMBV2dZh207kYBUpl_acK6lVSYq8mxkGRnxgvE4PX_ygcDuWMCylg0CZBeGtJcJDUWzVajXsnxYqB8UHxuVeTWKbt_zq2Qld3goyT4rjWCeoTwIaGKHqoGngs4_I9PstScEKsdmqT2Nim5Qo1YSuoHuVYh9B6oQWq_P7XBbrQPLCnzfkUcByUQ"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/30 text-secondary font-label-mono text-label-mono">Elden Ring</span>
+<span class="font-label-mono text-label-mono text-tertiary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">trending_up</span> +210%
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors truncate mt-0.5">
+                Miquella's True Age: Unpacking the Scadutree Crucifixion
+              </h3>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-lg shrink-0">
+<div class="flex flex-col items-end">
+<svg class="w-24 h-7 text-secondary" fill="none" viewbox="0 0 100 30">
+<path d="M0 26 L25 22 L50 18 L75 8 L100 6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+<span class="font-label-mono text-label-mono text-outline">98.4k reads / 24h</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+<!-- Row 03 -->
+<div class="group flex flex-col sm:flex-row sm:items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all gap-space-md cursor-pointer shadow-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<span class="font-display-lg text-display-lg italic text-outline/40 group-hover:text-primary transition-colors font-serif w-12 shrink-0">
+              03
+            </span>
+<div class="w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="Viktor transformed by the Hexcore with robotic augmentations and glowing purple core from Arcane season two" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyquvyMN-qLHRrZ_fctK5N8yd186D0gU3o5qruEkDT8glxplm-mQcTBXDQiw-K_S1EvjrBs1hCHjg1GWB0o0NqyuYZaNTpi502qVZB7VTvWWtET5CbF67zfv9ykxUA-eMKb97Z4-bJheCm3GD_9SwJeC7rR3ZPPf7kqFXnFXKLLM-vV8kBFrOi12ch6LKFIQHhF_3zt248226RNmipRufexsfNP33vr53L6RJw8xR6T5MQEQun1o-rZw"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-mono text-label-mono">Arcane</span>
+<span class="font-label-mono text-label-mono text-tertiary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">trending_up</span> +195%
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors truncate mt-0.5">
+                The Hexcore Evolution: How Viktor's Arc Reshapes Runeterra
+              </h3>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-lg shrink-0">
+<div class="flex flex-col items-end">
+<svg class="w-24 h-7 text-tertiary" fill="none" viewbox="0 0 100 30">
+<path d="M0 28 L30 25 L60 14 L80 12 L100 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+<span class="font-label-mono text-label-mono text-outline">86.1k reads / 24h</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+<!-- Row 04 -->
+<div class="group flex flex-col sm:flex-row sm:items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all gap-space-md cursor-pointer shadow-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<span class="font-display-lg text-display-lg italic text-outline/40 group-hover:text-primary transition-colors font-serif w-12 shrink-0">
+              04
+            </span>
+<div class="w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="The Oldest Dream train wagon surrounded by starlight and galaxy dust in Omniscient Reader novel illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1oq-eVePn8MssVpl-uBfu7CWlV-er4dKWIYKYAPMta2ihvzTqrJESUBq_PAiZD8AneNzFiICaI-8IMPQdqNe6tIkT-q_p_6A1rXpihYo3njtxIydVt5DGum74ymvcnrvLghqLcVYr0Mc_zmGnW-tryWb-FO8yHUPM1Vif-QA0imlMw-EP_1sgmrsFZkk8QmeDgt87w9Y_zE6zq2Az_D6Mfk_lE1fXvev886Hbtn1aibyLAgjkKBc9og"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/30 text-secondary font-label-mono text-label-mono">Omniscient Reader</span>
+<span class="font-label-mono text-label-mono text-secondary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">trending_flat</span> Stable
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors truncate mt-0.5">
+                The 1,863rd Regression: Secret Timeline Reconstructions
+              </h3>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-lg shrink-0">
+<div class="flex flex-col items-end">
+<svg class="w-24 h-7 text-secondary" fill="none" viewbox="0 0 100 30">
+<path d="M0 16 L25 18 L50 14 L75 16 L100 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+<span class="font-label-mono text-label-mono text-outline">67.9k reads / 24h</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+<!-- Row 05 -->
+<div class="group flex flex-col sm:flex-row sm:items-center justify-between p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all gap-space-md cursor-pointer shadow-sm">
+<div class="flex items-center gap-space-md min-w-0">
+<span class="font-display-lg text-display-lg italic text-outline/40 group-hover:text-primary transition-colors font-serif w-12 shrink-0">
+              05
+            </span>
+<div class="w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-surface-variant">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform" data-alt="Johnny Silverhand playing chrome guitar in smoke and neon red lights of Night City in Cyberpunk 2077 concept" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHmob9jlcrvjwT4E2E0bBbNLG0SM8VvKiA4IzsTCgPFOb2jq4EI9WEZx7gm-T0BMhOzE1EaXCTwyV1E44LWaEWBjl_j3F9zgyFejG8noaNlnVc7F_jeu7scBrLcq692VuIEpuodRZCpWO9luVLQP_Kd7jzwYdSEQJePeWGhXR_V6aREx2wqnj1EIMnN_vaxSzaZi9nYNZfLYuo_eFGIXXTEahDw_jkCTVmYCiJ5DhQ1HWaxnU0PpQx-A"/>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-mono text-label-mono">Cyberpunk 2077</span>
+<span class="font-label-mono text-label-mono text-tertiary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-xs">trending_up</span> +88%
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors truncate mt-0.5">
+                Blackwall Rogue AI Protocols: Complete Declassified Files
+              </h3>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-lg shrink-0">
+<div class="flex flex-col items-end">
+<svg class="w-24 h-7 text-tertiary" fill="none" viewbox="0 0 100 30">
+<path d="M0 24 L25 20 L50 22 L75 14 L100 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+<span class="font-label-mono text-label-mono text-outline">51.2k reads / 24h</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= 5. COMMUNITY ACTIVITY & TOP CONTRIBUTORS (Split Panel) ================= -->
+<section class="w-full bg-surface-container-lowest py-space-2xl">
+<div class="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<!-- Left Column: Live Archive Feed (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Live Ledger Updates</h3>
+</div>
+<span class="font-label-mono text-label-mono text-outline">SYNCHRONIZING FEED</span>
+</div>
+<!-- Feed Items -->
+<div class="flex flex-col gap-space-sm">
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-space-md shadow-sm">
+<div class="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-surface-variant ring-1 ring-primary/20">
+<img alt="Vesper" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARJErOkKFlQl7Mef4kA92TOv9zfiG8EPWiOwAQR0cx5elr-jINIaoyePvZwfxbnA2DvqudoR6_pMV4hA0dBrkR87hr1n8amvZ4_WjmGbD5FCic6PanoNtWBXP9Nv7YSB2id_GZgxuE1rsIxQ7iO-vzhwHVEhvugPs125EyM6p3iSoLLqWY1fHGSr2BtrGpx-mHIsLnuQbKu5Hi3EN2vs5bcgI4Ij_fyQEz8X58FGYz1g6TRIRcw1G27Q"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-space-xs">
+<span class="font-label-caps text-label-caps uppercase text-primary font-semibold">Vesper</span>
+<span class="font-label-mono text-label-mono text-outline">4m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+                    Edited <a class="text-secondary hover:underline font-medium" href="#">"Jinwoo's Monarch Dagger"</a> in <span class="text-on-surface-variant">Solo Leveling</span>
+</p>
+<div class="flex items-center gap-space-sm mt-1.5 font-label-mono text-label-mono">
+<span class="text-tertiary bg-tertiary/10 px-1.5 py-0.5 rounded">+1,240 chars</span>
+<span class="text-outline">Added Mythic tier relic stats</span>
+</div>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-space-md shadow-sm">
+<div class="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-surface-variant flex items-center justify-center bg-secondary-container text-on-secondary-container font-headline-sm">
+                  R
+                </div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-space-xs">
+<span class="font-label-caps text-label-caps uppercase text-secondary font-semibold">Ren-Kaelen</span>
+<span class="font-label-mono text-label-mono text-outline">12m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+                    Uploaded 4 high-res vector maps to <a class="text-secondary hover:underline font-medium" href="#">"Shadow Realm Cartography"</a>
+</p>
+<div class="flex items-center gap-space-sm mt-1.5 font-label-mono text-label-mono">
+<span class="text-tertiary bg-tertiary/10 px-1.5 py-0.5 rounded">4 Media Files</span>
+<span class="text-outline">Verified by Canon Council</span>
+</div>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-start gap-space-md shadow-sm">
+<div class="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-surface-variant flex items-center justify-center bg-primary-container text-on-primary-container font-headline-sm">
+                  A
+                </div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-space-xs">
+<span class="font-label-caps text-label-caps uppercase text-primary font-semibold">Aethelgard</span>
+<span class="font-label-mono text-label-mono text-outline">28m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+                    Published serialized critique: <a class="text-secondary hover:underline font-medium" href="#">"The Economics of Piltover Hexgates"</a>
+</p>
+<div class="flex items-center gap-space-sm mt-1.5 font-label-mono text-label-mono">
+<span class="text-primary bg-primary/10 px-1.5 py-0.5 rounded">Story Serial</span>
+<span class="text-outline">Chapter 3 of 5</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-space-md">
+<a class="inline-flex items-center gap-space-xs font-label-caps text-label-caps uppercase tracking-wider text-primary hover:text-on-surface transition-colors" href="#">
+<span>View Full Global Audit Log</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Right Column: Grand Archivists Leaderboard (5 Cols) -->
+<div class="lg:col-span-5 p-space-lg rounded-xl bg-surface-container flex flex-col justify-between shadow-xl">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-tertiary tracking-widest block mb-0.5">PEER-RANKED REGISTRY</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Top Lore-Masters</h3>
+</div>
+<span class="px-2 py-1 rounded bg-surface-container-highest font-label-mono text-label-mono text-secondary">THIS CYCLE</span>
+</div>
+<!-- Leaderboard Items -->
+<div class="space-y-space-md">
+<!-- Rank 1 -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low shadow-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-display-lg-mobile text-display-lg-mobile font-serif italic text-primary w-6 text-center">1</span>
+<div class="w-11 h-11 rounded-full overflow-hidden bg-surface-variant ring-2 ring-primary/40">
+<img class="w-full h-full object-cover" data-alt="Cyberpunk anime style character avatar with violet hair and neon visor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkFCZ6NGeaylWXRL0oIuoJCFwm35ONuPnxsC-owHhj1aZxx-0-2IPPFqTteVtmsem68p9J6TFzUyc6NqNraVObATdNbQBbXhxoH8F234xfAU0XF1FcNnK2hBEsJ5a0Flf3VYO8CJhmXABovdXfuFeuENSkjZVFozZzg2BJJXf0KgymdpN2sOQsaxFmXdsMrSdoSJ2_VLTSNQg1cR94hxee21-0z-8I528WMfyUFMiM-k0y0cEr1M-zqw"/>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h4 class="font-headline-sm text-headline-sm text-on-surface leading-none">Morpheus_X</h4>
+<span class="px-1.5 py-0.5 rounded bg-primary/20 text-primary font-label-caps text-label-caps text-[9px]">GRAND ARCHIVIST</span>
+</div>
+<span class="font-label-mono text-label-mono text-outline">18,490 Verified Revisions</span>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary font-bold">+4,820 pts</span>
+</div>
+<!-- Rank 2 -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low shadow-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-display-lg-mobile text-display-lg-mobile font-serif italic text-secondary w-6 text-center">2</span>
+<div class="w-11 h-11 rounded-full overflow-hidden bg-surface-variant ring-2 ring-secondary/30">
+<img class="w-full h-full object-cover" data-alt="High fantasy wizard portrait with silver hair and glowing blue eyes avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOxK76cXX__vpPL8EzsyohHUtYJ-gQ-RdDMQpUzNTsUtVRDoyQwBavLXzSo0Sh1gt9PtWbmwLl7nBLRGHR1hlOrfYRu5AAekJ9uuwGRhrERVndwzh0BA5tXqfoMDgPe8gTYs7aogVLhM_KTce5dE10Dgbwn7JkKBBb9dWqSh4MY2UOucxtCmiNIPoN-gLE5zuk0X1sfqVmiQEsLfH-FxnZWL_L6ISB2jpJVWB7AxB2Fuzsx0UvY42W7w"/>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h4 class="font-headline-sm text-headline-sm text-on-surface leading-none">LadyCinder</h4>
+<span class="px-1.5 py-0.5 rounded bg-secondary/20 text-secondary font-label-caps text-label-caps text-[9px]">LORE CHRONICLER</span>
+</div>
+<span class="font-label-mono text-label-mono text-outline">14,120 Verified Revisions</span>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary font-bold">+3,190 pts</span>
+</div>
+<!-- Rank 3 -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low shadow-sm">
+<div class="flex items-center gap-space-sm">
+<span class="font-display-lg-mobile text-display-lg-mobile font-serif italic text-tertiary w-6 text-center">3</span>
+<div class="w-11 h-11 rounded-full overflow-hidden bg-surface-variant ring-2 ring-tertiary/30">
+<img class="w-full h-full object-cover" data-alt="Dark fantasy armored knight profile avatar with golden rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjQJDagjYb3NjA9mkMMMT-yxlWQe9Gy6JpP064Li3EzmuzN_iybaLyTYO5JwSMXlHMwQHVl_0HGfYoy1iDgwRX0K_XUbOZCqsdOiKxlqjFntQCS7_8EvdvVK_C7gFW5h_orR3lZ8IqkVmwPN5FmtTSOAXYKp5sFjFTWOJoTPNdn3vBKpxNvRau6QExAwXuuPwhx5RnrKWiTcbBxJr0vkQssFdgwRdMoHiancSM-XiTaYZ7TRom1U_PDA"/>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h4 class="font-headline-sm text-headline-sm text-on-surface leading-none">VaelinAlSor</h4>
+<span class="px-1.5 py-0.5 rounded bg-tertiary/20 text-tertiary font-label-caps text-label-caps text-[9px]">SCHOLAR</span>
+</div>
+<span class="font-label-mono text-label-mono text-outline">11,040 Verified Revisions</span>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-tertiary font-bold">+2,410 pts</span>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-md bg-surface-container-high/40 rounded-lg p-space-sm flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Want to claim archivist status?</span>
+<button class="px-space-md py-1 rounded-lg bg-surface-container-highest hover:bg-surface-bright text-primary font-label-caps text-label-caps uppercase tracking-wider transition-colors">
+              Read Guidelines
+            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= 6. RANDOM DISCOVERY & EDITORIAL CALL TO ACTION ================= -->
+<section class="w-full bg-surface-container-lowest py-space-2xl">
+<div class="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg flex flex-col gap-space-xl">
+<!-- Random Lore Rolling Card -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-surface-container-high via-surface-container to-surface-container-high p-space-xl shadow-2xl">
+<div class="absolute -right-12 -bottom-12 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-16 h-16 rounded-2xl bg-primary-container text-on-primary-container flex items-center justify-center shrink-0 shadow-lg">
+<span class="material-symbols-outlined text-3xl">casino</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-primary">Serendipitous Exploration</span>
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight mt-0.5">
+                Don't know what to explore?
+              </h3>
+<p class="font-body-default text-body-default text-on-surface-variant mt-1 max-w-xl">
+                Dive headfirst into an obscure corner of fiction. Let our algorithmic dice drop you directly inside one of 482,000+ deep lore entries.
+              </p>
+</div>
+</div>
+<button class="w-full md:w-auto shrink-0 px-space-xl py-space-md rounded-xl bg-surface-bright hover:bg-primary hover:text-on-primary text-on-surface font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-xl flex items-center justify-center gap-space-xs active:scale-95">
+<span class="material-symbols-outlined text-xl">shuffle</span>
+<span>Roll Random Lore Page</span>
+</button>
+</div>
+</div>
+<!-- Massive Publish & Curate Call To Action -->
+<div class="relative rounded-2xl bg-surface-container-lowest overflow-hidden shadow-2xl p-space-xl lg:p-space-2xl flex flex-col items-center text-center">
+<!-- Ambient Backdrop Gradients -->
+<div class="absolute inset-0 bg-gradient-to-b from-primary/10 via-surface-container-low to-surface-container-lowest pointer-events-none"></div>
+<div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-primary/20 blur-[130px] rounded-full pointer-events-none"></div>
+<div class="relative z-10 max-w-3xl flex flex-col items-center">
+<span class="font-label-mono text-label-mono text-tertiary uppercase tracking-[0.25em] mb-space-sm">
+            CONTRIBUTE TO HUMAN FICTION HERITAGE
+          </span>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">
+            Know something worth remembering?
+          </h2>
+<p class="font-body-editorial text-body-editorial text-on-surface-variant mt-space-sm max-w-2xl">
+            Build a page. Share serialized fan fiction. Annotate the canon. Keep your beloved universe alive for future generations of lore-masters.
+          </p>
+<div class="flex flex-col sm:flex-row items-center gap-space-md mt-space-xl w-full sm:w-auto">
+<a class="w-full sm:w-auto px-space-xl py-space-sm rounded-xl bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-[0_0_24px_rgba(160,120,255,0.4)] flex items-center justify-center gap-space-xs active:scale-95" href="#">
+<span class="material-symbols-outlined text-lg">post_add</span>
+<span>Create a Wiki</span>
+</a>
+<a class="w-full sm:w-auto px-space-xl py-space-sm rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-space-xs" href="#">
+<span class="material-symbols-outlined text-lg">history_edu</span>
+<span>Publish a Story</span>
+</a>
+</div>
+<!-- Minimalist Newsletter Dispatch Subscription -->
+<div class="w-full max-w-md mt-space-2xl pt-space-xl">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-caps text-label-caps uppercase text-outline">The Lore Dispatch</span>
+<span class="font-label-mono text-label-mono text-secondary">Weekly Digest</span>
+</div>
+<div class="relative flex items-center bg-surface-container rounded-xl p-1 shadow-md">
+<input class="w-full bg-transparent px-space-md py-space-xs text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none" placeholder="Enter your email to stay in the loop..." type="email"/>
+<button class="px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider shrink-0 hover:bg-primary-container transition-all">
+                Join
+              </button>
+</div>
+<span class="font-label-mono text-label-mono text-outline block text-center mt-2">Zero spam. Pure fictional analysis curated by Grand Archivists.</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-container-lowest border-t border-white/[0.09] mt-space-2xl pt-space-2xl pb-space-xl"><div class="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-xl pb-space-2xl border-b border-white/[0.06]"><div class="lg:col-span-2 space-y-space-md pr-space-lg"><div class="flex items-center gap-space-sm"><img alt="MarcWiki Monogram Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UpssWQ8HLzh02Sjz7FwUvPeoUjnljc6BM_eUa9cPupI26cDlr40tbOfFqpAAUqfPGVJQ7TL3J7zWN_msogafzkelu8-nxbzS0SvdWf2_7R_LjxfWQdAfc_VELUy2178w3cLrBacbSByJnpZ-3IBGrhldg7wPRJaaP67o93uPAKcW4odpZahPHfe_BKy4ZZCLsDsGXN9_z1WZxhAqtSkgkvmrS6tQke-T9Ofx8Ll9CHYhKcpvfJv8Oc0Obh"/><span class="font-headline-md text-headline-md tracking-tight text-on-surface">MarcWiki</span></div><p class="text-body-editorial font-body-editorial text-on-surface-variant max-w-sm">Built by fans, for fans. The Living Archive for the worlds you love.</p><div class="flex items-center gap-space-xs text-tertiary-fixed-dim font-label-mono text-label-mono"><span class="w-2 h-2 rounded-full bg-tertiary inline-block animate-ping"></span><span>ARCHIVE NETWORK LIVE • 142,891 CANONS ACTIVE</span></div></div><div class="space-y-space-md"><h4 class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Explore</h4><ul class="space-y-space-xs text-body-sm font-body-sm text-on-surface-variant"><li class="hover:text-primary transition-colors cursor-pointer">Wikis</li><li class="hover:text-primary transition-colors cursor-pointer">Stories</li><li class="hover:text-primary transition-colors cursor-pointer">Anime</li><li class="hover:text-primary transition-colors cursor-pointer">Gaming</li><li class="hover:text-primary transition-colors cursor-pointer">Webtoons</li></ul></div><div class="space-y-space-md"><h4 class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Contribute</h4><ul class="space-y-space-xs text-body-sm font-body-sm text-on-surface-variant"><li class="hover:text-primary transition-colors cursor-pointer">Create a Page</li><li class="hover:text-primary transition-colors cursor-pointer">Submit Content</li><li class="hover:text-primary transition-colors cursor-pointer">Guidelines</li><li class="hover:text-primary transition-colors cursor-pointer">Verification</li></ul></div><div class="space-y-space-md"><h4 class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Platform &amp; Legal</h4><ul class="space-y-space-xs text-body-sm font-body-sm text-on-surface-variant"><li class="hover:text-primary transition-colors cursor-pointer">About MarcWiki</li><li class="hover:text-primary transition-colors cursor-pointer">Living Archive Tech</li><li class="hover:text-primary transition-colors cursor-pointer">API &amp; Data Feed</li><li class="hover:text-primary transition-colors cursor-pointer">Privacy Policy</li><li class="hover:text-primary transition-colors cursor-pointer">Terms of Service &amp; DMCA</li></ul></div></div><div class="pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-mono text-label-mono"><div>© 2025 MarcWiki Foundation. Preserving collective human imagination.</div><div class="flex items-center gap-space-lg"><span class="hover:text-primary transition-colors cursor-pointer">DISCORD</span><span class="hover:text-primary transition-colors cursor-pointer">GITHUB</span><span class="hover:text-primary transition-colors cursor-pointer">FEED (RSS)</span><span class="hover:text-primary transition-colors cursor-pointer">SECURITY</span></div></div></div></footer></body></html>

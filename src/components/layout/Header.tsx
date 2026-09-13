@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState, useRef } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { useTheme } from '@/src/context/ThemeContext';
 
 interface Me {
@@ -10,15 +10,30 @@ interface Me {
   email: string;
 }
 
-export default function Header() {
+export default function Header({ navLinks = [] }: { navLinks?: { label: string; url: string; icon?: string }[] }) {
   const { theme, toggleTheme } = useTheme();
   const router = useRouter();
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [me, setMe] = useState<Me | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     fetch('/api/auth/me').then((r) => r.json()).then(({ user }) => setMe(user));
   }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
@@ -27,166 +42,290 @@ export default function Header() {
     router.refresh();
   };
 
-  const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/wikis', label: 'Wikis' },
-    { href: '/anime', label: 'Anime' },
-    { href: '/games', label: 'Games' },
-    { href: '/web-novels', label: 'Web Novels' },
-    { href: '/community', label: 'Community' },
-  ];
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    return pathname.startsWith(href);
+  };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <div className="container">
-        <div className="flex items-center justify-between h-[72px]">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
-              <span className="text-accent-contrast font-bold text-xl">M</span>
+    <>
+      <header
+        ref={headerRef}
+        className={`
+          fixed top-0 inset-x-0 z-50
+          transition-all duration-500 ease-out
+          ${scrolled
+            ? 'bg-surface-container-lowest/90 backdrop-blur-2xl shadow-[0_1px_0_0_rgba(160,120,255,0.08),0_8px_40px_-12px_rgba(0,0,0,0.8)]'
+            : 'bg-surface-container-lowest/60 backdrop-blur-xl'
+          }
+        `}
+      >
+        {/* Subtle top gradient line */}
+        <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+
+        <div className="h-[64px] w-full max-w-[1440px] mx-auto px-5 md:px-8 lg:px-10 flex items-center justify-between gap-4">
+
+          {/* ── Left: Logo ── */}
+          <Link className="flex items-center gap-2.5 group shrink-0" href="/">
+            {/* Logo Mark with glow */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-primary/30 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-primary-container to-primary/60 flex items-center justify-center shadow-[0_0_0_1px_rgba(160,120,255,0.2),0_2px_8px_-2px_rgba(160,120,255,0.3)] group-hover:shadow-[0_0_0_1px_rgba(160,120,255,0.4),0_4px_20px_-4px_rgba(160,120,255,0.5)] transition-shadow duration-500">
+                <span className="text-on-primary-container font-bold text-base tracking-tight">M</span>
+              </div>
             </div>
-            <span className="text-xl font-bold text-foreground hidden sm:block">
-              Marc<span className="text-accent">Wiki</span>
-            </span>
+            <div className="hidden sm:flex flex-col">
+              <span className="text-[15px] font-semibold tracking-[-0.02em] text-on-surface group-hover:text-primary transition-colors duration-300">
+                MarcWiki
+              </span>
+              <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-primary/60 leading-none mt-0.5">
+                Living Archive
+              </span>
+            </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-foreground-muted hover:text-accent transition-colors font-medium"
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* ── Center: Navigation ── */}
+          <nav className="hidden lg:flex items-center gap-0.5 px-1.5 py-1 rounded-2xl bg-white/[0.03] border border-white/[0.06] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.03)]">
+            {navLinks.map((link) => {
+              const active = isActive(link.url);
+              return (
+                <Link
+                  key={link.url}
+                  href={link.url}
+                  className={`
+                    relative px-3.5 py-1.5 rounded-xl text-[13px] font-medium
+                    transition-all duration-300 ease-out
+                    ${active
+                      ? 'text-primary-container bg-primary/15 shadow-[0_0_12px_-3px_rgba(160,120,255,0.3),inset_0_1px_0_0_rgba(160,120,255,0.1)]'
+                      : 'text-on-surface-variant hover:text-on-surface hover:bg-white/[0.05]'
+                    }
+                  `}
+                >
+                  {active && (
+                    <span className="absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-4 h-[2px] rounded-full bg-primary shadow-[0_0_8px_2px_rgba(160,120,255,0.4)]" />
+                  )}
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* Right Actions */}
-          <div className="flex items-center gap-3">
+          {/* ── Right: Actions ── */}
+          <div className="flex items-center gap-2">
+
+            {/* Search */}
+            <button
+              onClick={() => setSearchFocused(true)}
+              className={`
+                hidden md:flex items-center gap-2.5
+                px-3.5 py-[7px] rounded-xl
+                border transition-all duration-300
+                ${searchFocused
+                  ? 'bg-surface-container-high/80 border-primary/40 shadow-[0_0_0_3px_rgba(160,120,255,0.08),0_0_20px_-4px_rgba(160,120,255,0.15)] w-72'
+                  : 'bg-white/[0.03] border-white/[0.07] hover:border-white/[0.12] hover:bg-white/[0.05] w-56 lg:w-64'
+                }
+                cursor-text group
+              `}
+              onBlur={() => setSearchFocused(false)}
+            >
+              <span className={`material-symbols-outlined text-[18px] transition-colors duration-300 ${searchFocused ? 'text-primary' : 'text-outline group-hover:text-on-surface-variant'}`}>
+                search
+              </span>
+              <span className="flex-1 text-[13px] text-outline text-left truncate">
+                Search wikis, characters...
+              </span>
+              <kbd className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-[1px] rounded-md bg-white/[0.06] border border-white/[0.08] text-[10px] font-mono text-on-surface-variant/60">
+                ⌘K
+              </kbd>
+            </button>
+
+            {/* Divider */}
+            <div className="hidden md:block w-[1px] h-5 bg-white/[0.08] mx-1" />
+
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-background-tertiary transition-colors"
+              className="relative w-8 h-8 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-white/[0.06] transition-all duration-300 group"
               aria-label="Toggle theme"
             >
-              {theme === 'dark' ? (
-                <svg className="w-5 h-5 text-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5 text-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              )}
+              <span className="material-symbols-outlined text-[18px] group-hover:rotate-45 transition-transform duration-500">
+                {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+              </span>
             </button>
 
-            {/* Search */}
-            <button className="p-2 rounded-lg hover:bg-background-tertiary transition-colors hidden sm:block">
-              <svg className="w-5 h-5 text-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
+            {/* CTA Button */}
+            {me ? (
+              <Link
+                className="hidden sm:inline-flex items-center gap-1.5 px-4 py-[7px] rounded-xl text-[13px] font-semibold
+                  bg-gradient-to-b from-primary-container to-primary/80
+                  text-on-primary-container
+                  shadow-[0_0_0_1px_rgba(160,120,255,0.3),0_2px_8px_-2px_rgba(160,120,255,0.4),inset_0_1px_0_0_rgba(255,255,255,0.15)]
+                  hover:shadow-[0_0_0_1px_rgba(160,120,255,0.5),0_4px_20px_-4px_rgba(160,120,255,0.6),inset_0_1px_0_0_rgba(255,255,255,0.2)]
+                  hover:brightness-110
+                  active:scale-[0.97] active:brightness-95
+                  transition-all duration-300"
+                href="/create"
+              >
+                <span className="material-symbols-outlined text-[16px]">edit_square</span>
+                <span>Create</span>
+              </Link>
+            ) : (
+              <Link
+                className="hidden sm:inline-flex items-center gap-1.5 px-4 py-[7px] rounded-xl text-[13px] font-semibold
+                  bg-gradient-to-b from-primary-container to-primary/80
+                  text-on-primary-container
+                  shadow-[0_0_0_1px_rgba(160,120,255,0.3),0_2px_8px_-2px_rgba(160,120,255,0.4),inset_0_1px_0_0_rgba(255,255,255,0.15)]
+                  hover:shadow-[0_0_0_1px_rgba(160,120,255,0.5),0_4px_20px_-4px_rgba(160,120,255,0.6),inset_0_1px_0_0_rgba(255,255,255,0.2)]
+                  hover:brightness-110
+                  active:scale-[0.97] active:brightness-95
+                  transition-all duration-300"
+                href="/login"
+              >
+                <span>Sign In</span>
+              </Link>
+            )}
 
-            {/* Sign In / Sign Up */}
-            <div className="hidden sm:flex items-center gap-2">
-              {me ? (
-                <>
-                  <Link href="/account" className="btn btn-ghost text-sm">
-                    Account
-                  </Link>
-                  <button type="button" onClick={handleLogout} className="btn btn-primary text-sm">
-                    Log out
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link href="/login" className="btn btn-ghost text-sm">
-                    Sign In
-                  </Link>
-                  <Link href="/register" className="btn btn-primary text-sm">
-                    Sign Up
-                  </Link>
-                </>
-              )}
-            </div>
+            {/* Avatar / Profile */}
+            {me && (
+              <Link className="relative group" href="/account">
+                <div className="w-8 h-8 rounded-xl flex items-center justify-center
+                  bg-gradient-to-br from-primary/20 to-primary/5
+                  text-primary text-sm font-bold
+                  ring-1 ring-white/[0.08]
+                  group-hover:ring-primary/40
+                  transition-all duration-300
+                  shadow-[0_0_0_0_rgba(160,120,255,0)]
+                  group-hover:shadow-[0_0_12px_-3px_rgba(160,120,255,0.3)]
+                ">
+                  {me.name.charAt(0).toUpperCase()}
+                </div>
+                <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-tertiary ring-[1.5px] ring-surface-container-lowest" />
+              </Link>
+            )}
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg hover:bg-background-tertiary transition-colors lg:hidden"
+              className="relative w-8 h-8 rounded-xl flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-white/[0.06] transition-all duration-300 lg:hidden"
             >
-              {mobileMenuOpen ? (
-                <svg className="w-6 h-6 text-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg className="w-6 h-6 text-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
+              <span className={`material-symbols-outlined text-xl transition-transform duration-300 ${mobileMenuOpen ? 'rotate-90' : ''}`}>
+                {mobileMenuOpen ? 'close' : 'menu'}
+              </span>
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border animate-fadeIn">
-            <nav className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="px-4 py-2 text-foreground-muted hover:text-accent hover:bg-background-tertiary rounded-lg transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <hr className="border-border my-2" />
-              {me ? (
-                <>
+        {/* Bottom gradient edge */}
+        <div className={`absolute bottom-0 inset-x-0 h-[1px] transition-opacity duration-500 ${scrolled ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="h-full bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+        </div>
+      </header>
+
+      {/* ── Mobile Menu Overlay ── */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 lg:hidden" onClick={() => setMobileMenuOpen(false)}>
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-[fadeIn_200ms_ease-out]" />
+
+          {/* Panel */}
+          <div
+            className="absolute top-[64px] inset-x-0 mx-3 mt-2 rounded-2xl overflow-hidden
+              bg-surface-container/95 backdrop-blur-2xl
+              border border-white/[0.08]
+              shadow-[0_20px_60px_-15px_rgba(0,0,0,0.8),0_0_0_1px_rgba(160,120,255,0.05)]
+              animate-[slideDown_300ms_ease-out]
+            "
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Mobile Nav */}
+            <nav className="p-3 space-y-0.5">
+              {navLinks.map((link) => {
+                const active = isActive(link.url);
+                return (
                   <Link
-                    href="/account"
-                    className="px-4 py-2 text-foreground-muted hover:text-accent hover:bg-background-tertiary rounded-lg transition-colors"
+                    key={link.url}
+                    href={link.url}
+                    className={`
+                      flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
+                      transition-all duration-200
+                      ${active
+                        ? 'text-primary-container bg-primary/10'
+                        : 'text-on-surface-variant hover:text-on-surface hover:bg-white/[0.04]'
+                      }
+                    `}
                     onClick={() => setMobileMenuOpen(false)}
                   >
+                    <span className={`material-symbols-outlined text-lg ${active ? 'text-primary' : 'text-outline'}`}>
+                      {link.icon || 'link'}
+                    </span>
+                    {link.label}
+                    {active && (
+                      <span className="ml-auto w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_2px_rgba(160,120,255,0.4)]" />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* Mobile Search */}
+            <div className="px-3 pb-3">
+              <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                <span className="material-symbols-outlined text-lg text-outline">search</span>
+                <span className="text-sm text-outline">Search wikis, characters...</span>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="mx-3 h-[1px] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+
+            {/* Mobile Auth */}
+            <div className="p-3">
+              {me ? (
+                <div className="space-y-2">
+                  <Link
+                    href="/account"
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-on-surface-variant hover:text-on-surface hover:bg-white/[0.04] transition-all"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="material-symbols-outlined text-lg text-outline">person</span>
                     Account
                   </Link>
                   <button
                     type="button"
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      handleLogout();
-                    }}
-                    className="px-4 py-2 bg-accent text-accent-contrast font-medium rounded-lg text-center"
+                    onClick={() => { setMobileMenuOpen(false); handleLogout(); }}
+                    className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold
+                      bg-gradient-to-b from-primary-container to-primary/80 text-on-primary-container
+                      shadow-[0_0_0_1px_rgba(160,120,255,0.3),0_2px_8px_-2px_rgba(160,120,255,0.4)]
+                      active:scale-[0.98] transition-all"
                   >
+                    <span className="material-symbols-outlined text-base">logout</span>
                     Log out
                   </button>
-                </>
+                </div>
               ) : (
-                <>
+                <div className="grid grid-cols-2 gap-2">
                   <Link
                     href="/login"
-                    className="px-4 py-2 text-foreground-muted hover:text-accent hover:bg-background-tertiary rounded-lg transition-colors"
+                    className="flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-medium text-on-surface-variant bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.06] transition-all"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/register"
-                    className="px-4 py-2 bg-accent text-accent-contrast font-medium rounded-lg text-center"
+                    className="flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-semibold
+                      bg-gradient-to-b from-primary-container to-primary/80 text-on-primary-container
+                      shadow-[0_0_0_1px_rgba(160,120,255,0.3)] active:scale-[0.98] transition-all"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Sign Up
                   </Link>
-                </>
+                </div>
               )}
-            </nav>
+            </div>
           </div>
-        )}
-      </div>
-    </header>
+        </div>
+      )}
+    </>
   );
 }

@@ -1,95 +1,77 @@
-'use client';
-
+// @ts-nocheck
 import Link from 'next/link';
+import type { HomepageSectionSettings } from '@/src/lib/db/homepageSections';
 
-export default function PublishCTASection() {
-  const features = [
-    {
-      icon: '🌐',
-      title: 'Start a New Wiki',
-      description: 'Create a comprehensive wiki for your favorite anime, game, or web novel series.',
-    },
-    {
-      icon: '✏️',
-      title: 'Edit & Contribute',
-      description: 'Add pages, update information, and help keep wikis accurate and up-to-date.',
-    },
-    {
-      icon: '🏆',
-      title: 'Earn Recognition',
-      description: 'Get badges and ranks as you contribute. Top editors are featured on our leaderboard.',
-    },
-    {
-      icon: '👥',
-      title: 'Build Community',
-      description: 'Connect with fellow fans, discuss theories, and grow the fandom together.',
-    },
-  ];
-
+export default function PublishCTASection({ settings }: { settings?: HomepageSectionSettings | any }) {
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-background to-purple-500/5" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-2xl" />
-
-      <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div>
-            <span className="section-subtitle">Become a Contributor</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Help Build the Ultimate Fan Resource
-            </h2>
-            <p className="text-lg text-foreground-muted mb-8">
-              Join thousands of fans documenting their favorite series. Whether you are an expert or just getting started,
-              your contributions make our wikis the best resource for fans worldwide.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Link href="/create-wiki" className="btn btn-primary text-lg px-8 py-3">
-                Start a Wiki
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-              </Link>
-              <Link href="/contribute" className="btn btn-secondary text-lg px-8 py-3">
-                Learn to Contribute
-              </Link>
-            </div>
-
-            {/* Stats */}
-            <div className="flex items-center gap-8 pt-4 border-t border-border">
-              <div>
-                <p className="text-2xl font-bold text-accent">100K+</p>
-                <p className="text-foreground-muted text-sm">Contributors</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-accent">500+</p>
-                <p className="text-foreground-muted text-sm">Active Wikis</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-accent">5M+</p>
-                <p className="text-foreground-muted text-sm">Monthly Visitors</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Content - Features */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="card p-6 hover:border-accent"
-              >
-                <span className="text-3xl mb-4 block">{feature.icon}</span>
-                <h3 className="font-semibold text-foreground mb-2">{feature.title}</h3>
-                <p className="text-sm text-foreground-muted">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+    <section className="w-full bg-surface-container-lowest py-space-2xl">
+<div className="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg flex flex-col gap-space-xl">
+{/*  Random Lore Rolling Card  */}
+<div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-surface-container-high via-surface-container to-surface-container-high p-space-xl shadow-2xl">
+<div className="absolute -right-12 -bottom-12 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-space-lg">
+<div className="flex items-center gap-space-md">
+<div className="w-16 h-16 rounded-2xl bg-primary-container text-on-primary-container flex items-center justify-center shrink-0 shadow-lg">
+<span className="material-symbols-outlined text-3xl">casino</span>
+</div>
+<div>
+<span className="font-label-caps text-label-caps uppercase tracking-widest text-primary">Serendipitous Exploration</span>
+<h3 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight mt-0.5">
+                Don&apos;t know what to explore?
+              </h3>
+<p className="font-body-default text-body-default text-on-surface-variant mt-1 max-w-xl">
+                Dive headfirst into an obscure corner of fiction. Let our algorithmic dice drop you directly inside one of 482,000+ deep lore entries.
+              </p>
+</div>
+</div>
+<button className="w-full md:w-auto shrink-0 px-space-xl py-space-md rounded-xl bg-surface-bright hover:bg-primary hover:text-on-primary text-on-surface font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-xl flex items-center justify-center gap-space-xs active:scale-95">
+<span className="material-symbols-outlined text-xl">shuffle</span>
+<span>Roll Random Lore Page</span>
+</button>
+</div>
+</div>
+{/*  Massive Publish & Curate Call To Action  */}
+<div className="relative rounded-2xl bg-surface-container-lowest overflow-hidden shadow-2xl p-space-xl lg:p-space-2xl flex flex-col items-center text-center">
+{/*  Ambient Backdrop Gradients  */}
+<div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-surface-container-low to-surface-container-lowest pointer-events-none"></div>
+<div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-primary/20 blur-[130px] rounded-full pointer-events-none"></div>
+<div className="relative z-10 max-w-3xl flex flex-col items-center">
+<span className="font-label-mono text-label-mono text-tertiary uppercase tracking-[0.25em] mb-space-sm">
+            CONTRIBUTE TO HUMAN FICTION HERITAGE
+          </span>
+          <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">
+            {settings?.title || "Know something worth remembering?"}
+          </h2>
+<p className="font-body-editorial text-body-editorial text-on-surface-variant mt-space-sm max-w-2xl">
+            Build a page. Share serialized fan fiction. Annotate the canon. Keep your beloved universe alive for future generations of lore-masters.
+          </p>
+<div className="flex flex-col sm:flex-row items-center gap-space-md mt-space-xl w-full sm:w-auto">
+<Link className="w-full sm:w-auto px-space-xl py-space-sm rounded-xl bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-[0_0_24px_rgba(160,120,255,0.4)] flex items-center justify-center gap-space-xs active:scale-95" href="#">
+<span className="material-symbols-outlined text-lg">post_add</span>
+<span>Create a Wiki</span>
+</Link>
+<Link className="w-full sm:w-auto px-space-xl py-space-sm rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-space-xs" href="#">
+<span className="material-symbols-outlined text-lg">history_edu</span>
+<span>Publish a Story</span>
+</Link>
+</div>
+{/*  Minimalist Newsletter Dispatch Subscription  */}
+<div className="w-full max-w-md mt-space-2xl pt-space-xl">
+<div className="flex items-center justify-between mb-2">
+<span className="font-label-caps text-label-caps uppercase text-outline">The Lore Dispatch</span>
+<span className="font-label-mono text-label-mono text-secondary">Weekly Digest</span>
+</div>
+<div className="relative flex items-center bg-surface-container rounded-xl p-1 shadow-md">
+<input className="w-full bg-transparent px-space-md py-space-xs text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none" placeholder="Enter your email to stay in the loop..." type="email"/>
+<button className="px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider shrink-0 hover:bg-primary-container transition-all">
+                Join
+              </button>
+</div>
+<span className="font-label-mono text-label-mono text-outline block text-center mt-2">Zero spam. Pure fictional analysis curated by Grand Archivists.</span>
+</div>
+</div>
+</div>
+</div>
     </section>
   );
 }

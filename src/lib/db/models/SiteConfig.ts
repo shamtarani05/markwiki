@@ -1,4 +1,6 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
+import type { HomepageSection } from '@/src/lib/db/homepageSections';
+import { HOMEPAGE_SECTION_TYPES } from '@/src/lib/db/homepageSections';
 
 export interface INavItem {
   label: string;
@@ -6,17 +8,6 @@ export interface INavItem {
   order: number;
   isExternal: boolean;
   children?: INavItem[];
-}
-
-export interface IHomepageSection {
-  id: string;
-  type: 'featured' | 'recent' | 'category' | 'custom';
-  title: string;
-  contentType?: 'books' | 'blogs' | 'stories' | 'pages' | 'mixed';
-  categoryId?: mongoose.Types.ObjectId;
-  itemCount: number;
-  order: number;
-  isActive: boolean;
 }
 
 export interface ISiteConfig extends Document {
@@ -45,10 +36,7 @@ export interface ISiteConfig extends Document {
     footer: INavItem[];
   };
   homepage: {
-    heroTitle?: string;
-    heroSubtitle?: string;
-    heroImage?: string;
-    sections: IHomepageSection[];
+    sections: HomepageSection[];
   };
   social: {
     twitter?: string;
@@ -72,13 +60,12 @@ const NavItemSchema = new Schema({
 
 const HomepageSectionSchema = new Schema({
   id: { type: String, required: true },
-  type: { type: String, enum: ['featured', 'recent', 'category', 'custom'], required: true },
-  title: { type: String, required: true },
-  contentType: { type: String, enum: ['books', 'blogs', 'stories', 'pages', 'mixed'] },
-  categoryId: { type: Schema.Types.ObjectId, ref: 'Category' },
-  itemCount: { type: Number, default: 6 },
+  type: { type: String, enum: [...HOMEPAGE_SECTION_TYPES], required: true },
+  title: { type: String, default: '' },
+  subtitle: { type: String, default: '' },
   order: { type: Number, default: 0 },
   isActive: { type: Boolean, default: true },
+  settings: { type: Schema.Types.Mixed, default: {} },
 }, { _id: false });
 
 const SiteConfigSchema = new Schema<ISiteConfig>(
@@ -114,9 +101,6 @@ const SiteConfigSchema = new Schema<ISiteConfig>(
       footer: [NavItemSchema],
     },
     homepage: {
-      heroTitle: String,
-      heroSubtitle: String,
-      heroImage: String,
       sections: [HomepageSectionSchema],
     },
     social: {

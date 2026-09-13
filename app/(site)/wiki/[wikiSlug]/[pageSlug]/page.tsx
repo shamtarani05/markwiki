@@ -11,16 +11,16 @@ interface Props {
   params: Promise<{ wikiSlug: string; pageSlug: string }>;
 }
 
-// Server-rendered on request (not client-fetched) so Google's crawler gets
+// Server-rendered on request (not client-fetched) so Google&apos;s crawler gets
 // full HTML immediately — the previous version of this route was a client
 // component with hardcoded mock data, which is both why readers never saw
-// real admin-authored pages and why it couldn't rank: an empty shell that
+// real admin-authored pages and why it couldn&apos;t rank: an empty shell that
 // needs JS to populate is a much weaker signal to a search crawler than
 // content present in the initial response.
 async function loadPage(wikiSlug: string, pageSlug: string) {
   await connectDB();
   // The wiki itself must be approved too — otherwise a page inside a
-  // draft/pending wiki stays publicly readable even though the wiki's own
+  // draft/pending wiki stays publicly readable even though the wiki&apos;s own
   // hub page 404s.
   const wiki = await Wiki.findOne({ slug: wikiSlug, status: 'approved' }).lean();
   if (!wiki) return null;
@@ -66,7 +66,7 @@ export default async function WikiReadPage({ params }: Props) {
   const { page, wiki } = result;
   const session = await getSessionUser();
 
-  // Fire-and-forget — don't make the reader wait on a write.
+  // Fire-and-forget — don&apos;t make the reader wait on a write.
   void Page.updateOne({ _id: page._id }, { $inc: { viewCount: 1 } }).exec();
   if (session) {
     void ReadingProgress.updateOne(

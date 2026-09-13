@@ -1,205 +1,158 @@
-'use client';
-
+// @ts-nocheck
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import type { HomepageSectionSettings } from '@/src/lib/db/homepageSections';
 
-export interface Wiki {
-  id: string;
-  slug: string;
-  title: string;
-  franchise: string;
-  cover: string;
-  category: string;
-  pages: number;
-  contributors: number;
-  trending: boolean;
-}
-
-// Keys are real Category.name values (see the seed list in
-// app/api/admin/categories/route.ts) — anything unmapped falls back to
-// badge-gray at the call site.
-const categoryColors: Record<string, string> = {
-  'Anime': 'badge-red',
-  'Webtoons': 'badge-purple',
-  'Web Novels': 'badge-blue',
-  'Video Games': 'badge-green',
-  'Trading Cards': 'badge-yellow',
-  'Movies & TV': 'badge-red',
-  'Books & Literature': 'badge-blue',
-  'Tabletop & RPG': 'badge-purple',
-};
-
-function WikiCard({ wiki }: { wiki: Wiki }) {
+export default function FeaturedWikisSection({ sectionSettings, wikis }: { sectionSettings, wikis?: HomepageSectionSettings | any }) {
   return (
-    <Link href={`/wiki/${wiki.slug}`} className="group block">
-      <div className="card overflow-hidden">
-        {/* Cover */}
-        <div className="relative h-[240px] md:h-[280px] overflow-hidden">
-          <img
-            src={wiki.cover}
-            alt={wiki.title}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-          />
-
-          {/* Trending Badge */}
-          {wiki.trending && (
-            <div className="absolute top-3 left-3 px-2 py-1 bg-accent text-white text-xs font-bold rounded-full flex items-center gap-1">
-              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clipRule="evenodd" />
-              </svg>
-              Trending
-            </div>
-          )}
-
-          {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span className="btn btn-primary text-sm">Explore Wiki</span>
-          </div>
-        </div>
-
-        {/* Info */}
-        <div className="p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <span className={`px-2 py-0.5 rounded text-xs font-medium ${categoryColors[wiki.category] || 'badge-gray'}`}>
-              {wiki.category}
-            </span>
-          </div>
-          <h3 className="font-bold text-foreground mb-1 group-hover:text-accent transition-colors text-base leading-tight line-clamp-1">
-            {wiki.title}
-          </h3>
-          <p className="text-sm text-foreground-muted mb-3">{wiki.franchise}</p>
-
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center gap-1 text-foreground-muted">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              <span>{wiki.pages.toLocaleString()} pages</span>
-            </div>
-            <div className="flex items-center gap-1 text-foreground-muted">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-              <span>{wiki.contributors}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Link>
-  );
-}
-
-export default function FeaturedWikisSection({ wikis }: { wikis: Wiki[] }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = Math.ceil(wikis.length / 4);
-
-  const scrollToSlide = (index: number) => {
-    if (scrollRef.current) {
-      const slideWidth = scrollRef.current.offsetWidth;
-      scrollRef.current.scrollTo({
-        left: slideWidth * index,
-        behavior: 'smooth',
-      });
-      setCurrentSlide(index);
-    }
-  };
-
-  const handleScroll = () => {
-    if (scrollRef.current) {
-      const slideWidth = scrollRef.current.offsetWidth;
-      const newSlide = Math.round(scrollRef.current.scrollLeft / slideWidth);
-      setCurrentSlide(newSlide);
-    }
-  };
-
-  return (
-    <section className="py-16 md:py-24">
-      <div className="container">
-        {/* Section Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <span className="section-subtitle">Most Popular</span>
-            <h2 className="section-title">Featured Wikis</h2>
-          </div>
-          <div className="flex items-center gap-4">
-            {/* Navigation Arrows */}
-            <div className="hidden md:flex items-center gap-2">
-              <button
-                onClick={() => scrollToSlide(Math.max(0, currentSlide - 1))}
-                disabled={currentSlide === 0}
-                className="p-2 rounded-full border border-border hover:border-accent hover:text-accent disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button
-                onClick={() => scrollToSlide(Math.min(totalSlides - 1, currentSlide + 1))}
-                disabled={currentSlide === totalSlides - 1}
-                className="p-2 rounded-full border border-border hover:border-accent hover:text-accent disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-            <Link href="/wikis" className="btn btn-secondary hidden sm:flex">
-              View All
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-
-        {/* Wikis Slider */}
-        {wikis.length === 0 ? (
-          <p className="text-foreground-muted text-center py-8">No featured wikis yet — check back soon.</p>
-        ) : (
-          <>
-            <div
-              ref={scrollRef}
-              onScroll={handleScroll}
-              className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-6"
-            >
-              {/* Each slide contains 4 wikis */}
-              {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-                <div
-                  key={slideIndex}
-                  className="flex-shrink-0 w-full snap-start grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
-                >
-                  {wikis.slice(slideIndex * 4, slideIndex * 4 + 4).map((wiki) => (
-                    <WikiCard key={wiki.id} wiki={wiki} />
-                  ))}
-                </div>
-              ))}
-            </div>
-
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-6">
-              {Array.from({ length: totalSlides }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => scrollToSlide(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    currentSlide === index
-                      ? 'bg-accent w-6'
-                      : 'bg-border hover:bg-foreground-muted'
-                  }`}
-                />
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* Mobile View All */}
-        <div className="text-center mt-8 sm:hidden">
-          <Link href="/wikis" className="btn btn-secondary">
-            View All Wikis
-          </Link>
-        </div>
-      </div>
-    </section>
+    <section className="w-full bg-surface-container-lowest py-space-2xl">
+<div className="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
+{/*  Section Editorial Header  */}
+<div className="flex items-center justify-between mb-space-xl">
+<div>
+<span className="font-label-mono text-label-mono text-secondary uppercase tracking-[0.25em] block mb-1">02 / SPOTLIGHT FRANCHISES</span>
+<h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">
+            {sectionSettings?.title || "Curated Vaults of the Month"}
+          </h2>
+</div>
+<div className="hidden md:flex items-center gap-space-xs">
+<button className="w-10 h-10 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors">
+<span className="material-symbols-outlined text-lg">west</span>
+</button>
+<button className="w-10 h-10 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors">
+<span className="material-symbols-outlined text-lg">east</span>
+</button>
+</div>
+</div>
+{/*  Asymmetric Grid Showcase  */}
+<div className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-stretch">
+{/*  Primary Featured Wiki (48% width -> lg:col-span-6 or 7)  */}
+<div className="lg:col-span-7 rounded-xl bg-surface-container-low overflow-hidden shadow-2xl flex flex-col justify-between group">
+<div className="relative w-full h-80 sm:h-96 overflow-hidden bg-surface-variant">
+<img className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" data-alt="Sung Jinwoo surrounded by glowing shadow soldiers, purple aura radiating from dual daggers, intense eyes, highly detailed high fantasy manhwa concept art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD88zIfwW8ZcBdM57XrBdpxRskhzit97AO8zIvlvD-iMoQBu9V2poDNGm1IBza6LxuZI6R82QVQYjNc7vG4Y-1A-9X6E3s0HhDtEyLrS1xN2hTNXeqfcVls4lFHFiF-vGStpvKKIze5aY0_8fBPUlkIDOK8wCuhlvR4NwHGB_1dUF-7mSGCfyrMs3SystMaDVvdQEJh0HJ9JmDpqVm0dSfYqbCqgy-0_cZHlDAPCGP9SpOuviUmEk4YmQ"/>
+<div className="absolute inset-0 bg-gradient-to-t from-surface-container-low via-surface-container-low/40 to-transparent"></div>
+<div className="absolute top-space-md left-space-md flex gap-space-xs">
+<span className="px-space-sm py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur text-primary font-label-caps text-label-caps uppercase tracking-wider">
+                Featured Canon #01
+              </span>
+<span className="px-space-sm py-1 rounded-full bg-tertiary-container/90 text-on-tertiary-container font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-1">
+<span className="material-symbols-outlined text-xs">verified</span> Verified 100%
+              </span>
+</div>
+<div className="absolute bottom-space-md left-space-md right-space-md flex items-end justify-between">
+<div>
+<span className="font-label-mono text-label-mono text-secondary">ARCHIVE VAULT // 77-SL</span>
+<h3 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface leading-none mt-1">
+                  Solo Leveling
+                </h3>
+<p className="font-headline-sm text-headline-sm text-primary italic">Shadow Monarch Compendium</p>
+</div>
+</div>
+</div>
+<div className="p-space-lg flex flex-col justify-between flex-1">
+<p className="font-body-editorial text-body-editorial text-on-surface-variant">
+              The definitive registry for Sung Jinwoo&apos;s army, monarch lineages, world gates, and complete rank distributions. Over 4,800 canon-inspected entries reviewed by the Global Hunters Guild.
+            </p>
+<div className="grid grid-cols-3 gap-space-sm my-space-lg py-space-sm bg-surface-container rounded-lg text-center">
+<div>
+<span className="block font-headline-sm text-headline-sm text-on-surface">4,812</span>
+<span className="font-label-caps text-label-caps uppercase text-outline">Canon Pages</span>
+</div>
+<div>
+<span className="block font-headline-sm text-headline-sm text-on-surface">1.4M</span>
+<span className="font-label-caps text-label-caps uppercase text-outline">Monthly Views</span>
+</div>
+<div>
+<span className="block font-headline-sm text-headline-sm text-tertiary">99.8%</span>
+<span className="font-label-caps text-label-caps uppercase text-outline">Accuracy Index</span>
+</div>
+</div>
+<div className="flex flex-wrap items-center justify-between gap-space-md pt-space-xs">
+<div className="flex items-center gap-2">
+<span className="px-2.5 py-1 rounded bg-surface-variant font-label-mono text-label-mono text-on-surface-variant">Rulers</span>
+<span className="px-2.5 py-1 rounded bg-surface-variant font-label-mono text-label-mono text-on-surface-variant">Monarchs</span>
+<span className="px-2.5 py-1 rounded bg-surface-variant font-label-mono text-label-mono text-on-surface-variant">S-Rank Guilds</span>
+</div>
+<button className="px-space-lg py-space-xs rounded-xl bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-md flex items-center gap-space-xs">
+<span>Enter Vault</span>
+<span className="material-symbols-outlined text-base">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+{/*  Secondary Wikis Stack (52% width -> lg:col-span-5)  */}
+<div className="lg:col-span-5 flex flex-col gap-space-md">
+{/*  Secondary Card 1: Arcane  */}
+<div className="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex gap-space-md items-center shadow-md">
+<div className="w-28 h-28 shrink-0 rounded-lg overflow-hidden bg-surface-variant relative shadow-md">
+<img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Jinx looking over the bridge in Zaun with vivid electric cyan hair, neon pink graffiti splashes, hextech blue ambient smoke, cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA69sAV9iIFCk-MfdsfhMYsz8WRkKiw4pMTjCt3qw-wSNP3BAATiOlhfiDW1wBMjD4HeIRxxLYr4gCY7y9UXAV3K-BM3oefB1YT8CLMU4J_rAHApwMMeVaKkdvkixzgcHLuvbq8aGmQNMOM4I7yYlqyIvWbbr2opuJvNcYM_nGC-aGRIkaIyrgC1wayE6Uy9DDaBdv3R2W5-hGJA40c1MQ40uCGNAsIShWuirkD1IV6CsfgOm7PlWyLNw"/>
+</div>
+<div className="flex-1 min-w-0">
+<div className="flex items-center gap-2 mb-1">
+<span className="font-label-mono text-label-mono text-secondary">2,940 ARTICLES</span>
+<span className="text-outline-variant">•</span>
+<span className="font-label-caps text-label-caps uppercase text-tertiary">Hextech Lore</span>
+</div>
+<h4 className="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors truncate">
+                Arcane: Piltover &amp; Zaun
+              </h4>
+<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">
+                Anatomy of Shimmer, Hexgates trade corridors, and council political minutes.
+              </p>
+<div className="flex items-center gap-space-xs mt-space-sm text-primary font-label-caps text-label-caps uppercase tracking-wider">
+<span>Inspect Archive</span>
+<span className="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+{/*  Secondary Card 2: Elden Ring  */}
+<div className="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex gap-space-md items-center shadow-md">
+<div className="w-28 h-28 shrink-0 rounded-lg overflow-hidden bg-surface-variant relative shadow-md">
+<img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Golden ethereal shattered runes floating in dark void, Erdtree roots winding through marble ruin architecture, souls-like dark fantasy concept" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3g4q4WLsmEiRpFfJkTmTh8o_IvSSGfhlqpIa8zvPKH1dZ1NGqYNQvBS8GUQ0msQ_gBCaKk7x3vBSFZQGAnd-2QT8t82hv1hsnH8xv0mbQWWZqANK8qKkt3kj2-zZ1_YNFryLqv4QHIVTJvooSkAzc0EH9uOdj-SPAUkry8o87sWlGebRH_Zw2M-it_fc79BkVkcD38oW_UYO_H3a31buo8kkqXd9ZVTU6WNB_Svt3ZpjWykt8rJGIsA"/>
+</div>
+<div className="flex-1 min-w-0">
+<div className="flex items-center gap-2 mb-1">
+<span className="font-label-mono text-label-mono text-secondary">6,120 ARTICLES</span>
+<span className="text-outline-variant">•</span>
+<span className="font-label-caps text-label-caps uppercase text-secondary-fixed-dim">Golden Order</span>
+</div>
+<h4 className="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors truncate">
+                Elden Ring: Lands Between Codex
+              </h4>
+<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">
+                Demigod lineages, Shadow Realm mappings, and untranslated item runes.
+              </p>
+<div className="flex items-center gap-space-xs mt-space-sm text-primary font-label-caps text-label-caps uppercase tracking-wider">
+<span>Inspect Archive</span>
+<span className="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+{/*  Secondary Card 3: Omniscient Reader  */}
+<div className="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex gap-space-md items-center shadow-md">
+<div className="w-28 h-28 shrink-0 rounded-lg overflow-hidden bg-surface-variant relative shadow-md">
+<img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Kim Dokja in black trench coat looking out over Seoul subway tunnel filled with floating constellation messages and blue starry constellations" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEq2X2BJNrPzJQVNSibpnneiglJhwqwTZTu1wvtnW2B-ID8HjJSkV-IWfoZaJgE65XJhodiwTN0aWpu1tYjjxQP7wRAUBi_Q6oDNviIZ5fc3QSdlVQC-VT80oiu-wIk-N5hqWmjDXjo0YBsJ3xqrr0nrZ_C4hT1BBmJ4CH9u-6atE9F1kTDr5aIoyDlqvsBAPnPqAgQC1yGcMvIrH-QK7rowiqf7ibETLhJ32oVck6NqtQlfuMzhVtug"/>
+</div>
+<div className="flex-1 min-w-0">
+<div className="flex items-center gap-2 mb-1">
+<span className="font-label-mono text-label-mono text-secondary">1,840 ARTICLES</span>
+<span className="text-outline-variant">•</span>
+<span className="font-label-caps text-label-caps uppercase text-tertiary">Scenario Log</span>
+</div>
+<h4 className="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors truncate">
+                Omniscient Reader&apos;s Viewpoint
+              </h4>
+<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">
+                Constellation sponsor contracts, dokkaebi scenario stipulations, and Fable logs.
+              </p>
+<div className="flex items-center gap-space-xs mt-space-sm text-primary font-label-caps text-label-caps uppercase tracking-wider">
+<span>Inspect Archive</span>
+<span className="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
   );
 }

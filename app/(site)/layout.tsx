@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/src/context/ThemeContext";
 import { Header, Footer } from "@/src/components/layout";
+import GlobalThemeWrapper from "@/src/components/layout/GlobalThemeWrapper";
+import { getNavigationConfig } from "@/src/lib/db/getNavigationConfig";
+import connectDB from "@/src/lib/db/connection";
+import { SiteConfig } from "@/src/lib/db/models";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +16,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -40,20 +50,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const { navigation } = await getNavigationConfig();
+  await connectDB();
+  const config = await SiteConfig.findOne().lean();
+  const theme = config?.theme || { accentColor: '#D4AF37' };
+
   return (
     <html
       lang="en"
       data-theme="dark"
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} dark`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col bg-background text-foreground">
-        <ThemeProvider>
-          <Header />
-          <main className="flex-1 pt-[72px]">{children}</main>
-          <Footer />
-        </ThemeProvider>
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+      </head>
+      <body className="bg-surface-container-lowest font-body-default text-body-default text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+        <GlobalThemeWrapper initialThemeConfig={theme}>
+          <ThemeProvider>
+            <Header navLinks={navigation.main} />
+            <main className="flex-1 w-full pt-16 min-h-screen bg-surface-container-lowest">{children}</main>
+            <Footer navLinks={navigation.footer} />
+          </ThemeProvider>
+        </GlobalThemeWrapper>
       </body>
     </html>
   );

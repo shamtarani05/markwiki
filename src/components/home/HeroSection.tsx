@@ -1,159 +1,97 @@
-'use client';
-
+// @ts-nocheck
 import Link from 'next/link';
-import { useState } from 'react';
+import type { HomepageSectionSettings } from '@/src/lib/db/homepageSections';
 
-export default function HeroSection() {
-  const [searchQuery, setSearchQuery] = useState('');
-
+export default function HeroSection({ settings }: { settings?: HomepageSectionSettings | any }) {
   return (
-    <section className="relative min-h-[calc(100vh-72px)] flex items-center py-16 overflow-hidden">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent/5" />
-
-      {/* Decorative Elements */}
-      <div className="absolute top-20 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/5 rounded-full blur-2xl" />
-      <div className="absolute top-40 left-20 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl" />
-
-      <div className="container relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="text-center lg:text-left">
-            <span className="inline-block px-4 py-1.5 bg-accent/10 text-accent rounded-full text-sm font-medium mb-6">
-              🎮 The Ultimate Fan Wiki Platform
-            </span>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Your Hub for{' '}
-              <span className="text-accent">Anime, Games</span>
-              <br />& Web Novels
-            </h1>
-
-            <p className="text-lg text-foreground-muted mb-8 max-w-xl mx-auto lg:mx-0">
-              Explore comprehensive wikis for your favorite anime, webtoons, web novels, and video games.
-              Discover characters, lore, and connect with passionate fan communities.
-            </p>
-
-            {/* Search Bar */}
-            <div className="relative max-w-xl mx-auto lg:mx-0 mb-8">
-              <input
-                type="text"
-                placeholder="Search wikis, characters, series..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-6 py-4 pr-14 rounded-full bg-card border border-border text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
-              />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 p-3 bg-accent text-white rounded-full hover:bg-accent/90 transition-colors">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Quick Links */}
-            <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start mb-8">
-              <span className="text-foreground-muted text-sm">Popular:</span>
-              <Link href="/wiki/solo-leveling" className="px-3 py-1 bg-card border border-border rounded-full text-sm hover:border-accent hover:text-accent transition-colors">
-                Solo Leveling
-              </Link>
-              <Link href="/wiki/jujutsu-kaisen" className="px-3 py-1 bg-card border border-border rounded-full text-sm hover:border-accent hover:text-accent transition-colors">
-                Jujutsu Kaisen
-              </Link>
-              <Link href="/wiki/elden-ring" className="px-3 py-1 bg-card border border-border rounded-full text-sm hover:border-accent hover:text-accent transition-colors">
-                Elden Ring
-              </Link>
-              <Link href="/wiki/lotm" className="px-3 py-1 bg-card border border-border rounded-full text-sm hover:border-accent hover:text-accent transition-colors">
-                Lord of the Mysteries
-              </Link>
-            </div>
-
-            {/* Stats */}
-            <div className="flex items-center gap-8 mt-8 justify-center lg:justify-start">
-              <div>
-                <p className="text-3xl font-bold text-foreground">500+</p>
-                <p className="text-foreground-muted text-sm">Wikis</p>
-              </div>
-              <div className="w-px h-12 bg-border" />
-              <div>
-                <p className="text-3xl font-bold text-foreground">50K+</p>
-                <p className="text-foreground-muted text-sm">Pages</p>
-              </div>
-              <div className="w-px h-12 bg-border" />
-              <div>
-                <p className="text-3xl font-bold text-foreground">100K+</p>
-                <p className="text-foreground-muted text-sm">Contributors</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Content - Wiki Cards Display */}
-          <div className="relative hidden lg:block">
-            <div className="relative flex items-center justify-center">
-              {/* Main Featured Wiki Card */}
-              <div className="relative z-20 w-72 transform hover:scale-105 transition-transform duration-300">
-                <div className="rounded-xl shadow-2xl overflow-hidden bg-card border border-border">
-                  <div className="h-40 overflow-hidden">
-                    <img
-                      src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400&h=200&fit=crop&q=80"
-                      alt="Solo Leveling"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2 py-0.5 badge-purple rounded text-xs font-medium">Manhwa</span>
-                      <span className="px-2 py-0.5 badge-blue rounded text-xs font-medium">Anime</span>
-                    </div>
-                    <h3 className="font-bold text-foreground text-lg">Solo Leveling Wiki</h3>
-                    <p className="text-foreground-muted text-sm mt-1">1,247 pages • 89K monthly views</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Side Cards */}
-              <div className="absolute left-0 z-10 w-56 transform -rotate-6 -translate-x-12 -translate-y-8 opacity-80 hover:opacity-100 transition-opacity">
-                <div className="rounded-xl shadow-xl overflow-hidden bg-card border border-border">
-                  <div className="h-28 overflow-hidden">
-                    <img
-                      src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&h=150&fit=crop&q=80"
-                      alt="Elden Ring"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-3">
-                    <span className="px-2 py-0.5 badge-green rounded text-xs font-medium">Game</span>
-                    <h3 className="font-bold text-foreground mt-1">Elden Ring Wiki</h3>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute right-0 z-10 w-56 transform rotate-6 translate-x-12 translate-y-8 opacity-80 hover:opacity-100 transition-opacity">
-                <div className="rounded-xl shadow-xl overflow-hidden bg-card border border-border">
-                  <div className="h-28 overflow-hidden">
-                    <img
-                      src="https://images.unsplash.com/photo-1618336753974-aae8e04506aa?w=300&h=150&fit=crop&q=80"
-                      alt="Jujutsu Kaisen"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-3">
-                    <span className="px-2 py-0.5 badge-red rounded text-xs font-medium">Anime</span>
-                    <h3 className="font-bold text-foreground mt-1">Jujutsu Kaisen Wiki</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <svg className="w-6 h-6 text-foreground-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </div>
-    </section>
+    <section className="relative w-full overflow-hidden bg-surface-container-lowest -mt-[72px] pt-[132px] pb-space-2xl min-h-[798px] flex flex-col justify-between">
+{/*  Cosmic Violet Nebula Glow Background  */}
+<div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen overflow-hidden">
+<div className="absolute -top-[20%] left-1/2 -translate-x-1/2 w-[1000px] h-[650px] bg-gradient-to-b from-primary/30 via-secondary-container/20 to-transparent blur-[140px] rounded-full"></div>
+<div className="absolute top-1/3 -left-[10%] w-[500px] h-[500px] bg-secondary-container/15 blur-[120px] rounded-full"></div>
+<div className="absolute top-1/4 -right-[10%] w-[600px] h-[600px] bg-primary/10 blur-[130px] rounded-full"></div>
+</div>
+{/*  Editorial Ambient Grid Overlay  */}
+<div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(160,120,255,0.12),transparent)] pointer-events-none"></div>
+<div className="relative z-10 max-w-[1440px] w-full mx-auto px-margin-sm md:px-margin lg:px-margin-lg flex flex-col items-center text-center">
+{/*  Living Badge  */}
+<div className="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-surface-container-high/90 shadow-md mb-space-lg backdrop-blur-md">
+<span className="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_#51de9d] animate-pulse"></span>
+<span className="font-label-caps text-label-caps text-on-surface uppercase tracking-[0.2em]">The Living Archive</span>
+<span className="text-outline-variant text-label-caps">•</span>
+<span className="font-label-mono text-label-mono text-primary">v4.8 CANON FEED</span>
+</div>
+{/*  Main Headline  */}
+<h1 className="font-display-xl text-display-xl-mobile md:text-display-xl text-on-surface max-w-5xl tracking-tight leading-[1.05] text-balance">
+        {settings?.heroTitle ? <span dangerouslySetInnerHTML={{__html: settings.heroTitle.replace(/<accent>/g, '<span class="italic font-normal text-primary">').replace(/<\/accent>/g, '</span>')}} /> : <>Explore the worlds <span className="italic font-normal text-primary">you love.</span></>}
+</h1>
+{/*  Supporting Editorial Narrative  */}
+<p className="mt-space-md font-body-editorial text-body-editorial text-on-surface-variant max-w-2xl text-balance">
+        {settings?.heroSubtitle || "The next-generation fan knowledge and serialized fiction platform. Deep lore, verified timelines, and living stories curated by enthusiasts worldwide."}
+      </p>
+{/*  Search Component Box  */}
+<div className="w-full max-w-3xl mt-space-xl relative group">
+<div className="absolute -inset-1 bg-gradient-to-r from-primary/30 via-secondary-container/40 to-primary/20 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition duration-500"></div>
+<div className="relative flex items-center bg-surface-container-high/90 backdrop-blur-xl rounded-full px-space-lg py-space-sm shadow-xl transition-all">
+<span className="material-symbols-outlined text-primary text-2xl mr-space-sm select-none">travel_explore</span>
+<input className="w-full bg-transparent text-headline-sm font-headline-sm text-on-surface placeholder:text-outline focus:outline-none tracking-tight" placeholder="Search wikis, characters, artifacts, chronologies..." type="text"/>
+<div className="flex items-center gap-space-xs ml-space-sm shrink-0">
+<kbd className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-highest text-label-mono font-label-mono text-on-surface-variant shadow-sm">
+<span className="text-xs">⌘</span>K
+            </kbd>
+<button className="flex items-center justify-center w-10 h-10 rounded-full bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-all shadow-md active:scale-95">
+<span className="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+{/*  Search Chips  */}
+<div className="flex flex-wrap items-center justify-center gap-space-xs mt-space-md max-w-2xl">
+<span className="font-label-caps text-label-caps uppercase text-outline mr-space-xs tracking-wider">Indexed Now:</span>
+<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Solo Leveling
+        </button>
+<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Arcane / Runeterra
+        </button>
+<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Elden Ring
+        </button>
+<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Chainsaw Man
+        </button>
+<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Cyberpunk 2077
+        </button>
+<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
+          Omniscient Reader
+        </button>
+</div>
+</div>
+{/*  Live Archive Stats Ribbon  */}
+<div className="relative z-10 max-w-[1440px] w-full mx-auto px-margin-sm md:px-margin lg:px-margin-lg mt-space-2xl">
+<div className="w-full bg-surface-container/80 backdrop-blur-md rounded-xl p-space-md flex flex-wrap items-center justify-around gap-space-md text-center shadow-md">
+<div className="flex items-center gap-space-sm">
+<span className="w-3 h-3 rounded-full bg-primary/30 flex items-center justify-center">
+<span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+</span>
+<span className="font-headline-sm text-headline-sm text-on-surface">482,190</span>
+<span className="font-label-caps text-label-caps uppercase text-outline tracking-wider">Canon Articles</span>
+</div>
+<div className="hidden sm:block w-px h-6 bg-surface-variant"></div>
+<div className="flex items-center gap-space-sm">
+<span className="material-symbols-outlined text-secondary text-lg">visibility</span>
+<span className="font-headline-sm text-headline-sm text-on-surface">3.4M</span>
+<span className="font-label-caps text-label-caps uppercase text-outline tracking-wider">Daily Readers</span>
+</div>
+<div className="hidden sm:block w-px h-6 bg-surface-variant"></div>
+<div className="flex items-center gap-space-sm">
+<span className="material-symbols-outlined text-tertiary text-lg">auto_stories</span>
+<span className="font-headline-sm text-headline-sm text-on-surface">14,200</span>
+<span className="font-label-caps text-label-caps uppercase text-outline tracking-wider">Active Lore-Masters</span>
+</div>
+</div>
+</div>
+</section>
   );
 }

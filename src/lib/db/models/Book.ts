@@ -15,6 +15,7 @@ export interface IBook extends Document {
   tags: string[];
   genres: string[];
   status: BookStatus;
+  format: 'novel' | 'webtoon';
   isPublished: boolean;
   isFeatured: boolean;
   chapterCount: number;
@@ -82,6 +83,11 @@ const BookSchema = new Schema<IBook>(
       type: String,
       enum: ['draft', 'ongoing', 'completed', 'hiatus', 'archived'],
       default: 'draft',
+    },
+    format: {
+      type: String,
+      enum: ['novel', 'webtoon'],
+      default: 'novel',
     },
     isPublished: {
       type: Boolean,

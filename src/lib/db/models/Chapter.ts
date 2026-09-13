@@ -5,7 +5,8 @@ export interface IChapter extends Document {
   book: mongoose.Types.ObjectId;
   title: string;
   slug: string;
-  content: string;
+  content?: string; // Optional for Webtoons
+  images?: string[]; // Array of image URLs for Webtoons
   chapterNumber: number;
   wordCount: number;
   isPublished: boolean;
@@ -37,8 +38,10 @@ const ChapterSchema = new Schema<IChapter>(
     },
     content: {
       type: String,
-      required: true,
     },
+    images: [{
+      type: String,
+    }],
     chapterNumber: {
       type: Number,
       required: true,

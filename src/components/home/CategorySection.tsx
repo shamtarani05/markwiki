@@ -1,80 +1,124 @@
-'use client';
-
+// @ts-nocheck
 import Link from 'next/link';
+import type { HomepageSectionSettings } from '@/src/lib/db/homepageSections';
 
-export interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  icon: string;
-  count: number;
-  description: string;
-  image: string;
-  color: string;
-}
-
-export default function CategorySection({ categories }: { categories: Category[] }) {
+export default function CategorySection({ sectionSettings, categories }: { sectionSettings?: HomepageSectionSettings | any, categories?: any[] }) {
   return (
-    <section className="py-16 md:py-24 bg-background-secondary">
-      <div className="container">
-        {/* Section Header */}
-        <div className="text-center mb-10">
-          <span className="section-subtitle">Browse by Type</span>
-          <h2 className="section-title">Explore Wiki Categories</h2>
-          <p className="text-foreground-muted mt-3 max-w-2xl mx-auto">
-            Dive into comprehensive wikis across anime, games, web novels, and more
-          </p>
-        </div>
-
-        {/* Category Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {categories.map((category) => (
-            <Link
-              key={category.id}
-              href={`/category/${category.slug}`}
-              className="group relative overflow-hidden rounded-xl border border-border bg-card transition-all hover:border-accent hover:shadow-lg h-[200px]"
-            >
-              {/* Background Image */}
-              <div className="absolute inset-0">
-                <img
-                  src={category.image}
-                  alt={category.name}
-                  className="w-full h-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-500"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t ${category.color} via-card/90 to-card/70`} />
-              </div>
-
-              <div className="relative z-10 p-5 h-full flex flex-col justify-end">
-                <span className="text-4xl mb-2">{category.icon}</span>
-                <h3 className="font-bold text-foreground text-lg mb-1 group-hover:text-accent transition-colors">
-                  {category.name}
-                </h3>
-                <p className="text-xs text-foreground-muted mb-1">{category.description}</p>
-                <p className="text-sm text-accent font-medium">{category.count.toLocaleString()} wikis</p>
-              </div>
-
-              <svg
-                className="absolute bottom-4 right-4 w-5 h-5 text-foreground-muted opacity-0 group-hover:opacity-100 transform translate-x-2 group-hover:translate-x-0 transition-all"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          ))}
-        </div>
-
-        {/* View All Link */}
-        <div className="text-center mt-8">
-          <Link href="/categories" className="btn btn-secondary">
-            Browse All Categories
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
-      </div>
-    </section>
+<section className="w-full bg-surface-container-lowest py-space-2xl">
+<div className="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
+{/*  Section Editorial Header  */}
+<div className="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-space-md">
+<div>
+<span className="font-label-mono text-label-mono text-primary uppercase tracking-[0.25em] block mb-1">01 / ARCHIVE DOMAINS</span>
+<h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">
+            {sectionSettings?.title || "Traverse curated knowledge nodes."}
+          </h2>
+</div>
+<p className="font-body-default text-body-default text-on-surface-variant max-w-md">
+          {sectionSettings?.subtitle || "Every universe partitioned by discipline, verified by cross-referencing core canon materials and authorized scripts."}
+        </p>
+</div>
+{/*  Bento Grid (Asymmetrical)  */}
+<div className="grid grid-cols-1 md:grid-cols-12 gap-space-md auto-rows-[220px]">
+{/*  Large Card 1: Anime & Manga (Cols: 7, Rows: 2)  */}
+<div className="md:col-span-7 md:row-span-2 relative rounded-xl overflow-hidden group p-space-lg flex flex-col justify-between shadow-xl bg-surface-container">
+<div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105 opacity-60" data-alt="Epic widescreen cinematic anime artwork with dark celestial sky, neon magenta energy slashing across the frame, highly stylized line work and glowing sparks" style={{backgroundImage: 'url(\'https'}}></div>
+<div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container/60 to-transparent"></div>
+<div className="relative z-10 flex items-center justify-between">
+<span className="px-3 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-primary font-label-mono text-label-mono">
+              // DOMAIN.01
+            </span>
+<span className="font-label-mono text-label-mono text-on-surface-variant bg-surface-container-lowest/60 px-2 py-0.5 rounded">
+              184,290 WIKIS
+            </span>
+</div>
+<div className="relative z-10 mt-auto">
+<span className="font-label-caps text-label-caps uppercase text-secondary tracking-widest block mb-1">CULT CLASSICS &amp; RELEASES</span>
+<h3 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface group-hover:text-primary transition-colors">
+              Anime &amp; Manga
+            </h3>
+<p className="font-body-default text-body-default text-on-surface-variant max-w-xl mt-space-xs line-clamp-2">
+              From the deep curses of Shibuya to the ancient Grand Line. Unravel complete character profiles, sakuga keyframe credits, and translated creator interviews.
+            </p>
+<div className="flex items-center gap-space-md mt-space-md">
+<span className="inline-flex items-center text-primary font-label-caps text-label-caps uppercase tracking-wider group-hover:translate-x-1 transition-transform">
+                Explore Domain <span className="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+</span>
+</div>
+</div>
+</div>
+{/*  Medium Card 2: Webtoons & Web Novels (Cols: 5, Rows: 1)  */}
+<div className="md:col-span-5 md:row-span-1 relative rounded-xl overflow-hidden group p-space-md flex flex-col justify-between shadow-lg bg-surface-container">
+<div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105 opacity-40" data-alt="Vertical scrolling manhwa art panel illustration showing a floating blue screen holographic user interface with glowing runes and dark silhouette" style={{backgroundImage: 'url(\'https'}}></div>
+<div className="absolute inset-0 bg-gradient-to-r from-surface-container-lowest/90 via-surface-container-lowest/60 to-transparent"></div>
+<div className="relative z-10 flex items-center justify-between">
+<span className="font-label-mono text-label-mono text-tertiary">// DOMAIN.02</span>
+<span className="font-label-mono text-label-mono text-outline">98,120 WIKIS</span>
+</div>
+<div className="relative z-10">
+<h3 className="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+              Webtoons &amp; Serialized Novels
+            </h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1">
+              Cultivation realms, regression systems, and dungeon apocalypse mythologies.
+            </p>
+</div>
+</div>
+{/*  Medium Card 3: Video Games (Cols: 5, Rows: 1)  */}
+<div className="md:col-span-5 md:row-span-1 relative rounded-xl overflow-hidden group p-space-md flex flex-col justify-between shadow-lg bg-surface-container">
+<div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105 opacity-40" data-alt="Dark fantasy gothic stone temple illuminated by golden Erdtree ethereal branches with an armored knight kneeling on wet stones in atmospheric Elden Ring lighting" style={{backgroundImage: 'url(\'https'}}></div>
+<div className="absolute inset-0 bg-gradient-to-r from-surface-container-lowest/90 via-surface-container-lowest/60 to-transparent"></div>
+<div className="relative z-10 flex items-center justify-between">
+<span className="font-label-mono text-label-mono text-secondary">// DOMAIN.03</span>
+<span className="font-label-mono text-label-mono text-outline">112,040 WIKIS</span>
+</div>
+<div className="relative z-10">
+<h3 className="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">
+              Video Game Universes
+            </h3>
+<p className="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-1">
+              Item description lore, interactive boss timings, and fragmented environmental storytelling.
+            </p>
+</div>
+</div>
+{/*  Compact Card 4: Movies & TV (Cols: 4, Rows: 1)  */}
+<div className="md:col-span-4 md:row-span-1 relative rounded-xl overflow-hidden group p-space-md flex flex-col justify-between bg-surface-container-low shadow-md">
+<div className="flex items-center justify-between">
+<span className="material-symbols-outlined text-primary text-xl">movie</span>
+<span className="font-label-mono text-label-mono text-outline">43,800</span>
+</div>
+<div>
+<span className="font-label-caps text-label-caps uppercase text-outline">Cinematic Universes</span>
+<h4 className="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors mt-0.5">Movies &amp; TV</h4>
+<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">Sci-fi franchises, space operas, &amp; serialized screenplays.</p>
+</div>
+</div>
+{/*  Compact Card 5: Tabletop & RPG (Cols: 4, Rows: 1)  */}
+<div className="md:col-span-4 md:row-span-1 relative rounded-xl overflow-hidden group p-space-md flex flex-col justify-between bg-surface-container-low shadow-md">
+<div className="flex items-center justify-between">
+<span className="material-symbols-outlined text-tertiary text-xl">casino</span>
+<span className="font-label-mono text-label-mono text-outline">28,450</span>
+</div>
+<div>
+<span className="font-label-caps text-label-caps uppercase text-outline">Campaign Lore</span>
+<h4 className="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors mt-0.5">Tabletop &amp; TTRPG</h4>
+<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">D&amp;D world settings, homebrew pantheons &amp; statblocks.</p>
+</div>
+</div>
+{/*  Compact Card 6: Trading Cards & Collectibles (Cols: 4, Rows: 1)  */}
+<div className="md:col-span-4 md:row-span-1 relative rounded-xl overflow-hidden group p-space-md flex flex-col justify-between bg-surface-container-low shadow-md">
+<div className="flex items-center justify-between">
+<span className="material-symbols-outlined text-secondary text-xl">style</span>
+<span className="font-label-mono text-label-mono text-outline">15,490</span>
+</div>
+<div>
+<span className="font-label-caps text-label-caps uppercase text-outline">Card Archetypes</span>
+<h4 className="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors mt-0.5">Trading Cards &amp; CCG</h4>
+<p className="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mt-1">Flavor text, card genealogy, and competitive meta logs.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
   );
 }

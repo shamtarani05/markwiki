@@ -17,4 +17,4 @@ export { default as Media, type IMedia, type MediaType } from './Media';
 export { default as Submission, type ISubmission, type SubmissionType, type SubmissionStatus } from './Submission';
 export { default as ReadingProgress, type IReadingProgress, type ReadableType } from './ReadingProgress';
 export { default as Reaction, type IReaction, type ReactableType, type ReactionType } from './Reaction';
-export { default as SiteConfig, type ISiteConfig, type INavItem, type IHomepageSection } from './SiteConfig';
+export { default as SiteConfig, type ISiteConfig, type INavItem } from './SiteConfig';
