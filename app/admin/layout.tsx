@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" data-theme="dark" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
-      <body className="bg-background text-foreground">
+      <body className="bg-surface-container-lowest text-on-surface">
         <ThemeProvider>
           {/* h-screen + overflow-hidden on the shell, independent overflow-y-auto
               on the sidebar and <main> — the page itself never scrolls, so the

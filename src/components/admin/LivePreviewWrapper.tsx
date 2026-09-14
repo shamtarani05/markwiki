@@ -1,19 +1,31 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import type { HomepageSection } from '@/src/lib/db/homepageSections';
-import HomepageSectionRenderer from '@/src/components/home/HomepageSectionRenderer';
+import type { Block } from '@/src/lib/blocks/types';
+import { BlockListRenderer } from '@/src/components/blocks/BlockRenderer';
+import {
+  HeroSection,
+  ContinueReadingSection,
+  CategorySection,
+  FeaturedWikisSection,
+  TrendingPagesSection,
+  CommunitySection,
+  RecentActivitySection,
+  PublishCTASection,
+  NewsletterSection,
+  AdBanner,
+} from '@/src/components/home';
 
 interface LivePreviewWrapperProps {
-  initialSections: HomepageSection[];
+  initialBlocks: Block[];
   initialTheme?: {
     accentColor?: string;
   };
   mockData: any;
 }
 
-export default function LivePreviewWrapper({ initialSections, initialTheme, mockData }: LivePreviewWrapperProps) {
-  const [sections, setSections] = useState<HomepageSection[]>(initialSections);
+export default function LivePreviewWrapper({ initialBlocks, initialTheme, mockData }: LivePreviewWrapperProps) {
+  const [blocks, setBlocks] = useState<Block[]>(initialBlocks);
   const [theme, setTheme] = useState(initialTheme || {});
   const [isPreview, setIsPreview] = useState(false);
 
@@ -22,8 +34,8 @@ export default function LivePreviewWrapper({ initialSections, initialTheme, mock
       // In production, you might want to verify event.origin
       if (event.data?.type === 'LIVE_PREVIEW_UPDATE') {
         setIsPreview(true);
-        if (event.data.data.sections) {
-          setSections(event.data.data.sections);
+        if (event.data.data.blocks) {
+          setBlocks(event.data.data.blocks);
         }
         if (event.data.data.theme) {
           setTheme(event.data.data.theme);
@@ -70,10 +82,52 @@ export default function LivePreviewWrapper({ initialSections, initialTheme, mock
           `
         }} />
       )}
-      
-      {sections.filter(s => s.isActive).map(section => (
-        <HomepageSectionRenderer key={section.id} section={section as any} data={mockData} />
-      ))}
+      <BlockListRenderer
+        blocks={blocks}
+        renderOverride={(block) => {
+          // Render specific homepage blocks using the mockData (like HomepageSectionRenderer did)
+          switch (block.type) {
+            case 'hero':
+              return <HeroSection settings={block.props as any} />;
+            case 'continueReading':
+              return <ContinueReadingSection items={mockData.readingItems} settings={block.props as any} />;
+            case 'categories':
+              return <CategorySection categories={mockData.categories} sectionSettings={block.props as any} />;
+            case 'featuredWikis':
+              return <FeaturedWikisSection wikis={mockData.featuredWikis} sectionSettings={block.props as any} />;
+            case 'trendingPages':
+              return <TrendingPagesSection pages={mockData.trendingPages} settings={block.props as any} />;
+            case 'community':
+              return <CommunitySection updates={mockData.communityUpdates} />;
+            case 'recentActivity':
+              return (
+                <RecentActivitySection
+                  settings={block.props as any}
+                  activity={mockData.recentActivity}
+                  contributors={mockData.contributors}
+                />
+              );
+            case 'publishCTA':
+              return <PublishCTASection settings={block.props as any} />;
+            case 'newsletter':
+              return <NewsletterSection />;
+            case 'featuredBooks':
+            case 'latestStories':
+            case 'blogPosts':
+              return (
+                <div className="container py-8 text-center border-2 border-dashed border-outline-variant/30 rounded-lg my-8">
+                  <p className="text-on-surface-variant">
+                    [{block.type}] — Component not implemented yet
+                  </p>
+                </div>
+              );
+            case 'adSlot':
+              return <AdBanner zone={(block.props as any).zone || 'homepage'} className="my-8" />;
+            default:
+              return undefined; // Let BlockRenderer handle it
+          }
+        }}
+      />
     </>
   );
 }

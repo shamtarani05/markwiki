@@ -44,7 +44,7 @@ export default function CommunitySection({ updates }: { updates: Update[] }) {
         </div>
 
         {updates.length === 0 ? (
-          <p className="text-foreground-muted text-center py-8">No community updates yet — check back soon.</p>
+          <p className="text-on-surface-variant text-center py-8">No community updates yet — check back soon.</p>
         ) : (
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Featured Post */}
@@ -63,21 +63,21 @@ export default function CommunitySection({ updates }: { updates: Update[] }) {
                     {typeColors[featuredPost.type].label}
                   </span>
                   {featuredPost.wiki && (
-                    <span className="px-3 py-1 bg-accent/10 text-accent rounded-full text-xs font-medium">
+                    <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
                       {featuredPost.wiki}
                     </span>
                   )}
-                  <span className="text-foreground-muted text-sm">{featuredPost.readTime} min read</span>
+                  <span className="text-on-surface-variant text-sm">{featuredPost.readTime} min read</span>
                 </div>
-                <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-accent transition-colors">
+                <h3 className="text-2xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">
                   {featuredPost.title}
                 </h3>
-                <p className="text-foreground-muted mb-4">{featuredPost.excerpt}</p>
+                <p className="text-on-surface-variant mb-4">{featuredPost.excerpt}</p>
                 <div className="flex items-center justify-between">
-                  <p className="text-sm text-foreground-muted">
-                    by <span className="text-foreground">{featuredPost.author}</span>
+                  <p className="text-sm text-on-surface-variant">
+                    by <span className="text-on-surface">{featuredPost.author}</span>
                   </p>
-                  <p className="text-sm text-foreground-muted">
+                  <p className="text-sm text-on-surface-variant">
                     {new Date(featuredPost.date).toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
@@ -106,16 +106,16 @@ export default function CommunitySection({ updates }: { updates: Update[] }) {
                       {typeColors[post.type].label}
                     </span>
                     {post.wiki && (
-                      <span className="px-2 py-0.5 bg-accent/10 text-accent rounded text-xs font-medium">
+                      <span className="px-2 py-0.5 bg-primary/10 text-primary rounded text-xs font-medium">
                         {post.wiki}
                       </span>
                     )}
-                    <span className="text-foreground-muted text-xs">{post.readTime} min</span>
+                    <span className="text-on-surface-variant text-xs">{post.readTime} min</span>
                   </div>
-                  <h3 className="font-semibold text-foreground mb-1 group-hover:text-accent transition-colors line-clamp-2">
+                  <h3 className="font-semibold text-on-surface mb-1 group-hover:text-primary transition-colors line-clamp-2">
                     {post.title}
                   </h3>
-                  <p className="text-sm text-foreground-muted line-clamp-2">{post.excerpt}</p>
+                  <p className="text-sm text-on-surface-variant line-clamp-2">{post.excerpt}</p>
                 </div>
               </Link>
             ))}

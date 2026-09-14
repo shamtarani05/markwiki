@@ -12,6 +12,7 @@ export interface IReadingProgress extends Document {
   scrollPosition?: number;
   percentComplete: number;
   isCompleted: boolean;
+  inLibrary: boolean;
   startedAt: Date;
   lastReadAt: Date;
   createdAt: Date;
@@ -55,6 +56,10 @@ const ReadingProgressSchema = new Schema<IReadingProgress>(
       default: 0,
     },
     isCompleted: {
+      type: Boolean,
+      default: false,
+    },
+    inLibrary: {
       type: Boolean,
       default: false,
     },

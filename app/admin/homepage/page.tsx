@@ -17,24 +17,39 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical, Eye, EyeOff, Trash2, Plus, ArrowLeft, CheckCircle2, ChevronRight, LayoutTemplate, Paintbrush, Monitor, Smartphone } from 'lucide-react';
-import type { HomepageSection, HomepageSectionType } from '@/src/lib/db/homepageSections';
-import { HOMEPAGE_SECTION_TYPES, SECTION_META, createSectionId } from '@/src/lib/db/homepageSections';
+import type { Block, BlockType } from '@/src/lib/blocks/types';
+import { BLOCK_LABELS, BLOCK_DESCRIPTIONS, createBlock } from '@/src/lib/blocks/types';
 import Link from 'next/link';
+
+// Restricting allowed block types for homepage
+export const HOMEPAGE_SECTION_TYPES: BlockType[] = [
+  'hero',
+  'continueReading',
+  'adSlot',
+  'categories',
+  'featuredWikis',
+  'trendingPages',
+  'community',
+  'recentActivity',
+  'publishCTA',
+  'newsletter',
+  'featuredBooks',
+  'latestStories',
+  'blogPosts',
+];
 
 // === Sortable Section Item (Left Sidebar) ===
 function SortableSectionItem({
-  section,
+  block,
   onClick,
   onRemove,
-  onChange
 }: {
-  section: HomepageSection;
+  block: Block;
   onClick: () => void;
   onRemove: () => void;
-  onChange: (updates: Partial<HomepageSection>) => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: section.id,
+    id: block.id,
   });
 
   const style = {
@@ -43,7 +58,7 @@ function SortableSectionItem({
     zIndex: isDragging ? 50 : 1,
   };
 
-  const meta = SECTION_META[section.type] || { label: section.type, icon: '❓', description: '' };
+  const label = BLOCK_LABELS[block.type] || block.type;
 
   return (
     <div
@@ -51,7 +66,7 @@ function SortableSectionItem({
       style={style}
       className={`group relative flex items-center p-3 mb-2 rounded-xl border bg-surface-container-lowest cursor-pointer transition-all ${
         isDragging ? 'border-primary shadow-xl scale-[1.02]' : 'border-surface-variant hover:border-primary/50 hover:shadow-md'
-      } ${!section.isActive ? 'opacity-50' : ''}`}
+      }`}
       onClick={onClick}
     >
       <button
@@ -64,21 +79,14 @@ function SortableSectionItem({
       </button>
 
       <div className="w-8 h-8 rounded-lg bg-surface-variant flex items-center justify-center text-lg mr-3 shrink-0">
-        {meta.icon}
+        <LayoutTemplate size={16} />
       </div>
       
       <div className="flex-1 min-w-0">
-        <h4 className="font-headline-sm text-sm text-on-surface truncate">{section.title || meta.label}</h4>
+        <h4 className="font-headline-sm text-sm text-on-surface truncate">{label}</h4>
       </div>
 
       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity ml-2">
-        <button
-          onClick={(e) => { e.stopPropagation(); onChange({ isActive: !section.isActive }); }}
-          className="p-1.5 rounded hover:bg-surface-variant text-on-surface-variant"
-          title={section.isActive ? 'Hide' : 'Show'}
-        >
-          {section.isActive ? <Eye size={16} /> : <EyeOff size={16} />}
-        </button>
         <button
           onClick={(e) => { e.stopPropagation(); onRemove(); }}
           className="p-1.5 rounded hover:bg-error/10 text-error"
@@ -95,43 +103,20 @@ function SortableSectionItem({
 
 // === Specific Section Settings Form ===
 function SectionSettingsForm({
-  section,
+  block,
   onChange,
 }: {
-  section: HomepageSection;
-  onChange: (updates: Partial<HomepageSection>) => void;
+  block: Block;
+  onChange: (props: any) => void;
 }) {
-  const { settings } = section;
-  const updateSettings = (newSettings: any) => onChange({ settings: { ...settings, ...newSettings } });
-  
-  const showSubtitle = !['hero', 'adBanner'].includes(section.type);
+  const settings = block.props as any;
+  const updateSettings = (newSettings: any) => onChange({ ...settings, ...newSettings });
 
   return (
     <div className="space-y-6 p-4">
-      <div>
-        <label className="block font-label-mono text-xs text-on-surface-variant mb-2">SECTION TITLE</label>
-        <input
-          type="text"
-          value={section.title}
-          onChange={(e) => onChange({ title: e.target.value })}
-          className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-on-surface focus:outline-none focus:border-primary"
-        />
-      </div>
-
-      {showSubtitle && (
-        <div>
-          <label className="block font-label-mono text-xs text-on-surface-variant mb-2">SUBTITLE TEXT</label>
-          <input
-            type="text"
-            value={section.subtitle}
-            onChange={(e) => onChange({ subtitle: e.target.value })}
-            className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-on-surface focus:outline-none focus:border-primary"
-          />
-        </div>
-      )}
 
       {/* Hero Settings */}
-      {section.type === 'hero' && (
+      {block.type === 'hero' && (
         <>
           <div>
             <label className="block font-label-mono text-xs text-on-surface-variant mb-2">HERO TITLE HTML</label>
@@ -153,12 +138,12 @@ function SectionSettingsForm({
       )}
 
       {/* Ad Zone Settings */}
-      {section.type === 'adBanner' && (
+      {block.type === 'adSlot' && (
         <div>
           <label className="block font-label-mono text-xs text-on-surface-variant mb-2">AD ZONE</label>
           <select
-            value={settings.adZone || 'homepage-feed'}
-            onChange={(e) => updateSettings({ adZone: e.target.value })}
+            value={settings.zone || 'homepage-feed'}
+            onChange={(e) => updateSettings({ zone: e.target.value })}
             className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-on-surface focus:outline-none focus:border-primary"
           >
             <option value="homepage-hero">Hero Header (Top)</option>
@@ -168,7 +153,7 @@ function SectionSettingsForm({
       )}
 
       {/* Item Count */}
-      {['featuredWikis', 'trending', 'recentActivity'].includes(section.type) && (
+      {['featuredWikis', 'trendingPages', 'recentActivity', 'continueReading'].includes(block.type) && (
         <div>
           <label className="block font-label-mono text-xs text-on-surface-variant mb-2">DISPLAY COUNT</label>
           <input
@@ -182,7 +167,7 @@ function SectionSettingsForm({
       )}
 
       {/* Background Style */}
-      {['categories', 'trending', 'community', 'newsletter'].includes(section.type) && (
+      {['categories', 'trendingPages', 'community', 'newsletter'].includes(block.type) && (
         <div>
           <label className="block font-label-mono text-xs text-on-surface-variant mb-2">BACKGROUND STYLE</label>
           <select
@@ -197,7 +182,7 @@ function SectionSettingsForm({
       )}
       
       {/* Publish CTA Buttons */}
-      {section.type === 'publishCTA' && (
+      {block.type === 'publishCTA' && (
         <>
           <div>
             <label className="block font-label-mono text-xs text-on-surface-variant mb-2">PRIMARY BUTTON TEXT</label>
@@ -224,7 +209,7 @@ function SectionSettingsForm({
 }
 
 export default function AdminHomepageBuilder() {
-  const [sections, setSections] = useState<HomepageSection[]>([]);
+  const [blocks, setBlocks] = useState<Block[]>([]);
   const [theme, setTheme] = useState({ accentColor: '#D4AF37' });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -246,7 +231,7 @@ export default function AdminHomepageBuilder() {
     fetch('/api/admin/homepage')
       .then((res) => res.json())
       .then((data) => {
-        if (data.sections?.length > 0) setSections(data.sections);
+        if (data.blocks?.length > 0) setBlocks(data.blocks);
         if (data.theme) setTheme(data.theme); // Make sure backend returns theme if possible
         setLoading(false);
       });
@@ -266,49 +251,40 @@ export default function AdminHomepageBuilder() {
     if (iframeRef.current?.contentWindow) {
       iframeRef.current.contentWindow.postMessage({
         type: 'LIVE_PREVIEW_UPDATE',
-        data: { sections, theme }
+        data: { blocks, theme }
       }, '*');
     }
-  }, [sections, theme]);
+  }, [blocks, theme]);
 
   useEffect(() => {
     if (!loading) syncPreview();
-  }, [sections, theme, loading, syncPreview]);
+  }, [blocks, theme, loading, syncPreview]);
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (over && active.id !== over.id) {
-      setSections((items) => {
+      setBlocks((items) => {
         const oldIndex = items.findIndex((i) => i.id === active.id);
         const newIndex = items.findIndex((i) => i.id === over.id);
-        const newItems = arrayMove(items, oldIndex, newIndex);
-        return newItems.map((item, index) => ({ ...item, order: index }));
+        return arrayMove(items, oldIndex, newIndex);
       });
     }
   };
 
-  const updateSection = (id: string, updates: Partial<HomepageSection>) => {
-    setSections((prev) => prev.map((s) => (s.id === id ? { ...s, ...updates } : s)));
+  const updateBlock = (id: string, props: any) => {
+    setBlocks((prev) => prev.map((s) => (s.id === id ? { ...s, props } as Block : s)));
   };
 
-  const removeSection = (id: string) => {
-    setSections((prev) => prev.filter((s) => s.id !== id));
+  const removeBlock = (id: string) => {
+    setBlocks((prev) => prev.filter((s) => s.id !== id));
     if (editingSectionId === id) setEditingSectionId(null);
   };
 
-  const addSection = (type: HomepageSectionType) => {
-    const newSection: HomepageSection = {
-      id: createSectionId(),
-      type,
-      title: SECTION_META[type].label,
-      subtitle: '',
-      order: sections.length,
-      isActive: true,
-      settings: {},
-    };
-    setSections((prev) => [...prev, newSection]);
+  const addBlock = (type: BlockType) => {
+    const newBlock: Block = createBlock(type, {} as any);
+    setBlocks((prev) => [...prev, newBlock]);
     setShowAddMenu(false);
-    setEditingSectionId(newSection.id);
+    setEditingSectionId(newBlock.id);
   };
 
   const saveConfig = async () => {
@@ -318,7 +294,7 @@ export default function AdminHomepageBuilder() {
       await fetch('/api/admin/homepage', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sections, theme }),
+        body: JSON.stringify({ blocks, theme }),
       });
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
@@ -335,7 +311,7 @@ export default function AdminHomepageBuilder() {
       const res = await fetch('/api/admin/homepage', { method: 'DELETE' });
       if (res.ok) {
         const data = await res.json();
-        setSections(data.sections || []);
+        setBlocks(data.blocks || []);
       }
     } catch (e) {
       console.error(e);
@@ -350,7 +326,7 @@ export default function AdminHomepageBuilder() {
     );
   }
 
-  const editingSection = sections.find(s => s.id === editingSectionId);
+  const editingBlock = blocks.find(s => s.id === editingSectionId);
 
   return (
     <div className="h-screen w-full flex flex-col bg-surface-container overflow-hidden">
@@ -408,7 +384,7 @@ export default function AdminHomepageBuilder() {
         <aside className="w-[320px] shrink-0 bg-surface-container-lowest border-r border-surface-variant flex flex-col overflow-hidden shadow-xl z-10 relative">
           
           {/* Main Tabs - hide if editing a specific section or adding */}
-          {!editingSection && !showAddMenu && (
+          {!editingBlock && !showAddMenu && (
             <div className="flex items-center border-b border-surface-variant bg-surface-container/30">
               <button 
                 onClick={() => setActiveTab('sections')}
@@ -428,7 +404,7 @@ export default function AdminHomepageBuilder() {
           <div className="flex-1 overflow-y-auto overflow-x-hidden relative">
             
             {/* View: Theme Settings */}
-            {activeTab === 'theme' && !editingSection && !showAddMenu && (
+            {activeTab === 'theme' && !editingBlock && !showAddMenu && (
               <div className="p-4 animate-in fade-in slide-in-from-right-4">
                 <h3 className="font-headline-sm mb-4 text-on-surface">Theme Settings</h3>
                 <div className="space-y-6">
@@ -456,18 +432,17 @@ export default function AdminHomepageBuilder() {
             )}
 
             {/* View: Sections List */}
-            {activeTab === 'sections' && !editingSection && !showAddMenu && (
+            {activeTab === 'sections' && !editingBlock && !showAddMenu && (
               <div className="p-4 animate-in fade-in slide-in-from-left-4">
                 <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                  <SortableContext items={sections.map(s => s.id)} strategy={verticalListSortingStrategy}>
+                  <SortableContext items={blocks.map(s => s.id)} strategy={verticalListSortingStrategy}>
                     <div className="min-h-[200px]">
-                      {sections.map(section => (
+                      {blocks.map(block => (
                         <SortableSectionItem
-                          key={section.id}
-                          section={section}
-                          onClick={() => setEditingSectionId(section.id)}
-                          onChange={(updates) => updateSection(section.id, updates)}
-                          onRemove={() => removeSection(section.id)}
+                          key={block.id}
+                          block={block}
+                          onClick={() => setEditingSectionId(block.id)}
+                          onRemove={() => removeBlock(block.id)}
                         />
                       ))}
                     </div>
@@ -494,19 +469,18 @@ export default function AdminHomepageBuilder() {
                 </div>
                 <div className="p-4 space-y-2 overflow-y-auto">
                   {HOMEPAGE_SECTION_TYPES.map(type => {
-                    const meta = SECTION_META[type];
                     return (
                       <button
                         key={type}
-                        onClick={() => addSection(type)}
+                        onClick={() => addBlock(type)}
                         className="w-full text-left p-3 rounded-xl hover:bg-surface-container transition-colors flex items-center gap-3 border border-transparent hover:border-surface-variant group"
                       >
                         <div className="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
-                          {meta.icon}
+                          <LayoutTemplate size={16} />
                         </div>
                         <div>
-                          <div className="text-sm font-medium text-on-surface">{meta.label}</div>
-                          <div className="text-[11px] text-on-surface-variant line-clamp-1">{meta.description}</div>
+                          <div className="text-sm font-medium text-on-surface">{BLOCK_LABELS[type]}</div>
+                          <div className="text-[11px] text-on-surface-variant line-clamp-1">{BLOCK_DESCRIPTIONS[type]}</div>
                         </div>
                       </button>
                     );
@@ -516,22 +490,22 @@ export default function AdminHomepageBuilder() {
             )}
 
             {/* View: Section Specific Settings */}
-            {editingSection && (
+            {editingBlock && (
               <div className="absolute inset-0 bg-surface-container-lowest z-10 flex flex-col animate-in slide-in-from-right-8">
                 <div className="flex items-center p-4 border-b border-surface-variant bg-surface-container/30 sticky top-0">
                   <button onClick={() => setEditingSectionId(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-variant mr-3">
                     <ArrowLeft size={18} />
                   </button>
-                  <h3 className="font-headline-sm text-on-surface truncate pr-4">{editingSection.title || SECTION_META[editingSection.type].label}</h3>
+                  <h3 className="font-headline-sm text-on-surface truncate pr-4">{BLOCK_LABELS[editingBlock.type]}</h3>
                 </div>
                 <div className="flex-1 overflow-y-auto">
                   <SectionSettingsForm
-                    section={editingSection}
-                    onChange={(updates) => updateSection(editingSection.id, updates)}
+                    block={editingBlock}
+                    onChange={(props) => updateBlock(editingBlock.id, props)}
                   />
                   <div className="p-4 border-t border-surface-variant mt-8">
                     <button
-                      onClick={() => removeSection(editingSection.id)}
+                      onClick={() => removeBlock(editingBlock.id)}
                       className="w-full py-2.5 rounded-lg border border-error/30 text-error hover:bg-error/10 text-sm font-medium transition-colors"
                     >
                       Delete Section
@@ -560,7 +534,7 @@ export default function AdminHomepageBuilder() {
             <iframe
               ref={iframeRef}
               src="/"
-              className="w-full h-full border-0 bg-background"
+              className="w-full h-full border-0 bg-surface-container-lowest"
               title="Live Preview"
             />
           </div>

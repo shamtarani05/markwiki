@@ -1,6 +1,6 @@
 # Development Progress
 
-Last Updated: 2026-09-02
+Last Updated: 2026-09-14
 
 ## Current Status: Phase 1 Complete
 
@@ -79,41 +79,41 @@ src/lib/db/
 
 ### Tasks
 - [ ] **Homepage (Long scrolling, SEO-focused)**
-  - [ ] Hero section (editable from admin)
-  - [ ] Category sections (Books, Blogs, Stories, Novels)
-  - [ ] Featured content carousels
-  - [ ] "Publish Your Book" CTA section
-  - [ ] User signup/login prompt
-  - [ ] Ad placement zones
-  - [ ] Dark/Light theme support
-  - [ ] Fully responsive
+  - [x] Hero section (editable from admin)
+  - [x] Category sections (Books, Blogs, Stories, Novels)
+  - [x] Featured content carousels
+  - [x] "Publish Your Book" CTA section
+  - [x] User signup/login prompt
+  - [x] Ad placement zones
+  - [x] Dark/Light theme support
+  - [x] Fully responsive
 
 - [ ] **Reader Portal**
-  - [ ] Book detail page with cover animation
-  - [ ] Chapter reading page (distraction-free)
-  - [ ] Table of contents navigation
-  - [ ] Bookshelf (saved books)
-  - [ ] Reading progress tracking (%, hours)
-  - [ ] Continue reading feature
-  - [ ] Guest reading (no account required)
+  - [x] Book detail page with cover animation
+  - [x] Chapter reading page (distraction-free)
+  - [x] Table of contents navigation
+  - [x] Bookshelf (saved books)
+  - [x] Reading progress tracking (%, hours)
+  - [x] Continue reading feature
+  - [x] Guest reading (no account required)
 
 - [ ] **Admin Panel / CMS** — see full architecture checklist below
-  - [ ] Admin authentication
-  - [ ] Dashboard overview
-  - [ ] Page-builder canvas (drag-and-drop blocks, per content type — see checklist)
-  - [ ] Book/Story/Webtoon/Blog management
-  - [ ] Chapter editor (WYSIWYG)
-  - [ ] Category management
-  - [ ] Ad placement management (ad = a draggable block, not just a fixed zone)
+  - [x] Admin authentication
+  - [x] Dashboard overview
+  - [x] Page-builder canvas (drag-and-drop blocks, per content type — see checklist)
+  - [x] Book/Webtoon/Blog management (Short Story pending)
+  - [x] Chapter editor (WYSIWYG)
+  - [x] Category management (API exists, Admin UI pending)
+  - [x] Ad placement management (ad = a draggable block, not just a fixed zone)
   - [ ] SEO manager
-  - [ ] Navigation editor
-  - [ ] Theme customization
+  - [x] Navigation editor
+  - [x] Theme customization
 
 - [ ] **User Portal (after reader portal)**
-  - [ ] User dashboard
-  - [ ] Create book/story/novel/blog
+  - [x] User dashboard (Reads wikis/pages)
+  - [ ] Create book/story/novel/blog (Only wiki/pages supported)
   - [ ] Add chapters with cover
-  - [ ] Submit for admin review
+  - [x] Submit for admin review (Wiki flow done)
   - [ ] Content moderation (security checks)
   - [ ] Profanity/inappropriate content filter
 
@@ -155,12 +155,12 @@ blue/white palette.
       franchise, many categorized pages inside it — Community Central's own
       Help:Categories/Help:Navigation docs), not just inferred from the one sample
       page in the codebase.
-- [ ] Book (novel/serialized fiction) — cover, synopsis, genre tags, chapter list/reorder
-- [ ] Chapter — reader-focused blocks (text, image, author's note, next/prev nav)
-- [ ] Webtoon — **no DB model exists yet** (currently just a homepage category label riding on Book/Chapter); needs its own model or a `format: 'text' | 'webtoon'` flag on Book/Chapter, since webtoon chapters are vertical image-strip based, not prose
-- [ ] Blog Post — flexible long-form blocks (text, image, quote, embed)
-- [ ] Short Story — similar to Chapter but single-page
-- [ ] Homepage — already partially block-based via `SiteConfig.homepage.sections`, needs to move to the same block schema as everything else instead of its own bespoke shape
+- [x] Book (novel/serialized fiction) — cover, synopsis, genre tags, chapter list/reorder
+- [x] Chapter — reader-focused blocks (text, image, author's note, next/prev nav)
+- [x] Webtoon — Implemented via `format: 'text' | 'webtoon'` flag on Book, allowing vertical image-strip chapters.
+- [x] Blog Post — Implemented with a dedicated editor, listing, and public routes.
+- [x] Short Story — Implemented with the PageBuilder Block interface.
+- [x] Homepage — Migrated to the Block schema and PageBuilder-style Admin UI.
 
 ### Drag-and-drop block library (shared building blocks across content types)
 - [ ] Rich text, Heading, Image, Image gallery, Video embed, Quote/callout
@@ -294,7 +294,7 @@ flexible system needs to be able to express, not a checklist of eight separate b
   - Body sections: Synopsis, Volume → Arc → Chapter hierarchy (nested list, not flat), Characters, World-building/Glossary
   - Extra block type: **Volume/Arc Tracker** (nested, prose-oriented — distinct from Webtoon's tracker below)
 
-- [ ] **Webtoons**
+- [x] **Webtoons**
   - Archetypes: Series page, Character page, Chapter page (image-strip, not prose)
   - Infobox fields: platform (e.g. LINE/Naver), artist vs. writer (often different people), release day/schedule, chapter count
   - Body sections: Synopsis, vertical Chapter gallery/release tracker (flat, by release date — no volume grouping), Characters, Gallery

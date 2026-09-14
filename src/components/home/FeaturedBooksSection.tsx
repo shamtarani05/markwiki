@@ -108,11 +108,11 @@ function BookCard({ book }: { book: Book }) {
 
         {/* Info */}
         <div className="p-4">
-          <p className="text-xs text-accent font-medium mb-1">{book.genre}</p>
-          <h3 className="font-semibold text-foreground mb-1 group-hover:text-accent transition-colors text-sm leading-tight line-clamp-1">
+          <p className="text-xs text-primary font-medium mb-1">{book.genre}</p>
+          <h3 className="font-semibold text-on-surface mb-1 group-hover:text-primary transition-colors text-sm leading-tight line-clamp-1">
             {book.title}
           </h3>
-          <p className="text-sm text-foreground-muted mb-3">{book.author}</p>
+          <p className="text-sm text-on-surface-variant mb-3">{book.author}</p>
 
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center gap-1 text-[var(--tag-yellow)]">
@@ -121,7 +121,7 @@ function BookCard({ book }: { book: Book }) {
               </svg>
               <span>{book.rating}</span>
             </div>
-            <span className="text-foreground-muted">{book.chapters} chapters</span>
+            <span className="text-on-surface-variant">{book.chapters} chapters</span>
           </div>
         </div>
       </div>
@@ -168,7 +168,7 @@ export default function FeaturedBooksSection() {
               <button
                 onClick={() => scrollToSlide(Math.max(0, currentSlide - 1))}
                 disabled={currentSlide === 0}
-                className="p-2 rounded-full border border-border hover:border-accent hover:text-accent disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="p-2 rounded-full border border-outline-variant/30 hover:border-accent hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -177,7 +177,7 @@ export default function FeaturedBooksSection() {
               <button
                 onClick={() => scrollToSlide(Math.min(totalSlides - 1, currentSlide + 1))}
                 disabled={currentSlide === totalSlides - 1}
-                className="p-2 rounded-full border border-border hover:border-accent hover:text-accent disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="p-2 rounded-full border border-outline-variant/30 hover:border-accent hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -220,7 +220,7 @@ export default function FeaturedBooksSection() {
               onClick={() => scrollToSlide(index)}
               className={`w-2 h-2 rounded-full transition-all ${
                 currentSlide === index
-                  ? 'bg-accent w-6'
+                  ? 'bg-primary w-6'
                   : 'bg-border hover:bg-foreground-muted'
               }`}
             />

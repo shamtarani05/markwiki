@@ -11,7 +11,7 @@ const PALETTE_ORDER: BlockType[] = [
 export default function BlockPalette({ onAdd }: { onAdd: (type: BlockType) => void }) {
   return (
     <div>
-      <p className="text-[11px] font-semibold text-foreground-muted/70 uppercase tracking-wider mb-2 px-1">
+      <p className="text-[11px] font-semibold text-on-surface-variant/70 uppercase tracking-wider mb-2 px-1">
         Add a block
       </p>
       <div>
@@ -21,7 +21,7 @@ export default function BlockPalette({ onAdd }: { onAdd: (type: BlockType) => vo
             type="button"
             onClick={() => onAdd(type)}
             title={BLOCK_DESCRIPTIONS[type]}
-            className="w-full text-left px-2 py-1.5 rounded-md text-sm text-foreground-muted hover:bg-background-tertiary hover:text-foreground transition-colors"
+            className="w-full text-left px-2 py-1.5 rounded-md text-sm text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors"
           >
             {BLOCK_LABELS[type]}
           </button>

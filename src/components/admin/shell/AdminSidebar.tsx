@@ -29,9 +29,9 @@ const NAV_GROUPS: { label: string; items: (NavItem | { label: string; icon: Luci
       { label: 'Wikis', href: '/admin/wikis', icon: BookOpen },
       { label: 'Pages', href: '/admin/pages', icon: FileText },
       { label: 'Site Pages', href: '/admin/pages/site', icon: FileText },
-      { label: 'Books', icon: Book },
-      { label: 'Blog Posts', icon: PenLine },
-      { label: 'Short Stories', icon: ScrollText },
+      { label: 'Books', href: '/admin/books', icon: Book },
+      { label: 'Blog Posts', href: '/admin/blog', icon: PenLine },
+      { label: 'Short Stories', href: '/admin/short-stories', icon: ScrollText },
     ],
   },
   {
@@ -39,8 +39,8 @@ const NAV_GROUPS: { label: string; items: (NavItem | { label: string; icon: Luci
     items: [
       { label: 'Homepage', href: '/admin/homepage', icon: LayoutTemplate },
       { label: 'Navigation', href: '/admin/navigation', icon: Compass },
-      { label: 'Categories', icon: Tag },
-      { label: 'Ad Placements', icon: Megaphone },
+      { label: 'Categories', href: '/admin/categories', icon: Tag },
+      { label: 'Ad Placements', href: '/admin/ads', icon: Megaphone },
       { label: 'Theme', icon: Palette },
     ],
   },
@@ -83,13 +83,13 @@ export default function AdminSidebar() {
         collapsed ? 'w-16' : 'w-60'
       }`}
     >
-      <div className={`flex items-center h-14 shrink-0 border-b border-border ${collapsed ? 'justify-center px-0' : 'justify-between pl-4 pr-2'}`}>
+      <div className={`flex items-center h-14 shrink-0 border-b border-outline-variant/30 ${collapsed ? 'justify-center px-0' : 'justify-between pl-4 pr-2'}`}>
         {!collapsed && (
           <Link href="/admin" className="flex items-center gap-2.5 min-w-0 no-underline">
-            <div className="w-7 h-7 rounded-md bg-accent flex items-center justify-center shrink-0">
-              <span className="text-accent-contrast font-bold text-xs">M</span>
+            <div className="w-7 h-7 rounded-md bg-primary flex items-center justify-center shrink-0">
+              <span className="text-primary-contrast font-bold text-xs">M</span>
             </div>
-            <span className="font-semibold text-foreground text-sm truncate">Admin</span>
+            <span className="font-semibold text-on-surface text-sm truncate">Admin</span>
           </Link>
         )}
         <button
@@ -97,7 +97,7 @@ export default function AdminSidebar() {
           onClick={toggle}
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          className="w-8 h-8 flex items-center justify-center rounded-md text-foreground-muted hover:text-foreground hover:bg-background-tertiary transition-colors shrink-0"
+          className="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors shrink-0"
         >
           {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
         </button>
@@ -110,10 +110,10 @@ export default function AdminSidebar() {
             // A hairline between groups instead of whitespace alone: the
             // grouping is real information (what kind of thing this manages),
             // so it gets a structural device rather than a gap.
-            className={groupIndex > 0 ? 'mt-3 pt-3 border-t border-border' : ''}
+            className={groupIndex > 0 ? 'mt-3 pt-3 border-t border-outline-variant/30' : ''}
           >
             {!collapsed && (
-              <p className="px-4 text-[11px] font-medium text-foreground-muted mb-1.5">
+              <p className="px-4 text-[11px] font-medium text-on-surface-variant mb-1.5">
                 {group.label}
               </p>
             )}
@@ -126,7 +126,7 @@ export default function AdminSidebar() {
                     <div
                       key={item.label}
                       title={collapsed ? `${item.label} — not available yet` : undefined}
-                      className={`flex items-center gap-2.5 pl-2.5 pr-2 py-1.5 rounded-md text-[13px] text-foreground-muted/45 cursor-not-allowed ${
+                      className={`flex items-center gap-2.5 pl-2.5 pr-2 py-1.5 rounded-md text-[13px] text-on-surface-variant/45 cursor-not-allowed ${
                         collapsed ? 'justify-center' : 'justify-between'
                       }`}
                     >
@@ -149,14 +149,14 @@ export default function AdminSidebar() {
                       collapsed ? 'justify-center' : ''
                     } ${
                       active
-                        ? 'bg-accent-muted text-accent font-semibold'
-                        : 'text-foreground-muted hover:bg-background-tertiary hover:text-foreground'
+                        ? 'bg-primary-muted text-primary font-semibold'
+                        : 'text-on-surface-variant hover:bg-surface-variant hover:text-on-surface'
                     }`}
                   >
                     {/* Full-height rail, not a 2px stub — the active row reads
                         as attached to the edge of the rail it sits in. */}
                     {active && (
-                      <span className="absolute -left-2 top-0 bottom-0 w-[3px] rounded-r-full bg-accent" />
+                      <span className="absolute -left-2 top-0 bottom-0 w-[3px] rounded-r-full bg-primary" />
                     )}
                     <Icon size={16} className="shrink-0" />
                     {!collapsed && <span className="truncate">{item.label}</span>}

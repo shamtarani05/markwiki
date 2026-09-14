@@ -75,25 +75,25 @@ function StoryCard({ story }: { story: Story }) {
         {/* Content */}
         <div className="p-6 flex-1">
           <div className="flex items-start justify-between mb-4">
-            <span className="px-3 py-1 bg-accent/10 text-accent rounded-full text-xs font-medium">
+            <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium">
               {story.genre}
             </span>
-            <span className="text-foreground-muted text-sm">{story.readTime} min read</span>
+            <span className="text-on-surface-variant text-sm">{story.readTime} min read</span>
           </div>
 
-          <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
+          <h3 className="text-xl font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">
             {story.title}
           </h3>
 
-          <p className="text-foreground-muted mb-4 line-clamp-2">
+          <p className="text-on-surface-variant mb-4 line-clamp-2">
             {story.excerpt}
           </p>
 
           <div className="flex items-center justify-between">
-            <p className="text-sm text-foreground-muted">
-              by <span className="text-foreground">{story.author}</span>
+            <p className="text-sm text-on-surface-variant">
+              by <span className="text-on-surface">{story.author}</span>
             </p>
-            <div className="flex items-center gap-1 text-foreground-muted">
+            <div className="flex items-center gap-1 text-on-surface-variant">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
               </svg>
@@ -108,7 +108,7 @@ function StoryCard({ story }: { story: Story }) {
 
 export default function LatestStoriesSection() {
   return (
-    <section className="py-16 md:py-24 bg-background-secondary">
+    <section className="py-16 md:py-24 bg-surface-container-low">
       <div className="container">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-10">

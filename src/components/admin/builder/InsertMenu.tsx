@@ -52,7 +52,7 @@ export default function InsertMenu({
       </button>
       {open && (
         <div className="absolute left-0 top-full mt-1 z-20 w-72 card p-1.5 shadow-xl max-h-[70vh] overflow-y-auto">
-          <p className="px-2 py-1 text-[11px] text-foreground-muted">Click to add, or drag onto the page</p>
+          <p className="px-2 py-1 text-[11px] text-on-surface-variant">Click to add, or drag onto the page</p>
           {PALETTE_ORDER.map((type) => {
             const disabled = SINGLETON_TYPES.has(type) && existingTypes.has(type);
             return (
@@ -93,8 +93,8 @@ function PaletteItem({ type, onPick, disabled }: { type: BlockType; onPick: () =
       style={{ touchAction: 'none' }}
       className={`w-full text-left px-2 py-1.5 rounded-md text-sm transition-colors select-none ${
         disabled
-          ? 'text-foreground-muted/40 cursor-not-allowed'
-          : `cursor-grab active:cursor-grabbing ${isDragging ? 'opacity-30' : 'text-foreground hover:bg-background-tertiary'}`
+          ? 'text-on-surface-variant/40 cursor-not-allowed'
+          : `cursor-grab active:cursor-grabbing ${isDragging ? 'opacity-30' : 'text-on-surface hover:bg-surface-variant'}`
       }`}
     >
       {BLOCK_LABELS[type]}

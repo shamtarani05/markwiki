@@ -24,10 +24,10 @@ export default function PublishCTASection({ settings }: { settings?: HomepageSec
               </p>
 </div>
 </div>
-<button className="w-full md:w-auto shrink-0 px-space-xl py-space-md rounded-xl bg-surface-bright hover:bg-primary hover:text-on-primary text-on-surface font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-xl flex items-center justify-center gap-space-xs active:scale-95">
+<Link href="/trending" className="w-full md:w-auto shrink-0 px-space-xl py-space-md rounded-xl bg-surface-bright hover:bg-primary hover:text-on-primary text-on-surface font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-xl flex items-center justify-center gap-space-xs active:scale-95">
 <span className="material-symbols-outlined text-xl">shuffle</span>
 <span>Roll Random Lore Page</span>
-</button>
+</Link>
 </div>
 </div>
 {/*  Massive Publish & Curate Call To Action  */}
@@ -46,11 +46,11 @@ export default function PublishCTASection({ settings }: { settings?: HomepageSec
             Build a page. Share serialized fan fiction. Annotate the canon. Keep your beloved universe alive for future generations of lore-masters.
           </p>
 <div className="flex flex-col sm:flex-row items-center gap-space-md mt-space-xl w-full sm:w-auto">
-<Link className="w-full sm:w-auto px-space-xl py-space-sm rounded-xl bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-[0_0_24px_rgba(160,120,255,0.4)] flex items-center justify-center gap-space-xs active:scale-95" href="#">
+<Link className="w-full sm:w-auto px-space-xl py-space-sm rounded-xl bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-[0_0_24px_rgba(160,120,255,0.4)] flex items-center justify-center gap-space-xs active:scale-95" href="/admin/wiki/new">
 <span className="material-symbols-outlined text-lg">post_add</span>
 <span>Create a Wiki</span>
 </Link>
-<Link className="w-full sm:w-auto px-space-xl py-space-sm rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-space-xs" href="#">
+<Link className="w-full sm:w-auto px-space-xl py-space-sm rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-space-xs" href="/admin/short-stories">
 <span className="material-symbols-outlined text-lg">history_edu</span>
 <span>Publish a Story</span>
 </Link>
@@ -61,12 +61,12 @@ export default function PublishCTASection({ settings }: { settings?: HomepageSec
 <span className="font-label-caps text-label-caps uppercase text-outline">The Lore Dispatch</span>
 <span className="font-label-mono text-label-mono text-secondary">Weekly Digest</span>
 </div>
-<div className="relative flex items-center bg-surface-container rounded-xl p-1 shadow-md">
-<input className="w-full bg-transparent px-space-md py-space-xs text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none" placeholder="Enter your email to stay in the loop..." type="email"/>
-<button className="px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider shrink-0 hover:bg-primary-container transition-all">
+<form action="#" className="relative flex items-center bg-surface-container rounded-xl p-1 shadow-md">
+<input name="email" className="w-full bg-transparent px-space-md py-space-xs text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none" placeholder="Enter your email to stay in the loop..." type="email"/>
+<button type="submit" className="px-space-md py-space-xs rounded-lg bg-primary text-on-primary font-label-caps text-label-caps uppercase tracking-wider shrink-0 hover:bg-primary-container transition-all">
                 Join
               </button>
-</div>
+</form>
 <span className="font-label-mono text-label-mono text-outline block text-center mt-2">Zero spam. Pure fictional analysis curated by Grand Archivists.</span>
 </div>
 </div>

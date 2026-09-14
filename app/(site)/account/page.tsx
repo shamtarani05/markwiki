@@ -10,8 +10,8 @@ interface Contributions {
 }
 
 const STATUS_STYLES: Record<string, string> = {
-  draft: 'bg-background-tertiary text-foreground-muted',
-  pending: 'bg-accent-muted text-accent',
+  draft: 'bg-surface-variant text-on-surface-variant',
+  pending: 'bg-primary-muted text-primary',
   approved: 'bg-[var(--tag-green-bg,theme(colors.emerald.500/0.15))] text-[var(--tag-green,theme(colors.emerald.600))]',
   published: 'bg-[var(--tag-green-bg,theme(colors.emerald.500/0.15))] text-[var(--tag-green,theme(colors.emerald.600))]',
   rejected: 'bg-[var(--tag-red-bg)] text-[var(--tag-red)]',
@@ -28,38 +28,38 @@ export default function AccountDashboard() {
 
   return (
     <div className="container py-10 space-y-12">
-      <h1 className="text-3xl font-bold text-foreground">Your Dashboard</h1>
+      <h1 className="text-3xl font-bold text-on-surface">Your Dashboard</h1>
 
       {reading.length === 0 ? (
         <section>
-          <h2 className="text-xl font-bold text-foreground mb-4">Continue Reading</h2>
-          <p className="text-foreground-muted">Pages you read will show up here.</p>
+          <h2 className="text-xl font-bold text-on-surface mb-4">Continue Reading</h2>
+          <p className="text-on-surface-variant">Pages you read will show up here.</p>
         </section>
       ) : (
         <ContinueReadingSection settings={{}} items={reading} />
       )}
 
       <section>
-        <h2 className="text-xl font-bold text-foreground mb-4">My Contributions</h2>
+        <h2 className="text-xl font-bold text-on-surface mb-4">My Contributions</h2>
         {!contributions || (contributions.wikis.length === 0 && contributions.pages.length === 0 && contributions.revisions.length === 0) ? (
-          <p className="text-foreground-muted">Wikis and pages you create or edit will show up here with their review status.</p>
+          <p className="text-on-surface-variant">Wikis and pages you create or edit will show up here with their review status.</p>
         ) : (
           <div className="space-y-2">
             {contributions.wikis.map((w) => (
               <div key={w._id} className="card p-3 flex items-center justify-between">
-                <span className="text-foreground">{w.name} <span className="text-foreground-muted text-xs">(wiki)</span></span>
+                <span className="text-on-surface">{w.name} <span className="text-on-surface-variant text-xs">(wiki)</span></span>
                 <span className={`text-xs px-2 py-0.5 rounded ${STATUS_STYLES[w.status]}`}>{w.status}</span>
               </div>
             ))}
             {contributions.pages.map((p) => (
               <div key={p._id} className="card p-3 flex items-center justify-between">
-                <span className="text-foreground">{p.title} <span className="text-foreground-muted text-xs">(page)</span></span>
+                <span className="text-on-surface">{p.title} <span className="text-on-surface-variant text-xs">(page)</span></span>
                 <span className={`text-xs px-2 py-0.5 rounded ${STATUS_STYLES[p.status]}`}>{p.status}</span>
               </div>
             ))}
             {contributions.revisions.map((r) => (
               <div key={r._id} className="card p-3 flex items-center justify-between">
-                <span className="text-foreground">{r.title} <span className="text-foreground-muted text-xs">(edit)</span></span>
+                <span className="text-on-surface">{r.title} <span className="text-on-surface-variant text-xs">(edit)</span></span>
                 <span className={`text-xs px-2 py-0.5 rounded ${STATUS_STYLES[r.status]}`}>{r.status}</span>
               </div>
             ))}

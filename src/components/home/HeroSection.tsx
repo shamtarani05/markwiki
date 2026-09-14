@@ -30,42 +30,40 @@ export default function HeroSection({ settings }: { settings?: HomepageSectionSe
         {settings?.heroSubtitle || "The next-generation fan knowledge and serialized fiction platform. Deep lore, verified timelines, and living stories curated by enthusiasts worldwide."}
       </p>
 {/*  Search Component Box  */}
-<div className="w-full max-w-3xl mt-space-xl relative group">
+<form action="/search" className="w-full max-w-3xl mt-space-xl relative group">
 <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 via-secondary-container/40 to-primary/20 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition duration-500"></div>
 <div className="relative flex items-center bg-surface-container-high/90 backdrop-blur-xl rounded-full px-space-lg py-space-sm shadow-xl transition-all">
 <span className="material-symbols-outlined text-primary text-2xl mr-space-sm select-none">travel_explore</span>
-<input className="w-full bg-transparent text-headline-sm font-headline-sm text-on-surface placeholder:text-outline focus:outline-none tracking-tight" placeholder="Search wikis, characters, artifacts, chronologies..." type="text"/>
+<input name="q" className="w-full bg-transparent text-headline-sm font-headline-sm text-on-surface placeholder:text-outline focus:outline-none tracking-tight" placeholder="Search wikis, characters, artifacts, chronologies..." type="text"/>
 <div className="flex items-center gap-space-xs ml-space-sm shrink-0">
 <kbd className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-highest text-label-mono font-label-mono text-on-surface-variant shadow-sm">
 <span className="text-xs">⌘</span>K
             </kbd>
-<button className="flex items-center justify-center w-10 h-10 rounded-full bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-all shadow-md active:scale-95">
+<button type="submit" className="flex items-center justify-center w-10 h-10 rounded-full bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary transition-all shadow-md active:scale-95">
 <span className="material-symbols-outlined text-xl">arrow_forward</span>
 </button>
 </div>
 </div>
-</div>
+</form>
 {/*  Search Chips  */}
 <div className="flex flex-wrap items-center justify-center gap-space-xs mt-space-md max-w-2xl">
-<span className="font-label-caps text-label-caps uppercase text-outline mr-space-xs tracking-wider">Indexed Now:</span>
-<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
-          Solo Leveling
-        </button>
-<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
-          Arcane / Runeterra
-        </button>
-<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
-          Elden Ring
-        </button>
-<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
-          Chainsaw Man
-        </button>
-<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
-          Cyberpunk 2077
-        </button>
-<button className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all">
-          Omniscient Reader
-        </button>
+            <span className="font-label-caps text-label-caps uppercase text-outline mr-space-xs tracking-wider">Indexed Now:</span>
+            {(settings?.searchTags || [
+              'Solo Leveling',
+              'Arcane',
+              'Elden Ring',
+              'Chainsaw Man',
+              'Cyberpunk 2077',
+              'Omniscient Reader'
+            ]).map((query: string) => (
+              <Link 
+                key={query}
+                href={`/search?q=${encodeURIComponent(query)}`} 
+                className="px-space-sm py-1 rounded-full bg-surface-container/70 hover:bg-surface-container-highest text-on-surface-variant hover:text-primary font-body-sm text-body-sm transition-all"
+              >
+                {query}
+              </Link>
+            ))}
 </div>
 </div>
 {/*  Live Archive Stats Ribbon  */}

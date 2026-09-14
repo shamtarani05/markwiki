@@ -32,7 +32,7 @@ export default async function SitePage({ params }: Props) {
 
   return (
     <div className="container py-12 max-w-3xl mx-auto">
-      <h1 className="text-4xl font-bold text-foreground mb-6">{page.title}</h1>
+      <h1 className="text-4xl font-bold text-on-surface mb-6">{page.title}</h1>
       <BlockListRenderer blocks={page.blocks as Block[]} />
     </div>
   );

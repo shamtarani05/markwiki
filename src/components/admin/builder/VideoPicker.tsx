@@ -41,13 +41,13 @@ export default function VideoPicker({
     <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50" onClick={onClose}>
       <div className="card w-full max-w-md p-4" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-semibold text-foreground">Insert video</h3>
-          <button type="button" onClick={onClose} aria-label="Close" className="text-foreground-muted hover:text-foreground">✕</button>
+          <h3 className="text-sm font-semibold text-on-surface">Insert video</h3>
+          <button type="button" onClick={onClose} aria-label="Close" className="text-on-surface-variant hover:text-on-surface">✕</button>
         </div>
 
-        <div className="flex rounded-md border border-border overflow-hidden mb-3 w-fit">
-          <button type="button" onClick={() => setTab('upload')} className={`px-3 py-1 text-xs ${tab === 'upload' ? 'bg-accent text-accent-contrast' : 'text-foreground-muted hover:bg-background-tertiary'}`}>Upload</button>
-          <button type="button" onClick={() => setTab('url')} className={`px-3 py-1 text-xs ${tab === 'url' ? 'bg-accent text-accent-contrast' : 'text-foreground-muted hover:bg-background-tertiary'}`}>URL</button>
+        <div className="flex rounded-md border border-outline-variant/30 overflow-hidden mb-3 w-fit">
+          <button type="button" onClick={() => setTab('upload')} className={`px-3 py-1 text-xs ${tab === 'upload' ? 'bg-primary text-primary-contrast' : 'text-on-surface-variant hover:bg-surface-variant'}`}>Upload</button>
+          <button type="button" onClick={() => setTab('url')} className={`px-3 py-1 text-xs ${tab === 'url' ? 'bg-primary text-primary-contrast' : 'text-on-surface-variant hover:bg-surface-variant'}`}>URL</button>
         </div>
 
         {error && <p className="text-xs text-[var(--tag-red)] mb-2">{error}</p>}
@@ -73,7 +73,7 @@ export default function VideoPicker({
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://youtube.com/watch?v=... or a direct video URL"
-              className="w-full px-3 py-2 text-sm bg-background border border-border rounded-lg text-foreground focus:outline-none focus:border-accent"
+              className="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-on-surface focus:outline-none focus:border-accent"
             />
             <button
               type="button"

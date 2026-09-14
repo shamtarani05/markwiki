@@ -43,11 +43,11 @@ function SortableLink({
       ref={setNodeRef}
       style={style}
       className={`bg-card border rounded-lg mb-2 flex items-center p-2 gap-3 transition-colors ${
-        isDragging ? 'border-accent shadow-xl opacity-90' : 'border-border'
+        isDragging ? 'border-accent shadow-xl opacity-90' : 'border-outline-variant/30'
       }`}
     >
       <button
-        className="p-1.5 text-foreground-muted hover:text-foreground cursor-grab active:cursor-grabbing rounded"
+        className="p-1.5 text-on-surface-variant hover:text-on-surface cursor-grab active:cursor-grabbing rounded"
         {...attributes}
         {...listeners}
       >
@@ -59,7 +59,7 @@ function SortableLink({
         value={link.label}
         onChange={(e) => onChange({ label: e.target.value })}
         placeholder="Link Label"
-        className="w-1/3 min-w-0 bg-background border border-border rounded-md px-3 py-1.5 text-foreground focus:outline-none focus:border-accent text-sm"
+        className="w-1/3 min-w-0 bg-surface-container-lowest border border-outline-variant/30 rounded-md px-3 py-1.5 text-on-surface focus:outline-none focus:border-accent text-sm"
       />
 
       <input
@@ -67,22 +67,22 @@ function SortableLink({
         value={link.url}
         onChange={(e) => onChange({ url: e.target.value })}
         placeholder="/url-path or https://..."
-        className="flex-1 min-w-0 bg-background border border-border rounded-md px-3 py-1.5 text-foreground focus:outline-none focus:border-accent text-sm"
+        className="flex-1 min-w-0 bg-surface-container-lowest border border-outline-variant/30 rounded-md px-3 py-1.5 text-on-surface focus:outline-none focus:border-accent text-sm"
       />
 
-      <label className="flex items-center gap-1.5 text-xs text-foreground-muted cursor-pointer shrink-0">
+      <label className="flex items-center gap-1.5 text-xs text-on-surface-variant cursor-pointer shrink-0">
         <input
           type="checkbox"
           checked={link.isExternal}
           onChange={(e) => onChange({ isExternal: e.target.checked })}
-          className="rounded border-border bg-background text-accent focus:ring-accent/20"
+          className="rounded border-outline-variant/30 bg-surface-container-lowest text-primary focus:ring-accent/20"
         />
         <ExternalLink size={12} />
       </label>
 
       <button
         onClick={onRemove}
-        className="p-1.5 rounded hover:bg-red-500/10 text-foreground-muted hover:text-red-500 transition-colors shrink-0 ml-2"
+        className="p-1.5 rounded hover:bg-red-500/10 text-on-surface-variant hover:text-red-500 transition-colors shrink-0 ml-2"
         title="Remove link"
       >
         <Trash2 size={16} />
@@ -174,11 +174,11 @@ export default function AdminNavigationBuilder() {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto bg-background">
+    <div className="flex-1 overflow-y-auto bg-surface-container-lowest">
       {/* Top Bar */}
-      <div className="sticky top-0 z-20 bg-background/80 backdrop-blur-md border-b border-border px-8 h-16 flex items-center justify-between">
+      <div className="sticky top-0 z-20 bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant/30 px-8 h-16 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-foreground">Navigation & Social</h1>
+          <h1 className="text-xl font-bold text-on-surface">Navigation & Social</h1>
         </div>
         <div className="flex items-center gap-3">
           <a
@@ -204,8 +204,8 @@ export default function AdminNavigationBuilder() {
         <section>
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-lg font-bold text-foreground">Header Links</h2>
-              <p className="text-sm text-foreground-muted">Main navigation items shown at the top of every page.</p>
+              <h2 className="text-lg font-bold text-on-surface">Header Links</h2>
+              <p className="text-sm text-on-surface-variant">Main navigation items shown at the top of every page.</p>
             </div>
             <button
               onClick={addMainLink}
@@ -238,7 +238,7 @@ export default function AdminNavigationBuilder() {
             </SortableContext>
           </DndContext>
           {mainLinks.length === 0 && (
-            <div className="text-center py-8 border-2 border-dashed border-border rounded-lg text-foreground-muted text-sm">
+            <div className="text-center py-8 border-2 border-dashed border-outline-variant/30 rounded-lg text-on-surface-variant text-sm">
               No header links configured.
             </div>
           )}
@@ -248,8 +248,8 @@ export default function AdminNavigationBuilder() {
         <section>
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-lg font-bold text-foreground">Footer Links</h2>
-              <p className="text-sm text-foreground-muted">Links shown at the bottom of every page.</p>
+              <h2 className="text-lg font-bold text-on-surface">Footer Links</h2>
+              <p className="text-sm text-on-surface-variant">Links shown at the bottom of every page.</p>
             </div>
             <button
               onClick={addFooterLink}
@@ -282,7 +282,7 @@ export default function AdminNavigationBuilder() {
             </SortableContext>
           </DndContext>
           {footerLinks.length === 0 && (
-            <div className="text-center py-8 border-2 border-dashed border-border rounded-lg text-foreground-muted text-sm">
+            <div className="text-center py-8 border-2 border-dashed border-outline-variant/30 rounded-lg text-on-surface-variant text-sm">
               No footer links configured.
             </div>
           )}
@@ -290,46 +290,46 @@ export default function AdminNavigationBuilder() {
 
         {/* Social Links */}
         <section>
-          <h2 className="text-lg font-bold text-foreground mb-4">Social Links</h2>
-          <div className="bg-card border border-border rounded-lg p-6 grid sm:grid-cols-2 gap-6">
+          <h2 className="text-lg font-bold text-on-surface mb-4">Social Links</h2>
+          <div className="bg-card border border-outline-variant/30 rounded-lg p-6 grid sm:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">Twitter URL</label>
+              <label className="block text-sm font-medium text-on-surface mb-1.5">Twitter URL</label>
               <input
                 type="text"
                 value={social.twitter || ''}
                 onChange={(e) => setSocial({ ...social, twitter: e.target.value })}
                 placeholder="https://twitter.com/..."
-                className="w-full bg-background border border-border rounded-md px-3 py-2 text-foreground focus:outline-none focus:border-accent text-sm"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-md px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">Discord URL</label>
+              <label className="block text-sm font-medium text-on-surface mb-1.5">Discord URL</label>
               <input
                 type="text"
                 value={social.discord || ''}
                 onChange={(e) => setSocial({ ...social, discord: e.target.value })}
                 placeholder="https://discord.gg/..."
-                className="w-full bg-background border border-border rounded-md px-3 py-2 text-foreground focus:outline-none focus:border-accent text-sm"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-md px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">Instagram URL</label>
+              <label className="block text-sm font-medium text-on-surface mb-1.5">Instagram URL</label>
               <input
                 type="text"
                 value={social.instagram || ''}
                 onChange={(e) => setSocial({ ...social, instagram: e.target.value })}
                 placeholder="https://instagram.com/..."
-                className="w-full bg-background border border-border rounded-md px-3 py-2 text-foreground focus:outline-none focus:border-accent text-sm"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-md px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-foreground mb-1.5">Facebook URL</label>
+              <label className="block text-sm font-medium text-on-surface mb-1.5">Facebook URL</label>
               <input
                 type="text"
                 value={social.facebook || ''}
                 onChange={(e) => setSocial({ ...social, facebook: e.target.value })}
                 placeholder="https://facebook.com/..."
-                className="w-full bg-background border border-border rounded-md px-3 py-2 text-foreground focus:outline-none focus:border-accent text-sm"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded-md px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
               />
             </div>
           </div>

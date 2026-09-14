@@ -40,10 +40,10 @@ export default function SortableBlock({
       style={style}
       onClick={onSelect}
       className={`group relative rounded-md pl-3 pr-1 py-2 cursor-pointer transition-colors select-none ${
-        selected ? 'bg-accent-muted' : 'hover:bg-background-secondary'
+        selected ? 'bg-primary-muted' : 'hover:bg-surface-container-low'
       }`}
     >
-      {selected && <span className="absolute left-0 top-1 bottom-1 w-0.5 rounded-full bg-accent" />}
+      {selected && <span className="absolute left-0 top-1 bottom-1 w-0.5 rounded-full bg-primary" />}
 
       <div className="flex items-center justify-between mb-1 h-5">
         <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
@@ -53,19 +53,19 @@ export default function SortableBlock({
             {...listeners}
             aria-label="Drag to reorder"
             style={{ touchAction: 'none' }}
-            className="cursor-grab active:cursor-grabbing text-foreground-muted hover:text-foreground text-xs leading-none px-0.5 select-none"
+            className="cursor-grab active:cursor-grabbing text-on-surface-variant hover:text-on-surface text-xs leading-none px-0.5 select-none"
             onClick={(e) => e.stopPropagation()}
           >
             ⠿
           </button>
-          <span className="text-[11px] text-foreground-muted select-none">{BLOCK_LABELS[block.type]}</span>
+          <span className="text-[11px] text-on-surface-variant select-none">{BLOCK_LABELS[block.type]}</span>
           {SIDEBAR_TYPES.has(block.type) && (
-            <span className="text-[10px] text-accent border border-accent/30 rounded px-1 select-none">
+            <span className="text-[10px] text-primary border border-accent/30 rounded px-1 select-none">
               → sidebar on page
             </span>
           )}
           {block.type === 'tableOfContents' && (
-            <span className="text-[10px] text-accent border border-accent/30 rounded px-1 select-none">
+            <span className="text-[10px] text-primary border border-accent/30 rounded px-1 select-none">
               → always shown first
             </span>
           )}
@@ -76,7 +76,7 @@ export default function SortableBlock({
             aria-label="Duplicate block"
             title="Duplicate"
             onClick={(e) => { e.stopPropagation(); onDuplicate(); }}
-            className="w-5 h-5 flex items-center justify-center rounded text-xs text-foreground-muted hover:text-accent hover:bg-background-tertiary"
+            className="w-5 h-5 flex items-center justify-center rounded text-xs text-on-surface-variant hover:text-primary hover:bg-surface-variant"
           >
             ⧉
           </button>
@@ -85,7 +85,7 @@ export default function SortableBlock({
             aria-label="Delete block"
             title="Delete"
             onClick={(e) => { e.stopPropagation(); onDelete(); }}
-            className="w-5 h-5 flex items-center justify-center rounded text-xs text-foreground-muted hover:text-[var(--tag-red)] hover:bg-background-tertiary"
+            className="w-5 h-5 flex items-center justify-center rounded text-xs text-on-surface-variant hover:text-[var(--tag-red)] hover:bg-surface-variant"
           >
             ✕
           </button>

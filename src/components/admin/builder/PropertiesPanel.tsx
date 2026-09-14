@@ -16,7 +16,7 @@ export default function PropertiesPanel({
 }) {
   return (
     <div className="space-y-4">
-      <h3 className="text-sm font-semibold text-foreground-muted uppercase tracking-wide pr-6">
+      <h3 className="text-sm font-semibold text-on-surface-variant uppercase tracking-wide pr-6">
         {block.type} settings
       </h3>
       {renderFields(block, onChange)}
@@ -165,7 +165,7 @@ function VideoEmbedFields({ props, onChange }: { props: VideoEmbedProps; onChang
       <button
         type="button"
         onClick={() => setPickerOpen(true)}
-        className="text-xs text-accent hover:underline"
+        className="text-xs text-primary hover:underline"
       >
         Upload a video file instead
       </button>
@@ -197,9 +197,9 @@ function GalleryFields({ props, onChange }: { props: GalleryProps; onChange: OnC
         onChange={(v) => onChange({ ...props, columns: Number(v) as 2 | 3 | 4 })}
       />
       <div className="space-y-2">
-        <span className="text-xs text-foreground-muted">Images</span>
+        <span className="text-xs text-on-surface-variant">Images</span>
         {props.images.map((img, i) => (
-          <div key={i} className="border border-border rounded-lg p-2 space-y-1">
+          <div key={i} className="border border-outline-variant/30 rounded-lg p-2 space-y-1">
             <TextField label="URL" value={img.src} onChange={(src) => update(i, { src })} compact />
             <TextField label="Caption" value={img.caption ?? ''} onChange={(caption) => update(i, { caption })} compact />
             <RemoveButton onClick={() => onChange({ ...props, images: props.images.filter((_, idx) => idx !== i) })} />
@@ -220,9 +220,9 @@ function FieldListEditor({ label, items, onChange }: { label: string; items: Inf
   };
   return (
     <div className="space-y-2">
-      <span className="text-xs text-foreground-muted">{label}</span>
+      <span className="text-xs text-on-surface-variant">{label}</span>
       {items.map((f, i) => (
-        <div key={i} className="border border-border rounded-lg p-2 space-y-1">
+        <div key={i} className="border border-outline-variant/30 rounded-lg p-2 space-y-1">
           <TextField label="Label" value={f.label} onChange={(v) => update(i, { label: v })} compact />
           <TextField label="Value" value={f.value} onChange={(v) => update(i, { value: v })} compact />
           <RemoveButton onClick={() => onChange(items.filter((_, idx) => idx !== i))} />
@@ -239,9 +239,9 @@ function CardItemListEditor({ items, onChange }: { items: CardGridItem[]; onChan
   };
   return (
     <div className="space-y-2">
-      <span className="text-xs text-foreground-muted">Items</span>
+      <span className="text-xs text-on-surface-variant">Items</span>
       {items.map((it, i) => (
-        <div key={i} className="border border-border rounded-lg p-2 space-y-1">
+        <div key={i} className="border border-outline-variant/30 rounded-lg p-2 space-y-1">
           <TextField label="Title" value={it.title} onChange={(v) => update(i, { title: v })} compact />
           <TextField label="Subtitle" value={it.subtitle ?? ''} onChange={(v) => update(i, { subtitle: v })} compact />
           <TextField label="Image URL" value={it.image ?? ''} onChange={(v) => update(i, { image: v })} compact />
@@ -257,12 +257,12 @@ function CardItemListEditor({ items, onChange }: { items: CardGridItem[]; onChan
 function TextField({ label, value, onChange, compact }: { label: string; value: string; onChange: (v: string) => void; compact?: boolean }) {
   return (
     <label className="block">
-      <span className="block text-xs text-foreground-muted mb-1">{label}</span>
+      <span className="block text-xs text-on-surface-variant mb-1">{label}</span>
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full ${compact ? 'px-2 py-1 text-xs' : 'px-3 py-2 text-sm'} bg-background border border-border rounded-lg text-foreground focus:outline-none focus:border-accent transition-colors`}
+        className={`w-full ${compact ? 'px-2 py-1 text-xs' : 'px-3 py-2 text-sm'} bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-on-surface focus:outline-none focus:border-accent transition-colors`}
       />
     </label>
   );
@@ -271,12 +271,12 @@ function TextField({ label, value, onChange, compact }: { label: string; value: 
 function TextAreaField({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
   return (
     <label className="block">
-      <span className="block text-xs text-foreground-muted mb-1">{label}</span>
+      <span className="block text-xs text-on-surface-variant mb-1">{label}</span>
       <textarea
         value={value}
         rows={3}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-3 py-2 text-sm bg-background border border-border rounded-lg text-foreground focus:outline-none focus:border-accent transition-colors"
+        className="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-on-surface focus:outline-none focus:border-accent transition-colors"
       />
     </label>
   );
@@ -285,11 +285,11 @@ function TextAreaField({ label, value, onChange }: { label: string; value: strin
 function SelectField({ label, value, options, onChange }: { label: string; value: string; options: { value: string; label: string }[]; onChange: (v: string) => void }) {
   return (
     <label className="block">
-      <span className="block text-xs text-foreground-muted mb-1">{label}</span>
+      <span className="block text-xs text-on-surface-variant mb-1">{label}</span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full px-3 py-2 text-sm bg-background border border-border rounded-lg text-foreground focus:outline-none focus:border-accent transition-colors"
+        className="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-on-surface focus:outline-none focus:border-accent transition-colors"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>{o.label}</option>
@@ -301,7 +301,7 @@ function SelectField({ label, value, options, onChange }: { label: string; value
 
 function AddButton({ label, onClick }: { label: string; onClick: () => void }) {
   return (
-    <button type="button" onClick={onClick} className="text-xs text-accent hover:underline">
+    <button type="button" onClick={onClick} className="text-xs text-primary hover:underline">
       + {label}
     </button>
   );

@@ -197,7 +197,7 @@ export default function PageBuilder({
   return (
     <div>
       {/* Toolbar — one ribbon strip: history, insert, view mode, publish */}
-      <div className="flex items-center gap-1 mb-3 px-2 py-1.5 border border-border rounded-lg bg-background-secondary">
+      <div className="flex items-center gap-1 mb-3 px-2 py-1.5 border border-outline-variant/30 rounded-lg bg-surface-container-low">
         <ToolbarIconButton label="Undo" onClick={undo} disabled={!canUndo}>↺</ToolbarIconButton>
         <ToolbarIconButton label="Redo" onClick={redo} disabled={!canRedo}>↻</ToolbarIconButton>
         <Divider />
@@ -205,18 +205,18 @@ export default function PageBuilder({
           <InsertMenu onAdd={(type) => addBlock(type)} existingTypes={new Set(blocks.map((b) => b.type))} />
         )}
         <Divider />
-        <div className="flex rounded-md border border-border overflow-hidden">
+        <div className="flex rounded-md border border-outline-variant/30 overflow-hidden">
           <button
             type="button"
             onClick={() => setMode('edit')}
-            className={`px-2.5 py-1 text-xs ${mode === 'edit' ? 'bg-accent text-accent-contrast' : 'text-foreground-muted hover:bg-background-tertiary'}`}
+            className={`px-2.5 py-1 text-xs ${mode === 'edit' ? 'bg-primary text-primary-contrast' : 'text-on-surface-variant hover:bg-surface-variant'}`}
           >
             Edit
           </button>
           <button
             type="button"
             onClick={() => setMode('preview')}
-            className={`px-2.5 py-1 text-xs ${mode === 'preview' ? 'bg-accent text-accent-contrast' : 'text-foreground-muted hover:bg-background-tertiary'}`}
+            className={`px-2.5 py-1 text-xs ${mode === 'preview' ? 'bg-primary text-primary-contrast' : 'text-on-surface-variant hover:bg-surface-variant'}`}
           >
             Preview
           </button>
@@ -239,12 +239,12 @@ export default function PageBuilder({
         <button
           type="button"
           onClick={() => setCoverPickerOpen(true)}
-          className="w-16 h-10 rounded-md border border-border bg-background-secondary overflow-hidden shrink-0 flex items-center justify-center text-foreground-muted hover:border-accent transition-colors"
+          className="w-16 h-10 rounded-md border border-outline-variant/30 bg-surface-container-low overflow-hidden shrink-0 flex items-center justify-center text-on-surface-variant hover:border-accent transition-colors"
           title={coverImage ? 'Change cover image' : 'Add a cover image'}
         >
           {coverImage ? <img src={coverImage} alt="" className="w-full h-full object-cover" /> : <span className="text-xs">+</span>}
         </button>
-        <span className="text-xs text-foreground-muted">
+        <span className="text-xs text-on-surface-variant">
           {coverImage ? 'Cover image set' : 'No cover image — used as the card thumbnail and social preview'}
         </span>
         {coverImage && (
@@ -260,7 +260,7 @@ export default function PageBuilder({
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Untitled page"
-        className="w-full text-4xl font-bold bg-transparent text-foreground focus:outline-none mb-1 pb-2 border-b border-border"
+        className="w-full text-4xl font-bold bg-transparent text-on-surface focus:outline-none mb-1 pb-2 border-b border-outline-variant/30"
       />
 
       {showEditSummary && (
@@ -271,7 +271,7 @@ export default function PageBuilder({
           onChange={(e) => setEditSummary(e.target.value)}
           placeholder="Edit summary (required) — briefly describe what you changed"
           maxLength={500}
-          className="w-full mt-3 mb-1 px-3 py-2 text-sm bg-background-secondary border border-border rounded-lg text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-accent transition-colors"
+          className="w-full mt-3 mb-1 px-3 py-2 text-sm bg-surface-container-low border border-outline-variant/30 rounded-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-accent transition-colors"
         />
       )}
 
@@ -282,7 +282,7 @@ export default function PageBuilder({
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
             <div>
               {blocks.length === 0 ? (
-                <div ref={setEndDropRef} className={`ad-zone transition-colors ${isOverEnd ? 'border-accent text-accent' : ''}`}>
+                <div ref={setEndDropRef} className={`ad-zone transition-colors ${isOverEnd ? 'border-accent text-primary' : ''}`}>
                   Add your first block from &ldquo;Insert block&rdquo; above, or drag one onto the page.
                 </div>
               ) : (
@@ -305,7 +305,7 @@ export default function PageBuilder({
                   <div
                     ref={setEndDropRef}
                     className={`h-10 rounded-md border border-dashed transition-colors ${
-                      isOverEnd ? 'border-accent bg-accent-muted' : 'border-transparent'
+                      isOverEnd ? 'border-accent bg-primary-muted' : 'border-transparent'
                     }`}
                   />
                 </>
@@ -329,7 +329,7 @@ export default function PageBuilder({
             type="button"
             onClick={() => setSelectedId(null)}
             aria-label="Close settings"
-            className="absolute top-3 right-3 w-6 h-6 flex items-center justify-center rounded text-foreground-muted hover:text-foreground hover:bg-background-tertiary"
+            className="absolute top-3 right-3 w-6 h-6 flex items-center justify-center rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant"
           >
             ✕
           </button>
@@ -363,7 +363,7 @@ function ToolbarIconButton({
       aria-label={label}
       disabled={disabled}
       onClick={onClick}
-      className="w-7 h-7 flex items-center justify-center rounded-md text-foreground-muted hover:text-foreground hover:bg-background-tertiary disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
+      className="w-7 h-7 flex items-center justify-center rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-variant disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
     >
       {children}
     </button>

@@ -25,8 +25,8 @@ export default async function BlogListPage() {
 
       {posts.length === 0 ? (
         <div className="admin-empty">
-          <PenTool size={22} className="mx-auto text-foreground-muted mb-3" aria-hidden="true" />
-          <p className="text-[13px] text-foreground mb-1">No posts yet</p>
+          <PenTool size={22} className="mx-auto text-on-surface-variant mb-3" aria-hidden="true" />
+          <p className="text-[13px] text-on-surface mb-1">No posts yet</p>
           <p className="admin-meta mb-4">
             Blog posts are perfect for announcements, news, or articles.
           </p>
@@ -39,25 +39,25 @@ export default async function BlogListPage() {
           {posts.map((p: any) => (
             <div key={p._id.toString()} className="admin-tile flex flex-col">
               <Link href={`/admin/blog/${p._id}`} className="no-underline group">
-                <div className="aspect-video bg-background-tertiary flex items-center justify-center relative overflow-hidden">
+                <div className="aspect-video bg-surface-variant flex items-center justify-center relative overflow-hidden">
                   {p.coverImage ? (
                     <img src={p.coverImage} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   ) : (
-                    <ImageOff size={24} className="text-foreground-muted/50" aria-hidden="true" />
+                    <ImageOff size={24} className="text-on-surface-variant/50" aria-hidden="true" />
                   )}
                   {/* Status badge */}
                   <div className="absolute top-2 right-2">
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
                       p.status === 'published'
-                        ? 'bg-accent text-background'
-                        : 'bg-background-tertiary text-foreground-muted border border-border'
+                        ? 'bg-primary text-background'
+                        : 'bg-surface-variant text-on-surface-variant border border-outline-variant/30'
                     }`}>
                       {p.status}
                     </span>
                   </div>
                 </div>
                 <div className="px-4 pt-3.5 pb-3">
-                  <h3 className="text-[14px] font-bold text-foreground truncate group-hover:text-accent transition-colors">
+                  <h3 className="text-[14px] font-bold text-on-surface truncate group-hover:text-primary transition-colors">
                     {p.title}
                   </h3>
                   <p className="admin-meta mt-1 line-clamp-2">
@@ -65,8 +65,8 @@ export default async function BlogListPage() {
                   </p>
                 </div>
               </Link>
-              <div className="mt-auto flex items-center justify-between gap-2 px-4 py-2.5 border-t border-border bg-background-secondary/30">
-                <span className="admin-meta admin-num font-medium text-foreground">
+              <div className="mt-auto flex items-center justify-between gap-2 px-4 py-2.5 border-t border-outline-variant/30 bg-surface-container-low/30">
+                <span className="admin-meta admin-num font-medium text-on-surface">
                   {p.readingTime} min read
                 </span>
                 <span className="admin-meta admin-num text-right">{new Date(p.updatedAt).toLocaleDateString()}</span>

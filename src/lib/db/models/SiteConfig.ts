@@ -1,6 +1,5 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import type { HomepageSection } from '@/src/lib/db/homepageSections';
-import { HOMEPAGE_SECTION_TYPES } from '@/src/lib/db/homepageSections';
+import type { Block } from '@/src/lib/blocks/types';
 
 export interface INavItem {
   label: string;
@@ -36,7 +35,7 @@ export interface ISiteConfig extends Document {
     footer: INavItem[];
   };
   homepage: {
-    sections: HomepageSection[];
+    blocks: Block[];
   };
   social: {
     twitter?: string;
@@ -58,15 +57,7 @@ const NavItemSchema = new Schema({
   children: [{ type: Schema.Types.Mixed }],
 }, { _id: false });
 
-const HomepageSectionSchema = new Schema({
-  id: { type: String, required: true },
-  type: { type: String, enum: [...HOMEPAGE_SECTION_TYPES], required: true },
-  title: { type: String, default: '' },
-  subtitle: { type: String, default: '' },
-  order: { type: Number, default: 0 },
-  isActive: { type: Boolean, default: true },
-  settings: { type: Schema.Types.Mixed, default: {} },
-}, { _id: false });
+
 
 const SiteConfigSchema = new Schema<ISiteConfig>(
   {
@@ -101,7 +92,17 @@ const SiteConfigSchema = new Schema<ISiteConfig>(
       footer: [NavItemSchema],
     },
     homepage: {
-      sections: [HomepageSectionSchema],
+      blocks: {
+        type: [
+          {
+            id: { type: String, required: true },
+            type: { type: String, required: true },
+            props: { type: Schema.Types.Mixed, default: {} },
+          },
+        ],
+        default: [],
+        _id: false,
+      },
     },
     social: {
       twitter: String,

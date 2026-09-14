@@ -29,3 +29,24 @@ export async function GET() {
   const categories = await Category.find().sort({ order: 1 });
   return NextResponse.json({ categories });
 }
+
+export async function POST(req: Request) {
+  try {
+    await connectDB();
+    const data = await req.json();
+
+    // Generate slug from name if not provided
+    if (!data.slug && data.name) {
+      data.slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    }
+
+    const category = await Category.create(data);
+    return NextResponse.json({ success: true, category }, { status: 201 });
+  } catch (error: any) {
+    console.error('Error creating category:', error);
+    return NextResponse.json(
+      { success: false, error: error.message || 'Failed to create category' },
+      { status: 400 }
+    );
+  }
+}

@@ -1,4 +1,5 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
+import type { Block, BlockType } from '@/src/lib/blocks/types';
 
 export type StoryStatus = 'draft' | 'published' | 'archived';
 
@@ -6,7 +7,8 @@ export interface IShortStory extends Document {
   _id: mongoose.Types.ObjectId;
   title: string;
   slug: string;
-  content: string;
+  blocks: Block[];
+  searchText: string;
   synopsis?: string;
   coverImage?: string;
   author: mongoose.Types.ObjectId;
@@ -44,9 +46,20 @@ const ShortStorySchema = new Schema<IShortStory>(
       lowercase: true,
       trim: true,
     },
-    content: {
+    blocks: {
+      type: [
+        {
+          id: { type: String, required: true },
+          type: { type: String, required: true },
+          props: { type: Schema.Types.Mixed, default: {} },
+        },
+      ],
+      default: [],
+      _id: false,
+    },
+    searchText: {
       type: String,
-      required: true,
+      default: '',
     },
     synopsis: {
       type: String,
@@ -123,7 +136,32 @@ ShortStorySchema.index({ isFeatured: 1 });
 ShortStorySchema.index({ isGuestContribution: 1 });
 ShortStorySchema.index({ tags: 1 });
 ShortStorySchema.index({ genres: 1 });
-ShortStorySchema.index({ title: 'text', content: 'text' });
+ShortStorySchema.index({ title: 'text', searchText: 'text' });
+
+const TEXT_BLOCK_TYPES: BlockType[] = ['heading', 'richText', 'quote'];
+
+function extractBlockText(block: Block): string {
+  switch (block.type) {
+    case 'heading':
+      return block.props.text;
+    case 'richText':
+      return block.props.html.replace(/<[^>]+>/g, ' ');
+    case 'quote':
+      return [block.props.text, block.props.source].filter(Boolean).join(' ');
+    default:
+      return '';
+  }
+}
+
+ShortStorySchema.pre('save', function () {
+  if (this.isModified('blocks')) {
+    this.searchText = this.blocks
+      .filter((b) => TEXT_BLOCK_TYPES.includes(b.type))
+      .map(extractBlockText)
+      .join(' ')
+      .slice(0, 20000);
+  }
+});
 
 const ShortStory: Model<IShortStory> =
   mongoose.models.ShortStory || mongoose.model<IShortStory>('ShortStory', ShortStorySchema);

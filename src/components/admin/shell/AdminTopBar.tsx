@@ -31,18 +31,18 @@ export default function AdminTopBar() {
   };
 
   return (
-    <header className="h-14 shrink-0 border-b border-border flex items-center justify-between gap-4 px-4 md:px-6 bg-background">
+    <header className="h-14 shrink-0 border-b border-outline-variant/30 flex items-center justify-between gap-4 px-4 md:px-6 bg-surface-container-lowest">
       <div className="relative w-72 max-w-[45vw]">
         <Search
           size={15}
           aria-hidden="true"
-          className="absolute left-3 top-1/2 -translate-y-1/2 text-foreground-muted pointer-events-none"
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none"
         />
         <input
           type="search"
           placeholder="Search content"
           aria-label="Search content"
-          className="w-full pl-9 pr-3 py-1.5 text-[13px] bg-background-secondary border border-border rounded-lg text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-accent transition-colors"
+          className="w-full pl-9 pr-3 py-1.5 text-[13px] bg-surface-container-low border border-outline-variant/30 rounded-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-accent transition-colors"
         />
       </div>
 
@@ -52,7 +52,7 @@ export default function AdminTopBar() {
           onClick={toggleTheme}
           aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
           title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-          className="w-8 h-8 flex items-center justify-center rounded-md text-foreground-muted hover:text-foreground hover:bg-background-tertiary transition-colors"
+          className="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors"
         >
           {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
         </button>
@@ -60,10 +60,10 @@ export default function AdminTopBar() {
         <span aria-hidden="true" className="w-px h-5 bg-border mx-2" />
 
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-full bg-accent flex items-center justify-center text-accent-contrast text-xs font-bold shrink-0">
+          <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-primary-contrast text-xs font-bold shrink-0">
             {me?.name?.[0]?.toUpperCase() ?? '?'}
           </div>
-          {me && <span className="text-[13px] text-foreground hidden sm:block">{me.name}</span>}
+          {me && <span className="text-[13px] text-on-surface hidden sm:block">{me.name}</span>}
         </div>
 
         <button
@@ -71,7 +71,7 @@ export default function AdminTopBar() {
           onClick={handleLogout}
           aria-label="Log out"
           title="Log out"
-          className="w-8 h-8 ml-1 flex items-center justify-center rounded-md text-foreground-muted hover:text-foreground hover:bg-background-tertiary transition-colors"
+          className="w-8 h-8 ml-1 flex items-center justify-center rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors"
         >
           <LogOut size={16} />
         </button>

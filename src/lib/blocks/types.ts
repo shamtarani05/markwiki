@@ -21,7 +21,16 @@ export type BlockType =
   | 'adSlot'
   | 'wikiStats'
   | 'trendingPages'
-  | 'recentActivity';
+  | 'recentActivity'
+  | 'hero'
+  | 'continueReading'
+  | 'categories'
+  | 'featuredWikis'
+  | 'community'
+  | 'publishCTA'
+  | 'featuredBooks'
+  | 'latestStories'
+  | 'blogPosts';
 
 export interface HeadingProps {
   text: string;
@@ -118,6 +127,49 @@ export interface RecentActivityProps {
   limit: number;
 }
 
+export interface HeroProps {
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroImage?: string;
+  heroSearchPlaceholder?: string;
+  popularLinks?: { label: string; href: string }[];
+}
+
+export interface ContinueReadingProps {
+  itemCount?: number;
+}
+
+export interface CategoriesProps {
+  backgroundStyle?: 'default' | 'secondary' | 'gradient';
+}
+
+export interface FeaturedWikisProps {
+  itemCount?: number;
+}
+
+export interface CommunityProps {}
+
+export interface PublishCTAProps {
+  ctaTitle?: string;
+  ctaSubtitle?: string;
+  ctaPrimaryText?: string;
+  ctaPrimaryLink?: string;
+  ctaSecondaryText?: string;
+  ctaSecondaryLink?: string;
+}
+
+export interface FeaturedBooksProps {
+  itemCount?: number;
+}
+
+export interface LatestStoriesProps {
+  itemCount?: number;
+}
+
+export interface BlogPostsProps {
+  itemCount?: number;
+}
+
 export interface BlockPropsMap {
   heading: HeadingProps;
   richText: RichTextProps;
@@ -136,6 +188,15 @@ export interface BlockPropsMap {
   wikiStats: WikiStatsProps;
   trendingPages: TrendingPagesProps;
   recentActivity: RecentActivityProps;
+  hero: HeroProps;
+  continueReading: ContinueReadingProps;
+  categories: CategoriesProps;
+  featuredWikis: FeaturedWikisProps;
+  community: CommunityProps;
+  publishCTA: PublishCTAProps;
+  featuredBooks: FeaturedBooksProps;
+  latestStories: LatestStoriesProps;
+  blogPosts: BlogPostsProps;
 }
 
 // Discriminated union built from BlockPropsMap: `block.type` narrows
@@ -162,6 +223,15 @@ export const BLOCK_LABELS: Record<BlockType, string> = {
   wikiStats: 'Wiki Stats',
   trendingPages: 'Trending Pages',
   recentActivity: 'Recent Activity',
+  hero: 'Hero Section',
+  continueReading: 'Continue Reading',
+  categories: 'Categories',
+  featuredWikis: 'Featured Wikis',
+  community: 'Community News',
+  publishCTA: 'Contribute CTA',
+  featuredBooks: 'Featured Books',
+  latestStories: 'Latest Stories',
+  blogPosts: 'Blog Posts',
 };
 
 export const BLOCK_DESCRIPTIONS: Record<BlockType, string> = {
@@ -182,6 +252,15 @@ export const BLOCK_DESCRIPTIONS: Record<BlockType, string> = {
   wikiStats: 'Live page/view counters for this wiki (renders on the wiki cover page only)',
   trendingPages: "This wiki's most-viewed/most-searched pages, computed live",
   recentActivity: "This wiki's latest edits, computed live",
+  hero: 'Main banner with search bar and quick links',
+  continueReading: 'Resume cards for logged-in users (auto-hidden for guests)',
+  categories: 'Browse by category (Anime, Games, Web Novels, etc.)',
+  featuredWikis: 'Showcase top wikis with cover art carousel',
+  community: 'Latest community updates and wiki edits',
+  publishCTA: 'Call-to-action to contribute or start a wiki',
+  featuredBooks: 'Showcase featured books and novels',
+  latestStories: 'Recently published short stories',
+  blogPosts: 'Latest blog articles',
 };
 
 let blockIdCounter = 0;
@@ -227,4 +306,13 @@ export const DEFAULT_BLOCK_PROPS: { [K in BlockType]: BlockPropsMap[K] } = {
   wikiStats: {},
   trendingPages: { limit: 4 },
   recentActivity: { limit: 5 },
+  hero: { heroTitle: 'Welcome' },
+  continueReading: { itemCount: 6 },
+  categories: { backgroundStyle: 'secondary' },
+  featuredWikis: { itemCount: 8 },
+  community: {},
+  publishCTA: { ctaPrimaryText: 'Get Started' },
+  featuredBooks: { itemCount: 8 },
+  latestStories: { itemCount: 8 },
+  blogPosts: { itemCount: 3 },
 };

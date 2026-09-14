@@ -32,9 +32,9 @@ export default function PublicEditPage() {
   }, [params.wikiSlug, params.pageSlug]);
 
   if (loggedIn === false) {
-    return <p className="container py-16 text-foreground-muted">You must be signed in to edit this page.</p>;
+    return <p className="container py-16 text-on-surface-variant">You must be signed in to edit this page.</p>;
   }
-  if (!page) return <p className="container py-16 text-foreground-muted">Loading…</p>;
+  if (!page) return <p className="container py-16 text-on-surface-variant">Loading…</p>;
 
   const handleSave = async (data: PageBuilderSaveData) => {
     setSaving(true);
@@ -61,7 +61,7 @@ export default function PublicEditPage() {
 
   return (
     <div className="container py-8">
-      {notice && <div className="mb-4 px-4 py-2 rounded-lg bg-accent-muted text-accent text-sm">{notice}</div>}
+      {notice && <div className="mb-4 px-4 py-2 rounded-lg bg-primary-muted text-primary text-sm">{notice}</div>}
       {/* Public contributors get the flowing, Wikipedia-style document
           editor — not the admin drag-and-drop block canvas. Paragraphs,
           headings-as-sections, images: the mental model a general

@@ -25,8 +25,8 @@ export default async function WikisListPage() {
 
       {wikis.length === 0 ? (
         <div className="admin-empty">
-          <BookOpen size={22} className="mx-auto text-foreground-muted mb-3" aria-hidden="true" />
-          <p className="text-[13px] text-foreground mb-1">No wikis yet</p>
+          <BookOpen size={22} className="mx-auto text-on-surface-variant mb-3" aria-hidden="true" />
+          <p className="text-[13px] text-on-surface mb-1">No wikis yet</p>
           <p className="admin-meta mb-4">
             A wiki groups pages for one franchise. Creating your first page starts one.
           </p>
@@ -41,15 +41,15 @@ export default async function WikisListPage() {
             // Preview link, and an <a> inside an <a> is invalid HTML.
             <div key={w._id.toString()} className="admin-tile flex flex-col">
               <Link href={`/admin/pages?wikiId=${w._id}`} className="no-underline group">
-                <div className="aspect-[16/9] bg-background-tertiary flex items-center justify-center">
+                <div className="aspect-[16/9] bg-surface-variant flex items-center justify-center">
                   {w.coverImage ? (
                     <img src={w.coverImage} alt="" className="w-full h-full object-cover" />
                   ) : (
-                    <ImageOff size={20} className="text-foreground-muted/50" aria-hidden="true" />
+                    <ImageOff size={20} className="text-on-surface-variant/50" aria-hidden="true" />
                   )}
                 </div>
                 <div className="px-4 pt-3.5 pb-3">
-                  <h3 className="text-[13px] font-semibold text-foreground truncate group-hover:text-accent transition-colors">
+                  <h3 className="text-[13px] font-semibold text-on-surface truncate group-hover:text-primary transition-colors">
                     {w.name}
                   </h3>
                   <p className="admin-meta mt-1 truncate">
@@ -57,7 +57,7 @@ export default async function WikisListPage() {
                   </p>
                 </div>
               </Link>
-              <div className="mt-auto flex items-center justify-between gap-2 px-4 py-2.5 border-t border-border">
+              <div className="mt-auto flex items-center justify-between gap-2 px-4 py-2.5 border-t border-outline-variant/30">
                 <span className="admin-meta admin-num flex items-center gap-1.5">
                   <FileText size={12} aria-hidden="true" />
                   {w.pageCount} page{w.pageCount === 1 ? '' : 's'}
@@ -66,7 +66,7 @@ export default async function WikisListPage() {
                   <span className="admin-meta admin-num">{new Date(w.updatedAt).toLocaleDateString()}</span>
                   <Link
                     href={`/admin/preview/wiki/${w._id}`}
-                    className="text-[11.5px] font-medium text-accent hover:underline"
+                    className="text-[11.5px] font-medium text-primary hover:underline"
                   >
                     Preview
                   </Link>

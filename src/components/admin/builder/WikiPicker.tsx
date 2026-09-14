@@ -68,20 +68,20 @@ export default function WikiPicker({ onSelect }: { onSelect: (wiki: WikiOption) 
   };
 
   if (loading) {
-    return <p className="text-foreground-muted py-12 text-center">Loading…</p>;
+    return <p className="text-on-surface-variant py-12 text-center">Loading…</p>;
   }
 
   return (
     <div className="max-w-3xl mx-auto py-12">
-      <h2 className="text-2xl font-bold text-foreground mb-1">Which wiki is this page for?</h2>
-      <p className="text-foreground-muted mb-6">
+      <h2 className="text-2xl font-bold text-on-surface mb-1">Which wiki is this page for?</h2>
+      <p className="text-on-surface-variant mb-6">
         A wiki groups together every page about one series/game/book — Character, Location,
         Episode, and Overview pages all live under it. Pick an existing wiki or start a new one.
       </p>
 
       {wikis.length > 0 && (
         <div className="mb-8">
-          <h3 className="text-sm font-semibold text-foreground-muted uppercase tracking-wide mb-3">
+          <h3 className="text-sm font-semibold text-on-surface-variant uppercase tracking-wide mb-3">
             Existing wikis
           </h3>
           <div className="grid sm:grid-cols-2 gap-3">
@@ -92,12 +92,12 @@ export default function WikiPicker({ onSelect }: { onSelect: (wiki: WikiOption) 
                 onClick={() => onSelect(w)}
                 className="card overflow-hidden text-left hover:border-accent transition-colors"
               >
-                <div className="aspect-[3/1] bg-background-tertiary">
+                <div className="aspect-[3/1] bg-surface-variant">
                   {w.coverImage && <img src={w.coverImage} alt={w.name} className="w-full h-full object-cover" />}
                 </div>
                 <div className="p-4">
-                  <h4 className="text-sm font-semibold text-foreground">{w.name}</h4>
-                  <p className="text-xs text-foreground-muted mt-1">
+                  <h4 className="text-sm font-semibold text-on-surface">{w.name}</h4>
+                  <p className="text-xs text-on-surface-variant mt-1">
                     {w.category?.name ?? 'Uncategorized'} · {w.pageCount} page{w.pageCount === 1 ? '' : 's'}
                   </p>
                 </div>
@@ -108,27 +108,27 @@ export default function WikiPicker({ onSelect }: { onSelect: (wiki: WikiOption) 
       )}
 
       <div className="card p-4">
-        <h3 className="text-sm font-semibold text-foreground-muted uppercase tracking-wide mb-3">
+        <h3 className="text-sm font-semibold text-on-surface-variant uppercase tracking-wide mb-3">
           Start a new wiki
         </h3>
         {error && <p className="text-sm text-[var(--tag-red)] mb-3">{error}</p>}
         <div className="space-y-3">
           <label className="block">
-            <span className="block text-xs text-foreground-muted mb-1">Wiki name</span>
+            <span className="block text-xs text-on-surface-variant mb-1">Wiki name</span>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Solo Leveling"
-              className="w-full px-3 py-2 text-sm bg-background border border-border rounded-lg text-foreground focus:outline-none focus:border-accent transition-colors"
+              className="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-on-surface focus:outline-none focus:border-accent transition-colors"
             />
           </label>
           <label className="block">
-            <span className="block text-xs text-foreground-muted mb-1">Topic category</span>
+            <span className="block text-xs text-on-surface-variant mb-1">Topic category</span>
             <select
               value={categoryId}
               onChange={(e) => setCategoryId(e.target.value)}
-              className="w-full px-3 py-2 text-sm bg-background border border-border rounded-lg text-foreground focus:outline-none focus:border-accent transition-colors"
+              className="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-on-surface focus:outline-none focus:border-accent transition-colors"
             >
               {categories.map((c) => (
                 <option key={c._id} value={c._id}>{c.name}</option>
@@ -136,23 +136,23 @@ export default function WikiPicker({ onSelect }: { onSelect: (wiki: WikiOption) 
             </select>
           </label>
           <label className="block">
-            <span className="block text-xs text-foreground-muted mb-1">Description (optional)</span>
+            <span className="block text-xs text-on-surface-variant mb-1">Description (optional)</span>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={2}
-              className="w-full px-3 py-2 text-sm bg-background border border-border rounded-lg text-foreground focus:outline-none focus:border-accent transition-colors"
+              className="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-on-surface focus:outline-none focus:border-accent transition-colors"
             />
           </label>
           <div>
-            <span className="block text-xs text-foreground-muted mb-1">Cover image (optional)</span>
+            <span className="block text-xs text-on-surface-variant mb-1">Cover image (optional)</span>
             {coverImage ? (
               <div className="relative">
-                <img src={coverImage} alt="" className="w-full aspect-[3/1] object-cover rounded-lg border border-border" />
+                <img src={coverImage} alt="" className="w-full aspect-[3/1] object-cover rounded-lg border border-outline-variant/30" />
                 <button
                   type="button"
                   onClick={() => setCoverImage('')}
-                  className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded bg-background/80 text-foreground-muted hover:text-[var(--tag-red)]"
+                  className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded bg-surface-container-lowest/80 text-on-surface-variant hover:text-[var(--tag-red)]"
                 >
                   ✕
                 </button>

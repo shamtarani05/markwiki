@@ -47,7 +47,7 @@ export default function PageHistory({ params }: { params: Promise<{ id: string }
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-foreground">Edit History</h1>
+        <h1 className="text-2xl font-bold text-on-surface">Edit History</h1>
         <Link href={`/admin/wiki/${id}/edit`} className="btn btn-secondary">Back to editor</Link>
       </div>
 
@@ -56,22 +56,22 @@ export default function PageHistory({ params }: { params: Promise<{ id: string }
       )}
 
       {revisions === null ? (
-        <p className="text-foreground-muted">Loading…</p>
+        <p className="text-on-surface-variant">Loading…</p>
       ) : revisions.length === 0 ? (
-        <p className="text-foreground-muted">No edits yet — history starts after the first save to this page.</p>
+        <p className="text-on-surface-variant">No edits yet — history starts after the first save to this page.</p>
       ) : (
-        <div className="card divide-y divide-border overflow-hidden">
+        <div className="card divide-y divide-outline-variant/30 overflow-hidden">
           {revisions.map((rev) => (
             <div key={rev._id} className="flex items-center justify-between gap-4 p-4">
               <div className="min-w-0">
-                <p className="text-sm font-medium text-foreground">
+                <p className="text-sm font-medium text-on-surface">
                   v{rev.version} · {rev.title}
                 </p>
-                <p className="text-xs text-foreground-muted mt-0.5">
+                <p className="text-xs text-on-surface-variant mt-0.5">
                   {new Date(rev.createdAt).toLocaleString()} by {rev.editedBy?.name ?? 'Unknown'}
                 </p>
                 {rev.editSummary && (
-                  <p className="text-xs text-foreground-muted mt-1 italic">&ldquo;{rev.editSummary}&rdquo;</p>
+                  <p className="text-xs text-on-surface-variant mt-1 italic">&ldquo;{rev.editSummary}&rdquo;</p>
                 )}
               </div>
               <button

@@ -49,24 +49,24 @@ export default async function BlogPostPage({ params }: Props) {
       <div className={`container mx-auto px-4 max-w-3xl ${post.coverImage ? '-mt-32 relative z-20' : 'pt-24'}`}>
         <Link 
           href="/blog" 
-          className="inline-flex items-center gap-2 text-sm font-medium text-foreground-muted hover:text-accent transition-colors mb-8 bg-background/80 backdrop-blur-sm py-1.5 px-3 rounded-full border border-border w-fit"
+          className="inline-flex items-center gap-2 text-sm font-medium text-on-surface-variant hover:text-primary transition-colors mb-8 bg-surface-container-lowest/80 backdrop-blur-sm py-1.5 px-3 rounded-full border border-outline-variant/30 w-fit"
         >
           <ArrowLeft size={16} /> Back to Blog
         </Link>
 
-        <div className="mb-12 text-center bg-background/80 backdrop-blur-md p-8 sm:p-12 rounded-3xl border border-border shadow-xl">
-          <div className="flex flex-wrap items-center justify-center gap-3 text-sm font-semibold uppercase tracking-wider text-accent mb-6">
+        <div className="mb-12 text-center bg-surface-container-lowest/80 backdrop-blur-md p-8 sm:p-12 rounded-3xl border border-outline-variant/30 shadow-xl">
+          <div className="flex flex-wrap items-center justify-center gap-3 text-sm font-semibold uppercase tracking-wider text-primary mb-6">
             {post.tags?.map((tag: string) => (
-              <span key={tag} className="bg-accent/10 px-3 py-1 rounded-full">{tag}</span>
+              <span key={tag} className="bg-primary/10 px-3 py-1 rounded-full">{tag}</span>
             ))}
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-on-surface mb-6 leading-tight">
             {post.title}
           </h1>
           
-          <div className="flex items-center justify-center gap-4 text-foreground-muted">
-            <span className="font-medium text-foreground">{post.author?.name || 'Admin'}</span>
+          <div className="flex items-center justify-center gap-4 text-on-surface-variant">
+            <span className="font-medium text-on-surface">{(post.author as any)?.name || 'Admin'}</span>
             <span>•</span>
             <span>{post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Draft'}</span>
             <span>•</span>
@@ -75,7 +75,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         <div 
-          className="prose prose-lg dark:prose-invert max-w-none prose-p:leading-relaxed prose-headings:text-foreground prose-a:text-accent hover:prose-a:text-accent-hover"
+          className="prose prose-lg dark:prose-invert max-w-none prose-p:leading-relaxed prose-headings:text-on-surface prose-a:text-primary hover:prose-a:text-primary-hover"
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
       </div>

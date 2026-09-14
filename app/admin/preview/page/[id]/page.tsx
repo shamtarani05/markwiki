@@ -15,7 +15,7 @@ export default async function AdminPagePreview({ params }: { params: Promise<{ i
       <div className="mb-4 px-4 py-2 rounded-lg bg-[var(--tag-yellow-bg)] text-[var(--tag-yellow)] text-sm font-medium">
         Pending preview — status: {page.status}. Not visible to the public yet.
       </div>
-      <h1 className="text-4xl font-bold text-foreground mb-6">{page.title}</h1>
+      <h1 className="text-4xl font-bold text-on-surface mb-6">{page.title}</h1>
       <BlockListRenderer blocks={page.blocks as Block[]} />
     </div>
   );

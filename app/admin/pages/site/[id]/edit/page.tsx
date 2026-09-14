@@ -99,7 +99,7 @@ export default function EditSitePage({ params }: { params: Promise<{ id: string 
       {page ? (
         <>
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-foreground-muted">
+            <p className="text-sm text-on-surface-variant">
               Site page · /{page.siteSlug}
               {' · '}
               <button
@@ -112,10 +112,10 @@ export default function EditSitePage({ params }: { params: Promise<{ id: string 
               </button>
             </p>
             <div className="flex items-center gap-3">
-              <Link href={`/admin/preview/page/${id}`} target="_blank" rel="noopener noreferrer" className="text-sm text-foreground-muted hover:text-accent">
+              <Link href={`/admin/preview/page/${id}`} target="_blank" rel="noopener noreferrer" className="text-sm text-on-surface-variant hover:text-primary">
                 Preview
               </Link>
-              <Link href={`/admin/wiki/${id}/history`} className="text-sm text-foreground-muted hover:text-accent">
+              <Link href={`/admin/wiki/${id}/history`} className="text-sm text-on-surface-variant hover:text-primary">
                 View history
               </Link>
               <button
@@ -155,7 +155,7 @@ export default function EditSitePage({ params }: { params: Promise<{ id: string 
           )}
         </>
       ) : !error ? (
-        <p className="text-foreground-muted">Loading…</p>
+        <p className="text-on-surface-variant">Loading…</p>
       ) : null}
     </div>
   );

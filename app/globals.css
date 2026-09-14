@@ -6,22 +6,7 @@
 
 :root {
   /* Dark Theme (Default) - Midnight Library */
-  --background: #121212;
-  --background-secondary: #1a1a1a;
-  --background-tertiary: #242424;
-  --foreground: #E0E0E0;
-  --foreground-muted: #9CA3AF;
-  --accent: #D4AF37;
-  --accent-hover: #E5C358;
-  --accent-muted: rgba(212, 175, 55, 0.1);
-  --border: #2d2d2d;
-  --border-light: #3d3d3d;
-  --card: #1a1a1a;
-  --card-hover: #242424;
-  --success: #22C55E;
-  --error: #EF4444;
-  --warning: #F59E0B;
-  --info: #3B82F6;
+  --primary-container: rgba(212, 175, 55, 0.1);
 
   /* Text color guaranteed to read on top of --accent (flips per theme) */
   --accent-contrast: #000000;
@@ -60,52 +45,7 @@
   --section-padding: 100px;
 }
 
-/* Light Theme - Classic Editorial (accent swapped from crimson to teal —
-   reads calmer next to white, doesn't compete with the red/error status
-   color, and isn't shared with any of the category badge colors) */
-[data-theme="light"] {
-  --background: #FFFFFF;
-  --background-secondary: #F2F3F5;
-  --background-tertiary: #E7E9EC;
-  --foreground: #2C3E50;
-  --foreground-muted: #64748B;
-  --accent: #0F766E;
-  --accent-hover: #115E56;
-  --accent-muted: rgba(15, 118, 110, 0.1);
-  --border: #DADDE2;
-  --border-light: #E7E9EC;
-  --card: #FFFFFF;
-  --card-hover: #F9FAFB;
 
-  /* Overrides accent-contrast: white reads far better than black on this
-     accent (see WCAG note below) */
-  --accent-contrast: #FFFFFF;
-
-  /* Darker than the dark-theme info/status colors so each still hits 4.5:1+ on white */
-  --info: #1D4ED8;
-  --success: #15803D;
-  --error: #B91C1C;
-  --warning: #B45309;
-
-  /* WCAG-safe (4.9:1-7:1 on white) darker versions of the badge colors above */
-  --tag-red: #B91C1C;
-  --tag-red-bg: rgba(185, 28, 28, 0.1);
-  --tag-blue: #1D4ED8;
-  --tag-blue-bg: rgba(29, 78, 216, 0.1);
-  --tag-green: #15803D;
-  --tag-green-bg: rgba(21, 128, 61, 0.1);
-  --tag-purple: #7E22CE;
-  --tag-purple-bg: rgba(126, 34, 206, 0.1);
-  --tag-yellow: #A16207;
-  --tag-yellow-bg: rgba(161, 98, 7, 0.1);
-  --tag-gray: #4B5563;
-  --tag-gray-bg: rgba(75, 85, 99, 0.1);
-
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
-}
 
 /* ============================================
    TAILWIND THEME INTEGRATION
@@ -113,23 +53,7 @@
 
 @theme inline {
   /* Legacy Tokens */
-  --color-background: var(--background);
-  --color-background-secondary: var(--background-secondary);
-  --color-background-tertiary: var(--background-tertiary);
-  --color-foreground: var(--foreground);
-  --color-foreground-muted: var(--foreground-muted);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-accent-muted: var(--accent-muted);
-  --color-accent-contrast: var(--accent-contrast);
-  --color-border: var(--border);
-  --color-border-light: var(--border-light);
-  --color-card: var(--card);
-  --color-card-hover: var(--card-hover);
-  --color-success: var(--success);
-  --color-error: var(--error);
-  --color-warning: var(--warning);
-  --color-info: var(--info);
+  --color-primary-container: var(--primary-container);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-serif: var(--font-serif);
@@ -410,7 +334,7 @@
   }
 
   .btn-ghost:hover {
-    background: var(--accent-muted);
+    background: var(--primary-container);
     color: var(--accent);
   }
 
@@ -872,7 +796,7 @@
   }
 
   /* The sidebar sets its surface here rather than via the
-     `bg-background-secondary` utility, because the light-theme rule below
+     `bg-surface-container-low` utility, because the light-theme rule below
      adds top/bottom hairlines to that utility — correct for banded page
      sections, wrong for a full-height rail. */
   .admin-sidebar {
@@ -882,10 +806,10 @@
 }
 
 /* Light surfaces separate less visibly by color alone than dark ones do,
-   so alternating "banded" sections (bg-background-secondary) get a hairline
+   so alternating "banded" sections (bg-surface-container-low) get a hairline
    border as a backup cue in the light theme. Additive (not overriding a
    utility), so it's fine unlayered. */
-[data-theme="light"] .bg-background-secondary {
+[data-theme="light"] .bg-surface-container-low {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }

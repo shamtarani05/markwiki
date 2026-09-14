@@ -18,12 +18,12 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-background-secondary">
+    <section className="py-16 md:py-24 bg-surface-container-low">
       <div className="container">
         <div className="max-w-2xl mx-auto text-center">
           <span className="section-subtitle">Stay Updated</span>
           <h2 className="section-title mb-4">Join Our Wiki Community</h2>
-          <p className="text-foreground-muted mb-8">
+          <p className="text-on-surface-variant mb-8">
             Get notified about new wiki launches, trending pages, anime/game news, and community events
             delivered straight to your inbox.
           </p>
@@ -35,7 +35,7 @@ export default function NewsletterSection() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               required
-              className="flex-1 px-4 py-3 bg-background border border-border rounded-lg text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-accent transition-colors"
+              className="flex-1 px-4 py-3 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-accent transition-colors"
             />
             <button
               type="submit"
@@ -62,7 +62,7 @@ export default function NewsletterSection() {
             </p>
           )}
 
-          <p className="mt-4 text-foreground-muted text-xs">
+          <p className="mt-4 text-on-surface-variant text-xs">
             No spam, unsubscribe at any time.
           </p>
         </div>

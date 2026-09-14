@@ -48,8 +48,8 @@ export default function SitePagesList() {
         </div>
       ) : pages.length === 0 ? (
         <div className="admin-empty">
-          <Files size={22} className="mx-auto text-foreground-muted mb-3" aria-hidden="true" />
-          <p className="text-[13px] text-foreground mb-1">No site pages yet</p>
+          <Files size={22} className="mx-auto text-on-surface-variant mb-3" aria-hidden="true" />
+          <p className="text-[13px] text-on-surface mb-1">No site pages yet</p>
           <p className="admin-meta">
             Site pages are built with the same editor as wiki pages, but sit outside any wiki.
           </p>
@@ -63,12 +63,12 @@ export default function SitePagesList() {
               className="admin-tile no-underline group p-4 flex flex-col gap-3"
             >
               <div className="min-w-0">
-                <h2 className="text-[13px] font-semibold text-foreground truncate group-hover:text-accent transition-colors">
+                <h2 className="text-[13px] font-semibold text-on-surface truncate group-hover:text-primary transition-colors">
                   {p.title}
                 </h2>
                 {/* The slug is a literal URL the admin will type or share, so it
                     is set in the mono face — the one machine value on the screen. */}
-                <p className="font-mono text-[11.5px] text-foreground-muted mt-1 truncate">/{p.siteSlug}</p>
+                <p className="font-mono text-[11.5px] text-on-surface-variant mt-1 truncate">/{p.siteSlug}</p>
               </div>
               <div className="mt-auto flex items-center justify-between gap-2">
                 <span className={`admin-chip ${STATUS_BADGE[p.status] ?? 'badge-gray'}`}>

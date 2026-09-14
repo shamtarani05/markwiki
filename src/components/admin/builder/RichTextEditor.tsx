@@ -33,8 +33,8 @@ export default function RichTextEditor({
   };
 
   return (
-    <div className="border border-border rounded-lg overflow-hidden">
-      <div className="flex items-center gap-1 border-b border-border bg-background-secondary p-1.5">
+    <div className="border border-outline-variant/30 rounded-lg overflow-hidden">
+      <div className="flex items-center gap-1 border-b border-outline-variant/30 bg-surface-container-low p-1.5">
         <ToolbarButton label="Bold" onClick={() => exec('bold')}><strong>B</strong></ToolbarButton>
         <ToolbarButton label="Italic" onClick={() => exec('italic')}><em>I</em></ToolbarButton>
         <ToolbarButton label="Bullet list" onClick={() => exec('insertUnorderedList')}>&bull; List</ToolbarButton>
@@ -49,7 +49,7 @@ export default function RichTextEditor({
         suppressContentEditableWarning
         onInput={handleInput}
         onBlur={handleInput}
-        className="p-3 min-h-[120px] text-sm text-foreground focus:outline-none prose-wiki"
+        className="p-3 min-h-[120px] text-sm text-on-surface focus:outline-none prose-wiki"
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>
@@ -64,7 +64,7 @@ function ToolbarButton({ label, onClick, children }: { label: string; onClick: (
       aria-label={label}
       onMouseDown={(e) => e.preventDefault()}
       onClick={onClick}
-      className="px-2 py-1 text-xs rounded hover:bg-background-tertiary text-foreground-muted hover:text-foreground transition-colors"
+      className="px-2 py-1 text-xs rounded hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors"
     >
       {children}
     </button>

@@ -31,19 +31,16 @@ export async function getNavigationConfig(): Promise<{
   const defaultNavigation: NavigationConfig = {
     main: [
       { label: 'Home', url: '/', order: 0, isExternal: false },
-      { label: 'Anime', url: '/category/anime', order: 1, isExternal: false },
-      { label: 'Games', url: '/category/games', order: 2, isExternal: false },
-      { label: 'Novels', url: '/category/novels', order: 3, isExternal: false },
-      { label: 'Trending', url: '/trending', order: 4, isExternal: false },
-      { label: 'Community', url: '/community', order: 5, isExternal: false },
+      { label: 'Novels', url: '/books', order: 1, isExternal: false },
+      { label: 'Short Stories', url: '/stories', order: 2, isExternal: false },
+      { label: 'Blog', url: '/blog', order: 3, isExternal: false },
+      { label: 'Bookshelf', url: '/bookshelf', order: 4, isExternal: false },
     ],
     footer: [
-      { label: 'Explore', url: '/explore', order: 0, isExternal: false },
-      { label: 'Trending', url: '/trending', order: 1, isExternal: false },
-      { label: 'Categories', url: '/categories', order: 2, isExternal: false },
-      { label: 'Guidelines', url: '/guidelines', order: 3, isExternal: false },
-      { label: 'Terms', url: '/terms', order: 4, isExternal: false },
-      { label: 'Privacy', url: '/privacy', order: 5, isExternal: false },
+      { label: 'Home', url: '/', order: 0, isExternal: false },
+      { label: 'Novels', url: '/books', order: 1, isExternal: false },
+      { label: 'Short Stories', url: '/stories', order: 2, isExternal: false },
+      { label: 'Blog', url: '/blog', order: 3, isExternal: false },
     ],
   };
 

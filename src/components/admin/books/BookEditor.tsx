@@ -47,22 +47,22 @@ function SortableChapterItem({ chapter, bookId }: SortableChapterItemProps) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`flex items-center gap-3 p-3 bg-background-secondary border border-border rounded-lg ${
+      className={`flex items-center gap-3 p-3 bg-surface-container-low border border-outline-variant/30 rounded-lg ${
         isDragging ? 'shadow-xl scale-[1.02] border-accent' : 'hover:border-accent/50'
       }`}
     >
       <div
         {...attributes}
         {...listeners}
-        className="cursor-grab active:cursor-grabbing text-foreground-muted hover:text-accent"
+        className="cursor-grab active:cursor-grabbing text-on-surface-variant hover:text-primary"
       >
         <GripVertical size={16} />
       </div>
       <div className="flex-1 min-w-0">
-        <h4 className="font-semibold text-foreground text-sm truncate">
+        <h4 className="font-semibold text-on-surface text-sm truncate">
           Chapter {chapter.chapterNumber}: {chapter.title}
         </h4>
-        <div className="text-xs text-foreground-muted flex gap-2">
+        <div className="text-xs text-on-surface-variant flex gap-2">
           <span>{chapter.wordCount} words</span>
           <span>•</span>
           <span className={chapter.isPublished ? 'text-green-500' : 'text-yellow-500'}>
@@ -73,7 +73,7 @@ function SortableChapterItem({ chapter, bookId }: SortableChapterItemProps) {
       <div className="flex items-center gap-2">
         <Link
           href={`/admin/books/${bookId}/chapters/${chapter._id}`}
-          className="p-1.5 text-foreground-muted hover:text-accent hover:bg-background-tertiary rounded"
+          className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-variant rounded"
         >
           <Edit size={16} />
         </Link>
@@ -232,10 +232,10 @@ export default function BookEditor({ bookId }: { bookId?: string }) {
     <div className="max-w-5xl mx-auto py-8 px-4">
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
-          <Link href="/admin/books" className="p-2 rounded hover:bg-background-secondary text-foreground-muted">
+          <Link href="/admin/books" className="p-2 rounded hover:bg-surface-container-low text-on-surface-variant">
             <ArrowLeft size={20} />
           </Link>
-          <h1 className="text-2xl font-bold text-foreground">
+          <h1 className="text-2xl font-bold text-on-surface">
             {bookId ? 'Edit Book' : 'New Book'}
           </h1>
         </div>
@@ -256,46 +256,46 @@ export default function BookEditor({ bookId }: { bookId?: string }) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
           <div className="card p-6 space-y-4">
-            <h2 className="text-lg font-bold text-foreground border-b border-border pb-2">Basic Info</h2>
+            <h2 className="text-lg font-bold text-on-surface border-b border-outline-variant/30 pb-2">Basic Info</h2>
             
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-foreground-muted uppercase">Title</label>
+              <label className="text-xs font-semibold text-on-surface-variant uppercase">Title</label>
               <input
                 type="text"
                 value={title}
                 onChange={handleTitleChange}
-                className="w-full bg-background border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:border-accent"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent"
                 placeholder="Book title..."
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-foreground-muted uppercase">Slug (URL)</label>
+              <label className="text-xs font-semibold text-on-surface-variant uppercase">Slug (URL)</label>
               <input
                 type="text"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
-                className="w-full bg-background border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:border-accent"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent"
                 placeholder="book-title"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-foreground-muted uppercase">Synopsis (Short)</label>
+              <label className="text-xs font-semibold text-on-surface-variant uppercase">Synopsis (Short)</label>
               <textarea
                 value={synopsis}
                 onChange={(e) => setSynopsis(e.target.value)}
-                className="w-full bg-background border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:border-accent h-24"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent h-24"
                 placeholder="Brief summary for cards..."
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-foreground-muted uppercase">Description (Full)</label>
+              <label className="text-xs font-semibold text-on-surface-variant uppercase">Description (Full)</label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full bg-background border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:border-accent h-40"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent h-40"
                 placeholder="Full description..."
               />
             </div>
@@ -303,18 +303,18 @@ export default function BookEditor({ bookId }: { bookId?: string }) {
 
           {bookId && (
             <div className="card p-6">
-              <div className="flex items-center justify-between mb-4 border-b border-border pb-2">
-                <h2 className="text-lg font-bold text-foreground">Chapters</h2>
+              <div className="flex items-center justify-between mb-4 border-b border-outline-variant/30 pb-2">
+                <h2 className="text-lg font-bold text-on-surface">Chapters</h2>
                 <Link
                   href={`/admin/books/${bookId}/chapters/new`}
-                  className="text-accent hover:underline text-sm font-medium flex items-center gap-1"
+                  className="text-primary hover:underline text-sm font-medium flex items-center gap-1"
                 >
                   <Plus size={14} /> Add Chapter
                 </Link>
               </div>
 
               {chapters.length === 0 ? (
-                <div className="text-center py-8 text-foreground-muted text-sm border-2 border-dashed border-border rounded-lg">
+                <div className="text-center py-8 text-on-surface-variant text-sm border-2 border-dashed border-outline-variant/30 rounded-lg">
                   No chapters yet. Add your first chapter.
                 </div>
               ) : (
@@ -341,14 +341,14 @@ export default function BookEditor({ bookId }: { bookId?: string }) {
 
         <div className="space-y-6">
           <div className="card p-6 space-y-4">
-            <h2 className="text-lg font-bold text-foreground border-b border-border pb-2">Metadata</h2>
+            <h2 className="text-lg font-bold text-on-surface border-b border-outline-variant/30 pb-2">Metadata</h2>
             
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-foreground-muted uppercase">Status</label>
+              <label className="text-xs font-semibold text-on-surface-variant uppercase">Status</label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="w-full bg-background border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:border-accent"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent"
               >
                 <option value="draft">Draft (Hidden)</option>
                 <option value="ongoing">Ongoing</option>
@@ -359,11 +359,11 @@ export default function BookEditor({ bookId }: { bookId?: string }) {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-foreground-muted uppercase">Format</label>
+              <label className="text-xs font-semibold text-on-surface-variant uppercase">Format</label>
               <select
                 value={format}
                 onChange={(e) => setFormat(e.target.value)}
-                className="w-full bg-background border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:border-accent"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent"
               >
                 <option value="novel">Novel (Text)</option>
                 <option value="webtoon">Webtoon (Images)</option>
@@ -371,11 +371,11 @@ export default function BookEditor({ bookId }: { bookId?: string }) {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-foreground-muted uppercase">Category</label>
+              <label className="text-xs font-semibold text-on-surface-variant uppercase">Category</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-background border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:border-accent"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent"
               >
                 <option value="">Select Category</option>
                 {categories.map((c) => (
@@ -385,39 +385,39 @@ export default function BookEditor({ bookId }: { bookId?: string }) {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-foreground-muted uppercase">Cover Image URL</label>
+              <label className="text-xs font-semibold text-on-surface-variant uppercase">Cover Image URL</label>
               <input
                 type="text"
                 value={coverImage}
                 onChange={(e) => setCoverImage(e.target.value)}
-                className="w-full bg-background border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:border-accent"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent"
                 placeholder="https://..."
               />
               {coverImage && (
-                <div className="mt-2 aspect-[2/3] w-32 rounded border border-border overflow-hidden bg-background-secondary mx-auto">
+                <div className="mt-2 aspect-[2/3] w-32 rounded border border-outline-variant/30 overflow-hidden bg-surface-container-low mx-auto">
                   <img src={coverImage} alt="Cover preview" className="w-full h-full object-cover" />
                 </div>
               )}
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-foreground-muted uppercase">Genres (Comma separated)</label>
+              <label className="text-xs font-semibold text-on-surface-variant uppercase">Genres (Comma separated)</label>
               <input
                 type="text"
                 value={genres}
                 onChange={(e) => setGenres(e.target.value)}
-                className="w-full bg-background border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:border-accent"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent"
                 placeholder="Fantasy, Action, Romance"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-foreground-muted uppercase">Tags (Comma separated)</label>
+              <label className="text-xs font-semibold text-on-surface-variant uppercase">Tags (Comma separated)</label>
               <input
                 type="text"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
-                className="w-full bg-background border border-border rounded px-3 py-2 text-foreground focus:outline-none focus:border-accent"
+                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent"
                 placeholder="magic, sword, hero"
               />
             </div>

@@ -82,8 +82,8 @@ export default function HomepageSectionRenderer({
     case 'latestStories':
     case 'blogPosts':
       return (
-        <div className="container py-8 text-center border-2 border-dashed border-border rounded-lg my-8">
-          <p className="text-foreground-muted">
+        <div className="container py-8 text-center border-2 border-dashed border-outline-variant/30 rounded-lg my-8">
+          <p className="text-on-surface-variant">
             [{section.title || section.type}] — Component not implemented yet
           </p>
         </div>

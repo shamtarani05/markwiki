@@ -126,7 +126,7 @@ export default function TextEditor({
   return (
     <div>
       {/* Toolbar — same ribbon language as the block editor */}
-      <div className="flex items-center gap-1 mb-3 px-2 py-1.5 border border-border rounded-lg bg-background-secondary flex-wrap">
+      <div className="flex items-center gap-1 mb-3 px-2 py-1.5 border border-outline-variant/30 rounded-lg bg-surface-container-low flex-wrap">
         <ToolbarIconButton label="Undo" onClick={() => editor?.chain().focus().undo().run()} disabled={!editor?.can().undo()}>↺</ToolbarIconButton>
         <ToolbarIconButton label="Redo" onClick={() => editor?.chain().focus().redo().run()} disabled={!editor?.can().redo()}>↻</ToolbarIconButton>
         <Divider />
@@ -137,7 +137,7 @@ export default function TextEditor({
             if (v === 'p') editor?.chain().focus().setParagraph().run();
             else editor?.chain().focus().toggleHeading({ level: v === 'h2' ? 2 : 3 }).run();
           }}
-          className="h-7 px-2 text-xs bg-background border border-border rounded-md text-foreground"
+          className="h-7 px-2 text-xs bg-surface-container-lowest border border-outline-variant/30 rounded-md text-on-surface"
         >
           <option value="p">Paragraph</option>
           <option value="h2">Heading</option>
@@ -150,7 +150,7 @@ export default function TextEditor({
             if (e.target.value) editor?.chain().focus().setFontSize(e.target.value).run();
             else editor?.chain().focus().unsetFontSize().run();
           }}
-          className="h-7 px-2 text-xs bg-background border border-border rounded-md text-foreground"
+          className="h-7 px-2 text-xs bg-surface-container-lowest border border-outline-variant/30 rounded-md text-on-surface"
           title="Font size"
         >
           {FONT_SIZES.map((s) => (
@@ -179,20 +179,20 @@ export default function TextEditor({
         <ToolbarIconButton label="Insert image" onClick={() => setImagePickerOpen(true)}>🖼</ToolbarIconButton>
         <ToolbarIconButton label="Insert video" onClick={() => setVideoPickerOpen(true)}>▶</ToolbarIconButton>
         <Divider />
-        <button type="button" onClick={toggleInfobox} className="px-2 py-1 text-xs rounded-md text-foreground-muted hover:text-foreground hover:bg-background-tertiary">
+        <button type="button" onClick={toggleInfobox} className="px-2 py-1 text-xs rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-variant">
           Infobox
         </button>
         <button
           type="button"
           onClick={() => setDoc((prev) => ({ ...prev, tocEnabled: !prev.tocEnabled }))}
-          className={`px-2 py-1 text-xs rounded-md ${doc.tocEnabled ? 'text-accent' : 'text-foreground-muted hover:text-foreground hover:bg-background-tertiary'}`}
+          className={`px-2 py-1 text-xs rounded-md ${doc.tocEnabled ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-variant'}`}
         >
           Contents
         </button>
         <Divider />
-        <div className="flex rounded-md border border-border overflow-hidden">
-          <button type="button" onClick={() => setMode('edit')} className={`px-2.5 py-1 text-xs ${mode === 'edit' ? 'bg-accent text-accent-contrast' : 'text-foreground-muted hover:bg-background-tertiary'}`}>Edit</button>
-          <button type="button" onClick={() => setMode('preview')} className={`px-2.5 py-1 text-xs ${mode === 'preview' ? 'bg-accent text-accent-contrast' : 'text-foreground-muted hover:bg-background-tertiary'}`}>Preview</button>
+        <div className="flex rounded-md border border-outline-variant/30 overflow-hidden">
+          <button type="button" onClick={() => setMode('edit')} className={`px-2.5 py-1 text-xs ${mode === 'edit' ? 'bg-primary text-primary-contrast' : 'text-on-surface-variant hover:bg-surface-variant'}`}>Edit</button>
+          <button type="button" onClick={() => setMode('preview')} className={`px-2.5 py-1 text-xs ${mode === 'preview' ? 'bg-primary text-primary-contrast' : 'text-on-surface-variant hover:bg-surface-variant'}`}>Preview</button>
         </div>
         <div className="flex-1" />
         <button
@@ -210,12 +210,12 @@ export default function TextEditor({
         <button
           type="button"
           onClick={() => setCoverPickerOpen(true)}
-          className="w-16 h-10 rounded-md border border-border bg-background-secondary overflow-hidden shrink-0 flex items-center justify-center text-foreground-muted hover:border-accent transition-colors"
+          className="w-16 h-10 rounded-md border border-outline-variant/30 bg-surface-container-low overflow-hidden shrink-0 flex items-center justify-center text-on-surface-variant hover:border-accent transition-colors"
           title={coverImage ? 'Change cover image' : 'Add a cover image'}
         >
           {coverImage ? <img src={coverImage} alt="" className="w-full h-full object-cover" /> : <span className="text-xs">+</span>}
         </button>
-        <span className="text-xs text-foreground-muted">
+        <span className="text-xs text-on-surface-variant">
           {coverImage ? 'Cover image set' : 'No cover image — used as the card thumbnail and social preview'}
         </span>
         {coverImage && (
@@ -230,7 +230,7 @@ export default function TextEditor({
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Untitled page"
-        className="w-full text-4xl font-bold bg-transparent text-foreground focus:outline-none mb-1 pb-2 border-b border-border"
+        className="w-full text-4xl font-bold bg-transparent text-on-surface focus:outline-none mb-1 pb-2 border-b border-outline-variant/30"
       />
 
       {showEditSummary && (
@@ -241,7 +241,7 @@ export default function TextEditor({
           onChange={(e) => setEditSummary(e.target.value)}
           placeholder="Edit summary (required) — briefly describe what you changed"
           maxLength={500}
-          className="w-full mt-3 mb-1 px-3 py-2 text-sm bg-background-secondary border border-border rounded-lg text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-accent transition-colors"
+          className="w-full mt-3 mb-1 px-3 py-2 text-sm bg-surface-container-low border border-outline-variant/30 rounded-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-accent transition-colors"
         />
       )}
 
@@ -254,18 +254,18 @@ export default function TextEditor({
               <EditorContent editor={editor} />
 
               {doc.otherBlocks.length > 0 && (
-                <div className="mt-8 pt-4 border-t border-border">
-                  <p className="text-[11px] font-semibold text-foreground-muted/70 uppercase tracking-wider mb-2">
+                <div className="mt-8 pt-4 border-t border-outline-variant/30">
+                  <p className="text-[11px] font-semibold text-on-surface-variant/70 uppercase tracking-wider mb-2">
                     Other blocks on this page (edit these in the Block editor)
                   </p>
                   <div className="space-y-1">
                     {doc.otherBlocks.map((b) => (
-                      <div key={b.id} className="flex items-center justify-between px-2 py-1.5 rounded-md bg-background-secondary text-sm">
-                        <span className="text-foreground-muted">{BLOCK_LABELS[b.type]}</span>
+                      <div key={b.id} className="flex items-center justify-between px-2 py-1.5 rounded-md bg-surface-container-low text-sm">
+                        <span className="text-on-surface-variant">{BLOCK_LABELS[b.type]}</span>
                         <button
                           type="button"
                           onClick={() => setDoc((prev) => ({ ...prev, otherBlocks: prev.otherBlocks.filter((x) => x.id !== b.id) }))}
-                          className="text-xs text-foreground-muted hover:text-[var(--tag-red)]"
+                          className="text-xs text-on-surface-variant hover:text-[var(--tag-red)]"
                         >
                           Remove
                         </button>
@@ -280,20 +280,20 @@ export default function TextEditor({
               <div className="w-full lg:w-80 shrink-0 space-y-3 mt-6 lg:mt-0">
                 {doc.infobox && (
                   <div className="card p-3">
-                    <p className="text-[11px] font-semibold text-foreground-muted/70 uppercase tracking-wider mb-2">Infobox</p>
+                    <p className="text-[11px] font-semibold text-on-surface-variant/70 uppercase tracking-wider mb-2">Infobox</p>
                     <input
                       type="text"
                       value={doc.infobox.props.title}
                       onChange={(e) => setDoc((prev) => (prev.infobox ? { ...prev, infobox: { ...prev.infobox, props: { ...prev.infobox.props, title: e.target.value } } } : prev))}
                       placeholder="Infobox title"
-                      className="w-full mb-2 px-2 py-1.5 text-sm bg-background border border-border rounded-md text-foreground"
+                      className="w-full mb-2 px-2 py-1.5 text-sm bg-surface-container-lowest border border-outline-variant/30 rounded-md text-on-surface"
                     />
                     <input
                       type="text"
                       value={doc.infobox.props.image ?? ''}
                       onChange={(e) => setDoc((prev) => (prev.infobox ? { ...prev, infobox: { ...prev.infobox, props: { ...prev.infobox.props, image: e.target.value } } } : prev))}
                       placeholder="Image URL"
-                      className="w-full mb-2 px-2 py-1.5 text-sm bg-background border border-border rounded-md text-foreground"
+                      className="w-full mb-2 px-2 py-1.5 text-sm bg-surface-container-lowest border border-outline-variant/30 rounded-md text-on-surface"
                     />
                     <div className="space-y-1.5">
                       {doc.infobox.props.fields.map((f, i) => (
@@ -303,14 +303,14 @@ export default function TextEditor({
                             value={f.label}
                             onChange={(e) => updateInfoboxField(i, { label: e.target.value })}
                             placeholder="Label"
-                            className="px-2 py-1 text-xs bg-background border border-border rounded"
+                            className="px-2 py-1 text-xs bg-surface-container-lowest border border-outline-variant/30 rounded"
                           />
                           <input
                             type="text"
                             value={f.value}
                             onChange={(e) => updateInfoboxField(i, { value: e.target.value })}
                             placeholder="Value"
-                            className="px-2 py-1 text-xs bg-background border border-border rounded"
+                            className="px-2 py-1 text-xs bg-surface-container-lowest border border-outline-variant/30 rounded"
                           />
                         </div>
                       ))}
@@ -318,7 +318,7 @@ export default function TextEditor({
                     <button
                       type="button"
                       onClick={() => setDoc((prev) => (prev.infobox ? { ...prev, infobox: { ...prev.infobox, props: { ...prev.infobox.props, fields: [...prev.infobox.props.fields, { label: '', value: '' }] } } } : prev))}
-                      className="mt-2 text-xs text-accent hover:underline"
+                      className="mt-2 text-xs text-primary hover:underline"
                     >
                       + Add field
                     </button>
@@ -332,7 +332,7 @@ export default function TextEditor({
                   </div>
                 )}
                 {doc.tocEnabled && (
-                  <div className="card p-3 text-xs text-foreground-muted">
+                  <div className="card p-3 text-xs text-on-surface-variant">
                     Table of contents — auto-built from your headings, shown to readers.
                   </div>
                 )}
@@ -386,7 +386,7 @@ function ToolbarIconButton({
       disabled={disabled}
       onClick={onClick}
       className={`min-w-7 h-7 px-1.5 flex items-center justify-center rounded-md text-sm transition-colors disabled:opacity-30 disabled:hover:bg-transparent ${
-        active ? 'bg-accent-muted text-accent' : 'text-foreground-muted hover:text-foreground hover:bg-background-tertiary'
+        active ? 'bg-primary-muted text-primary' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-variant'
       }`}
     >
       {children}

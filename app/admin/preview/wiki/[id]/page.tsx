@@ -20,21 +20,21 @@ export default async function AdminWikiPreview({ params }: { params: Promise<{ i
       <div className="mb-4 px-4 py-2 rounded-lg bg-[var(--tag-yellow-bg)] text-[var(--tag-yellow)] text-sm font-medium">
         Pending preview — status: {wiki.status}. Not visible to the public yet.
       </div>
-      <h1 className="text-3xl font-bold text-foreground mb-1">{wiki.name} Wiki</h1>
-      {wiki.description && <p className="text-foreground-muted mb-6">{wiki.description}</p>}
+      <h1 className="text-3xl font-bold text-on-surface mb-1">{wiki.name} Wiki</h1>
+      {wiki.description && <p className="text-on-surface-variant mb-6">{wiki.description}</p>}
       {coverPage ? (
         <BlockListRenderer blocks={coverPage.blocks as Block[]} />
       ) : (
-        <p className="text-foreground-muted">No cover page.</p>
+        <p className="text-on-surface-variant">No cover page.</p>
       )}
       {otherPages.length > 0 && (
         <div className="mt-8">
-          <h2 className="text-lg font-semibold text-foreground mb-3">Pages in this wiki</h2>
+          <h2 className="text-lg font-semibold text-on-surface mb-3">Pages in this wiki</h2>
           <ul className="space-y-1">
             {otherPages.map((p) => (
               <li key={p._id.toString()}>
-                <Link href={`/admin/preview/page/${p._id}`} className="text-accent hover:underline">{p.title}</Link>
-                <span className="text-xs text-foreground-muted ml-2">({p.status})</span>
+                <Link href={`/admin/preview/page/${p._id}`} className="text-primary hover:underline">{p.title}</Link>
+                <span className="text-xs text-on-surface-variant ml-2">({p.status})</span>
               </li>
             ))}
           </ul>

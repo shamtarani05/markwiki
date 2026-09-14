@@ -95,15 +95,15 @@ export default function ChapterReader({ book, chapter, prevChapter, nextChapter,
   }, [initialProgress]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col relative transition-colors duration-300">
+    <div className="min-h-screen bg-surface-container-lowest text-on-surface flex flex-col relative transition-colors duration-300">
       {/* Top Navbar */}
       <div 
-        className={`fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border transition-transform duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30 transition-transform duration-300 ${
           showControls ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
         <div className="container h-14 flex items-center justify-between">
-          <Link href={`/book/${book.slug}`} className="flex items-center gap-2 text-foreground-muted hover:text-foreground transition-colors">
+          <Link href={`/book/${book.slug}`} className="flex items-center gap-2 text-on-surface-variant hover:text-on-surface transition-colors">
             <ChevronLeft size={20} />
             <span className="font-medium hidden sm:inline">{book.title}</span>
           </Link>
@@ -112,20 +112,20 @@ export default function ChapterReader({ book, chapter, prevChapter, nextChapter,
             {chapter.title}
           </h1>
 
-          <div className="flex items-center gap-4 text-foreground-muted">
-            <button className="hover:text-foreground transition-colors" title="Settings">
+          <div className="flex items-center gap-4 text-on-surface-variant">
+            <button className="hover:text-on-surface transition-colors" title="Settings">
               <Settings size={20} />
             </button>
-            <button className="hover:text-foreground transition-colors" title="Bookmark">
+            <button className="hover:text-on-surface transition-colors" title="Bookmark">
               <Bookmark size={20} />
             </button>
           </div>
         </div>
         
         {/* Progress Bar */}
-        <div className="h-0.5 w-full bg-background-secondary absolute bottom-0 left-0">
+        <div className="h-0.5 w-full bg-surface-container-low absolute bottom-0 left-0">
           <div 
-            className="h-full bg-accent transition-all duration-150" 
+            className="h-full bg-primary transition-all duration-150" 
             style={{ width: `${readProgress}%` }}
           />
         </div>
@@ -136,7 +136,7 @@ export default function ChapterReader({ book, chapter, prevChapter, nextChapter,
         className="flex-1 w-full max-w-3xl mx-auto px-6 py-24 sm:py-32"
         style={{ fontSize: `${fontSize}px` }}
       >
-        <h1 className="text-3xl sm:text-4xl font-bold mb-12 text-center text-foreground leading-tight">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-12 text-center text-on-surface leading-tight">
           {chapter.title}
         </h1>
 
@@ -155,31 +155,31 @@ export default function ChapterReader({ book, chapter, prevChapter, nextChapter,
         ) : (
           <div 
             ref={contentRef}
-            className="prose prose-lg dark:prose-invert max-w-none prose-p:leading-relaxed prose-p:mb-6 marker:text-accent"
+            className="prose prose-lg dark:prose-invert max-w-none prose-p:leading-relaxed prose-p:mb-6 marker:text-primary"
             dangerouslySetInnerHTML={{ __html: chapter.content || '' }}
           />
         )}
 
         {chapter.authorNote && (
-          <div className="mt-16 pt-8 border-t border-border bg-background-secondary/50 rounded-xl p-6">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-accent mb-4">Author's Note</h3>
-            <p className="text-sm leading-relaxed text-foreground-muted whitespace-pre-wrap">
+          <div className="mt-16 pt-8 border-t border-outline-variant/30 bg-surface-container-low/50 rounded-xl p-6">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-primary mb-4">Author's Note</h3>
+            <p className="text-sm leading-relaxed text-on-surface-variant whitespace-pre-wrap">
               {chapter.authorNote}
             </p>
           </div>
         )}
 
         {/* Bottom Navigation */}
-        <div className="mt-16 pt-8 border-t border-border flex items-center justify-between gap-4">
+        <div className="mt-16 pt-8 border-t border-outline-variant/30 flex items-center justify-between gap-4">
           {prevChapter ? (
             <Link 
               href={`/book/${book.slug}/${prevChapter.slug}`}
-              className="flex-1 flex items-center gap-3 p-4 rounded-xl border border-border hover:border-accent/50 hover:bg-background-secondary transition-all group"
+              className="flex-1 flex items-center gap-3 p-4 rounded-xl border border-outline-variant/30 hover:border-accent/50 hover:bg-surface-container-low transition-all group"
             >
-              <ArrowLeft size={20} className="text-foreground-muted group-hover:text-accent transition-colors shrink-0" />
+              <ArrowLeft size={20} className="text-on-surface-variant group-hover:text-primary transition-colors shrink-0" />
               <div className="min-w-0">
-                <div className="text-xs text-foreground-muted uppercase tracking-wider font-semibold mb-1">Previous</div>
-                <div className="font-medium truncate text-foreground group-hover:text-accent transition-colors">
+                <div className="text-xs text-on-surface-variant uppercase tracking-wider font-semibold mb-1">Previous</div>
+                <div className="font-medium truncate text-on-surface group-hover:text-primary transition-colors">
                   {prevChapter.title}
                 </div>
               </div>
@@ -191,18 +191,18 @@ export default function ChapterReader({ book, chapter, prevChapter, nextChapter,
           {nextChapter ? (
             <Link 
               href={`/book/${book.slug}/${nextChapter.slug}`}
-              className="flex-1 flex items-center justify-end gap-3 p-4 rounded-xl border border-border hover:border-accent/50 hover:bg-background-secondary transition-all text-right group"
+              className="flex-1 flex items-center justify-end gap-3 p-4 rounded-xl border border-outline-variant/30 hover:border-accent/50 hover:bg-surface-container-low transition-all text-right group"
             >
               <div className="min-w-0">
-                <div className="text-xs text-foreground-muted uppercase tracking-wider font-semibold mb-1">Next</div>
-                <div className="font-medium truncate text-foreground group-hover:text-accent transition-colors">
+                <div className="text-xs text-on-surface-variant uppercase tracking-wider font-semibold mb-1">Next</div>
+                <div className="font-medium truncate text-on-surface group-hover:text-primary transition-colors">
                   {nextChapter.title}
                 </div>
               </div>
-              <ArrowRight size={20} className="text-foreground-muted group-hover:text-accent transition-colors shrink-0" />
+              <ArrowRight size={20} className="text-on-surface-variant group-hover:text-primary transition-colors shrink-0" />
             </Link>
           ) : (
-            <div className="flex-1 p-4 rounded-xl border border-border bg-background-secondary text-center text-foreground-muted font-medium">
+            <div className="flex-1 p-4 rounded-xl border border-outline-variant/30 bg-surface-container-low text-center text-on-surface-variant font-medium">
               You've reached the end!
             </div>
           )}
