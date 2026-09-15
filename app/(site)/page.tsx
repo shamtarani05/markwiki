@@ -164,6 +164,21 @@ export default async function Page() {
     points: 'Active'
   }));
 
+  // 8. Global Stats
+  const totalArticles = await WikiPage.countDocuments({ status: 'published' });
+  const viewsAggregation = await WikiPage.aggregate([
+    { $match: { status: 'published' } },
+    { $group: { _id: null, totalViews: { $sum: '$viewCount' } } }
+  ]);
+  const totalViews = viewsAggregation[0]?.totalViews || 0;
+  const activeContributors = await User.countDocuments({ role: { $in: ['admin', 'editor', 'contributor'] } });
+  
+  const stats = {
+    totalArticles,
+    totalViews,
+    activeContributors
+  };
+
   const mockData = {
     readingItems,
     categories,
@@ -172,6 +187,7 @@ export default async function Page() {
     communityUpdates,
     recentActivity,
     contributors,
+    stats,
   };
 
   return (

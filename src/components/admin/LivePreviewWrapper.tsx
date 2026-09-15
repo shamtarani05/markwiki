@@ -88,7 +88,7 @@ export default function LivePreviewWrapper({ initialBlocks, initialTheme, mockDa
           // Render specific homepage blocks using the mockData (like HomepageSectionRenderer did)
           switch (block.type) {
             case 'hero':
-              return <HeroSection settings={block.props as any} />;
+              return <HeroSection settings={block.props as any} stats={mockData.stats} />;
             case 'continueReading':
               return <ContinueReadingSection items={mockData.readingItems} settings={block.props as any} />;
             case 'categories':
@@ -108,7 +108,7 @@ export default function LivePreviewWrapper({ initialBlocks, initialTheme, mockDa
                 />
               );
             case 'publishCTA':
-              return <PublishCTASection settings={block.props as any} />;
+              return <PublishCTASection settings={block.props as any} stats={mockData.stats} />;
             case 'newsletter':
               return <NewsletterSection />;
             case 'featuredBooks':

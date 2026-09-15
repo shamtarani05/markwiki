@@ -2,7 +2,13 @@
 import Link from 'next/link';
 import type { HomepageSectionSettings } from '@/src/lib/db/homepageSections';
 
-export default function HeroSection({ settings }: { settings?: HomepageSectionSettings | any }) {
+export default function HeroSection({ settings, stats }: { settings?: HomepageSectionSettings | any, stats?: { totalArticles: number, totalViews: number, activeContributors: number } }) {
+  const formatNumber = (num: number = 0) => {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    return num.toString();
+  };
+
   return (
     <section className="relative w-full overflow-hidden bg-transparent -mt-[72px] pt-[132px] pb-space-2xl min-h-[798px] flex flex-col justify-between">
 <div className="relative z-10 max-w-[1440px] w-full mx-auto px-margin-sm md:px-margin lg:px-margin-lg flex flex-col items-center text-center">
@@ -56,19 +62,19 @@ export default function HeroSection({ settings }: { settings?: HomepageSectionSe
 <span className="w-3 h-3 rounded-full bg-primary/30 flex items-center justify-center">
 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
 </span>
-<span className="font-headline-sm text-headline-sm text-on-surface">482,190</span>
+<span className="font-headline-sm text-headline-sm text-on-surface">{formatNumber(stats?.totalArticles)}</span>
 <span className="font-label-caps text-label-caps uppercase text-outline tracking-wider">Canon Articles</span>
 </div>
 <div className="hidden sm:block w-px h-6 bg-surface-variant"></div>
 <div className="flex items-center gap-space-sm">
 <span className="material-symbols-outlined text-secondary text-lg">visibility</span>
-<span className="font-headline-sm text-headline-sm text-on-surface">3.4M</span>
-<span className="font-label-caps text-label-caps uppercase text-outline tracking-wider">Daily Readers</span>
+<span className="font-headline-sm text-headline-sm text-on-surface">{formatNumber(stats?.totalViews)}</span>
+<span className="font-label-caps text-label-caps uppercase text-outline tracking-wider">Total Views</span>
 </div>
 <div className="hidden sm:block w-px h-6 bg-surface-variant"></div>
 <div className="flex items-center gap-space-sm">
 <span className="material-symbols-outlined text-tertiary text-lg">auto_stories</span>
-<span className="font-headline-sm text-headline-sm text-on-surface">14,200</span>
+<span className="font-headline-sm text-headline-sm text-on-surface">{formatNumber(stats?.activeContributors)}</span>
 <span className="font-label-caps text-label-caps uppercase text-outline tracking-wider">Active Lore-Masters</span>
 </div>
 </div>

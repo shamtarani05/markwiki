@@ -2,7 +2,10 @@
 import Link from 'next/link';
 import type { HomepageSectionSettings } from '@/src/lib/db/homepageSections';
 
-export default function PublishCTASection({ settings }: { settings?: HomepageSectionSettings | any }) {
+export default function PublishCTASection({ settings, stats }: { settings?: HomepageSectionSettings | any, stats?: { totalArticles: number } }) {
+  const articleCount = stats?.totalArticles ? Math.floor(stats.totalArticles / 1000) * 1000 : 482000;
+  const formattedCount = articleCount >= 1000 ? `${(articleCount / 1000)}k+` : `${articleCount}+`;
+  
   return (
     <section className="w-full bg-transparent py-space-2xl">
 <div className="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg flex flex-col gap-space-xl">
@@ -20,7 +23,7 @@ export default function PublishCTASection({ settings }: { settings?: HomepageSec
                 Don&apos;t know what to explore?
               </h3>
 <p className="font-body-default text-body-default text-on-surface-variant mt-1 max-w-xl">
-                Dive headfirst into an obscure corner of fiction. Let our algorithmic dice drop you directly inside one of 482,000+ deep lore entries.
+                Dive headfirst into an obscure corner of fiction. Let our algorithmic dice drop you directly inside one of {formattedCount} deep lore entries.
               </p>
 </div>
 </div>
