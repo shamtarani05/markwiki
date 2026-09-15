@@ -4,11 +4,21 @@ import connectDB from '@/src/lib/db/connection';
 import { Wiki } from '@/src/lib/db/models';
 import ReactionButton from '@/src/components/community/ReactionButton';
 import CommentSection from '@/src/components/community/CommentSection';
+import { getSessionUser } from '@/src/lib/auth/getSessionUser';
+import { isTrustedRole } from '@/src/lib/auth/roles';
 
 export default async function Page({ params }: { params: Promise<{ wikiSlug: string }> }) {
   const { wikiSlug } = await params;
   await connectDB();
-  const wiki = await Wiki.findOne({ slug: wikiSlug, status: 'approved' }).lean();
+  
+  const session = await getSessionUser();
+  const isAdmin = session && isTrustedRole(session.role);
+  
+  const query = isAdmin 
+    ? { slug: wikiSlug } 
+    : { slug: wikiSlug, status: 'approved' as const };
+    
+  const wiki = await Wiki.findOne(query).lean();
   
   if (!wiki) {
     return notFound();

@@ -51,8 +51,8 @@ export default function InsertMenu({
         + Insert block
       </button>
       {open && (
-        <div className="absolute left-0 top-full mt-1 z-20 w-72 card p-1.5 shadow-xl max-h-[70vh] overflow-y-auto">
-          <p className="px-2 py-1 text-[11px] text-[#706F78]">Click to add, or drag onto the page</p>
+        <div className="absolute left-0 top-full mt-2 z-50 w-72 bg-surface-container-high border border-outline-variant/30 rounded-xl p-2 shadow-2xl max-h-[70vh] overflow-y-auto backdrop-blur-xl">
+          <p className="px-2 py-1 mb-1 text-[11px] font-label-mono text-on-surface-variant uppercase tracking-wider">Click to add, or drag onto the page</p>
           {PALETTE_ORDER.map((type) => {
             const disabled = SINGLETON_TYPES.has(type) && existingTypes.has(type);
             return (

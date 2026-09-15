@@ -20,7 +20,7 @@ interface IComment {
 }
 
 interface CommentSectionProps {
-  contentType: 'page' | 'book' | 'chapter' | 'blog' | 'story';
+  contentType: 'wiki' | 'page' | 'book' | 'chapter' | 'blog' | 'story';
   contentId: string;
 }
 

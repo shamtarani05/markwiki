@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
-export type CommentableType = 'page' | 'book' | 'chapter' | 'blog' | 'story';
+export type CommentableType = 'wiki' | 'page' | 'book' | 'chapter' | 'blog' | 'story';
 
 export interface IComment extends Document {
   _id: mongoose.Types.ObjectId;
@@ -23,7 +23,7 @@ const CommentSchema = new Schema<IComment>(
   {
     contentType: {
       type: String,
-      enum: ['page', 'book', 'chapter', 'blog', 'story'],
+      enum: ['wiki', 'page', 'book', 'chapter', 'blog', 'story'],
       required: true,
     },
     contentId: {

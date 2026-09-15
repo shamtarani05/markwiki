@@ -6,6 +6,7 @@ import { Page, ReadingProgress, Wiki } from '@/src/lib/db/models';
 import { BlockListRenderer } from '@/src/components/blocks/BlockRenderer';
 import type { Block } from '@/src/lib/blocks/types';
 import { getSessionUser } from '@/src/lib/auth/getSessionUser';
+import { isTrustedRole } from '@/src/lib/auth/roles';
 import ReactionButton from '@/src/components/community/ReactionButton';
 import CommentSection from '@/src/components/community/CommentSection';
 
@@ -21,13 +22,21 @@ interface Props {
 // content present in the initial response.
 async function loadPage(wikiSlug: string, pageSlug: string) {
   await connectDB();
+  
+  const session = await getSessionUser();
+  const isAdmin = session && isTrustedRole(session.role);
+
   // The wiki itself must be approved too — otherwise a page inside a
-  // draft/pending wiki stays publicly readable even though the wiki&apos;s own
+  // draft/pending wiki stays publicly readable even though the wiki's own
   // hub page 404s.
-  const wiki = await Wiki.findOne({ slug: wikiSlug, status: 'approved' }).lean();
+  const wikiQuery = isAdmin ? { slug: wikiSlug } : { slug: wikiSlug, status: 'approved' as const };
+  const wiki = await Wiki.findOne(wikiQuery).lean();
   if (!wiki) return null;
-  const page = await Page.findOne({ wiki: wiki._id, slug: pageSlug, status: 'published' }).lean();
+  
+  const pageQuery = isAdmin ? { wiki: wiki._id, slug: pageSlug } : { wiki: wiki._id, slug: pageSlug, status: 'published' as const };
+  const page = await Page.findOne(pageQuery).lean();
   if (!page) return null;
+  
   return { wiki, page };
 }
 

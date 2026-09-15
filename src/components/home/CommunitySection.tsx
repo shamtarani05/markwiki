@@ -13,6 +13,7 @@ export interface Update {
   featured: boolean;
   image: string;
   wiki?: string;
+  url?: string;
 }
 
 const typeColors: Record<string, { bg: string; text: string; label: string }> = {

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { ThumbsUp, ThumbsDown } from 'lucide-react';
 
 interface ReactionButtonProps {
-  contentType: 'page' | 'book' | 'chapter' | 'blog' | 'story' | 'comment';
+  contentType: 'wiki' | 'page' | 'book' | 'chapter' | 'blog' | 'story' | 'comment';
   contentId: string;
 }
 

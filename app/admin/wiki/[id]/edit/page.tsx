@@ -54,7 +54,10 @@ export default function EditWikiPage({ params }: { params: Promise<{ id: string 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error('Failed to save page');
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson.error || 'Failed to save page');
+      }
       const { page: updated } = await res.json();
       setPage((prev) => (prev ? { ...prev, title: updated.title, blocks: updated.blocks, coverImage: updated.coverImage } : prev));
       setSaved(true);
@@ -76,7 +79,10 @@ export default function EditWikiPage({ params }: { params: Promise<{ id: string 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: nextStatus }),
       });
-      if (!res.ok) throw new Error('Failed to update status');
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        throw new Error(errJson.error || 'Failed to update status');
+      }
       setPage((prev) => (prev ? { ...prev, status: nextStatus } : prev));
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Failed to update status');

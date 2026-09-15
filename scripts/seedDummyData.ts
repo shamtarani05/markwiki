@@ -7,8 +7,8 @@ import type { Block } from '../src/lib/blocks/types';
 const generateBlocks = (text: string): Block[] => [
   {
     id: new mongoose.Types.ObjectId().toString(),
-    type: 'prose',
-    props: { content: `<p>${text}</p>` },
+    type: 'richText',
+    props: { html: `<p>${text}</p>` },
   },
 ];
 

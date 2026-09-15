@@ -239,22 +239,17 @@ export default function PageBuilder({
         <button
           type="button"
           onClick={() => setCoverPickerOpen(true)}
-          className="w-16 h-10 rounded-md border border-[rgba(255,255,255,0.09)] bg-[#121218] overflow-hidden shrink-0 flex items-center justify-center text-[#706F78] hover:border-accent transition-colors"
+          className="relative w-16 h-10 rounded-md border border-[rgba(255,255,255,0.09)] bg-[#121218] overflow-hidden shrink-0 flex items-center justify-center text-[#706F78] hover:border-accent transition-colors"
           title={coverImage ? 'Change cover image' : 'Add a cover image'}
         >
-          {coverImage ? <>
-                    <>
-                    <>
-                    <>
-                    <img src={coverImage} alt="" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
-                  </>
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
-                  </>
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
-                  </>
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
-                  </> : <span className="text-xs">+</span>}
+          {coverImage ? (
+            <>
+              <img src={coverImage} alt="" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+            </>
+          ) : (
+            <span className="text-xs">+</span>
+          )}
         </button>
         <span className="text-xs text-[#706F78]">
           {coverImage ? 'Cover image set' : 'No cover image — used as the card thumbnail and social preview'}
@@ -336,7 +331,7 @@ export default function PageBuilder({
       {/* Properties drawer — only takes up space when a block is selected,
           so the page keeps its full width the rest of the time. */}
       {mode === 'edit' && selectedBlock && (
-        <div className="fixed right-4 top-20 bottom-4 w-80 card p-4 overflow-y-auto shadow-xl z-30">
+        <div className="fixed right-4 top-20 bottom-4 w-80 bg-surface-container-high border border-outline-variant/30 rounded-xl p-4 overflow-y-auto shadow-2xl z-50 backdrop-blur-xl">
           <button
             type="button"
             onClick={() => setSelectedId(null)}

@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
-export type ReactableType = 'page' | 'book' | 'chapter' | 'blog' | 'story' | 'comment';
+export type ReactableType = 'wiki' | 'page' | 'book' | 'chapter' | 'blog' | 'story' | 'comment';
 export type ReactionType = 'like' | 'dislike';
 
 export interface IReaction extends Document {
@@ -21,7 +21,7 @@ const ReactionSchema = new Schema<IReaction>(
     },
     contentType: {
       type: String,
-      enum: ['page', 'book', 'chapter', 'blog', 'story', 'comment'],
+      enum: ['wiki', 'page', 'book', 'chapter', 'blog', 'story', 'comment'],
       required: true,
     },
     contentId: {

@@ -18,15 +18,15 @@ export default async function SiteSearchPage({
     const regex = new RegExp(query, 'i');
     const [wikis, pages, books, stories, blogs] = await Promise.all([
       Wiki.find({ name: regex }).limit(10).lean(),
-      Page.find({ title: regex, status: 'published' }).populate('wiki', 'name slug').limit(15).lean(),
-      BookModel.find({ title: regex, status: 'published' }).limit(10).lean(),
-      ShortStory.find({ title: regex, status: 'published' }).limit(10).lean(),
-      BlogPost.find({ title: regex, status: 'published' }).limit(10).lean(),
+      Page.find({ title: regex, status: 'published' as const }).populate('wiki', 'name slug').limit(15).lean(),
+      BookModel.find({ title: regex, isPublished: true }).limit(10).lean(),
+      ShortStory.find({ title: regex, status: 'published' as const }).limit(10).lean(),
+      BlogPost.find({ title: regex, status: 'published' as const }).limit(10).lean(),
     ]);
 
     results = [
       ...wikis.map(w => ({ _id: w._id, type: 'wiki', title: w.name, subtitle: 'Wiki', desc: w.description, link: `/wiki/${w.slug}` })),
-      ...pages.map(p => ({ _id: p._id, type: 'page', title: p.title, subtitle: `Page · ${(p as any).wiki?.name || 'General'}`, desc: p.excerpt || p.content?.substring(0, 100), link: `/wiki/${(p as any).wiki?.slug || 'general'}/${p.slug}` })),
+      ...pages.map(p => ({ _id: p._id, type: 'page', title: p.title, subtitle: `Page · ${(p as any).wiki?.name || 'General'}`, desc: p.excerpt || '', link: `/wiki/${(p as any).wiki?.slug || 'general'}/${p.slug}` })),
       ...books.map(b => ({ _id: b._id, type: 'book', title: b.title, subtitle: `Book · ${(b as any).wiki?.name || 'General'}`, desc: b.synopsis, link: `/book/${b.slug}` })),
       ...stories.map(s => ({ _id: s._id, type: 'story', title: s.title, subtitle: `Short Story · ${(s as any).wiki?.name || 'General'}`, desc: s.synopsis, link: `/stories/${s.slug}` })),
       ...blogs.map(b => ({ _id: b._id, type: 'blog', title: b.title, subtitle: 'Blog Post', desc: b.excerpt, link: `/blog/${b.slug}` }))
