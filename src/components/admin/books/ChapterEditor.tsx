@@ -35,17 +35,29 @@ function SortableImageItem({ image, index, onRemove, onChange }: { image: string
     <div
       ref={setNodeRef}
       style={style}
-      className={`flex items-center gap-3 p-3 bg-surface-container-lowest border border-outline-variant/30 rounded-lg ${isDragging ? 'shadow-xl scale-[1.02] border-accent' : 'hover:border-accent/50'}`}
+      className={`flex items-center gap-3 p-3 bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded-lg ${isDragging ? 'shadow-xl scale-[1.02] border-accent' : 'hover:border-accent/50'}`}
     >
-      <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing text-on-surface-variant hover:text-primary">
+      <div {...attributes} {...listeners} className="cursor-grab active:cursor-grabbing text-[#706F78] hover:text-[#8B5CF6]">
         <GripVertical size={16} />
       </div>
       
-      <div className="w-16 h-16 rounded border border-outline-variant/30 overflow-hidden bg-surface-container-low shrink-0 relative flex items-center justify-center group cursor-pointer" onClick={() => setShowPicker(true)}>
+      <div className="w-16 h-16 rounded border border-[rgba(255,255,255,0.09)] overflow-hidden bg-[#121218] shrink-0 relative flex items-center justify-center group cursor-pointer" onClick={() => setShowPicker(true)}>
         {image ? (
-          <img src={image} alt={`Page ${index + 1}`} className="w-full h-full object-cover" />
+          <>
+                    <>
+                    <>
+                    <>
+                    <img src={image} alt={`Page ${index + 1}`} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
         ) : (
-          <ImageIcon size={20} className="text-on-surface-variant" />
+          <ImageIcon size={20} className="text-[#706F78]" />
         )}
         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
           <span className="text-white text-[10px] font-medium">Edit</span>
@@ -53,17 +65,17 @@ function SortableImageItem({ image, index, onRemove, onChange }: { image: string
       </div>
       
       <div className="flex-1 min-w-0">
-        <div className="text-xs font-semibold text-on-surface-variant uppercase mb-1">Page {index + 1} URL</div>
+        <div className="text-xs font-semibold text-[#706F78] uppercase mb-1">Page {index + 1} URL</div>
         <input
           type="text"
           value={image}
           onChange={(e) => onChange(e.target.value)}
           placeholder="https://..."
-          className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-1.5 text-on-surface focus:outline-none focus:border-accent text-sm"
+          className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-1.5 text-[#F5F3EF] focus:outline-none focus:border-accent text-sm"
         />
       </div>
       
-      <button onClick={onRemove} className="p-2 text-on-surface-variant hover:text-red-500 hover:bg-red-500/10 rounded transition-colors shrink-0">
+      <button onClick={onRemove} className="p-2 text-[#706F78] hover:text-red-500 hover:bg-red-500/10 rounded transition-colors shrink-0">
         <Trash2 size={16} />
       </button>
 
@@ -229,10 +241,10 @@ export default function ChapterEditor({ bookId, chapterId, bookFormat = 'novel' 
     <div className="max-w-5xl mx-auto py-8 px-4 h-[calc(100vh-4rem)] flex flex-col">
       <div className="flex items-center justify-between mb-6 shrink-0">
         <div className="flex items-center gap-4">
-          <Link href={`/admin/books/${bookId}`} className="p-2 rounded hover:bg-surface-container-low text-on-surface-variant">
+          <Link href={`/admin/books/${bookId}`} className="p-2 rounded hover:bg-[#121218] text-[#706F78]">
             <ArrowLeft size={20} />
           </Link>
-          <h1 className="text-2xl font-bold text-on-surface">
+          <h1 className="text-2xl font-bold text-[#F5F3EF]">
             {chapterId ? 'Edit Chapter' : 'New Chapter'}
           </h1>
         </div>
@@ -265,23 +277,23 @@ export default function ChapterEditor({ bookId, chapterId, bookFormat = 'novel' 
       </div>
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-4 gap-6 min-h-0">
-        <div className="lg:col-span-3 flex flex-col min-h-0 bg-surface-container-lowest border border-outline-variant/30 rounded-lg shadow-sm overflow-hidden">
+        <div className="lg:col-span-3 flex flex-col min-h-0 bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded-lg shadow-sm overflow-hidden">
           {/* Content Area */}
-          <div className="p-4 border-b border-outline-variant/30 bg-surface-container-low shrink-0">
+          <div className="p-4 border-b border-[rgba(255,255,255,0.09)] bg-[#121218] shrink-0">
             <input
               type="text"
               value={title}
               onChange={handleTitleChange}
               placeholder="Chapter Title"
-              className="w-full text-2xl font-bold bg-transparent text-on-surface focus:outline-none placeholder:text-on-surface-variant/50"
+              className="w-full text-2xl font-bold bg-transparent text-[#F5F3EF] focus:outline-none placeholder:text-[#706F78]"
             />
           </div>
           <div className="flex-1 p-0 overflow-y-auto">
             {bookFormat === 'webtoon' ? (
-              <div className="p-6 bg-surface-container-low min-h-[500px] flex flex-col items-center">
+              <div className="p-6 bg-[#121218] min-h-[500px] flex flex-col items-center">
                 <div className="w-full max-w-2xl space-y-4">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-bold text-on-surface">Vertical Image Strip</h3>
+                    <h3 className="text-sm font-bold text-[#F5F3EF]">Vertical Image Strip</h3>
                     <button
                       onClick={() => setImages([...images, ''])}
                       className="btn btn-secondary text-xs px-3 py-1.5 flex items-center gap-1.5"
@@ -291,7 +303,7 @@ export default function ChapterEditor({ bookId, chapterId, bookFormat = 'novel' 
                   </div>
                   
                   {images.length === 0 ? (
-                    <div className="text-center py-12 border-2 border-dashed border-outline-variant/30 rounded-lg text-on-surface-variant text-sm bg-surface-container-lowest">
+                    <div className="text-center py-12 border-2 border-dashed border-[rgba(255,255,255,0.09)] rounded-lg text-[#706F78] text-sm bg-[#0B0B0F]">
                       No images added yet. Click "Add Image" to start your strip.
                     </div>
                   ) : (
@@ -326,57 +338,57 @@ export default function ChapterEditor({ bookId, chapterId, bookFormat = 'novel' 
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="Write your chapter here..."
-                className="w-full h-full min-h-[500px] p-6 bg-surface-container-lowest text-on-surface focus:outline-none resize-none prose prose-wiki max-w-none"
+                className="w-full h-full min-h-[500px] p-6 bg-[#0B0B0F] text-[#F5F3EF] focus:outline-none resize-none prose prose-wiki max-w-none"
               />
             )}
           </div>
         </div>
 
         <div className="space-y-6 overflow-y-auto">
-          <div className="card p-5 space-y-4">
-            <h2 className="text-sm font-bold text-on-surface uppercase tracking-wider border-b border-outline-variant/30 pb-2">Settings</h2>
+          <div className="admin-panel p-5 space-y-4">
+            <h2 className="text-sm font-bold text-[#F5F3EF] uppercase tracking-wider border-b border-[rgba(255,255,255,0.09)] pb-2">Settings</h2>
             
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-on-surface-variant uppercase">Chapter Number</label>
+              <label className="text-xs font-semibold text-[#706F78] uppercase">Chapter Number</label>
               <input
                 type="number"
                 value={chapterNumber}
                 onChange={(e) => setChapterNumber(e.target.value ? Number(e.target.value) : '')}
-                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent"
+                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-on-surface-variant uppercase">Slug (URL)</label>
+              <label className="text-xs font-semibold text-[#706F78] uppercase">Slug (URL)</label>
               <input
                 type="text"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
-                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent"
+                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent"
               />
             </div>
 
-            <div className="flex items-center gap-3 pt-2 border-t border-outline-variant/30 mt-4">
+            <div className="flex items-center gap-3 pt-2 border-t border-[rgba(255,255,255,0.09)] mt-4">
               <input
                 type="checkbox"
                 id="isPublished"
                 checked={isPublished}
                 onChange={(e) => setIsPublished(e.target.checked)}
-                className="w-4 h-4 rounded border-outline-variant/30 text-primary focus:ring-accent bg-surface-container-lowest"
+                className="w-4 h-4 rounded border-[rgba(255,255,255,0.09)] text-[#8B5CF6] focus:ring-accent bg-[#0B0B0F]"
               />
-              <label htmlFor="isPublished" className="text-sm text-on-surface">
+              <label htmlFor="isPublished" className="text-sm text-[#F5F3EF]">
                 Published (Visible to readers)
               </label>
             </div>
           </div>
 
-          <div className="card p-5 space-y-4">
-            <h2 className="text-sm font-bold text-on-surface uppercase tracking-wider border-b border-outline-variant/30 pb-2">Author's Note</h2>
+          <div className="admin-panel p-5 space-y-4">
+            <h2 className="text-sm font-bold text-[#F5F3EF] uppercase tracking-wider border-b border-[rgba(255,255,255,0.09)] pb-2">Author's Note</h2>
             <textarea
               value={authorNote}
               onChange={(e) => setAuthorNote(e.target.value)}
               placeholder="Notes to appear at the end of the chapter..."
-              className="w-full h-32 bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent resize-none text-sm"
+              className="w-full h-32 bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent resize-none text-sm"
             />
           </div>
         </div>

@@ -80,12 +80,12 @@ src/lib/db/
 ### Tasks
 - [ ] **Homepage (Long scrolling, SEO-focused)**
   - [x] Hero section (editable from admin)
-  - [x] Category sections (Books, Blogs, Stories, Novels)
+  - [x] Category sections (Books, Blogs, Stories, Novels) - Styled with premium Cosmic glassmorphism
   - [x] Featured content carousels
   - [x] "Publish Your Book" CTA section
   - [x] User signup/login prompt
   - [x] Ad placement zones
-  - [x] Dark/Light theme support
+  - [x] Dark/Light theme support - Cosmic Violet Nebula Glow theme applied globally
   - [x] Fully responsive
 
 - [ ] **Reader Portal**
@@ -94,17 +94,18 @@ src/lib/db/
   - [x] Table of contents navigation
   - [x] Bookshelf (saved books)
   - [x] Reading progress tracking (%, hours)
-  - [x] Continue reading feature
+  - [x] Continue reading feature - Dynamic data integration complete
   - [x] Guest reading (no account required)
+  - [x] Category Domain Pages (Dynamic `/category/[slug]`)
 
 - [ ] **Admin Panel / CMS** — see full architecture checklist below
   - [x] Admin authentication
   - [x] Dashboard overview
-  - [x] Page-builder canvas (drag-and-drop blocks, per content type — see checklist)
+  - [x] Page-builder canvas (drag-and-drop blocks, per content type)
   - [x] Book/Webtoon/Blog management (Short Story pending)
   - [x] Chapter editor (WYSIWYG)
   - [x] Category management (API exists, Admin UI pending)
-  - [x] Ad placement management (ad = a draggable block, not just a fixed zone)
+  - [x] Ad placement management
   - [ ] SEO manager
   - [x] Navigation editor
   - [x] Theme customization
@@ -342,12 +343,12 @@ tackled once the shared block registry is proven on the simpler categories.
 ---
 
 ## Phase 3: Monetization & Community Logic ($140)
-**Status**: Not Started
+**Status**: In Progress
 
 ### Tasks
 - [ ] **Community Features**
-  - [ ] Like/dislike system
-  - [ ] Comment system (threaded)
+  - [x] Like/dislike system
+  - [x] Comment system (threaded)
   - [ ] Share functionality
   - [ ] Community edits (wiki-style)
 

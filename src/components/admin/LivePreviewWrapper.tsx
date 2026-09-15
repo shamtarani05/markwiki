@@ -115,8 +115,8 @@ export default function LivePreviewWrapper({ initialBlocks, initialTheme, mockDa
             case 'latestStories':
             case 'blogPosts':
               return (
-                <div className="container py-8 text-center border-2 border-dashed border-outline-variant/30 rounded-lg my-8">
-                  <p className="text-on-surface-variant">
+                <div className="container py-8 text-center border-2 border-dashed border-[rgba(255,255,255,0.09)] rounded-lg my-8">
+                  <p className="text-[#706F78]">
                     [{block.type}] — Component not implemented yet
                   </p>
                 </div>

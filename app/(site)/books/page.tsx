@@ -52,49 +52,31 @@ export default async function BooksDirectoryPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {books.map((book: any) => (
-              <div key={book._id.toString()} className="card flex flex-col group hover:border-accent/50 transition-colors h-full">
-                <Link href={`/book/${book.slug}`} className="block relative aspect-[2/3] bg-surface-variant overflow-hidden shrink-0 border-b border-outline-variant/30">
-                  {book.coverImage ? (
-                    <img 
-                      src={book.coverImage} 
-                      alt={book.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <BookOpen size={48} className="text-on-surface-variant/30" />
-                    </div>
-                  )}
-                  {/* Status badge */}
-                  <div className="absolute top-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider text-primary border border-accent/20">
-                    {book.status}
+              <Link key={book._id.toString()} href={`/book/${book.slug}`} className="group p-6 rounded-xl bg-surface-container-low shadow-sm hover:shadow-md border border-outline-variant/30 hover:border-primary/50 transition-all flex flex-col h-full backdrop-blur-sm">
+                {book.coverImage && (
+                  <div className="w-full h-48 rounded-lg overflow-hidden mb-4 relative">
+                    <img src={book.coverImage} alt={book.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    {book.status && (
+                      <div className="absolute top-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider text-primary border border-accent/20">
+                        {book.status}
+                      </div>
+                    )}
                   </div>
-                </Link>
+                )}
+                <h2 className="text-xl font-bold text-on-surface group-hover:text-primary transition-colors">{book.title}</h2>
+                {book.synopsis && <p className="text-on-surface-variant mt-2 line-clamp-2">{book.synopsis}</p>}
                 
-                <div className="p-4 flex flex-col flex-1">
-                  <div className="mb-auto">
-                    <Link href={`/book/${book.slug}`} className="block">
-                      <h3 className="font-bold text-on-surface hover:text-primary transition-colors line-clamp-2 mb-1 leading-snug">
-                        {book.title}
-                      </h3>
-                    </Link>
-                    <div className="text-xs text-on-surface-variant mb-3 flex items-center gap-1.5">
-                      <span className="w-4 h-4 rounded-full bg-surface-variant overflow-hidden border border-outline-variant/30">
-                        {(book.author as any)?.image ? (
-                          <img src={(book.author as any).image} alt="" className="w-full h-full object-cover" />
-                        ) : (
-                          <span className="flex items-center justify-center w-full h-full text-[8px] font-bold">{(book.author as any)?.name?.[0]}</span>
-                        )}
-                      </span>
-                      <span className="truncate">{(book.author as any)?.name}</span>
-                    </div>
-                    
-                    <p className="text-sm text-on-surface-variant line-clamp-3 mb-4 leading-relaxed">
-                      {book.synopsis}
-                    </p>
-                  </div>
-                  
-                  <div className="flex flex-wrap items-center gap-4 mt-auto pt-4 border-t border-outline-variant/30/50 text-xs font-semibold text-on-surface-variant">
+                <div className="mt-4 mb-2 flex items-center gap-2 text-xs text-on-surface-variant">
+                  {(book.author as any)?.image ? (
+                    <img src={(book.author as any).image} alt="" className="w-5 h-5 rounded-full object-cover" />
+                  ) : (
+                    <span className="w-5 h-5 rounded-full bg-surface-variant flex items-center justify-center font-bold">{(book.author as any)?.name?.[0]}</span>
+                  )}
+                  <span>{(book.author as any)?.name}</span>
+                </div>
+
+                <div className="mt-auto pt-4 flex items-center justify-between text-sm text-outline">
+                  <div className="flex items-center gap-4">
                     <span className="flex items-center gap-1.5" title="Chapters">
                       <List size={14} className="text-primary" />
                       {book.chapterCount}
@@ -104,8 +86,11 @@ export default async function BooksDirectoryPage() {
                       {book.viewCount > 1000 ? `${(book.viewCount / 1000).toFixed(1)}k` : book.viewCount}
                     </span>
                   </div>
+                  <span className="text-primary font-medium flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    Read <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                  </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

@@ -6,7 +6,7 @@ export default function ContinueReadingSection({ settings, items }: { settings, 
   if (!items || items.length === 0) return null;
 
   return (
-    <section className="w-full bg-surface-container-lowest py-space-xl">
+    <section className="w-full bg-transparent py-space-xl">
       <div className="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
         <div className="flex items-center justify-between mb-space-md">
           <div className="flex items-center gap-space-sm">

@@ -66,8 +66,8 @@ export default function NewWikiPage() {
         <WikiPicker onSelect={setWiki} />
       ) : (
         <>
-          <p className="text-sm text-on-surface-variant mb-2">
-            Adding a page to <span className="text-primary font-medium">{wiki.name}</span> ·{' '}
+          <p className="text-sm text-[#706F78] mb-2">
+            Adding a page to <span className="text-[#8B5CF6] font-medium">{wiki.name}</span> ·{' '}
             <button type="button" onClick={() => setWiki(null)} className="hover:underline">
               change wiki
             </button>

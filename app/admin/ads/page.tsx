@@ -138,8 +138,8 @@ export default function AdsAdminPage() {
     <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-on-surface tracking-tight mb-2">Ad Placements</h1>
-          <p className="text-on-surface-variant font-body-default">Manage monetization zones and external campaigns.</p>
+          <h1 className="text-3xl font-bold text-[#F5F3EF] tracking-tight mb-2">Ad Placements</h1>
+          <p className="text-[#706F78] font-body-default">Manage monetization zones and external campaigns.</p>
         </div>
         <button 
           onClick={openNewModal}
@@ -150,29 +150,29 @@ export default function AdsAdminPage() {
         </button>
       </div>
 
-      <div className="bg-surface-container-low rounded-2xl border border-outline-variant/30 overflow-hidden shadow-lg">
+      <div className="bg-[#121218] rounded-2xl border border-[rgba(255,255,255,0.09)] overflow-hidden shadow-lg">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-surface-container border-b border-outline-variant/30">
-                <th className="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Campaign Name</th>
-                <th className="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Zone</th>
-                <th className="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Type</th>
-                <th className="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Status</th>
-                <th className="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+              <tr className="bg-surface-container border-b border-[rgba(255,255,255,0.09)]">
+                <th className="px-6 py-4 font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider">Campaign Name</th>
+                <th className="px-6 py-4 font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider">Zone</th>
+                <th className="px-6 py-4 font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider">Type</th>
+                <th className="px-6 py-4 font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider">Status</th>
+                <th className="px-6 py-4 font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-outline-variant/30">
+            <tbody className="divide-y divide-[rgba(255,255,255,0.09)]">
               {isLoading ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-on-surface-variant">
+                  <td colSpan={5} className="px-6 py-8 text-center text-[#706F78]">
                     <span className="material-symbols-outlined animate-spin text-2xl">refresh</span>
                     <p className="mt-2 font-label-mono">Loading campaigns...</p>
                   </td>
                 </tr>
               ) : ads.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-on-surface-variant">
+                  <td colSpan={5} className="px-6 py-8 text-center text-[#706F78]">
                     <p className="font-label-mono">No ad campaigns found.</p>
                   </td>
                 </tr>
@@ -180,7 +180,7 @@ export default function AdsAdminPage() {
                 ads.map((ad) => (
                   <tr key={ad._id.toString()} className="hover:bg-surface-container/50 transition-colors">
                     <td className="px-6 py-4">
-                      <div className="font-headline-sm text-on-surface leading-tight">{ad.name}</div>
+                      <div className="font-headline-sm text-[#F5F3EF] leading-tight">{ad.name}</div>
                     </td>
                     <td className="px-6 py-4">
                       <span className="font-label-mono text-label-mono text-secondary px-2.5 py-1 rounded-md bg-surface-container">
@@ -188,7 +188,7 @@ export default function AdsAdminPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="font-label-mono text-label-mono text-on-surface-variant">
+                      <span className="font-label-mono text-label-mono text-[#706F78]">
                         {ad.type}
                       </span>
                     </td>
@@ -198,7 +198,7 @@ export default function AdsAdminPage() {
                           <span className="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span> Active
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-variant text-on-surface-variant font-label-caps text-[10px] uppercase tracking-wider">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#181820] text-[#706F78] font-label-caps text-[10px] uppercase tracking-wider">
                           <span className="w-1.5 h-1.5 rounded-full bg-outline"></span> Inactive
                         </span>
                       )}
@@ -207,14 +207,14 @@ export default function AdsAdminPage() {
                       <div className="flex items-center justify-end gap-2">
                         <button 
                           onClick={() => openEditModal(ad)}
-                          className="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors"
+                          className="w-8 h-8 rounded-lg flex items-center justify-center text-[#706F78] hover:text-[#8B5CF6] hover:bg-primary/10 transition-colors"
                           title="Edit"
                         >
                           <span className="material-symbols-outlined text-sm">edit</span>
                         </button>
                         <button 
                           onClick={() => handleDelete(ad._id.toString())}
-                          className="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error/10 transition-colors"
+                          className="w-8 h-8 rounded-lg flex items-center justify-center text-[#706F78] hover:text-error hover:bg-error/10 transition-colors"
                           title="Delete"
                         >
                           <span className="material-symbols-outlined text-sm">delete</span>
@@ -233,10 +233,10 @@ export default function AdsAdminPage() {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={closeModal}></div>
-          <div className="relative bg-surface-container-low border border-outline-variant/30 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-[slideDown_0.2s_ease-out]">
-            <div className="sticky top-0 z-10 px-6 py-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container">
-              <h2 className="font-headline-sm text-on-surface">{isEditing ? 'Edit Ad Campaign' : 'New Ad Campaign'}</h2>
-              <button onClick={closeModal} className="text-on-surface-variant hover:text-on-surface">
+          <div className="relative bg-[#121218] border border-[rgba(255,255,255,0.09)] rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-[slideDown_0.2s_ease-out]">
+            <div className="sticky top-0 z-10 px-6 py-4 border-b border-[rgba(255,255,255,0.09)] flex justify-between items-center bg-surface-container">
+              <h2 className="font-headline-sm text-[#F5F3EF]">{isEditing ? 'Edit Ad Campaign' : 'New Ad Campaign'}</h2>
+              <button onClick={closeModal} className="text-[#706F78] hover:text-[#F5F3EF]">
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
@@ -244,23 +244,23 @@ export default function AdsAdminPage() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
-                  <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Campaign Name</label>
+                  <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Campaign Name</label>
                   <input 
                     required
                     type="text" 
                     value={currentAd.name || ''}
                     onChange={(e) => setCurrentAd({...currentAd, name: e.target.value})}
-                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-default"
+                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-default"
                     placeholder="e.g. Summer Sale Banner"
                   />
                 </div>
                 
                 <div>
-                  <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Placement Zone</label>
+                  <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Placement Zone</label>
                   <select
                     value={currentAd.zone || 'homepage-feed'}
                     onChange={(e) => setCurrentAd({...currentAd, zone: e.target.value})}
-                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-default"
+                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-default"
                   >
                     {AD_ZONES.map(zone => (
                       <option key={zone.value} value={zone.value}>{zone.label}</option>
@@ -269,11 +269,11 @@ export default function AdsAdminPage() {
                 </div>
 
                 <div>
-                  <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Ad Type</label>
+                  <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Ad Type</label>
                   <select
                     value={currentAd.type || 'banner'}
                     onChange={(e) => setCurrentAd({...currentAd, type: e.target.value})}
-                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-default"
+                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-default"
                   >
                     {AD_TYPES.map(type => (
                       <option key={type.value} value={type.value}>{type.label}</option>
@@ -283,28 +283,28 @@ export default function AdsAdminPage() {
               </div>
 
               {/* Dynamic Content based on Ad Type */}
-              <div className="p-4 rounded-xl border border-outline-variant/30 bg-surface-container-lowest/50">
-                <h3 className="font-label-caps text-label-caps text-on-surface uppercase tracking-wider mb-4 border-b border-outline-variant/30 pb-2">Creative Content</h3>
+              <div className="p-4 rounded-xl border border-[rgba(255,255,255,0.09)] bg-[#0B0B0F]/50">
+                <h3 className="font-label-caps text-label-caps text-[#F5F3EF] uppercase tracking-wider mb-4 border-b border-[rgba(255,255,255,0.09)] pb-2">Creative Content</h3>
                 
                 {currentAd.type === 'banner' && (
                   <div className="flex flex-col gap-4">
                     <div>
-                      <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Image URL</label>
+                      <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Image URL</label>
                       <input 
                         type="url" 
                         value={currentAd.content?.imageUrl || ''}
                         onChange={(e) => updateContent('imageUrl', e.target.value)}
-                        className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono text-sm"
+                        className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono text-sm"
                         placeholder="https://..."
                       />
                     </div>
                     <div>
-                      <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Destination Link</label>
+                      <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Destination Link</label>
                       <input 
                         type="url" 
                         value={currentAd.content?.linkUrl || ''}
                         onChange={(e) => updateContent('linkUrl', e.target.value)}
-                        className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono text-sm"
+                        className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono text-sm"
                         placeholder="https://..."
                       />
                     </div>
@@ -313,11 +313,11 @@ export default function AdsAdminPage() {
 
                 {currentAd.type === 'adsense' && (
                   <div>
-                    <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">AdSense Client / Slot Code</label>
+                    <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">AdSense Client / Slot Code</label>
                     <textarea 
                       value={currentAd.content?.adsenseCode || ''}
                       onChange={(e) => updateContent('adsenseCode', e.target.value)}
-                      className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono text-sm min-h-[100px]"
+                      className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono text-sm min-h-[100px]"
                       placeholder="<!-- Google AdSense Code -->"
                     />
                   </div>
@@ -325,11 +325,11 @@ export default function AdsAdminPage() {
 
                 {currentAd.type === 'custom' && (
                   <div>
-                    <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Custom HTML</label>
+                    <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Custom HTML</label>
                     <textarea 
                       value={currentAd.content?.html || ''}
                       onChange={(e) => updateContent('html', e.target.value)}
-                      className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono text-sm min-h-[100px]"
+                      className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono text-sm min-h-[100px]"
                       placeholder="<div>...</div>"
                     />
                   </div>
@@ -338,12 +338,12 @@ export default function AdsAdminPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Priority (Higher = First)</label>
+                  <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Priority (Higher = First)</label>
                   <input 
                     type="number" 
                     value={currentAd.priority || 0}
                     onChange={(e) => setCurrentAd({...currentAd, priority: parseInt(e.target.value)})}
-                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono"
+                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono"
                   />
                 </div>
                 <div className="flex items-center">
@@ -352,18 +352,18 @@ export default function AdsAdminPage() {
                       type="checkbox" 
                       checked={currentAd.isActive !== false}
                       onChange={(e) => setCurrentAd({...currentAd, isActive: e.target.checked})}
-                      className="w-5 h-5 rounded border-outline-variant/30 text-primary focus:ring-primary bg-surface-container accent-primary"
+                      className="w-5 h-5 rounded border-[rgba(255,255,255,0.09)] text-[#8B5CF6] focus:ring-primary bg-surface-container accent-primary"
                     />
-                    <span className="font-label-caps text-label-caps text-on-surface uppercase tracking-wider">Campaign Active</span>
+                    <span className="font-label-caps text-label-caps text-[#F5F3EF] uppercase tracking-wider">Campaign Active</span>
                   </label>
                 </div>
               </div>
 
-              <div className="mt-4 flex justify-end gap-3 pt-4 border-t border-outline-variant/30">
+              <div className="mt-4 flex justify-end gap-3 pt-4 border-t border-[rgba(255,255,255,0.09)]">
                 <button 
                   type="button" 
                   onClick={closeModal}
-                  className="px-5 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-variant transition-colors font-label-caps text-label-caps uppercase tracking-wider"
+                  className="px-5 py-2.5 rounded-xl text-[#706F78] hover:bg-[#181820] transition-colors font-label-caps text-label-caps uppercase tracking-wider"
                 >
                   Cancel
                 </button>

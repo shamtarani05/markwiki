@@ -5,7 +5,7 @@ import Link from 'next/link';
 export interface Update {
   id: string;
   title: string;
-  type: 'news' | 'wiki-update' | 'community' | 'announcement';
+  type: 'news' | 'wiki-update' | 'community' | 'announcement' | 'blog' | 'story';
   author: string;
   excerpt: string;
   date: string;
@@ -20,6 +20,8 @@ const typeColors: Record<string, { bg: string; text: string; label: string }> = 
   'wiki-update': { bg: 'bg-[var(--tag-green-bg)]', text: 'text-[var(--tag-green)]', label: 'Wiki Update' },
   'community': { bg: 'bg-[var(--tag-purple-bg)]', text: 'text-[var(--tag-purple)]', label: 'Community' },
   'announcement': { bg: 'bg-[var(--tag-yellow-bg)]', text: 'text-[var(--tag-yellow)]', label: 'Announcement' },
+  'blog': { bg: 'bg-[var(--tag-blue-bg)]', text: 'text-[var(--tag-blue)]', label: 'Blog' },
+  'story': { bg: 'bg-[var(--tag-purple-bg)]', text: 'text-[var(--tag-purple)]', label: 'Story' },
 };
 
 export default function CommunitySection({ updates }: { updates: Update[] }) {
@@ -49,7 +51,7 @@ export default function CommunitySection({ updates }: { updates: Update[] }) {
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Featured Post */}
           {featuredPost && (
-            <Link href={`/news/${featuredPost.id}`} className="card group lg:row-span-2 overflow-hidden">
+            <Link href={featuredPost.url || `/news/${featuredPost.id}`} className="group rounded-xl bg-surface-container-low shadow-sm hover:shadow-md border border-outline-variant/30 hover:border-primary/50 transition-all flex flex-col h-full backdrop-blur-sm overflow-hidden lg:row-span-2">
               <div className="aspect-video relative overflow-hidden">
                 <img
                   src={featuredPost.image}
@@ -57,9 +59,9 @@ export default function CommunitySection({ updates }: { updates: Update[] }) {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className={`px-3 py-1 ${typeColors[featuredPost.type].bg} ${typeColors[featuredPost.type].text} rounded-full text-xs font-medium`}>
+                  <span className={`px-3 py-1 ${typeColors[featuredPost.type].bg} ${typeColors[featuredPost.type].text} rounded-full text-xs font-medium border border-accent/20`}>
                     {typeColors[featuredPost.type].label}
                   </span>
                   {featuredPost.wiki && (
@@ -72,10 +74,10 @@ export default function CommunitySection({ updates }: { updates: Update[] }) {
                 <h3 className="text-2xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors">
                   {featuredPost.title}
                 </h3>
-                <p className="text-on-surface-variant mb-4">{featuredPost.excerpt}</p>
-                <div className="flex items-center justify-between">
-                  <p className="text-sm text-on-surface-variant">
-                    by <span className="text-on-surface">{featuredPost.author}</span>
+                <p className="text-on-surface-variant mb-4 flex-1">{featuredPost.excerpt}</p>
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/30">
+                  <p className="text-sm font-medium text-on-surface">
+                    {featuredPost.author}
                   </p>
                   <p className="text-sm text-on-surface-variant">
                     {new Date(featuredPost.date).toLocaleDateString('en-US', {
@@ -90,10 +92,10 @@ export default function CommunitySection({ updates }: { updates: Update[] }) {
           )}
 
           {/* Other Posts */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {otherPosts.map((post) => (
-              <Link key={post.id} href={`/news/${post.id}`} className="card p-4 group flex gap-4 overflow-hidden">
-                <div className="w-28 h-28 shrink-0 relative rounded-lg overflow-hidden">
+              <Link key={post.id} href={post.url || `/news/${post.id}`} className="group p-4 rounded-xl bg-surface-container-low shadow-sm hover:shadow-md border border-outline-variant/30 hover:border-primary/50 transition-all flex gap-4 backdrop-blur-sm items-start">
+                <div className="w-28 h-28 shrink-0 relative rounded-lg overflow-hidden border border-outline-variant/20">
                   <img
                     src={post.image}
                     alt={post.title}

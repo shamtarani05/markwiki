@@ -4,7 +4,7 @@ import type { HomepageSectionSettings } from '@/src/lib/db/homepageSections';
 
 export default function RecentActivitySection({ settings, activity, contributors }: { settings?: HomepageSectionSettings | any, activity?: any, contributors?: any }) {
   return (
-    <section className="w-full bg-surface-container-lowest py-space-2xl">
+    <section className="w-full bg-transparent py-space-2xl">
 <div className="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
 <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
 {/*  Left Column: Live Archive Feed (7 Cols)  */}

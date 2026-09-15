@@ -47,7 +47,7 @@ export default function PageHistory({ params }: { params: Promise<{ id: string }
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-on-surface">Edit History</h1>
+        <h1 className="text-2xl font-bold text-[#F5F3EF]">Edit History</h1>
         <Link href={`/admin/wiki/${id}/edit`} className="btn btn-secondary">Back to editor</Link>
       </div>
 
@@ -56,22 +56,22 @@ export default function PageHistory({ params }: { params: Promise<{ id: string }
       )}
 
       {revisions === null ? (
-        <p className="text-on-surface-variant">Loading…</p>
+        <p className="text-[#706F78]">Loading…</p>
       ) : revisions.length === 0 ? (
-        <p className="text-on-surface-variant">No edits yet — history starts after the first save to this page.</p>
+        <p className="text-[#706F78]">No edits yet — history starts after the first save to this page.</p>
       ) : (
-        <div className="card divide-y divide-outline-variant/30 overflow-hidden">
+        <div className="card divide-y divide-[rgba(255,255,255,0.09)] overflow-hidden">
           {revisions.map((rev) => (
             <div key={rev._id} className="flex items-center justify-between gap-4 p-4">
               <div className="min-w-0">
-                <p className="text-sm font-medium text-on-surface">
+                <p className="text-sm font-medium text-[#F5F3EF]">
                   v{rev.version} · {rev.title}
                 </p>
-                <p className="text-xs text-on-surface-variant mt-0.5">
+                <p className="text-xs text-[#706F78] mt-0.5">
                   {new Date(rev.createdAt).toLocaleString()} by {rev.editedBy?.name ?? 'Unknown'}
                 </p>
                 {rev.editSummary && (
-                  <p className="text-xs text-on-surface-variant mt-1 italic">&ldquo;{rev.editSummary}&rdquo;</p>
+                  <p className="text-xs text-[#706F78] mt-1 italic">&ldquo;{rev.editSummary}&rdquo;</p>
                 )}
               </div>
               <button

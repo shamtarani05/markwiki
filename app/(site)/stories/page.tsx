@@ -50,36 +50,35 @@ export default async function ShortStoriesListingPage() {
             <Link 
               key={story._id.toString()}
               href={`/stories/${story.slug}`}
-              className="group flex flex-col bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/30 hover:border-accent/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+              className="group p-6 rounded-xl bg-surface-container-low shadow-sm hover:shadow-md border border-outline-variant/30 hover:border-primary/50 transition-all flex flex-col h-full backdrop-blur-sm"
             >
               {story.coverImage && (
-                <div className="aspect-[2/3] relative overflow-hidden bg-surface-variant">
+                <div className="w-full h-48 rounded-lg overflow-hidden mb-4 relative">
                   <img 
                     src={story.coverImage} 
                     alt={story.title} 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
+                  <div className="absolute top-3 right-3 bg-surface-container-lowest/80 backdrop-blur-md px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider text-primary border border-accent/20">
+                    {story.genres?.[0] || 'Fiction'}
+                  </div>
                 </div>
               )}
-              <div className="p-6 flex flex-col flex-1">
-                <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-primary mb-3">
-                  <span>{story.genres?.[0] || 'Fiction'}</span>
-                  <span className="text-on-surface-variant">{story.readingTime} min read</span>
+              <h2 className="text-xl font-bold text-on-surface group-hover:text-primary transition-colors">{story.title}</h2>
+              {story.synopsis && <p className="text-on-surface-variant mt-2 line-clamp-2">{story.synopsis}</p>}
+              
+              <div className="mt-4 mb-2 flex items-center gap-2 text-xs text-on-surface-variant">
+                <span className="font-semibold">{story.author?.name || 'Admin'}</span>
+              </div>
+
+              <div className="mt-auto pt-4 flex items-center justify-between text-sm text-outline">
+                <div className="flex items-center gap-4">
+                  <span>{story.readingTime} min read</span>
+                  <span>{story.publishedAt ? new Date(story.publishedAt).toLocaleDateString() : 'Draft'}</span>
                 </div>
-                <h3 className="text-xl font-bold text-on-surface mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                  {story.title}
-                </h3>
-                <p className="text-on-surface-variant line-clamp-3 mb-6 flex-1">
-                  {story.synopsis}
-                </p>
-                <div className="flex items-center justify-between mt-auto pt-4 border-t border-outline-variant/30">
-                  <span className="text-sm font-medium text-on-surface">
-                    {story.author?.name || 'Admin'}
-                  </span>
-                  <span className="text-sm text-on-surface-variant">
-                    {story.publishedAt ? new Date(story.publishedAt).toLocaleDateString() : 'Draft'}
-                  </span>
-                </div>
+                <span className="text-primary font-medium flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                  Read <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </span>
               </div>
             </Link>
           ))}

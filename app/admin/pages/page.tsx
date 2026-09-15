@@ -62,7 +62,7 @@ export default async function PagesListPage({
           <span className="admin-meta">Filtered to</span>
           <Link
             href="/admin/pages"
-            className="admin-chip bg-primary-muted text-primary no-underline hover:opacity-80 transition-opacity"
+            className="admin-chip bg-[rgba(139,92,246,0.14)] text-[#8B5CF6] no-underline hover:opacity-80 transition-opacity"
             title="Clear filter"
           >
             {wiki.name}
@@ -73,8 +73,8 @@ export default async function PagesListPage({
 
       {pages.length === 0 ? (
         <div className="admin-empty">
-          <FileText size={22} className="mx-auto text-on-surface-variant mb-3" aria-hidden="true" />
-          <p className="text-[13px] text-on-surface mb-1">
+          <FileText size={22} className="mx-auto text-[#706F78] mb-3" aria-hidden="true" />
+          <p className="text-[13px] text-[#F5F3EF] mb-1">
             {wiki ? `No pages in ${wiki.name} yet` : 'No pages yet'}
           </p>
           <p className="admin-meta mb-4">Start from an archetype — overview, character, location or episode.</p>
@@ -90,24 +90,27 @@ export default async function PagesListPage({
               href={`/admin/wiki/${p._id}/edit`}
               className="admin-tile no-underline group flex flex-col"
             >
-              <div className="aspect-[16/9] bg-surface-variant flex items-center justify-center">
+              <div className="aspect-[16/9] bg-[#181820] flex items-center justify-center relative">
                 {p.coverImage ? (
-                  <img src={p.coverImage} alt="" className="w-full h-full object-cover" />
+                  <>
+                    <img src={p.coverImage} alt="" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
                 ) : (
-                  <ImageOff size={20} className="text-on-surface-variant/50" aria-hidden="true" />
+                  <ImageOff size={20} className="text-[#706F78]" aria-hidden="true" />
                 )}
               </div>
               <div className="px-4 pt-3.5 pb-3">
-                <h3 className="text-[13px] font-semibold text-on-surface truncate group-hover:text-primary transition-colors">
+                <h3 className="text-[13px] font-semibold text-[#F5F3EF] truncate group-hover:text-[#8B5CF6] transition-colors">
                   {p.title}
                 </h3>
                 <p className="admin-meta mt-1 truncate">
                   {(p.wiki as unknown as { name?: string } | null)?.name ?? 'No wiki'}
-                  <span aria-hidden="true" className="inline-block w-px h-3 align-middle bg-border mx-2" />
+                  <span aria-hidden="true" className="inline-block w-px h-3 align-middle bg-[rgba(255,255,255,0.09)] mx-2" />
                   {PAGE_TYPE_LABEL[p.pageType] ?? p.pageType}
                 </p>
               </div>
-              <div className="mt-auto flex items-center justify-between gap-2 px-4 py-2.5 border-t border-outline-variant/30">
+              <div className="mt-auto flex items-center justify-between gap-2 px-4 py-2.5 border-t border-[rgba(255,255,255,0.09)]">
                 <span className={`admin-chip ${STATUS_BADGE[p.status] ?? 'badge-gray'}`}>
                   {STATUS_LABEL[p.status] ?? p.status}
                 </span>

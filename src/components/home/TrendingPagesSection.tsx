@@ -5,7 +5,7 @@ import AdZoneRenderer from '@/src/components/ads/AdZoneRenderer';
 
 export default function TrendingPagesSection({ settings, pages }: { settings, pages?: HomepageSectionSettings | any }) {
   return (
-    <section className="w-full bg-surface-container-lowest py-space-2xl">
+    <section className="w-full bg-transparent py-space-2xl">
 <div className="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
 <AdZoneRenderer zone="homepage-feed" className="mb-space-xl" />
 <div className="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-space-md">
@@ -57,7 +57,7 @@ export default function TrendingPagesSection({ settings, pages }: { settings, pa
           </svg>
           <span className="font-label-mono text-label-mono text-outline">{page.views} reads / 24h</span>
         </div>
-        <Link href={`/wiki/${page.wikiId}/${page.id}`} className="w-10 h-10 rounded-full bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface flex items-center justify-center transition-colors">
+        <Link href={page.url || `/wiki/${page.wikiId}/${page.id}`} className="w-10 h-10 rounded-full bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface flex items-center justify-center transition-colors">
           <span className="material-symbols-outlined">chevron_right</span>
         </Link>
       </div>

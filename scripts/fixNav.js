@@ -11,16 +11,19 @@ async function fixNav() {
     const defaultNavigation = {
       main: [
         { label: 'Home', url: '/', order: 0, isExternal: false },
-        { label: 'Novels', url: '/books', order: 1, isExternal: false },
-        { label: 'Short Stories', url: '/stories', order: 2, isExternal: false },
-        { label: 'Blog', url: '/blog', order: 3, isExternal: false },
-        { label: 'Bookshelf', url: '/bookshelf', order: 4, isExternal: false },
+        { label: 'Wikis', url: '/wikis', order: 1, isExternal: false },
+        { label: 'Categories', url: '/categories', order: 2, isExternal: false },
+        { label: 'Novels', url: '/books', order: 3, isExternal: false },
+        { label: 'Short Stories', url: '/stories', order: 4, isExternal: false },
+        { label: 'Blog', url: '/blog', order: 5, isExternal: false },
+        { label: 'Bookshelf', url: '/bookshelf', order: 6, isExternal: false },
       ],
       footer: [
         { label: 'Home', url: '/', order: 0, isExternal: false },
-        { label: 'Novels', url: '/books', order: 1, isExternal: false },
-        { label: 'Short Stories', url: '/stories', order: 2, isExternal: false },
-        { label: 'Blog', url: '/blog', order: 3, isExternal: false },
+        { label: 'Categories', url: '/categories', order: 1, isExternal: false },
+        { label: 'Novels', url: '/books', order: 2, isExternal: false },
+        { label: 'Short Stories', url: '/stories', order: 3, isExternal: false },
+        { label: 'Blog', url: '/blog', order: 4, isExternal: false },
       ],
     };
 

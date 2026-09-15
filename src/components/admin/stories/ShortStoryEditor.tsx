@@ -124,10 +124,10 @@ export default function ShortStoryEditor({ storyId }: { storyId?: string }) {
     <div className="max-w-5xl mx-auto py-8 px-4 h-[calc(100vh-4rem)] flex flex-col relative">
       <div className="flex items-center justify-between mb-6 shrink-0">
         <div className="flex items-center gap-4">
-          <Link href="/admin/short-stories" className="p-2 rounded hover:bg-surface-container-low text-on-surface-variant">
+          <Link href="/admin/short-stories" className="p-2 rounded hover:bg-[#121218] text-[#706F78]">
             <ArrowLeft size={20} />
           </Link>
-          <h1 className="text-2xl font-bold text-on-surface">
+          <h1 className="text-2xl font-bold text-[#F5F3EF]">
             {storyId ? 'Edit Story' : 'New Story'}
           </h1>
         </div>
@@ -144,7 +144,7 @@ export default function ShortStoryEditor({ storyId }: { storyId?: string }) {
           )}
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className={`p-2 rounded transition-colors ${showSettings ? 'bg-surface-container-low text-on-surface' : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low'}`}
+            className={`p-2 rounded transition-colors ${showSettings ? 'bg-[#121218] text-[#F5F3EF]' : 'text-[#706F78] hover:text-[#F5F3EF] hover:bg-[#121218]'}`}
             title="Story Settings"
           >
             <Settings size={20} />
@@ -165,25 +165,25 @@ export default function ShortStoryEditor({ storyId }: { storyId?: string }) {
 
         {showSettings && (
           <div className="w-80 shrink-0 space-y-6 overflow-y-auto">
-            <div className="card p-5 space-y-4">
-              <h2 className="text-sm font-bold text-on-surface uppercase tracking-wider border-b border-outline-variant/30 pb-2">Story Settings</h2>
+            <div className="admin-panel p-5 space-y-4">
+              <h2 className="text-sm font-bold text-[#F5F3EF] uppercase tracking-wider border-b border-[rgba(255,255,255,0.09)] pb-2">Story Settings</h2>
               
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-on-surface-variant uppercase">Slug (URL)</label>
+                <label className="text-xs font-semibold text-[#706F78] uppercase">Slug (URL)</label>
                 <input
                   type="text"
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
-                  className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
+                  className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent text-sm"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-on-surface-variant uppercase">Status</label>
+                <label className="text-xs font-semibold text-[#706F78] uppercase">Status</label>
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
+                  className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent text-sm"
                 >
                   <option value="draft">Draft</option>
                   <option value="published">Published</option>
@@ -192,34 +192,34 @@ export default function ShortStoryEditor({ storyId }: { storyId?: string }) {
               </div>
               
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-on-surface-variant uppercase">Synopsis</label>
+                <label className="text-xs font-semibold text-[#706F78] uppercase">Synopsis</label>
                 <textarea
                   value={synopsis}
                   onChange={(e) => setSynopsis(e.target.value)}
                   placeholder="Brief summary..."
-                  className="w-full h-24 bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent resize-none text-sm"
+                  className="w-full h-24 bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent resize-none text-sm"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-on-surface-variant uppercase">Genres (comma separated)</label>
+                <label className="text-xs font-semibold text-[#706F78] uppercase">Genres (comma separated)</label>
                 <input
                   type="text"
                   value={genres}
                   onChange={(e) => setGenres(e.target.value)}
                   placeholder="fantasy, sci-fi, horror"
-                  className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
+                  className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent text-sm"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-on-surface-variant uppercase">Tags (comma separated)</label>
+                <label className="text-xs font-semibold text-[#706F78] uppercase">Tags (comma separated)</label>
                 <input
                   type="text"
                   value={tags}
                   onChange={(e) => setTags(e.target.value)}
                   placeholder="featured, winner"
-                  className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
+                  className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent text-sm"
                 />
               </div>
             </div>

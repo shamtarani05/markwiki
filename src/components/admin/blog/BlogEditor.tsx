@@ -130,10 +130,10 @@ export default function BlogEditor({ postId }: { postId?: string }) {
     <div className="max-w-5xl mx-auto py-8 px-4 h-[calc(100vh-4rem)] flex flex-col">
       <div className="flex items-center justify-between mb-6 shrink-0">
         <div className="flex items-center gap-4">
-          <Link href="/admin/blog" className="p-2 rounded hover:bg-surface-container-low text-on-surface-variant">
+          <Link href="/admin/blog" className="p-2 rounded hover:bg-[#121218] text-[#706F78]">
             <ArrowLeft size={20} />
           </Link>
-          <h1 className="text-2xl font-bold text-on-surface">
+          <h1 className="text-2xl font-bold text-[#F5F3EF]">
             {postId ? 'Edit Post' : 'New Post'}
           </h1>
         </div>
@@ -164,14 +164,14 @@ export default function BlogEditor({ postId }: { postId?: string }) {
       </div>
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-4 gap-6 min-h-0">
-        <div className="lg:col-span-3 flex flex-col min-h-0 bg-surface-container-lowest border border-outline-variant/30 rounded-lg shadow-sm overflow-hidden">
-          <div className="p-4 border-b border-outline-variant/30 bg-surface-container-low shrink-0">
+        <div className="lg:col-span-3 flex flex-col min-h-0 bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded-lg shadow-sm overflow-hidden">
+          <div className="p-4 border-b border-[rgba(255,255,255,0.09)] bg-[#121218] shrink-0">
             <input
               type="text"
               value={title}
               onChange={handleTitleChange}
               placeholder="Post Title"
-              className="w-full text-2xl font-bold bg-transparent text-on-surface focus:outline-none placeholder:text-on-surface-variant/50"
+              className="w-full text-2xl font-bold bg-transparent text-[#F5F3EF] focus:outline-none placeholder:text-[#706F78]"
             />
           </div>
           <div className="flex-1 p-0 overflow-y-auto">
@@ -179,31 +179,31 @@ export default function BlogEditor({ postId }: { postId?: string }) {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="Write your blog post here..."
-              className="w-full h-full min-h-[500px] p-6 bg-surface-container-lowest text-on-surface focus:outline-none resize-none prose prose-wiki max-w-none"
+              className="w-full h-full min-h-[500px] p-6 bg-[#0B0B0F] text-[#F5F3EF] focus:outline-none resize-none prose prose-wiki max-w-none"
             />
           </div>
         </div>
 
         <div className="space-y-6 overflow-y-auto">
-          <div className="card p-5 space-y-4">
-            <h2 className="text-sm font-bold text-on-surface uppercase tracking-wider border-b border-outline-variant/30 pb-2">Settings</h2>
+          <div className="admin-panel p-5 space-y-4">
+            <h2 className="text-sm font-bold text-[#F5F3EF] uppercase tracking-wider border-b border-[rgba(255,255,255,0.09)] pb-2">Settings</h2>
             
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-on-surface-variant uppercase">Slug (URL)</label>
+              <label className="text-xs font-semibold text-[#706F78] uppercase">Slug (URL)</label>
               <input
                 type="text"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
-                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
+                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent text-sm"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-on-surface-variant uppercase">Status</label>
+              <label className="text-xs font-semibold text-[#706F78] uppercase">Status</label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
-                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
+                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent text-sm"
               >
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
@@ -212,14 +212,14 @@ export default function BlogEditor({ postId }: { postId?: string }) {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-on-surface-variant uppercase">Cover Image</label>
+              <label className="text-xs font-semibold text-[#706F78] uppercase">Cover Image</label>
               <div className="flex gap-2">
                 <input
                   type="text"
                   value={coverImage}
                   onChange={(e) => setCoverImage(e.target.value)}
                   placeholder="https://..."
-                  className="flex-1 bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
+                  className="flex-1 bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent text-sm"
                 />
                 <button
                   onClick={() => setShowImagePicker(true)}
@@ -230,30 +230,42 @@ export default function BlogEditor({ postId }: { postId?: string }) {
                 </button>
               </div>
               {coverImage && (
-                <div className="mt-2 aspect-video w-full rounded border border-outline-variant/30 overflow-hidden bg-surface-container-low relative">
-                  <img src={coverImage} alt="Cover preview" className="w-full h-full object-cover" />
+                <div className="mt-2 aspect-video w-full rounded border border-[rgba(255,255,255,0.09)] overflow-hidden bg-[#121218] relative">
+                  <>
+                    <>
+                    <>
+                    <>
+                    <img src={coverImage} alt="Cover preview" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
                 </div>
               )}
             </div>
             
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-on-surface-variant uppercase">Excerpt</label>
+              <label className="text-xs font-semibold text-[#706F78] uppercase">Excerpt</label>
               <textarea
                 value={excerpt}
                 onChange={(e) => setExcerpt(e.target.value)}
                 placeholder="Brief summary..."
-                className="w-full h-24 bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent resize-none text-sm"
+                className="w-full h-24 bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent resize-none text-sm"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-semibold text-on-surface-variant uppercase">Tags (comma separated)</label>
+              <label className="text-xs font-semibold text-[#706F78] uppercase">Tags (comma separated)</label>
               <input
                 type="text"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
                 placeholder="news, update, feature"
-                className="w-full bg-surface-container-lowest border border-outline-variant/30 rounded px-3 py-2 text-on-surface focus:outline-none focus:border-accent text-sm"
+                className="w-full bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded px-3 py-2 text-[#F5F3EF] focus:outline-none focus:border-accent text-sm"
               />
             </div>
           </div>

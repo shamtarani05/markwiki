@@ -75,8 +75,8 @@ export default function ReviewQueuePage() {
         </div>
       ) : items.length === 0 ? (
         <div className="admin-empty">
-          <Inbox size={22} className="mx-auto text-on-surface-variant mb-3" aria-hidden="true" />
-          <p className="text-[13px] text-on-surface mb-1">Nothing waiting</p>
+          <Inbox size={22} className="mx-auto text-[#706F78] mb-3" aria-hidden="true" />
+          <p className="text-[13px] text-[#F5F3EF] mb-1">Nothing waiting</p>
           <p className="admin-meta">
             When a reader submits a wiki, a page or an edit, it appears here for you to preview and decide on.
           </p>
@@ -94,10 +94,10 @@ export default function ReviewQueuePage() {
                 <div className="flex items-center gap-2 mb-1.5">
                   <span className={`admin-chip ${KIND_BADGE[item.kind]}`}>{KIND_LABEL[item.kind]}</span>
                 </div>
-                <h2 className="text-[15px] font-semibold text-on-surface truncate">{item.title}</h2>
+                <h2 className="text-[15px] font-semibold text-[#F5F3EF] truncate">{item.title}</h2>
                 <p className="admin-meta mt-0.5 truncate">
                   {item.submittedBy ?? 'Unknown contributor'}
-                  <span aria-hidden="true" className="inline-block w-px h-3 align-middle bg-border mx-2" />
+                  <span aria-hidden="true" className="inline-block w-px h-3 align-middle bg-[rgba(255,255,255,0.09)] mx-2" />
                   <span className="admin-num">{new Date(item.updatedAt).toLocaleString()}</span>
                 </p>
               </div>

@@ -64,13 +64,13 @@ function SortableSectionItem({
     <div
       ref={setNodeRef}
       style={style}
-      className={`group relative flex items-center p-3 mb-2 rounded-xl border bg-surface-container-lowest cursor-pointer transition-all ${
+      className={`group relative flex items-center p-3 mb-2 rounded-xl border bg-[#0B0B0F] cursor-pointer transition-all ${
         isDragging ? 'border-primary shadow-xl scale-[1.02]' : 'border-surface-variant hover:border-primary/50 hover:shadow-md'
       }`}
       onClick={onClick}
     >
       <button
-        className="p-1.5 mr-2 text-on-surface-variant hover:text-primary hover:bg-primary/10 rounded-lg cursor-grab active:cursor-grabbing"
+        className="p-1.5 mr-2 text-[#706F78] hover:text-[#8B5CF6] hover:bg-primary/10 rounded-lg cursor-grab active:cursor-grabbing"
         {...attributes}
         {...listeners}
         onClick={(e) => e.stopPropagation()}
@@ -78,12 +78,12 @@ function SortableSectionItem({
         <GripVertical size={16} />
       </button>
 
-      <div className="w-8 h-8 rounded-lg bg-surface-variant flex items-center justify-center text-lg mr-3 shrink-0">
+      <div className="w-8 h-8 rounded-lg bg-[#181820] flex items-center justify-center text-lg mr-3 shrink-0">
         <LayoutTemplate size={16} />
       </div>
       
       <div className="flex-1 min-w-0">
-        <h4 className="font-headline-sm text-sm text-on-surface truncate">{label}</h4>
+        <h4 className="font-headline-sm text-sm text-[#F5F3EF] truncate">{label}</h4>
       </div>
 
       <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity ml-2">
@@ -96,7 +96,7 @@ function SortableSectionItem({
         </button>
       </div>
 
-      <ChevronRight size={16} className="text-on-surface-variant opacity-30 ml-2" />
+      <ChevronRight size={16} className="text-[#706F78] opacity-30 ml-2" />
     </div>
   );
 }
@@ -119,19 +119,19 @@ function SectionSettingsForm({
       {block.type === 'hero' && (
         <>
           <div>
-            <label className="block font-label-mono text-xs text-on-surface-variant mb-2">HERO TITLE HTML</label>
+            <label className="block font-label-mono text-xs text-[#706F78] mb-2">HERO TITLE HTML</label>
             <textarea
               value={settings.heroTitle ?? ''}
               onChange={(e) => updateSettings({ heroTitle: e.target.value })}
-              className="w-full h-24 bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-on-surface focus:outline-none focus:border-primary font-mono"
+              className="w-full h-24 bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-[#F5F3EF] focus:outline-none focus:border-primary font-mono"
             />
           </div>
           <div>
-            <label className="block font-label-mono text-xs text-on-surface-variant mb-2">HERO SUBTITLE</label>
+            <label className="block font-label-mono text-xs text-[#706F78] mb-2">HERO SUBTITLE</label>
             <textarea
               value={settings.heroSubtitle ?? ''}
               onChange={(e) => updateSettings({ heroSubtitle: e.target.value })}
-              className="w-full h-20 bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-on-surface focus:outline-none focus:border-primary"
+              className="w-full h-20 bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-[#F5F3EF] focus:outline-none focus:border-primary"
             />
           </div>
         </>
@@ -140,11 +140,11 @@ function SectionSettingsForm({
       {/* Ad Zone Settings */}
       {block.type === 'adSlot' && (
         <div>
-          <label className="block font-label-mono text-xs text-on-surface-variant mb-2">AD ZONE</label>
+          <label className="block font-label-mono text-xs text-[#706F78] mb-2">AD ZONE</label>
           <select
             value={settings.zone || 'homepage-feed'}
             onChange={(e) => updateSettings({ zone: e.target.value })}
-            className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-on-surface focus:outline-none focus:border-primary"
+            className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-[#F5F3EF] focus:outline-none focus:border-primary"
           >
             <option value="homepage-hero">Hero Header (Top)</option>
             <option value="homepage-feed">Content Feed (Middle/Bottom)</option>
@@ -155,13 +155,13 @@ function SectionSettingsForm({
       {/* Item Count */}
       {['featuredWikis', 'trendingPages', 'recentActivity', 'continueReading'].includes(block.type) && (
         <div>
-          <label className="block font-label-mono text-xs text-on-surface-variant mb-2">DISPLAY COUNT</label>
+          <label className="block font-label-mono text-xs text-[#706F78] mb-2">DISPLAY COUNT</label>
           <input
             type="number"
             min={1} max={20}
             value={settings.itemCount ?? 6}
             onChange={(e) => updateSettings({ itemCount: parseInt(e.target.value, 10) || 6 })}
-            className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-on-surface focus:outline-none focus:border-primary"
+            className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-[#F5F3EF] focus:outline-none focus:border-primary"
           />
         </div>
       )}
@@ -169,11 +169,11 @@ function SectionSettingsForm({
       {/* Background Style */}
       {['categories', 'trendingPages', 'community', 'newsletter'].includes(block.type) && (
         <div>
-          <label className="block font-label-mono text-xs text-on-surface-variant mb-2">BACKGROUND STYLE</label>
+          <label className="block font-label-mono text-xs text-[#706F78] mb-2">BACKGROUND STYLE</label>
           <select
             value={settings.backgroundStyle || 'default'}
             onChange={(e) => updateSettings({ backgroundStyle: e.target.value })}
-            className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-on-surface focus:outline-none focus:border-primary"
+            className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-[#F5F3EF] focus:outline-none focus:border-primary"
           >
             <option value="default">Default Transparent (Clean)</option>
             <option value="secondary">Elevated Surface (Muted)</option>
@@ -185,21 +185,21 @@ function SectionSettingsForm({
       {block.type === 'publishCTA' && (
         <>
           <div>
-            <label className="block font-label-mono text-xs text-on-surface-variant mb-2">PRIMARY BUTTON TEXT</label>
+            <label className="block font-label-mono text-xs text-[#706F78] mb-2">PRIMARY BUTTON TEXT</label>
             <input
               type="text"
               value={settings.ctaPrimaryText ?? ''}
               onChange={(e) => updateSettings({ ctaPrimaryText: e.target.value })}
-              className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-on-surface focus:outline-none focus:border-primary"
+              className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-[#F5F3EF] focus:outline-none focus:border-primary"
             />
           </div>
           <div>
-            <label className="block font-label-mono text-xs text-on-surface-variant mb-2">PRIMARY BUTTON URL</label>
+            <label className="block font-label-mono text-xs text-[#706F78] mb-2">PRIMARY BUTTON URL</label>
             <input
               type="text"
               value={settings.ctaPrimaryLink ?? ''}
               onChange={(e) => updateSettings({ ctaPrimaryLink: e.target.value })}
-              className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-on-surface focus:outline-none focus:border-primary"
+              className="w-full bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-[#F5F3EF] focus:outline-none focus:border-primary"
             />
           </div>
         </>
@@ -320,7 +320,7 @@ export default function AdminHomepageBuilder() {
 
   if (loading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-surface-container-lowest">
+      <div className="h-screen flex items-center justify-center bg-[#0B0B0F]">
         <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent"></div>
       </div>
     );
@@ -331,13 +331,13 @@ export default function AdminHomepageBuilder() {
   return (
     <div className="h-screen w-full flex flex-col bg-surface-container overflow-hidden">
       {/* Admin Top Header */}
-      <header className="h-16 shrink-0 bg-surface-container-lowest border-b border-surface-variant flex items-center justify-between px-4 z-20">
+      <header className="h-16 shrink-0 bg-[#0B0B0F] border-b border-surface-variant flex items-center justify-between px-4 z-20">
         <div className="flex items-center gap-4">
-          <Link href="/admin" className="w-8 h-8 rounded-lg hover:bg-surface-variant flex items-center justify-center text-on-surface-variant">
+          <Link href="/admin" className="w-8 h-8 rounded-lg hover:bg-[#181820] flex items-center justify-center text-[#706F78]">
             <ArrowLeft size={18} />
           </Link>
           <div>
-            <h1 className="font-headline-sm font-bold text-on-surface">Visual Editor</h1>
+            <h1 className="font-headline-sm font-bold text-[#F5F3EF]">Visual Editor</h1>
           </div>
         </div>
 
@@ -345,13 +345,13 @@ export default function AdminHomepageBuilder() {
         <div className="flex items-center bg-surface-container rounded-lg p-1">
           <button 
             onClick={() => setPreviewMode('desktop')}
-            className={`p-1.5 rounded-md ${previewMode === 'desktop' ? 'bg-surface-variant text-on-surface' : 'text-on-surface-variant hover:text-on-surface'}`}
+            className={`p-1.5 rounded-md ${previewMode === 'desktop' ? 'bg-[#181820] text-[#F5F3EF]' : 'text-[#706F78] hover:text-[#F5F3EF]'}`}
           >
             <Monitor size={18} />
           </button>
           <button 
             onClick={() => setPreviewMode('mobile')}
-            className={`p-1.5 rounded-md ${previewMode === 'mobile' ? 'bg-surface-variant text-on-surface' : 'text-on-surface-variant hover:text-on-surface'}`}
+            className={`p-1.5 rounded-md ${previewMode === 'mobile' ? 'bg-[#181820] text-[#F5F3EF]' : 'text-[#706F78] hover:text-[#F5F3EF]'}`}
           >
             <Smartphone size={18} />
           </button>
@@ -381,20 +381,20 @@ export default function AdminHomepageBuilder() {
 
       <main className="flex-1 flex overflow-hidden">
         {/* Left Sidebar (Shopify Style) */}
-        <aside className="w-[320px] shrink-0 bg-surface-container-lowest border-r border-surface-variant flex flex-col overflow-hidden shadow-xl z-10 relative">
+        <aside className="w-[320px] shrink-0 bg-[#0B0B0F] border-r border-surface-variant flex flex-col overflow-hidden shadow-xl z-10 relative">
           
           {/* Main Tabs - hide if editing a specific section or adding */}
           {!editingBlock && !showAddMenu && (
             <div className="flex items-center border-b border-surface-variant bg-surface-container/30">
               <button 
                 onClick={() => setActiveTab('sections')}
-                className={`flex-1 py-3 text-sm font-medium flex justify-center items-center gap-2 border-b-2 transition-colors ${activeTab === 'sections' ? 'border-primary text-primary' : 'border-transparent text-on-surface-variant hover:text-on-surface'}`}
+                className={`flex-1 py-3 text-sm font-medium flex justify-center items-center gap-2 border-b-2 transition-colors ${activeTab === 'sections' ? 'border-primary text-[#8B5CF6]' : 'border-transparent text-[#706F78] hover:text-[#F5F3EF]'}`}
               >
                 <LayoutTemplate size={16} /> Sections
               </button>
               <button 
                 onClick={() => setActiveTab('theme')}
-                className={`flex-1 py-3 text-sm font-medium flex justify-center items-center gap-2 border-b-2 transition-colors ${activeTab === 'theme' ? 'border-primary text-primary' : 'border-transparent text-on-surface-variant hover:text-on-surface'}`}
+                className={`flex-1 py-3 text-sm font-medium flex justify-center items-center gap-2 border-b-2 transition-colors ${activeTab === 'theme' ? 'border-primary text-[#8B5CF6]' : 'border-transparent text-[#706F78] hover:text-[#F5F3EF]'}`}
               >
                 <Paintbrush size={16} /> Theme
               </button>
@@ -406,10 +406,10 @@ export default function AdminHomepageBuilder() {
             {/* View: Theme Settings */}
             {activeTab === 'theme' && !editingBlock && !showAddMenu && (
               <div className="p-4 animate-in fade-in slide-in-from-right-4">
-                <h3 className="font-headline-sm mb-4 text-on-surface">Theme Settings</h3>
+                <h3 className="font-headline-sm mb-4 text-[#F5F3EF]">Theme Settings</h3>
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-xs font-label-mono text-on-surface-variant mb-2">ACCENT COLOR</label>
+                    <label className="block text-xs font-label-mono text-[#706F78] mb-2">ACCENT COLOR</label>
                     <div className="flex items-center gap-3">
                       <div className="relative w-10 h-10 rounded-full border-2 border-surface-variant overflow-hidden shadow-inner">
                         <input 
@@ -423,7 +423,7 @@ export default function AdminHomepageBuilder() {
                         type="text" 
                         value={theme.accentColor}
                         onChange={(e) => setTheme({...theme, accentColor: e.target.value})}
-                        className="flex-1 bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-on-surface uppercase font-mono"
+                        className="flex-1 bg-surface-container border border-surface-variant rounded-lg px-3 py-2 text-sm text-[#F5F3EF] uppercase font-mono"
                       />
                     </div>
                   </div>
@@ -451,7 +451,7 @@ export default function AdminHomepageBuilder() {
                 
                 <button
                   onClick={() => setShowAddMenu(true)}
-                  className="w-full mt-4 py-3 border-2 border-dashed border-surface-variant rounded-xl text-on-surface-variant hover:text-primary hover:border-primary hover:bg-primary/5 transition-colors flex justify-center items-center gap-2 text-sm font-medium"
+                  className="w-full mt-4 py-3 border-2 border-dashed border-surface-variant rounded-xl text-[#706F78] hover:text-[#8B5CF6] hover:border-primary hover:bg-primary/5 transition-colors flex justify-center items-center gap-2 text-sm font-medium"
                 >
                   <Plus size={16} /> Add Section
                 </button>
@@ -460,12 +460,12 @@ export default function AdminHomepageBuilder() {
 
             {/* View: Add Section Menu */}
             {showAddMenu && (
-              <div className="absolute inset-0 bg-surface-container-lowest z-10 flex flex-col animate-in slide-in-from-right-8">
+              <div className="absolute inset-0 bg-[#0B0B0F] z-10 flex flex-col animate-in slide-in-from-right-8">
                 <div className="flex items-center p-4 border-b border-surface-variant bg-surface-container/30 sticky top-0">
-                  <button onClick={() => setShowAddMenu(false)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-variant mr-3">
+                  <button onClick={() => setShowAddMenu(false)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[#181820] mr-3">
                     <ArrowLeft size={18} />
                   </button>
-                  <h3 className="font-headline-sm text-on-surface">Add Section</h3>
+                  <h3 className="font-headline-sm text-[#F5F3EF]">Add Section</h3>
                 </div>
                 <div className="p-4 space-y-2 overflow-y-auto">
                   {HOMEPAGE_SECTION_TYPES.map(type => {
@@ -475,12 +475,12 @@ export default function AdminHomepageBuilder() {
                         onClick={() => addBlock(type)}
                         className="w-full text-left p-3 rounded-xl hover:bg-surface-container transition-colors flex items-center gap-3 border border-transparent hover:border-surface-variant group"
                       >
-                        <div className="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
+                        <div className="w-10 h-10 rounded-lg bg-[#181820] flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
                           <LayoutTemplate size={16} />
                         </div>
                         <div>
-                          <div className="text-sm font-medium text-on-surface">{BLOCK_LABELS[type]}</div>
-                          <div className="text-[11px] text-on-surface-variant line-clamp-1">{BLOCK_DESCRIPTIONS[type]}</div>
+                          <div className="text-sm font-medium text-[#F5F3EF]">{BLOCK_LABELS[type]}</div>
+                          <div className="text-[11px] text-[#706F78] line-clamp-1">{BLOCK_DESCRIPTIONS[type]}</div>
                         </div>
                       </button>
                     );
@@ -491,12 +491,12 @@ export default function AdminHomepageBuilder() {
 
             {/* View: Section Specific Settings */}
             {editingBlock && (
-              <div className="absolute inset-0 bg-surface-container-lowest z-10 flex flex-col animate-in slide-in-from-right-8">
+              <div className="absolute inset-0 bg-[#0B0B0F] z-10 flex flex-col animate-in slide-in-from-right-8">
                 <div className="flex items-center p-4 border-b border-surface-variant bg-surface-container/30 sticky top-0">
-                  <button onClick={() => setEditingSectionId(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-variant mr-3">
+                  <button onClick={() => setEditingSectionId(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[#181820] mr-3">
                     <ArrowLeft size={18} />
                   </button>
-                  <h3 className="font-headline-sm text-on-surface truncate pr-4">{BLOCK_LABELS[editingBlock.type]}</h3>
+                  <h3 className="font-headline-sm text-[#F5F3EF] truncate pr-4">{BLOCK_LABELS[editingBlock.type]}</h3>
                 </div>
                 <div className="flex-1 overflow-y-auto">
                   <SectionSettingsForm
@@ -519,14 +519,14 @@ export default function AdminHomepageBuilder() {
         </aside>
 
         {/* Live Preview Area */}
-        <div className="flex-1 bg-surface-variant flex items-center justify-center overflow-hidden p-4 relative">
+        <div className="flex-1 bg-[#181820] flex items-center justify-center overflow-hidden p-4 relative">
           <div className="absolute top-4 left-4 right-4 text-center z-0">
-            <span className="px-3 py-1 bg-surface-container rounded-full text-[10px] uppercase font-label-mono text-on-surface-variant tracking-wider shadow-sm">
+            <span className="px-3 py-1 bg-surface-container rounded-full text-[10px] uppercase font-label-mono text-[#706F78] tracking-wider shadow-sm">
               Live Preview
             </span>
           </div>
           <div 
-            className={`bg-surface-container-lowest shadow-2xl overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
+            className={`bg-[#0B0B0F] shadow-2xl overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)] ${
               previewMode === 'mobile' ? 'w-[375px] h-[812px] rounded-[3rem] border-8 border-surface-container-highest' : 'w-full h-full rounded-2xl border border-surface-variant'
             }`}
           >
@@ -534,7 +534,7 @@ export default function AdminHomepageBuilder() {
             <iframe
               ref={iframeRef}
               src="/"
-              className="w-full h-full border-0 bg-surface-container-lowest"
+              className="w-full h-full border-0 bg-[#0B0B0F]"
               title="Live Preview"
             />
           </div>

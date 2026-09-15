@@ -40,15 +40,15 @@ export default function ImagePicker({
 
   return (
     <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50" onClick={onClose}>
-      <div className="card w-full max-w-md p-4" onClick={(e) => e.stopPropagation()}>
+      <div className="admin-panel w-full max-w-md p-4" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-semibold text-on-surface">Insert image</h3>
-          <button type="button" onClick={onClose} aria-label="Close" className="text-on-surface-variant hover:text-on-surface">✕</button>
+          <h3 className="text-sm font-semibold text-[#F5F3EF]">Insert image</h3>
+          <button type="button" onClick={onClose} aria-label="Close" className="text-[#706F78] hover:text-[#F5F3EF]">✕</button>
         </div>
 
-        <div className="flex rounded-md border border-outline-variant/30 overflow-hidden mb-3 w-fit">
-          <button type="button" onClick={() => setTab('upload')} className={`px-3 py-1 text-xs ${tab === 'upload' ? 'bg-primary text-primary-contrast' : 'text-on-surface-variant hover:bg-surface-variant'}`}>Upload</button>
-          <button type="button" onClick={() => setTab('url')} className={`px-3 py-1 text-xs ${tab === 'url' ? 'bg-primary text-primary-contrast' : 'text-on-surface-variant hover:bg-surface-variant'}`}>URL</button>
+        <div className="flex rounded-md border border-[rgba(255,255,255,0.09)] overflow-hidden mb-3 w-fit">
+          <button type="button" onClick={() => setTab('upload')} className={`px-3 py-1 text-xs ${tab === 'upload' ? 'bg-primary text-[#8B5CF6]-contrast' : 'text-[#706F78] hover:bg-[#181820]'}`}>Upload</button>
+          <button type="button" onClick={() => setTab('url')} className={`px-3 py-1 text-xs ${tab === 'url' ? 'bg-primary text-[#8B5CF6]-contrast' : 'text-[#706F78] hover:bg-[#181820]'}`}>URL</button>
         </div>
 
         {error && <p className="text-xs text-[var(--tag-red)] mb-2">{error}</p>}
@@ -74,14 +74,14 @@ export default function ImagePicker({
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://example.com/image.jpg"
-              className="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-on-surface focus:outline-none focus:border-accent"
+              className="w-full px-3 py-2 text-sm bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded-lg text-[#F5F3EF] focus:outline-none focus:border-accent"
             />
             <input
               type="text"
               value={alt}
               onChange={(e) => setAlt(e.target.value)}
               placeholder="Alt text (for accessibility)"
-              className="w-full px-3 py-2 text-sm bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-on-surface focus:outline-none focus:border-accent"
+              className="w-full px-3 py-2 text-sm bg-[#0B0B0F] border border-[rgba(255,255,255,0.09)] rounded-lg text-[#F5F3EF] focus:outline-none focus:border-accent"
             />
             <button
               type="button"

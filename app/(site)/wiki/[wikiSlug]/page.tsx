@@ -1,6 +1,19 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import connectDB from '@/src/lib/db/connection';
+import { Wiki } from '@/src/lib/db/models';
+import ReactionButton from '@/src/components/community/ReactionButton';
+import CommentSection from '@/src/components/community/CommentSection';
 
-export default function Page() {
+export default async function Page({ params }: { params: Promise<{ wikiSlug: string }> }) {
+  const { wikiSlug } = await params;
+  await connectDB();
+  const wiki = await Wiki.findOne({ slug: wikiSlug, status: 'approved' }).lean();
+  
+  if (!wiki) {
+    return notFound();
+  }
+
   return (
     <>
 <div className="flex flex-col w-full">
@@ -50,7 +63,7 @@ export default function Page() {
 </div>
 <div>
 <p className="font-label-mono text-label-mono uppercase tracking-widest text-outline">Living Codex · Sovereign Records</p>
-<h1 className="font-headline-lg text-headline-lg text-on-surface tracking-tight">Solo Leveling: Complete Archives</h1>
+<h1 className="font-headline-lg text-headline-lg text-on-surface tracking-tight">{wiki.name}</h1>
 </div>
 </div>
 {/*  Metadata Metrics Strip  */}
@@ -72,9 +85,7 @@ export default function Page() {
 <button className="inline-flex items-center gap-2 px-space-md py-2.5 rounded-xl bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase tracking-wider hover:bg-surface-bright transition-all" id="randomBtn">
 <span className="material-symbols-outlined text-base">shuffle</span> Random Article
           </button>
-<Link className="inline-flex items-center gap-1 px-space-sm py-2.5 rounded-xl bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase tracking-wider hover:text-on-surface hover:bg-surface-container-high transition-all" data-path="create-page" href="#">
-<span className="material-symbols-outlined text-base">add</span> Page
-          </Link>
+
 <button className="w-10 h-10 rounded-xl bg-surface-container text-on-surface-variant flex items-center justify-center hover:text-primary hover:bg-surface-container-high transition-all" id="watchBtn" title="Watch Canon Updates">
 <span className="material-symbols-outlined text-lg">notifications</span>
 </button>
@@ -523,6 +534,14 @@ export default function Page() {
 </div>
 </aside>
 </div>
+<div className="mt-12 flex justify-between items-center border-t border-outline-variant/30 pt-8">
+  <div>
+    <h3 className="text-lg font-headline-sm text-on-surface mb-2">Was this wiki helpful?</h3>
+    <p className="text-on-surface-variant font-body-sm mb-4">Let the community know what you think!</p>
+    <ReactionButton contentType="wiki" contentId={wiki._id.toString()} />
+  </div>
+</div>
+<CommentSection contentType="wiki" contentId={wiki._id.toString()} />
 </main>
 </div>
     </>

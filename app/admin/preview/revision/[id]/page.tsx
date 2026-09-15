@@ -16,7 +16,7 @@ export default async function AdminRevisionPreview({ params }: { params: Promise
       <div className="mb-4 px-4 py-2 rounded-lg bg-[var(--tag-yellow-bg)] text-[var(--tag-yellow)] text-sm font-medium">
         Proposed edit preview — not yet applied to the live page.
       </div>
-      <h1 className="text-4xl font-bold text-on-surface mb-6">{revision.title}</h1>
+      <h1 className="text-4xl font-bold text-[#F5F3EF] mb-6">{revision.title}</h1>
       <BlockListRenderer blocks={blocks} />
     </div>
   );

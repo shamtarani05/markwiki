@@ -100,8 +100,8 @@ export default function EditWikiPage({ params }: { params: Promise<{ id: string 
       {page ? (
         <>
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-on-surface-variant">
-              {page.wiki && <>In <span className="text-primary font-medium">{page.wiki.name}</span></>}
+            <p className="text-sm text-[#706F78]">
+              {page.wiki && <>In <span className="text-[#8B5CF6] font-medium">{page.wiki.name}</span></>}
               {' · '}
               <button
                 type="button"
@@ -118,15 +118,15 @@ export default function EditWikiPage({ params }: { params: Promise<{ id: string 
                   href={`/wiki/${page.wiki.slug}/${page.slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-on-surface-variant hover:text-primary"
+                  className="text-sm text-[#706F78] hover:text-[#8B5CF6]"
                 >
                   View live ↗
                 </a>
               )}
-              <Link href={`/admin/preview/page/${id}`} target="_blank" rel="noopener noreferrer" className="text-sm text-on-surface-variant hover:text-primary">
+              <Link href={`/admin/preview/page/${id}`} target="_blank" rel="noopener noreferrer" className="text-sm text-[#706F78] hover:text-[#8B5CF6]">
                 Preview
               </Link>
-              <Link href={`/admin/wiki/${id}/history`} className="text-sm text-on-surface-variant hover:text-primary">
+              <Link href={`/admin/wiki/${id}/history`} className="text-sm text-[#706F78] hover:text-[#8B5CF6]">
                 View history
               </Link>
               <button
@@ -166,7 +166,7 @@ export default function EditWikiPage({ params }: { params: Promise<{ id: string 
           )}
         </>
       ) : !error ? (
-        <p className="text-on-surface-variant">Loading…</p>
+        <p className="text-[#706F78]">Loading…</p>
       ) : null}
     </div>
   );

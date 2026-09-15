@@ -5,8 +5,8 @@ import { PAGE_TEMPLATES, PageTemplate } from '@/src/lib/blocks/templates';
 export default function TemplatePicker({ onSelect }: { onSelect: (template: PageTemplate) => void }) {
   return (
     <div className="max-w-3xl mx-auto py-12">
-      <h2 className="text-2xl font-bold text-on-surface mb-1">Start a Wiki Page</h2>
-      <p className="text-on-surface-variant mb-6">
+      <h2 className="text-2xl font-bold text-[#F5F3EF] mb-1">Start a Wiki Page</h2>
+      <p className="text-[#706F78] mb-6">
         Pick a starting layout — every block it adds can be moved, edited, or deleted afterward. Nothing here is locked in.
       </p>
       <div className="grid sm:grid-cols-3 gap-4">
@@ -15,10 +15,10 @@ export default function TemplatePicker({ onSelect }: { onSelect: (template: Page
             key={t.key}
             type="button"
             onClick={() => onSelect(t)}
-            className="card p-4 text-left hover:border-accent transition-colors"
+            className="admin-panel p-4 text-left hover:border-accent transition-colors"
           >
-            <h3 className="text-sm font-semibold text-on-surface mb-1">{t.name}</h3>
-            <p className="text-xs text-on-surface-variant">{t.description}</p>
+            <h3 className="text-sm font-semibold text-[#F5F3EF] mb-1">{t.name}</h3>
+            <p className="text-xs text-[#706F78]">{t.description}</p>
           </button>
         ))}
       </div>

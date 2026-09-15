@@ -45,21 +45,28 @@ export default async function Page() {
     };
   }
 
-  // 1. Reading Items (if logged in)
   let readingItems: any[] = [];
   if (session) {
     const progressRecords = await ReadingProgress.find({ user: session.sub })
       .sort({ lastReadAt: -1 })
       .limit(3)
-      .populate('contentId', 'title coverImage slug type status')
       .lean();
 
-    readingItems = progressRecords.map((p: any) => ({
+    const populatedRecords = await Promise.all(progressRecords.map(async (p: any) => {
+      let content = null;
+      if (p.contentType === 'book') content = await Book.findById(p.contentId, 'title coverImage slug type status').lean();
+      if (p.contentType === 'story') content = await ShortStory.findById(p.contentId, 'title coverImage slug type status').lean();
+      if (p.contentType === 'blog') content = await BlogPost.findById(p.contentId, 'title coverImage slug type status').lean();
+      if (p.contentType === 'page') content = await WikiPage.findById(p.contentId, 'title coverImage slug type status').lean();
+      return { ...p, contentId: content };
+    }));
+
+    readingItems = populatedRecords.map((p: any) => ({
       id: p._id.toString(),
       title: p.contentId?.title || 'Unknown',
       chapter: p.currentChapter ? 'Resuming...' : 'New',
       image: p.contentId?.coverImage || 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=500&q=80',
-      progress: p.progress || 0,
+      progress: p.percentComplete || 0,
       type: p.contentType,
       lastRead: p.lastReadAt ? new Date(p.lastReadAt).toLocaleDateString() : 'Recently',
     }));

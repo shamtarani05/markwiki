@@ -106,8 +106,8 @@ export default function CategoriesAdminPage() {
     <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-on-surface tracking-tight mb-2">Categories</h1>
-          <p className="text-on-surface-variant font-body-default">Manage content domains and taxonomy for the archive.</p>
+          <h1 className="text-3xl font-bold text-[#F5F3EF] tracking-tight mb-2">Categories</h1>
+          <p className="text-[#706F78] font-body-default">Manage content domains and taxonomy for the archive.</p>
         </div>
         <button 
           onClick={openNewModal}
@@ -118,29 +118,29 @@ export default function CategoriesAdminPage() {
         </button>
       </div>
 
-      <div className="bg-surface-container-low rounded-2xl border border-outline-variant/30 overflow-hidden shadow-lg">
+      <div className="bg-[#121218] rounded-2xl border border-[rgba(255,255,255,0.09)] overflow-hidden shadow-lg">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-surface-container border-b border-outline-variant/30">
-                <th className="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Category</th>
-                <th className="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Slug</th>
-                <th className="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Status</th>
-                <th className="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Order</th>
-                <th className="px-6 py-4 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+              <tr className="bg-surface-container border-b border-[rgba(255,255,255,0.09)]">
+                <th className="px-6 py-4 font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider">Category</th>
+                <th className="px-6 py-4 font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider">Slug</th>
+                <th className="px-6 py-4 font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider">Status</th>
+                <th className="px-6 py-4 font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider">Order</th>
+                <th className="px-6 py-4 font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-outline-variant/30">
+            <tbody className="divide-y divide-[rgba(255,255,255,0.09)]">
               {isLoading ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-on-surface-variant">
+                  <td colSpan={5} className="px-6 py-8 text-center text-[#706F78]">
                     <span className="material-symbols-outlined animate-spin text-2xl">refresh</span>
                     <p className="mt-2 font-label-mono">Loading taxonomy...</p>
                   </td>
                 </tr>
               ) : categories.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-on-surface-variant">
+                  <td colSpan={5} className="px-6 py-8 text-center text-[#706F78]">
                     <p className="font-label-mono">No categories found.</p>
                   </td>
                 </tr>
@@ -149,12 +149,12 @@ export default function CategoriesAdminPage() {
                   <tr key={cat._id.toString()} className="hover:bg-surface-container/50 transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <span className="w-10 h-10 rounded-xl bg-surface-variant flex items-center justify-center text-xl shrink-0 shadow-sm border border-outline-variant/20">
+                        <span className="w-10 h-10 rounded-xl bg-[#181820] flex items-center justify-center text-xl shrink-0 shadow-sm border border-outline-variant/20">
                           {cat.icon || '📁'}
                         </span>
                         <div>
-                          <div className="font-headline-sm text-on-surface leading-tight">{cat.name}</div>
-                          <div className="text-sm text-on-surface-variant mt-0.5 line-clamp-1 max-w-xs">{cat.description}</div>
+                          <div className="font-headline-sm text-[#F5F3EF] leading-tight">{cat.name}</div>
+                          <div className="text-sm text-[#706F78] mt-0.5 line-clamp-1 max-w-xs">{cat.description}</div>
                         </div>
                       </div>
                     </td>
@@ -169,26 +169,26 @@ export default function CategoriesAdminPage() {
                           <span className="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span> Active
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-variant text-on-surface-variant font-label-caps text-[10px] uppercase tracking-wider">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#181820] text-[#706F78] font-label-caps text-[10px] uppercase tracking-wider">
                           <span className="w-1.5 h-1.5 rounded-full bg-outline"></span> Hidden
                         </span>
                       )}
                     </td>
                     <td className="px-6 py-4">
-                      <span className="font-label-mono text-label-mono text-on-surface-variant">{cat.order}</span>
+                      <span className="font-label-mono text-label-mono text-[#706F78]">{cat.order}</span>
                     </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end gap-2">
                         <button 
                           onClick={() => openEditModal(cat)}
-                          className="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors"
+                          className="w-8 h-8 rounded-lg flex items-center justify-center text-[#706F78] hover:text-[#8B5CF6] hover:bg-primary/10 transition-colors"
                           title="Edit"
                         >
                           <span className="material-symbols-outlined text-sm">edit</span>
                         </button>
                         <button 
                           onClick={() => handleDelete(cat._id.toString())}
-                          className="w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error/10 transition-colors"
+                          className="w-8 h-8 rounded-lg flex items-center justify-center text-[#706F78] hover:text-error hover:bg-error/10 transition-colors"
                           title="Delete"
                         >
                           <span className="material-symbols-outlined text-sm">delete</span>
@@ -207,10 +207,10 @@ export default function CategoriesAdminPage() {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={closeModal}></div>
-          <div className="relative bg-surface-container-low border border-outline-variant/30 rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-[slideDown_0.2s_ease-out]">
-            <div className="px-6 py-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container">
-              <h2 className="font-headline-sm text-on-surface">{isEditing ? 'Edit Category' : 'New Category'}</h2>
-              <button onClick={closeModal} className="text-on-surface-variant hover:text-on-surface">
+          <div className="relative bg-[#121218] border border-[rgba(255,255,255,0.09)] rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden animate-[slideDown_0.2s_ease-out]">
+            <div className="px-6 py-4 border-b border-[rgba(255,255,255,0.09)] flex justify-between items-center bg-surface-container">
+              <h2 className="font-headline-sm text-[#F5F3EF]">{isEditing ? 'Edit Category' : 'New Category'}</h2>
+              <button onClick={closeModal} className="text-[#706F78] hover:text-[#F5F3EF]">
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
@@ -218,58 +218,58 @@ export default function CategoriesAdminPage() {
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
-                  <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Name</label>
+                  <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Name</label>
                   <input 
                     required
                     type="text" 
                     value={currentCategory.name || ''}
                     onChange={(e) => setCurrentCategory({...currentCategory, name: e.target.value})}
-                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-default"
+                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-default"
                     placeholder="e.g. Web Novels"
                   />
                 </div>
                 
                 <div>
-                  <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Slug</label>
+                  <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Slug</label>
                   <input 
                     type="text" 
                     value={currentCategory.slug || ''}
                     onChange={(e) => setCurrentCategory({...currentCategory, slug: e.target.value})}
-                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono text-sm"
+                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono text-sm"
                     placeholder="e.g. web-novels"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Icon (Emoji/Text)</label>
+                  <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Icon (Emoji/Text)</label>
                   <input 
                     type="text" 
                     value={currentCategory.icon || ''}
                     onChange={(e) => setCurrentCategory({...currentCategory, icon: e.target.value})}
-                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-xl"
+                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all text-xl"
                     placeholder="e.g. 📖"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Description</label>
+                <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Description</label>
                 <textarea 
                   value={currentCategory.description || ''}
                   onChange={(e) => setCurrentCategory({...currentCategory, description: e.target.value})}
-                  className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-default min-h-[100px] resize-y"
+                  className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-default min-h-[100px] resize-y"
                   placeholder="Short description of the category..."
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Display Order</label>
+                  <label className="block font-label-caps text-label-caps text-[#706F78] uppercase tracking-wider mb-2">Display Order</label>
                   <input 
                     type="number" 
                     value={currentCategory.order || 0}
                     onChange={(e) => setCurrentCategory({...currentCategory, order: parseInt(e.target.value)})}
-                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-outline-variant/30 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono"
+                    className="w-full bg-surface-container px-4 py-2.5 rounded-xl border border-[rgba(255,255,255,0.09)] text-[#F5F3EF] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-label-mono"
                   />
                 </div>
                 <div className="flex items-center">
@@ -278,18 +278,18 @@ export default function CategoriesAdminPage() {
                       type="checkbox" 
                       checked={currentCategory.isActive !== false}
                       onChange={(e) => setCurrentCategory({...currentCategory, isActive: e.target.checked})}
-                      className="w-5 h-5 rounded border-outline-variant/30 text-primary focus:ring-primary bg-surface-container accent-primary"
+                      className="w-5 h-5 rounded border-[rgba(255,255,255,0.09)] text-[#8B5CF6] focus:ring-primary bg-surface-container accent-primary"
                     />
-                    <span className="font-label-caps text-label-caps text-on-surface uppercase tracking-wider">Active</span>
+                    <span className="font-label-caps text-label-caps text-[#F5F3EF] uppercase tracking-wider">Active</span>
                   </label>
                 </div>
               </div>
 
-              <div className="mt-4 flex justify-end gap-3 pt-4 border-t border-outline-variant/30">
+              <div className="mt-4 flex justify-end gap-3 pt-4 border-t border-[rgba(255,255,255,0.09)]">
                 <button 
                   type="button" 
                   onClick={closeModal}
-                  className="px-5 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-variant transition-colors font-label-caps text-label-caps uppercase tracking-wider"
+                  className="px-5 py-2.5 rounded-xl text-[#706F78] hover:bg-[#181820] transition-colors font-label-caps text-label-caps uppercase tracking-wider"
                 >
                   Cancel
                 </button>

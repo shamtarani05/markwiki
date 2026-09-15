@@ -35,15 +35,15 @@ export default function AdminSettingsPage() {
     }
   };
 
-  if (loading) return <p className="text-on-surface-variant">Loading…</p>;
+  if (loading) return <p className="text-[#706F78]">Loading…</p>;
 
   return (
     <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold text-on-surface mb-6">Settings</h1>
+      <h1 className="text-2xl font-bold text-[#F5F3EF] mb-6">Settings</h1>
 
       <div className="card p-5">
-        <h2 className="text-sm font-semibold text-on-surface mb-1">Default wiki page editor</h2>
-        <p className="text-sm text-on-surface-variant mb-4">
+        <h2 className="text-sm font-semibold text-[#F5F3EF] mb-1">Default wiki page editor</h2>
+        <p className="text-sm text-[#706F78] mb-4">
           This is a per-account preference — it only changes which editor opens for you when creating or
           editing a wiki page. Both editors save the exact same page and render identically, so switching
           any time is safe.
@@ -64,7 +64,7 @@ export default function AdminSettingsPage() {
           />
         </div>
 
-        {saving && <p className="text-xs text-on-surface-variant mt-3">Saving…</p>}
+        {saving && <p className="text-xs text-[#706F78] mt-3">Saving…</p>}
         {saved && !saving && <p className="text-xs text-success mt-3">Saved.</p>}
       </div>
     </div>
@@ -79,14 +79,14 @@ function EditorOption({
       type="button"
       onClick={onSelect}
       className={`text-left p-4 rounded-lg border transition-colors ${
-        active ? 'border-accent bg-primary-muted' : 'border-outline-variant/30 hover:border-outline-variant/30-light hover:bg-surface-variant'
+        active ? 'border-accent bg-[rgba(139,92,246,0.14)]' : 'border-[rgba(255,255,255,0.09)] hover:border-[rgba(255,255,255,0.09)]-light hover:bg-[#181820]'
       }`}
     >
       <div className="flex items-center justify-between mb-1">
-        <h3 className="text-sm font-semibold text-on-surface">{title}</h3>
-        {active && <span className="text-[10px] uppercase tracking-wide text-primary">Current</span>}
+        <h3 className="text-sm font-semibold text-[#F5F3EF]">{title}</h3>
+        {active && <span className="text-[10px] uppercase tracking-wide text-[#8B5CF6]">Current</span>}
       </div>
-      <p className="text-xs text-on-surface-variant">{description}</p>
+      <p className="text-xs text-[#706F78]">{description}</p>
     </button>
   );
 }

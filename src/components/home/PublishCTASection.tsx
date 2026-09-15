@@ -4,7 +4,7 @@ import type { HomepageSectionSettings } from '@/src/lib/db/homepageSections';
 
 export default function PublishCTASection({ settings }: { settings?: HomepageSectionSettings | any }) {
   return (
-    <section className="w-full bg-surface-container-lowest py-space-2xl">
+    <section className="w-full bg-transparent py-space-2xl">
 <div className="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg flex flex-col gap-space-xl">
 {/*  Random Lore Rolling Card  */}
 <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-surface-container-high via-surface-container to-surface-container-high p-space-xl shadow-2xl">
@@ -31,7 +31,7 @@ export default function PublishCTASection({ settings }: { settings?: HomepageSec
 </div>
 </div>
 {/*  Massive Publish & Curate Call To Action  */}
-<div className="relative rounded-2xl bg-surface-container-lowest overflow-hidden shadow-2xl p-space-xl lg:p-space-2xl flex flex-col items-center text-center">
+<div className="relative rounded-2xl bg-transparent overflow-hidden shadow-2xl p-space-xl lg:p-space-2xl flex flex-col items-center text-center">
 {/*  Ambient Backdrop Gradients  */}
 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-surface-container-low to-surface-container-lowest pointer-events-none"></div>
 <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-primary/20 blur-[130px] rounded-full pointer-events-none"></div>

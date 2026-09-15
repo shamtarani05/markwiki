@@ -114,8 +114,10 @@ export default function Header({ navLinks = [] }: { navLinks?: { label: string; 
           <div className="flex items-center gap-2">
 
             {/* Search */}
-            <button
-              onClick={() => setSearchFocused(true)}
+            <form
+              action="/search"
+              onFocus={() => setSearchFocused(true)}
+              onBlur={() => setSearchFocused(false)}
               className={`
                 hidden md:flex items-center gap-2.5
                 px-3.5 py-[7px] rounded-xl
@@ -126,18 +128,17 @@ export default function Header({ navLinks = [] }: { navLinks?: { label: string; 
                 }
                 cursor-text group
               `}
-              onBlur={() => setSearchFocused(false)}
             >
               <span className={`material-symbols-outlined text-[18px] transition-colors duration-300 ${searchFocused ? 'text-primary' : 'text-outline group-hover:text-on-surface-variant'}`}>
                 search
               </span>
-              <span className="flex-1 text-[13px] text-outline text-left truncate">
-                Search wikis, characters...
-              </span>
-              <kbd className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-[1px] rounded-md bg-white/[0.06] border border-white/[0.08] text-[10px] font-mono text-on-surface-variant/60">
-                ⌘K
-              </kbd>
-            </button>
+              <input
+                type="search"
+                name="q"
+                placeholder="Search wikis, characters..."
+                className="flex-1 text-[13px] text-on-surface placeholder:text-outline bg-transparent border-none outline-none min-w-0"
+              />
+            </form>
 
             {/* Divider */}
             <div className="hidden md:block w-[1px] h-5 bg-white/[0.08] mx-1" />
@@ -154,22 +155,7 @@ export default function Header({ navLinks = [] }: { navLinks?: { label: string; 
             </button>
 
             {/* CTA Button */}
-            {me ? (
-              <Link
-                className="hidden sm:inline-flex items-center gap-1.5 px-4 py-[7px] rounded-xl text-[13px] font-semibold
-                  bg-gradient-to-b from-primary-container to-primary/80
-                  text-on-primary-container
-                  shadow-[0_0_0_1px_rgba(160,120,255,0.3),0_2px_8px_-2px_rgba(160,120,255,0.4),inset_0_1px_0_0_rgba(255,255,255,0.15)]
-                  hover:shadow-[0_0_0_1px_rgba(160,120,255,0.5),0_4px_20px_-4px_rgba(160,120,255,0.6),inset_0_1px_0_0_rgba(255,255,255,0.2)]
-                  hover:brightness-110
-                  active:scale-[0.97] active:brightness-95
-                  transition-all duration-300"
-                href="/create"
-              >
-                <span className="material-symbols-outlined text-[16px]">edit_square</span>
-                <span>Create</span>
-              </Link>
-            ) : (
+            {!me && (
               <Link
                 className="hidden sm:inline-flex items-center gap-1.5 px-4 py-[7px] rounded-xl text-[13px] font-semibold
                   bg-gradient-to-b from-primary-container to-primary/80
@@ -269,10 +255,10 @@ export default function Header({ navLinks = [] }: { navLinks?: { label: string; 
 
             {/* Mobile Search */}
             <div className="px-3 pb-3">
-              <div className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+              <form action="/search" className="flex items-center gap-3 px-3 py-2 -mx-3 rounded-lg bg-surface-container-low mb-2">
                 <span className="material-symbols-outlined text-lg text-outline">search</span>
-                <span className="text-sm text-outline">Search wikis, characters...</span>
-              </div>
+                <input type="search" name="q" placeholder="Search wikis, characters..." className="flex-1 bg-transparent border-none outline-none text-sm text-on-surface placeholder:text-outline min-w-0" />
+              </form>
             </div>
 
             {/* Divider */}

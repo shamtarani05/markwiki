@@ -83,13 +83,13 @@ export default function AdminSidebar() {
         collapsed ? 'w-16' : 'w-60'
       }`}
     >
-      <div className={`flex items-center h-14 shrink-0 border-b border-outline-variant/30 ${collapsed ? 'justify-center px-0' : 'justify-between pl-4 pr-2'}`}>
+      <div className={`flex items-center h-14 shrink-0 border-b border-[rgba(255,255,255,0.09)] ${collapsed ? 'justify-center px-0' : 'justify-between pl-4 pr-2'}`}>
         {!collapsed && (
           <Link href="/admin" className="flex items-center gap-2.5 min-w-0 no-underline">
-            <div className="w-7 h-7 rounded-md bg-primary flex items-center justify-center shrink-0">
-              <span className="text-primary-contrast font-bold text-xs">M</span>
+            <div className="w-7 h-7 rounded-md bg-[#8B5CF6] flex items-center justify-center shrink-0">
+              <span className="text-[#F5F3EF] font-bold text-xs">M</span>
             </div>
-            <span className="font-semibold text-on-surface text-sm truncate">Admin</span>
+            <span className="font-semibold text-[#F5F3EF] text-sm truncate">Admin</span>
           </Link>
         )}
         <button
@@ -97,7 +97,7 @@ export default function AdminSidebar() {
           onClick={toggle}
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          className="w-8 h-8 flex items-center justify-center rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors shrink-0"
+          className="w-8 h-8 flex items-center justify-center rounded-md text-[#A7A5AE] hover:text-[#F5F3EF] hover:bg-[#181820] transition-colors shrink-0"
         >
           {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
         </button>
@@ -110,10 +110,10 @@ export default function AdminSidebar() {
             // A hairline between groups instead of whitespace alone: the
             // grouping is real information (what kind of thing this manages),
             // so it gets a structural device rather than a gap.
-            className={groupIndex > 0 ? 'mt-3 pt-3 border-t border-outline-variant/30' : ''}
+            className={groupIndex > 0 ? 'mt-3 pt-3 border-t border-[rgba(255,255,255,0.09)]' : ''}
           >
             {!collapsed && (
-              <p className="px-4 text-[11px] font-medium text-on-surface-variant mb-1.5">
+              <p className="px-4 text-[11px] font-semibold font-[family-name:var(--font-label-caps)] uppercase tracking-[0.12em] text-[#706F78] mb-1.5">
                 {group.label}
               </p>
             )}
@@ -126,7 +126,7 @@ export default function AdminSidebar() {
                     <div
                       key={item.label}
                       title={collapsed ? `${item.label} — not available yet` : undefined}
-                      className={`flex items-center gap-2.5 pl-2.5 pr-2 py-1.5 rounded-md text-[13px] text-on-surface-variant/45 cursor-not-allowed ${
+                      className={`flex items-center gap-2.5 pl-2.5 pr-2 py-1.5 rounded-md text-[13px] text-[#706F78] cursor-not-allowed ${
                         collapsed ? 'justify-center' : 'justify-between'
                       }`}
                     >
@@ -134,7 +134,7 @@ export default function AdminSidebar() {
                         <Icon size={16} className="shrink-0" />
                         {!collapsed && <span className="truncate">{item.label}</span>}
                       </span>
-                      {!collapsed && <span className="text-[11px] shrink-0">Soon</span>}
+                      {!collapsed && <span className="text-[11px] font-semibold font-[family-name:var(--font-label-caps)] uppercase tracking-[0.12em] shrink-0">Soon</span>}
                     </div>
                   );
                 }
@@ -149,14 +149,14 @@ export default function AdminSidebar() {
                       collapsed ? 'justify-center' : ''
                     } ${
                       active
-                        ? 'bg-primary-muted text-primary font-semibold'
-                        : 'text-on-surface-variant hover:bg-surface-variant hover:text-on-surface'
+                        ? 'bg-[rgba(139,92,246,0.14)] text-[#A78BFA] font-semibold'
+                        : 'text-[#A7A5AE] hover:bg-[#181820] hover:text-[#F5F3EF]'
                     }`}
                   >
                     {/* Full-height rail, not a 2px stub — the active row reads
                         as attached to the edge of the rail it sits in. */}
                     {active && (
-                      <span className="absolute -left-2 top-0 bottom-0 w-[3px] rounded-r-full bg-primary" />
+                      <span className="absolute -left-2 top-0 bottom-0 w-[3px] rounded-r-full bg-[#8B5CF6]" />
                     )}
                     <Icon size={16} className="shrink-0" />
                     {!collapsed && <span className="truncate">{item.label}</span>}

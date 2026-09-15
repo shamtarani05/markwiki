@@ -25,8 +25,8 @@ export default async function ShortStoryListPage() {
 
       {stories.length === 0 ? (
         <div className="admin-empty">
-          <Feather size={22} className="mx-auto text-on-surface-variant mb-3" aria-hidden="true" />
-          <p className="text-[13px] text-on-surface mb-1">No short stories yet</p>
+          <Feather size={22} className="mx-auto text-[#706F78] mb-3" aria-hidden="true" />
+          <p className="text-[13px] text-[#F5F3EF] mb-1">No short stories yet</p>
           <p className="admin-meta mb-4">
             Short stories are standalone pieces of fiction without chapters.
           </p>
@@ -39,37 +39,40 @@ export default async function ShortStoryListPage() {
           {stories.map((s: any) => (
             <div key={s._id.toString()} className="admin-tile flex flex-col">
               <Link href={`/admin/short-stories/${s._id}`} className="no-underline group">
-                <div className="aspect-[2/3] bg-surface-variant flex items-center justify-center relative overflow-hidden">
+                <div className="aspect-[2/3] bg-[#181820] flex items-center justify-center relative overflow-hidden relative">
                   {s.coverImage ? (
+                    <>
                     <img src={s.coverImage} alt={s.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
                   ) : (
-                    <ImageOff size={24} className="text-on-surface-variant/50" aria-hidden="true" />
+                    <ImageOff size={24} className="text-[#706F78]" aria-hidden="true" />
                   )}
                   {/* Status badge */}
                   <div className="absolute top-2 right-2 flex flex-col gap-1 items-end">
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
                       s.status === 'published'
                         ? 'bg-primary text-background'
-                        : 'bg-surface-variant text-on-surface-variant border border-outline-variant/30'
+                        : 'bg-[#181820] text-[#706F78] border border-[rgba(255,255,255,0.09)]'
                     }`}>
                       {s.status}
                     </span>
                   </div>
                 </div>
                 <div className="px-4 pt-3.5 pb-3">
-                  <h3 className="text-[14px] font-bold text-on-surface truncate group-hover:text-primary transition-colors">
+                  <h3 className="text-[14px] font-bold text-[#F5F3EF] truncate group-hover:text-[#8B5CF6] transition-colors">
                     {s.title}
                   </h3>
                   <p className="admin-meta mt-1 line-clamp-2">
                     {s.synopsis || 'No synopsis provided.'}
                   </p>
-                  <p className="admin-meta mt-2 text-[11px] font-medium text-primary">
+                  <p className="admin-meta mt-2 text-[11px] font-medium text-[#8B5CF6]">
                     {s.genres?.join(', ') || 'Uncategorized'}
                   </p>
                 </div>
               </Link>
-              <div className="mt-auto flex items-center justify-between gap-2 px-4 py-2.5 border-t border-outline-variant/30 bg-surface-container-low/30">
-                <span className="admin-meta admin-num font-medium text-on-surface">
+              <div className="mt-auto flex items-center justify-between gap-2 px-4 py-2.5 border-t border-[rgba(255,255,255,0.09)] bg-[#121218]/30">
+                <span className="admin-meta admin-num font-medium text-[#F5F3EF]">
                   {s.readingTime} min read
                 </span>
                 <span className="admin-meta admin-num text-right">{new Date(s.updatedAt).toLocaleDateString()}</span>

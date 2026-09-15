@@ -65,8 +65,14 @@ export default function ReactionButton({ contentType, contentId }: ReactionButto
       });
 
       if (!res.ok) {
+        // Revert optimistic update
+        setUserReaction(previousReaction);
+        setLikes(previousLikes);
+        setDislikes(previousDislikes);
+
         if (res.status === 401) {
           alert('You must be logged in to leave a reaction.');
+          return; // Stop execution, already handled
         }
         throw new Error('Failed to save reaction');
       }
@@ -77,8 +83,8 @@ export default function ReactionButton({ contentType, contentId }: ReactionButto
       setDislikes(data.dislikes);
       setUserReaction(data.userReaction);
     } catch (error) {
-      console.error(error);
-      // Revert optimistic update
+      console.error('Reaction error:', error);
+      // Ensure UI is reverted if network fails
       setUserReaction(previousReaction);
       setLikes(previousLikes);
       setDislikes(previousDislikes);

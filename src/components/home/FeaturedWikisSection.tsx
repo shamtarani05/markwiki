@@ -4,7 +4,7 @@ import type { HomepageSectionSettings } from '@/src/lib/db/homepageSections';
 
 export default function FeaturedWikisSection({ sectionSettings, wikis }: { sectionSettings, wikis?: HomepageSectionSettings | any }) {
   return (
-    <section className="w-full bg-surface-container-lowest py-space-2xl">
+    <section className="w-full bg-transparent py-space-2xl">
 <div className="max-w-[1440px] mx-auto px-margin-sm md:px-margin lg:px-margin-lg">
 {/*  Section Editorial Header  */}
 <div className="flex items-center justify-between mb-space-xl">
@@ -31,7 +31,7 @@ export default function FeaturedWikisSection({ sectionSettings, wikis }: { secti
         <img className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" alt={wikis[0].name} src={wikis[0].image}/>
         <div className="absolute inset-0 bg-gradient-to-t from-surface-container-low via-surface-container-low/40 to-transparent"></div>
         <div className="absolute top-space-md left-space-md flex gap-space-xs">
-          <span className="px-space-sm py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur text-primary font-label-caps text-label-caps uppercase tracking-wider">
+          <span className="px-space-sm py-1 rounded-full bg-transparent/90 backdrop-blur text-primary font-label-caps text-label-caps uppercase tracking-wider">
             Featured Canon #01
           </span>
           <span className="px-space-sm py-1 rounded-full bg-tertiary-container/90 text-on-tertiary-container font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-1">
@@ -70,7 +70,7 @@ export default function FeaturedWikisSection({ sectionSettings, wikis }: { secti
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-1 rounded bg-surface-variant font-label-mono text-label-mono text-on-surface-variant">Top Tier</span>
           </div>
-          <Link href={`/wiki/${wikis[0].id}`} className="px-space-lg py-space-xs rounded-xl bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-md flex items-center gap-space-xs">
+          <Link href={wikis[0].url || `/wiki/${wikis[0].id}`} className="px-space-lg py-space-xs rounded-xl bg-primary-container text-on-primary-container hover:bg-primary hover:text-on-primary font-label-caps text-label-caps uppercase tracking-wider transition-all shadow-md flex items-center gap-space-xs">
             <span>Enter Vault</span>
             <span className="material-symbols-outlined text-base">arrow_forward</span>
           </Link>
@@ -81,7 +81,7 @@ export default function FeaturedWikisSection({ sectionSettings, wikis }: { secti
 
   <div className="lg:col-span-5 flex flex-col gap-space-md">
     {wikis?.slice(1).map((wiki: any, index: number) => (
-      <Link href={`/wiki/${wiki.id}`} key={wiki.id || index} className="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex gap-space-md items-center shadow-md">
+      <Link href={wiki.url || `/wiki/${wiki.id}`} key={wiki.id || index} className="group p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-all flex gap-space-md items-center shadow-md">
         <div className="w-28 h-28 shrink-0 rounded-lg overflow-hidden bg-surface-variant relative shadow-md">
           <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={wiki.name} src={wiki.image}/>
         </div>

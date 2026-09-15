@@ -197,7 +197,7 @@ export default function PageBuilder({
   return (
     <div>
       {/* Toolbar — one ribbon strip: history, insert, view mode, publish */}
-      <div className="flex items-center gap-1 mb-3 px-2 py-1.5 border border-outline-variant/30 rounded-lg bg-surface-container-low">
+      <div className="flex items-center gap-1 mb-3 px-2 py-1.5 border border-[rgba(255,255,255,0.09)] rounded-lg bg-[#121218]">
         <ToolbarIconButton label="Undo" onClick={undo} disabled={!canUndo}>↺</ToolbarIconButton>
         <ToolbarIconButton label="Redo" onClick={redo} disabled={!canRedo}>↻</ToolbarIconButton>
         <Divider />
@@ -205,18 +205,18 @@ export default function PageBuilder({
           <InsertMenu onAdd={(type) => addBlock(type)} existingTypes={new Set(blocks.map((b) => b.type))} />
         )}
         <Divider />
-        <div className="flex rounded-md border border-outline-variant/30 overflow-hidden">
+        <div className="flex rounded-md border border-[rgba(255,255,255,0.09)] overflow-hidden">
           <button
             type="button"
             onClick={() => setMode('edit')}
-            className={`px-2.5 py-1 text-xs ${mode === 'edit' ? 'bg-primary text-primary-contrast' : 'text-on-surface-variant hover:bg-surface-variant'}`}
+            className={`px-2.5 py-1 text-xs ${mode === 'edit' ? 'bg-primary text-[#8B5CF6]-contrast' : 'text-[#706F78] hover:bg-[#181820]'}`}
           >
             Edit
           </button>
           <button
             type="button"
             onClick={() => setMode('preview')}
-            className={`px-2.5 py-1 text-xs ${mode === 'preview' ? 'bg-primary text-primary-contrast' : 'text-on-surface-variant hover:bg-surface-variant'}`}
+            className={`px-2.5 py-1 text-xs ${mode === 'preview' ? 'bg-primary text-[#8B5CF6]-contrast' : 'text-[#706F78] hover:bg-[#181820]'}`}
           >
             Preview
           </button>
@@ -239,12 +239,24 @@ export default function PageBuilder({
         <button
           type="button"
           onClick={() => setCoverPickerOpen(true)}
-          className="w-16 h-10 rounded-md border border-outline-variant/30 bg-surface-container-low overflow-hidden shrink-0 flex items-center justify-center text-on-surface-variant hover:border-accent transition-colors"
+          className="w-16 h-10 rounded-md border border-[rgba(255,255,255,0.09)] bg-[#121218] overflow-hidden shrink-0 flex items-center justify-center text-[#706F78] hover:border-accent transition-colors"
           title={coverImage ? 'Change cover image' : 'Add a cover image'}
         >
-          {coverImage ? <img src={coverImage} alt="" className="w-full h-full object-cover" /> : <span className="text-xs">+</span>}
+          {coverImage ? <>
+                    <>
+                    <>
+                    <>
+                    <img src={coverImage} alt="" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-[#121218]" />
+                  </> : <span className="text-xs">+</span>}
         </button>
-        <span className="text-xs text-on-surface-variant">
+        <span className="text-xs text-[#706F78]">
           {coverImage ? 'Cover image set' : 'No cover image — used as the card thumbnail and social preview'}
         </span>
         {coverImage && (
@@ -260,7 +272,7 @@ export default function PageBuilder({
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Untitled page"
-        className="w-full text-4xl font-bold bg-transparent text-on-surface focus:outline-none mb-1 pb-2 border-b border-outline-variant/30"
+        className="w-full text-4xl font-bold bg-transparent text-[#F5F3EF] focus:outline-none mb-1 pb-2 border-b border-[rgba(255,255,255,0.09)]"
       />
 
       {showEditSummary && (
@@ -271,7 +283,7 @@ export default function PageBuilder({
           onChange={(e) => setEditSummary(e.target.value)}
           placeholder="Edit summary (required) — briefly describe what you changed"
           maxLength={500}
-          className="w-full mt-3 mb-1 px-3 py-2 text-sm bg-surface-container-low border border-outline-variant/30 rounded-lg text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-accent transition-colors"
+          className="w-full mt-3 mb-1 px-3 py-2 text-sm bg-[#121218] border border-[rgba(255,255,255,0.09)] rounded-lg text-[#F5F3EF] placeholder:text-[#706F78] focus:outline-none focus:border-accent transition-colors"
         />
       )}
 
@@ -282,7 +294,7 @@ export default function PageBuilder({
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
             <div>
               {blocks.length === 0 ? (
-                <div ref={setEndDropRef} className={`ad-zone transition-colors ${isOverEnd ? 'border-accent text-primary' : ''}`}>
+                <div ref={setEndDropRef} className={`ad-zone transition-colors ${isOverEnd ? 'border-accent text-[#8B5CF6]' : ''}`}>
                   Add your first block from &ldquo;Insert block&rdquo; above, or drag one onto the page.
                 </div>
               ) : (
@@ -305,7 +317,7 @@ export default function PageBuilder({
                   <div
                     ref={setEndDropRef}
                     className={`h-10 rounded-md border border-dashed transition-colors ${
-                      isOverEnd ? 'border-accent bg-primary-muted' : 'border-transparent'
+                      isOverEnd ? 'border-accent bg-[rgba(139,92,246,0.14)]' : 'border-transparent'
                     }`}
                   />
                 </>
@@ -329,7 +341,7 @@ export default function PageBuilder({
             type="button"
             onClick={() => setSelectedId(null)}
             aria-label="Close settings"
-            className="absolute top-3 right-3 w-6 h-6 flex items-center justify-center rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant"
+            className="absolute top-3 right-3 w-6 h-6 flex items-center justify-center rounded text-[#706F78] hover:text-[#F5F3EF] hover:bg-[#181820]"
           >
             ✕
           </button>
@@ -363,7 +375,7 @@ function ToolbarIconButton({
       aria-label={label}
       disabled={disabled}
       onClick={onClick}
-      className="w-7 h-7 flex items-center justify-center rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-variant disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
+      className="w-7 h-7 flex items-center justify-center rounded-md text-[#706F78] hover:text-[#F5F3EF] hover:bg-[#181820] disabled:opacity-30 disabled:hover:bg-transparent transition-colors"
     >
       {children}
     </button>
@@ -371,5 +383,5 @@ function ToolbarIconButton({
 }
 
 function Divider() {
-  return <div className="w-px h-5 bg-border mx-1" />;
+  return <div className="w-px h-5 bg-[rgba(255,255,255,0.09)] mx-1" />;
 }

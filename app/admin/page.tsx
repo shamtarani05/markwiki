@@ -38,30 +38,30 @@ export default async function AdminDashboard() {
       </div>
 
       <div className="admin-panel overflow-hidden">
-        <div className="flex items-center justify-between px-4 py-3 border-b border-outline-variant/30">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-[rgba(255,255,255,0.09)]">
           <h2 className="admin-section-title">Recently edited</h2>
-          <Link href="/admin/pages" className="text-[13px] text-primary hover:underline">
+          <Link href="/admin/pages" className="text-[13px] text-[#8B5CF6] hover:underline">
             All pages
           </Link>
         </div>
         {recentPages.length === 0 ? (
           <div className="admin-empty border-0">
-            <FileText size={22} className="mx-auto text-on-surface-variant mb-3" aria-hidden="true" />
-            <p className="text-[13px] text-on-surface mb-1">No pages yet</p>
+            <FileText size={22} className="mx-auto text-[#706F78] mb-3" aria-hidden="true" />
+            <p className="text-[13px] text-[#F5F3EF] mb-1">No pages yet</p>
             <p className="admin-meta mb-4">Pages you create or edit will show up here.</p>
             <Link href="/admin/wiki/new" className="btn btn-primary text-[13px] py-2 px-4 no-underline">
               <Plus size={15} /> Create your first page
             </Link>
           </div>
         ) : (
-          <div className="divide-y divide-outline-variant/30">
+          <div className="divide-y divide-[rgba(255,255,255,0.09)]">
             {recentPages.map((p) => (
               <Link key={p._id.toString()} href={`/admin/wiki/${p._id}/edit`} className="admin-row no-underline">
                 <div className="min-w-0">
-                  <p className="text-[13px] font-medium text-on-surface truncate">{p.title}</p>
+                  <p className="text-[13px] font-medium text-[#F5F3EF] truncate">{p.title}</p>
                   <p className="admin-meta mt-0.5 truncate">
                     {(p.wiki as unknown as { name?: string } | null)?.name ?? 'Unknown wiki'}
-                    <span aria-hidden="true" className="inline-block w-px h-3 align-middle bg-border mx-2" />
+                    <span aria-hidden="true" className="inline-block w-px h-3 align-middle bg-[rgba(255,255,255,0.09)] mx-2" />
                     {PAGE_TYPE_LABEL[p.pageType] ?? p.pageType}
                   </p>
                 </div>
